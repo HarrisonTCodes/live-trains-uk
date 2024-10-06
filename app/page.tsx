@@ -1,7 +1,7 @@
-export default function Home() {
+export default function LiveTrainsPage() {
   return (
     <main>
-      <h1>Live Trains UK</h1>
+      <h1>Live Trains</h1>
     </main>
   );
 }
