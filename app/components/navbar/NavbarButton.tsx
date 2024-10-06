@@ -7,7 +7,7 @@ export default function NavbarButton({
 }) {
   return (
     <button className="text-white font-medium rounded-xl hover:bg-blue-600 p-2">
-      <a href={href}>
+      <a href={href} className="flex items-center justify-center gap-2">
         {children}
       </a>
     </button>
