@@ -1,15 +1,15 @@
 export default function NavbarButton({
   children,
-  href
+  href,
 }: {
-  children: React.ReactNode,
-  href?: string
+  children: React.ReactNode;
+  href?: string;
 }) {
   return (
-    <button className="text-white font-medium rounded-xl hover:bg-blue-600 p-2 hidden md:block">
+    <button className="hidden rounded-xl p-2 font-medium text-white hover:bg-blue-600 md:block">
       <a href={href} className="flex items-center justify-center gap-2">
         {children}
       </a>
     </button>
-  )
+  );
 }

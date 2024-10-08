@@ -3,5 +3,5 @@ export default function AccountPage() {
     <main>
       <h1>Account</h1>
     </main>
-  )
+  );
 }

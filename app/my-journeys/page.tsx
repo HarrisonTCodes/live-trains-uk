@@ -3,5 +3,5 @@ export default function JourneysPage() {
     <main>
       <h1>Journeys</h1>
     </main>
-  )
+  );
 }
