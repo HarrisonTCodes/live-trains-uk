@@ -1,5 +1,5 @@
 import NavbarButton from "./NavbarButton";
-import { FaBookmark, FaUser, FaTrain } from "react-icons/fa";
+import { FaBookmark, FaUser, FaTrain, FaBars } from "react-icons/fa";
 
 const buttonData = [
   {label: "Live Trains", href: "/", icon: <FaTrain size={24} color="ffffff" className="text-white" />},
@@ -13,8 +13,11 @@ export default function Navbar() {
       <h1 className="text-2xl text-white font-medium">Live Trains UK</h1>
       <section className="flex gap-8">
         {buttonData.map((data) => (
-          <NavbarButton href={data.href} key={data.label}>{data.icon} {data.label}</NavbarButton>
+          <NavbarButton href={data.href}>{data.icon} {data.label}</NavbarButton>
         ))}
+        <button className="md:hidden">
+          <FaBars size={32} color="ffffff" className="text-white" />
+        </button>
       </section>
     </nav>
   )
