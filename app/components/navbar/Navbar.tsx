@@ -19,6 +19,11 @@ export default function Navbar() {
           <FaBars size={32} color="ffffff" className="text-white" />
         </button>
       </section>
+      <div className="flex md:hidden flex-col cursor-pointer absolute w-48 top-16 right-2 border-2 border-stone-300 bg-white rounded-xl divide-y-2 divide-stone-300">
+        {buttonData.map((data) => (
+          <a href={data.href} className="px-2 py-2 text-lg text-stone-600 font-medium">{data.label}</a>
+        ))}
+      </div>
     </nav>
   )
 }
