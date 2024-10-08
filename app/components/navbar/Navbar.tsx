@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import NavbarButton from './NavbarButton';
-import { FaBookmark, FaUser, FaTrain, FaBars } from 'react-icons/fa';
+import { FaBookmark, FaUser, FaTrain, FaBars, FaXmark } from 'react-icons/fa6';
 
 const buttonData = [
   {
@@ -37,7 +37,11 @@ export default function Navbar() {
         ))}
         {/* Hamburger Button */}
         <button className="md:hidden" onClick={() => setHamburgerMenuOpen(!hamburgerMenuOpen)}>
-          <FaBars size={32} color="ffffff" className="text-white" />
+          {hamburgerMenuOpen ? (
+            <FaXmark size={32} color="ffffff" className="text-white" />
+          ) : (
+            <FaBars size={32} color="ffffff" className="text-white" />
+          )}
         </button>
       </section>
       {/* Hamburger Menu */}
