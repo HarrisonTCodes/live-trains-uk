@@ -11,8 +11,8 @@ async function getServiceIds(from: string, to: string) {
 }
 
 export async function GET(request: NextRequest) {
-  const from = request.nextUrl.searchParams.get('from');
-  const to = request.nextUrl.searchParams.get('to');
+  const from = request.nextUrl.searchParams.get('from')?.toUpperCase();
+  const to = request.nextUrl.searchParams.get('to')?.toUpperCase();
 
   // If a 'from' or 'to' station argument isn't provided in the query parameters, error
   if (!from || !to) {
@@ -21,9 +21,29 @@ export async function GET(request: NextRequest) {
     });
   }
 
+  // Get IDs of services running between stations
   const serviceIds = await getServiceIds(from, to);
 
-  // TODO get info about each service using ids
+  // Get info on each service
+  const services = serviceIds.map(async (id: string) => {
+    const huxleyResponse = await fetch(
+      `https://huxley2.azurewebsites.net/service/${id}/?accessToken=${process.env.ACCESS_TOKEN}`,
+    ).then((response) => response.json());
 
-  return Response.json(serviceIds);
+    // Get information on the calling point that lines up with the user-specified "to" station
+    const arrivalData = huxleyResponse.subsequentCallingPoints[0].callingPoint.find(
+      ({ crs }: { crs: string }) => crs === to,
+    );
+
+    // Return relevant information
+    return {
+      platform: huxleyResponse.platform,
+      departTime: huxleyResponse.std ?? huxleyResponse.sta,
+      estimatedDepartTime: huxleyResponse.etd,
+      arrivalTime: arrivalData.st,
+      estimatedArrivalTime: arrivalData.et,
+    };
+  });
+
+  return Response.json(await Promise.all(services));
 }
