@@ -6,11 +6,12 @@ async function getServiceIds(from: string, to: string) {
     `https://huxley2.azurewebsites.net/departures/${from}/to/${to}/?accessToken=${process.env.ACCESS_TOKEN}`,
   ).then((response) => response.json());
 
-  const services = huxleyResponse.trainServices;
+  const services = huxleyResponse.trainServices ?? [];
   return services.map(({ serviceID }: { serviceID: string }) => serviceID);
 }
 
 export async function GET(request: NextRequest) {
+  // Get query parameters
   const from = request.nextUrl.searchParams.get('from')?.toUpperCase();
   const to = request.nextUrl.searchParams.get('to')?.toUpperCase();
 
@@ -22,7 +23,13 @@ export async function GET(request: NextRequest) {
   }
 
   // Get IDs of services running between stations
-  const serviceIds = await getServiceIds(from, to);
+  let serviceIds;
+  try {
+    serviceIds = await getServiceIds(from, to);
+  } catch (error) {
+    console.error(error);
+    return new Response('Invalid stations provided', { status: 400 });
+  }
 
   // Get info on each service
   const services = serviceIds.map(async (id: string) => {
