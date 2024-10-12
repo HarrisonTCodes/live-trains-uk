@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react';
+'use client';
+import { ChangeEvent, useState } from 'react';
 
 export default function Search({
   label,
@@ -9,9 +10,22 @@ export default function Search({
   value: string;
   setValue: (value: string) => void;
 }) {
-  const onChange = (ev: ChangeEvent<HTMLInputElement>) => {
-    setValue(ev.target.value);
-    // TODO make request to API and get matching station options here
+  const [options, setOptions] = useState<string[]>([]);
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setValue(input);
+
+    if (!input) {
+      setOptions([]);
+    }
+
+    // Get stations
+    if (input.length % 2 != 0 && input.length < 8) {
+      fetch(`/api/stations?prompt=${event.target.value}`)
+        .then((response) => response.json())
+        .then((stations) => setOptions(stations));
+    }
   };
 
   return (
@@ -23,7 +37,11 @@ export default function Search({
         value={value}
         onChange={onChange}
       />
-      {/* TODO menu with options matching search here */}
+      <ul>
+        {options.map((option) => (
+          <li key={option}>{option}</li>
+        ))}
+      </ul>
     </div>
   );
 }
