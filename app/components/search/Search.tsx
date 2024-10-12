@@ -1,6 +1,13 @@
 'use client';
 import { ChangeEvent, useState } from 'react';
 
+const toTitleCase = (str: string) => {
+  return str.replace(
+    /\w\S*/g,
+    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+  );
+};
+
 export default function Search({
   label,
   value,
@@ -11,6 +18,7 @@ export default function Search({
   setValue: (value: string) => void;
 }) {
   const [options, setOptions] = useState<string[]>([]);
+  const [focused, setFocused] = useState<boolean>(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
@@ -36,12 +44,22 @@ export default function Search({
         placeholder={label}
         value={value}
         onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       />
-      <ul>
-        {options.map((option) => (
-          <li key={option}>{option}</li>
-        ))}
-      </ul>
+      {options.length > 0 && focused && (
+        <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-14 cursor-pointer divide-y-2 divide-gray-300 overflow-y-scroll rounded-lg border-2 border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
+          {options.map((option) => (
+            <li
+              key={option}
+              onMouseDown={() => setValue(toTitleCase(option))}
+              className="p-2 text-lg"
+            >
+              {toTitleCase(option)}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
