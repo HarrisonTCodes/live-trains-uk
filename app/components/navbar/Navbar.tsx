@@ -51,7 +51,7 @@ export default function Navbar() {
           {buttonData.map((data) => (
             <Link
               href={data.href}
-              className="px-2 py-2 text-lg font-medium text-stone-600"
+              className="px-2 py-2 text-lg font-medium text-stone-600 active:bg-stone-200"
               key={`${data.label} menu option`}
             >
               {data.label}
