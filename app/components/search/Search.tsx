@@ -38,6 +38,7 @@ export default function Search({
 
   return (
     <div className="flex w-[80vw] max-w-96 flex-col md:w-[40vw]">
+      {/* Search bar */}
       <input
         type="search"
         className="w-full rounded-lg border-2 border-gray-400 bg-gray-100 p-2 text-xl focus:border-blue-800 focus:outline-none"
@@ -47,6 +48,7 @@ export default function Search({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />
+      {/* Matching options dropdown */}
       {options.length > 0 && focused && (
         <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-14 cursor-pointer divide-y-2 divide-gray-300 overflow-y-scroll rounded-lg border-2 border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
           {options.map((option) => (
