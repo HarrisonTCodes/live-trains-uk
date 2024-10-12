@@ -1,14 +1,15 @@
 import { CallingPoint, ServiceResponse } from '@/app/interfaces';
 import { NextRequest } from 'next/server';
+import stations from '../shared/stations';
 
 export async function GET(request: NextRequest) {
   // Get query parameters
-  const from = request.nextUrl.searchParams.get('from')?.toUpperCase();
-  const to = request.nextUrl.searchParams.get('to')?.toUpperCase();
+  const from = stations[request.nextUrl.searchParams.get('from') as keyof typeof stations];
+  const to = stations[request.nextUrl.searchParams.get('to') as keyof typeof stations];
 
-  // If a 'from' or 'to' station argument isn't provided in the query parameters, error
+  // If invalid or missing stations provided
   if (!from || !to) {
-    return new Response('Missing URL parameters - must have a from and to value', {
+    return new Response('Invalid stations provided', {
       status: 400,
     });
   }
