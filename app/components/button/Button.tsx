@@ -7,7 +7,7 @@ export default function Button({
 }) {
   return (
     <button
-      className="flex w-36 justify-center gap-2 rounded-xl bg-blue-800 p-2 font-medium text-white hover:bg-blue-600 active:bg-blue-500"
+      className="flex w-36 justify-center gap-2 rounded-xl bg-blue-800 p-2.5 font-medium text-white hover:bg-blue-600 active:bg-blue-500"
       onClick={onClick}
     >
       {children}

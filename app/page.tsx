@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Search from './components/search/Search';
 import Button from './components/button/Button';
 import { FaArrowRightArrowLeft, FaMagnifyingGlass } from 'react-icons/fa6';
+import Link from 'next/link';
 
 export default function LiveTrainsPage() {
   const [from, setFrom] = useState<string>('');
@@ -26,10 +27,12 @@ export default function LiveTrainsPage() {
           <FaArrowRightArrowLeft size={24} color="ffffff" className="text-white" />
           Switch
         </Button>
-        <Button>
-          <FaMagnifyingGlass size={24} color="ffffff" className="text-white" />
-          Go
-        </Button>
+        <Link href={`/trains?from=${from}&to=${to}`}>
+          <Button>
+            <FaMagnifyingGlass size={24} color="ffffff" className="text-white" />
+            Go
+          </Button>
+        </Link>
       </section>
     </main>
   );
