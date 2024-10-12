@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import NavbarButton from './NavbarButton';
 import { FaBookmark, FaUser, FaTrain, FaBars, FaXmark } from 'react-icons/fa6';
+import Link from 'next/link';
 
 const buttonData = [
   {
@@ -48,13 +49,13 @@ export default function Navbar() {
       {hamburgerMenuOpen && (
         <div className="absolute right-2 top-16 flex w-48 cursor-pointer flex-col divide-y-2 divide-stone-300 rounded-xl border-2 border-stone-300 bg-white shadow-xl md:hidden">
           {buttonData.map((data) => (
-            <a
+            <Link
               href={data.href}
               className="px-2 py-2 text-lg font-medium text-stone-600"
               key={`${data.label} menu option`}
             >
               {data.label}
-            </a>
+            </Link>
           ))}
         </div>
       )}
