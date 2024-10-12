@@ -1,14 +1,5 @@
+import { CallingPoint, ServiceResponse } from '@/app/interfaces';
 import { NextRequest } from 'next/server';
-
-async function getServiceIds(from: string, to: string) {
-  // Get services between stations from huxley
-  const huxleyResponse = await fetch(
-    `https://huxley2.azurewebsites.net/departures/${from}/to/${to}/?accessToken=${process.env.ACCESS_TOKEN}`,
-  ).then((response) => response.json());
-
-  const services = huxleyResponse.trainServices ?? [];
-  return services.map(({ serviceID }: { serviceID: string }) => serviceID);
-}
 
 export async function GET(request: NextRequest) {
   // Get query parameters
@@ -22,35 +13,33 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  // Get IDs of services running between stations
-  let serviceIds;
-  try {
-    serviceIds = await getServiceIds(from, to);
-  } catch (error) {
-    console.error(error);
-    return new Response('Invalid stations provided', { status: 400 });
-  }
+  // Set API key in headers
+  const headers = new Headers();
+  headers.set('x-apikey', process.env.API_KEY!);
 
-  // Get info on each service
-  const services = serviceIds.map(async (id: string) => {
-    const huxleyResponse = await fetch(
-      `https://huxley2.azurewebsites.net/service/${id}/?accessToken=${process.env.ACCESS_TOKEN}`,
-    ).then((response) => response.json());
+  // Get service details
+  const response = await fetch(
+    `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${from}?numRows=10&filterCrs=${to}`,
+    {
+      headers,
+    },
+  ).then((response) => response.json());
 
-    // Get information on the calling point that lines up with the user-specified "to" station
-    const arrivalData = huxleyResponse.subsequentCallingPoints[0].callingPoint.find(
+  // Parse data
+  const services = response.trainServices.map((serviceResponse: ServiceResponse) => {
+    // Get data from calling point matching provided destination station
+    const arrivalData: CallingPoint = serviceResponse.subsequentCallingPoints[0].callingPoint.find(
       ({ crs }: { crs: string }) => crs === to,
-    );
+    )!;
 
-    // Return relevant information
     return {
-      platform: huxleyResponse.platform,
-      departTime: huxleyResponse.std ?? huxleyResponse.sta,
-      estimatedDepartTime: huxleyResponse.etd,
+      departureTime: serviceResponse.std,
+      estimatedDepartureTime: serviceResponse.etd,
+      platform: serviceResponse.platform,
       arrivalTime: arrivalData.st,
       estimatedArrivalTime: arrivalData.et,
     };
   });
 
-  return Response.json(await Promise.all(services));
+  return Response.json(services);
 }
