@@ -26,6 +26,11 @@ export async function GET(request: NextRequest) {
     },
   ).then((response) => response.json());
 
+  // If no services
+  if (!response.trainServices) {
+    return Response.json([]);
+  }
+
   // Parse data
   const services = response.trainServices.map((serviceResponse: ServiceResponse) => {
     // Get data from calling point matching provided destination station
