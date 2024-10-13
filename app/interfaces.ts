@@ -10,3 +10,11 @@ export interface CallingPoint {
   st: string;
   et: string;
 }
+
+export interface Service {
+  departureTime: string;
+  estimatedDepartureTime: string;
+  platform: string;
+  arrivalTime: string;
+  estimatedArrivalTime: string;
+}
