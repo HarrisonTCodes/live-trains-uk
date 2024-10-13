@@ -10,13 +10,19 @@ export default function TrainsPage({
   searchParams: { from: string; to: string };
 }) {
   const [services, setServices] = useState<Service[]>([]);
+  const [fromCrs, setFromCrs] = useState<string>();
+  const [toCrs, setToCrs] = useState<string>();
 
   useEffect(() => {
     fetch(
       `/api/live-departures?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
     )
       .then((response) => response.json())
-      .then((services) => setServices(services));
+      .then((response) => {
+        setServices(response.services);
+        setFromCrs(response.from);
+        setToCrs(response.to);
+      });
   }, []);
 
   return (

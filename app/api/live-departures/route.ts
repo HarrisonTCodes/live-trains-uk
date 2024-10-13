@@ -47,5 +47,9 @@ export async function GET(request: NextRequest) {
     };
   });
 
-  return Response.json(services);
+  return Response.json({
+    services,
+    from,
+    to,
+  });
 }
