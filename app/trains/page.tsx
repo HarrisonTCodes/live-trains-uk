@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Service } from '../interfaces';
+import Button from '../components/button/Button';
+import { FaArrowRotateRight } from 'react-icons/fa6';
 
 export default function TrainsPage({
   searchParams,
@@ -25,7 +27,10 @@ export default function TrainsPage({
           {searchParams.from} to {searchParams.to}
         </h2>
       </section>
-      <p>{JSON.stringify(services)}</p>
+      <Button>
+        <FaArrowRotateRight size={24} color="ffffff" className="text-white" />
+        Refresh
+      </Button>
     </main>
   );
 }
