@@ -38,7 +38,7 @@ export default function TrainsPage({
         <FaArrowRotateRight size={24} color="ffffff" className="text-white" />
         Refresh
       </Button>
-      <section className="flex w-full flex-col items-center gap-2">
+      <section className="flex w-full flex-col items-center gap-4">
         {services.map((service) => (
           <TrainInfo service={service} from={fromCrs} to={toCrs} />
         ))}
