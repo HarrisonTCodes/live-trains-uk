@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Service } from '../interfaces';
 import Button from '../components/button/Button';
 import { FaArrowRotateRight } from 'react-icons/fa6';
+import TrainInfo from '../components/train-info/TrainInfo';
 
 export default function TrainsPage({
   searchParams,
@@ -10,8 +11,8 @@ export default function TrainsPage({
   searchParams: { from: string; to: string };
 }) {
   const [services, setServices] = useState<Service[]>([]);
-  const [fromCrs, setFromCrs] = useState<string>();
-  const [toCrs, setToCrs] = useState<string>();
+  const [fromCrs, setFromCrs] = useState<string>('');
+  const [toCrs, setToCrs] = useState<string>('');
 
   useEffect(() => {
     fetch(
@@ -19,7 +20,7 @@ export default function TrainsPage({
     )
       .then((response) => response.json())
       .then((response) => {
-        setServices(response.services);
+        setServices(response.services ?? []);
         setFromCrs(response.from);
         setToCrs(response.to);
       });
@@ -37,6 +38,11 @@ export default function TrainsPage({
         <FaArrowRotateRight size={24} color="ffffff" className="text-white" />
         Refresh
       </Button>
+      <section className="flex w-full flex-col items-center gap-2">
+        {services.map((service) => (
+          <TrainInfo service={service} from={fromCrs} to={toCrs} />
+        ))}
+      </section>
     </main>
   );
 }
