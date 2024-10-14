@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Service } from '../interfaces';
 import Button from '../components/button/Button';
-import { FaArrowRotateRight } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaArrowRotateRight } from 'react-icons/fa6';
 import TrainInfo from '../components/train-info/TrainInfo';
 
 export default function TrainsPage({
@@ -14,7 +14,8 @@ export default function TrainsPage({
   const [fromCrs, setFromCrs] = useState<string>('');
   const [toCrs, setToCrs] = useState<string>('');
 
-  useEffect(() => {
+  const getData = () => {
+    setServices([]);
     fetch(
       `/api/live-departures?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
     )
@@ -24,6 +25,10 @@ export default function TrainsPage({
         setFromCrs(response.from);
         setToCrs(response.to);
       });
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
   return (
@@ -34,10 +39,16 @@ export default function TrainsPage({
           {searchParams.from} to {searchParams.to}
         </h2>
       </section>
-      <Button>
-        <FaArrowRotateRight size={24} color="ffffff" className="text-white" />
-        Refresh
-      </Button>
+      <section className="flex gap-2">
+        <Button onClick={getData}>
+          <FaArrowRotateRight size={24} color="ffffff" className="text-white" />
+          Refresh
+        </Button>
+        <Button>
+          <FaArrowRightArrowLeft size={24} color="ffffff" className="text-white" />
+          Switch
+        </Button>
+      </section>
       <section className="flex w-full flex-col items-center gap-4">
         {services.map((service) => (
           <TrainInfo service={service} from={fromCrs} to={toCrs} />
