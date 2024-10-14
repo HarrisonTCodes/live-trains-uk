@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import NavbarButton from './NavbarButton';
 import { FaBookmark, FaUser, FaTrain, FaBars, FaXmark } from 'react-icons/fa6';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const buttonData = [
   {
@@ -24,6 +24,12 @@ const buttonData = [
 
 export default function Navbar() {
   const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const menuButtonPressed = (href: string) => {
+    router.push(href);
+    setHamburgerMenuOpen(false);
+  };
 
   return (
     <nav className="z-10 flex h-14 w-full items-center justify-between bg-blue-800 px-4">
@@ -49,13 +55,13 @@ export default function Navbar() {
       {hamburgerMenuOpen && (
         <div className="absolute right-2 top-16 flex w-48 cursor-pointer flex-col divide-y-2 divide-stone-300 rounded-xl border-2 border-stone-300 bg-white shadow-xl md:hidden">
           {buttonData.map((data) => (
-            <Link
-              href={data.href}
-              className="px-2 py-2 text-lg font-medium text-stone-600 active:bg-stone-200"
+            <button
+              onClick={() => menuButtonPressed(data.href)}
+              className="px-2 py-2 text-left text-lg font-medium text-stone-600 active:bg-stone-200"
               key={`${data.label} menu option`}
             >
               {data.label}
-            </Link>
+            </button>
           ))}
         </div>
       )}
