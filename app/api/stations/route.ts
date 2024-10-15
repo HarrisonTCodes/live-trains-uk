@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import stations from '../shared/stations';
 
-function matchStation(station: string, prompt: string) {
+export function matchStation(station: string, prompt: string) {
   // Catch exact matches
   if (station.startsWith(prompt)) return true;
 
