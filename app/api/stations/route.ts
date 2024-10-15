@@ -3,7 +3,7 @@ import stations from '../shared/stations';
 
 function matchStation(station: string, prompt: string) {
   // Catch exact matches
-  if (station.slice(0, prompt.length) == prompt) return true;
+  if (station.startsWith(prompt)) return true;
 
   // Allow searching of CRS for power users
   const crs = stations[station as keyof typeof stations];
@@ -14,7 +14,7 @@ function matchStation(station: string, prompt: string) {
   const promptWords = prompt.split(' ');
   for (const promptWord of promptWords) {
     for (const stationWord of stationWords) {
-      if (stationWord.slice(0, promptWord.length) == promptWord) return true;
+      if (stationWord.startsWith(promptWord)) return true;
     }
   }
 
