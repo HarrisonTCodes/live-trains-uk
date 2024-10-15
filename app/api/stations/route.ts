@@ -5,6 +5,10 @@ function matchStation(station: string, prompt: string) {
   // Catch exact matches
   if (station.slice(0, prompt.length) == prompt) return true;
 
+  // Allow searching of CRS for power users
+  const crs = stations[station as keyof typeof stations];
+  if (crs.toLowerCase() === prompt) return true;
+
   // Check each word of prompt against each word of station
   const stationWords = station.split(' ');
   const promptWords = prompt.split(' ');
@@ -13,10 +17,6 @@ function matchStation(station: string, prompt: string) {
       if (stationWord.slice(0, promptWord.length) == promptWord) return true;
     }
   }
-
-  // Allow searching of CRS for power users
-  const crs = stations[station as keyof typeof stations];
-  if (crs.toLowerCase() === prompt) return true;
 
   // If no cases above match, return false
   return false;
