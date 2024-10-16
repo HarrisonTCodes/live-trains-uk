@@ -14,10 +14,12 @@ export default function TrainsPage({
   const [services, setServices] = useState<Service[]>([]);
   const [fromCrs, setFromCrs] = useState<string>('');
   const [toCrs, setToCrs] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const getData = () => {
     setServices([]);
+    setLoading(true);
     fetch(
       `/api/live-departures?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
     )
@@ -26,6 +28,7 @@ export default function TrainsPage({
         setServices(response.services ?? []);
         setFromCrs(response.from);
         setToCrs(response.to);
+        setLoading(false);
       });
   };
 
@@ -59,9 +62,14 @@ export default function TrainsPage({
       </section>
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
-        {services.map((service) => (
-          <TrainInfo service={service} from={fromCrs} to={toCrs} />
-        ))}
+        {!loading
+          ? services.map((service) => <TrainInfo service={service} from={fromCrs} to={toCrs} />)
+          : Array.from({ length: 5 }).map((_, index: number) => (
+              <div
+                key={`skeleton${index}`}
+                className="flex h-24 w-11/12 max-w-[500px] animate-pulse divide-x-2 rounded-xl bg-gray-300"
+              />
+            ))}
       </section>
     </main>
   );
