@@ -5,6 +5,7 @@ import Button from '../components/button/Button';
 import { FaArrowRightArrowLeft, FaArrowRotateRight } from 'react-icons/fa6';
 import TrainInfo from '../components/train-info/TrainInfo';
 import { useRouter } from 'next/navigation';
+import TrainInfoSkeletons from '../components/train-info/TrainInfoSkeletons';
 
 export default function TrainsPage({
   searchParams,
@@ -15,6 +16,7 @@ export default function TrainsPage({
   const [fromCrs, setFromCrs] = useState<string>('');
   const [toCrs, setToCrs] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
 
   const getData = () => {
@@ -29,6 +31,11 @@ export default function TrainsPage({
         setFromCrs(response.from);
         setToCrs(response.to);
         setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setError(true);
       });
   };
 
@@ -62,14 +69,15 @@ export default function TrainsPage({
       </section>
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
-        {!loading
-          ? services.map((service) => <TrainInfo service={service} from={fromCrs} to={toCrs} />)
-          : Array.from({ length: 5 }).map((_, index: number) => (
-              <div
-                key={`skeleton${index}`}
-                className="flex h-24 w-11/12 max-w-[500px] animate-pulse divide-x-2 rounded-xl bg-gray-300"
-              />
-            ))}
+        {loading ? (
+          <TrainInfoSkeletons />
+        ) : error ? (
+          <p>There was an error</p>
+        ) : services.length === 0 ? (
+          <p>No services</p>
+        ) : (
+          services.map((service) => <TrainInfo service={service} from={fromCrs} to={toCrs} />)
+        )}
       </section>
     </main>
   );
