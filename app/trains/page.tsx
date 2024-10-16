@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Service } from '../interfaces';
 import Button from '../components/button/Button';
-import { FaArrowRightArrowLeft, FaArrowRotateRight } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaArrowRotateRight, FaTriangleExclamation } from 'react-icons/fa6';
 import TrainInfo from '../components/train-info/TrainInfo';
 import { useRouter } from 'next/navigation';
 import TrainInfoSkeletons from '../components/train-info/TrainInfoSkeletons';
@@ -82,9 +82,15 @@ export default function TrainsPage({
         {loading ? (
           <TrainInfoSkeletons />
         ) : error ? (
-          <p>There was an error</p>
+          <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
+            <FaTriangleExclamation size={24} color="ff0000" className="text-white" /> There was an
+            error
+          </h2>
         ) : services.length === 0 ? (
-          <p>No services</p>
+          <h2 className="flex items-center gap-2 text-2xl font-medium text-gray-500">
+            <FaTriangleExclamation size={24} color="f3a600" className="text-white" /> No services at
+            the moment
+          </h2>
         ) : (
           services.map((service) => (
             <TrainInfo
