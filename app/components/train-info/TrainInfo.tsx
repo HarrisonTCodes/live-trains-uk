@@ -1,7 +1,7 @@
 import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
 
-function TrainInfo({
+export default function TrainInfo({
   service,
   from,
   to,
@@ -34,5 +34,3 @@ function TrainInfo({
     </div>
   );
 }
-
-export default TrainInfo;
