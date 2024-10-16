@@ -1,6 +1,7 @@
 import { CallingPoint, ServiceResponse } from '@/app/interfaces';
 import { NextRequest } from 'next/server';
 import stations from '../shared/stations';
+import getDuration from '@/app/utils/getDuration';
 
 export async function GET(request: NextRequest) {
   // Get query parameters
@@ -44,6 +45,7 @@ export async function GET(request: NextRequest) {
       platform: serviceResponse.platform,
       arrivalTime: arrivalData.st,
       estimatedArrivalTime: arrivalData.et,
+      duration: getDuration(serviceResponse.std, arrivalData.st),
     };
   });
 

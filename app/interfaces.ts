@@ -17,4 +17,5 @@ export interface Service {
   platform: string;
   arrivalTime: string;
   estimatedArrivalTime: string;
+  duration: number;
 }

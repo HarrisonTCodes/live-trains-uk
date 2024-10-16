@@ -1,6 +1,5 @@
 import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
-import getDuration from '@/app/utils/getDuration';
 
 function TrainInfo({ service, from, to }: { service: Service; from: string; to: string }) {
   return (
@@ -19,9 +18,7 @@ function TrainInfo({ service, from, to }: { service: Service; from: string; to: 
       </section>
       <section className="flex w-1/3 flex-col items-center gap-1">
         <h2>DURATION</h2>
-        <p className="text-2xl">
-          {formatDuration(getDuration(service.departureTime, service.arrivalTime))}
-        </p>
+        <p className="text-2xl">{formatDuration(service.duration)}</p>
       </section>
     </div>
   );
