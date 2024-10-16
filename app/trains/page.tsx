@@ -13,6 +13,7 @@ export default function TrainsPage({
   searchParams: { from: string; to: string };
 }) {
   const [services, setServices] = useState<Service[]>([]);
+  const [averageDuration, setAverageDuration] = useState<number>(0);
   const [fromCrs, setFromCrs] = useState<string>('');
   const [toCrs, setToCrs] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,7 +28,16 @@ export default function TrainsPage({
     )
       .then((response) => response.json())
       .then((response) => {
-        setServices(response.services ?? []);
+        const responseServices = response.services ?? [];
+        setServices(responseServices);
+        if (responseServices.length > 0) {
+          setAverageDuration(
+            responseServices.reduce(
+              (accumulator: number, service: Service) => accumulator + service.duration,
+              0,
+            ) / responseServices.length,
+          );
+        }
         setFromCrs(response.from);
         setToCrs(response.to);
         setLoading(false);
@@ -76,7 +86,14 @@ export default function TrainsPage({
         ) : services.length === 0 ? (
           <p>No services</p>
         ) : (
-          services.map((service) => <TrainInfo service={service} from={fromCrs} to={toCrs} />)
+          services.map((service) => (
+            <TrainInfo
+              service={service}
+              from={fromCrs}
+              to={toCrs}
+              averageDuration={averageDuration}
+            />
+          ))
         )}
       </section>
     </main>
