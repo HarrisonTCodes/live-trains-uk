@@ -1,5 +1,6 @@
 import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
+import { GiRabbit, GiTortoise } from 'react-icons/gi';
 
 export default function TrainInfo({
   service,
@@ -12,24 +13,42 @@ export default function TrainInfo({
   to: string;
   averageDuration: number;
 }) {
+  const speed = service.duration <= averageDuration ? 'Fast' : 'Slow';
+
   return (
-    <div className="flex w-11/12 max-w-[500px] divide-x-2 rounded-xl border-2 border-gray-300">
+    <div className="flex w-11/12 max-w-[500px] divide-x-2 divide-gray-300 rounded-xl border-2 border-gray-300">
+      {/* Departure station */}
       <section className="flex w-1/3 flex-col items-center gap-1">
         <h2>
           {from} {service.platform ? `P${service.platform}` : ''}
         </h2>
         <p className="text-2xl">{service.departureTime}</p>
-        <p className="text-gray-500">{service.estimatedDepartureTime}</p>
+        <p
+          className={`${service.estimatedArrivalTime === 'Cancelled' ? 'text-red-700' : 'text-gray-500'} ${service.estimatedDepartureTime === 'On time' ? 'font-normal' : 'font-medium'}`}
+        >
+          {service.estimatedDepartureTime}
+        </p>
       </section>
+      {/* Arrival station */}
       <section className="flex w-1/3 flex-col items-center gap-1">
         <h2>{to}</h2>
         <p className="text-2xl">{service.arrivalTime}</p>
-        <p className="text-gray-500">{service.estimatedArrivalTime}</p>
+        <p
+          className={`${service.estimatedArrivalTime === 'Cancelled' ? 'text-red-700' : 'text-gray-500'} ${service.estimatedArrivalTime === 'On time' ? 'font-normal' : 'font-medium'}`}
+        >
+          {service.estimatedArrivalTime}
+        </p>
       </section>
+      {/* Duration */}
       <section className="flex w-1/3 flex-col items-center gap-1">
         <h2>DURATION</h2>
         <p className="text-2xl">{formatDuration(service.duration)}</p>
-        <p className="text-gray-500">{service.duration <= averageDuration ? 'Fast' : 'Slow'}</p>
+        <p
+          className={`flex items-center gap-1 font-medium ${speed === 'Fast' ? 'text-green-700' : 'text-red-700'}`}
+        >
+          {speed === 'Fast' ? <GiRabbit /> : <GiTortoise />}
+          {speed}
+        </p>
       </section>
     </div>
   );
