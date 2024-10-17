@@ -17,14 +17,12 @@ export async function GET(request: NextRequest) {
 
   // Set API key in headers
   const headers = new Headers();
-  headers.set('x-apikey', process.env.API_KEY!);
+  headers.set('x-apikey', process.env.DEPARTURE_BOARD_API_KEY!);
 
   // Get service details
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${from}?numRows=10&filterCrs=${to}`,
-    {
-      headers,
-    },
+    { headers },
   ).then((response) => response.json());
 
   // If no services

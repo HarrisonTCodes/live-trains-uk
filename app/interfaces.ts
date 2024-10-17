@@ -10,6 +10,7 @@ export interface CallingPoint {
   crs: string;
   st: string;
   et: string;
+  locationName: string;
 }
 
 export interface Service {
