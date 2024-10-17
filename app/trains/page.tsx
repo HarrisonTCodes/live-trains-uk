@@ -16,12 +16,11 @@ export default function TrainsPage({
   const [averageDuration, setAverageDuration] = useState<number>(0);
   const [fromCrs, setFromCrs] = useState<string>('');
   const [toCrs, setToCrs] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const router = useRouter();
 
   const getData = () => {
-    setServices([]);
     setLoading(true);
     fetch(
       `/api/live-departures?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
