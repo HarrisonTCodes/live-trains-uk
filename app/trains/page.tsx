@@ -93,6 +93,7 @@ export default function TrainsPage({
         ) : (
           services.map((service) => (
             <TrainInfo
+              key={service.serviceId}
               service={service}
               from={fromCrs}
               to={toCrs}

@@ -46,6 +46,7 @@ export async function GET(request: NextRequest) {
       arrivalTime: arrivalData.st,
       estimatedArrivalTime: arrivalData.et,
       duration: getDuration(serviceResponse.std, arrivalData.st),
+      serviceId: serviceResponse.serviceID,
     };
   });
 

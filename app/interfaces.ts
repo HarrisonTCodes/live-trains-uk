@@ -3,6 +3,7 @@ export interface ServiceResponse {
   etd: string;
   platform: string;
   subsequentCallingPoints: [{ callingPoint: CallingPoint[] }];
+  serviceID: string;
 }
 
 export interface CallingPoint {
@@ -18,4 +19,5 @@ export interface Service {
   arrivalTime: string;
   estimatedArrivalTime: string;
   duration: number;
+  serviceId: string;
 }
