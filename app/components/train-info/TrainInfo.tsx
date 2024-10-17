@@ -24,7 +24,7 @@ export default function TrainInfo({
         </h2>
         <p className="text-2xl">{service.departureTime}</p>
         <p
-          className={`${service.estimatedArrivalTime === 'Cancelled' ? 'text-red-700' : 'text-gray-500'} ${service.estimatedDepartureTime === 'On time' ? 'font-normal' : 'font-medium'}`}
+          className={`${service.estimatedDepartureTime === 'Cancelled' ? 'text-red-700' : 'text-gray-500'} ${service.estimatedDepartureTime === 'On time' ? 'font-normal' : 'font-medium'}`}
         >
           {service.estimatedDepartureTime}
         </p>
