@@ -27,6 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       station: callingPoint.locationName,
       departureTime: callingPoint.st,
       estimatedDepartureTime: callingPoint.et,
+      cancelReason: callingPoint.cancelReason,
     };
   });
 
@@ -36,6 +37,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         station: callingPoint.locationName,
         departureTime: callingPoint.st,
         estimatedDepartureTime: callingPoint.et,
+        cancelReason: callingPoint.cancelReason,
       };
     },
   );
@@ -47,6 +49,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       station: response.locationName,
       departureTime: response.std,
       estimatedDepartureTime: response.etd,
+      cancelReason: response.cancelReason,
+      platform: response.platform,
     },
     ...subsequentCallingPoints,
   ];

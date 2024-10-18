@@ -11,6 +11,7 @@ export interface CallingPoint {
   st: string;
   et: string;
   locationName: string;
+  cancelReason?: string;
 }
 
 export interface Service {
