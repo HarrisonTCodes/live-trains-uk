@@ -2,11 +2,11 @@ export interface ServiceResponse {
   std: string;
   etd: string;
   platform: string;
-  subsequentCallingPoints: [{ callingPoint: CallingPoint[] }];
+  subsequentCallingPoints: [{ callingPoint: CallingPointResponse[] }];
   serviceID: string;
 }
 
-export interface CallingPoint {
+export interface CallingPointResponse {
   crs: string;
   st: string;
   et: string;
@@ -22,4 +22,12 @@ export interface Service {
   estimatedArrivalTime: string;
   duration: number;
   serviceId: string;
+}
+
+export interface CallingPoint {
+  station: string;
+  departureTime: string;
+  estimatedDepartureTime?: string;
+  cancelReason?: string;
+  platform?: string;
 }

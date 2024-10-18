@@ -1,4 +1,4 @@
-import { CallingPoint } from '@/app/interfaces';
+import { CallingPointResponse } from '@/app/interfaces';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
@@ -22,17 +22,19 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     ? response.subsequentCallingPoints[0].callingPoint
     : [];
 
-  const previousCallingPoints = previousCallingPointsResponse.map((callingPoint: CallingPoint) => {
-    return {
-      station: callingPoint.locationName,
-      departureTime: callingPoint.st,
-      estimatedDepartureTime: callingPoint.et,
-      cancelReason: callingPoint.cancelReason,
-    };
-  });
+  const previousCallingPoints = previousCallingPointsResponse.map(
+    (callingPoint: CallingPointResponse) => {
+      return {
+        station: callingPoint.locationName,
+        departureTime: callingPoint.st,
+        estimatedDepartureTime: callingPoint.et,
+        cancelReason: callingPoint.cancelReason,
+      };
+    },
+  );
 
   const subsequentCallingPoints = subsequentCallingPointsResponse.map(
-    (callingPoint: CallingPoint) => {
+    (callingPoint: CallingPointResponse) => {
       return {
         station: callingPoint.locationName,
         departureTime: callingPoint.st,

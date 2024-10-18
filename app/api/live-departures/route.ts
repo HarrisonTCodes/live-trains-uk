@@ -1,4 +1,4 @@
-import { CallingPoint, ServiceResponse } from '@/app/interfaces';
+import { CallingPointResponse, ServiceResponse } from '@/app/interfaces';
 import { NextRequest } from 'next/server';
 import stations from '../shared/stations';
 import getDuration from '@/app/utils/getDuration';
@@ -33,9 +33,10 @@ export async function GET(request: NextRequest) {
   // Parse data
   const services = response.trainServices.map((serviceResponse: ServiceResponse) => {
     // Get data from calling point matching provided destination station
-    const arrivalData: CallingPoint = serviceResponse.subsequentCallingPoints[0].callingPoint.find(
-      ({ crs }: { crs: string }) => crs === to,
-    )!;
+    const arrivalData: CallingPointResponse =
+      serviceResponse.subsequentCallingPoints[0].callingPoint.find(
+        ({ crs }: { crs: string }) => crs === to,
+      )!;
 
     return {
       departureTime: serviceResponse.std,

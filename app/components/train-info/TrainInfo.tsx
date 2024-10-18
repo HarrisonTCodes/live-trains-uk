@@ -1,6 +1,7 @@
 import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
 import { GiRabbit, GiTortoise } from 'react-icons/gi';
+import { useRouter } from 'next/navigation';
 
 export default function TrainInfo({
   service,
@@ -14,9 +15,13 @@ export default function TrainInfo({
   averageDuration: number;
 }) {
   const speed = service.duration <= averageDuration ? 'Fast' : 'Slow';
+  const router = useRouter();
 
   return (
-    <div className="flex w-11/12 max-w-[500px] divide-x-2 divide-gray-300 rounded-xl border-2 border-gray-300">
+    <div
+      className="flex w-11/12 max-w-[500px] cursor-pointer divide-x-2 divide-gray-300 rounded-xl border-2 border-gray-300"
+      onClick={() => router.push(`/train/${service.serviceId}`)}
+    >
       {/* Departure station */}
       <section className="flex w-1/3 flex-col items-center gap-1">
         <h2>
