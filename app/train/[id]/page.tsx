@@ -38,7 +38,10 @@ export default function TrainPage() {
         {/* Points */}
         <section>
           {callingPoints.map((callingPoint: CallingPoint) => (
-            <section className="flex items-center gap-2">
+            <section
+              key={`${callingPoint.station} calling point`}
+              className="flex items-center gap-2"
+            >
               {/* Circle */}
               <div className="z-10 my-10 h-[16px] w-[16px] rounded-full bg-blue-700" />
               {/* Details */}
