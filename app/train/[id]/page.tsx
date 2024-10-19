@@ -1,6 +1,6 @@
 'use client';
+import CallingPointInfo from '@/app/components/calling-point-info/CallingPointInfo';
 import { CallingPoint } from '@/app/interfaces';
-import formatEstimated from '@/app/utils/formatEstimated';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
@@ -42,7 +42,7 @@ export default function TrainPage() {
         <FaArrowLeft size={24} />
         Return to Departures
       </h1>
-      {/* Calling points */}
+      {/* Details */}
       <div
         className={`relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px] ${loading ? 'h-[100vh]' : ''}`}
       >
@@ -61,36 +61,13 @@ export default function TrainPage() {
         {!loading && !error && (
           <div className="absolute left-5 h-full w-1 rounded-full bg-blue-900" />
         )}
-        {/* Points */}
+        {/* Calling points */}
         <section>
           {callingPoints.map((callingPoint: CallingPoint) => (
-            <section
-              key={`${callingPoint.station} calling point`}
-              className="flex items-center gap-2"
-            >
-              {/* Circle */}
-              <div className="z-10 my-10 h-[16px] w-[16px] rounded-full bg-blue-700" />
-              {/* Details */}
-              <section className="w-full">
-                <p className={`text-lg ${callingPoint.focus ? 'font-bold' : ''}`}>
-                  {callingPoint.station}
-                </p>
-                <p>
-                  {callingPoint.departureTime}
-                  {callingPoint.estimatedDepartureTime && (
-                    <span
-                      className={
-                        callingPoint.estimatedDepartureTime === 'Cancelled'
-                          ? 'font-medium text-red-700'
-                          : 'text-gray-600'
-                      }
-                    >
-                      {formatEstimated(callingPoint.estimatedDepartureTime)}
-                    </span>
-                  )}
-                </p>
-              </section>
-            </section>
+            <CallingPointInfo
+              key={`calling point ${callingPoint.station}`}
+              callingPoint={callingPoint}
+            />
           ))}
         </section>
       </div>
