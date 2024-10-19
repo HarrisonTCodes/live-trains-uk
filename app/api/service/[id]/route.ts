@@ -49,8 +49,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     ...previousCallingPoints,
     {
       station: response.locationName,
-      departureTime: response.std,
-      estimatedDepartureTime: response.etd,
+      departureTime: response.std ?? response.sta,
+      estimatedDepartureTime: response.etd ?? response.eta,
       cancelReason: response.cancelReason,
       platform: response.platform,
       focus: true,

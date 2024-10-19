@@ -1,5 +1,6 @@
 'use client';
 import { CallingPoint } from '@/app/interfaces';
+import formatEstimated from '@/app/utils/formatEstimated';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
@@ -47,9 +48,7 @@ export default function TrainPage() {
                 </p>
                 <p>
                   {callingPoint.departureTime}
-                  {callingPoint.estimatedDepartureTime
-                    ? ` (${callingPoint.estimatedDepartureTime})`
-                    : ''}
+                  {formatEstimated(callingPoint.estimatedDepartureTime)}
                 </p>
               </section>
             </section>
