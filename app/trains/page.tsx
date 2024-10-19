@@ -83,13 +83,13 @@ export default function TrainsPage({
           <TrainInfoSkeletons />
         ) : error ? (
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-            <FaTriangleExclamation size={24} color="ff0000" className="text-white" /> There was an
+            <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
             error
           </h2>
         ) : services.length === 0 ? (
           <h2 className="flex items-center gap-2 text-2xl font-medium text-gray-500">
-            <FaTriangleExclamation size={24} color="f3a600" className="text-white" /> No services at
-            the moment
+            <FaTriangleExclamation size={24} color="f3a600" className="text-[#f3a600]" /> No
+            services at the moment
           </h2>
         ) : (
           services.map((service) => (

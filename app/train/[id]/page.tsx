@@ -3,18 +3,29 @@ import { CallingPoint } from '@/app/interfaces';
 import formatEstimated from '@/app/utils/formatEstimated';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { FaArrowLeft } from 'react-icons/fa6';
+import { FaArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
 
 export default function TrainPage() {
   const [callingPoints, setCallingPoints] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
   const splitPathname = pathname.split('/');
 
   const getData = () => {
+    setLoading(true);
     fetch(`/api/service/${splitPathname[splitPathname.length - 1]}`)
       .then((response) => response.json())
-      .then((response) => setCallingPoints(response));
+      .then((response) => {
+        setCallingPoints(response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setError(true);
+      });
   };
 
   useEffect(() => {
@@ -32,9 +43,22 @@ export default function TrainPage() {
         Return to Departures
       </h1>
       {/* Calling points */}
-      <div className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
+      <div className="relative flex min-h-[100vh] w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
+        {/* Loading message */}
+        {loading && (
+          <h2 className="py-4 text-center text-xl text-gray-400">Loading service details...</h2>
+        )}
+        {/* Error message */}
+        {error && (
+          <h2 className="flex items-center justify-center gap-2 py-4 text-xl font-medium text-red-700">
+            <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
+            error
+          </h2>
+        )}
         {/* Line */}
-        <div className="absolute left-5 h-full w-1 rounded-full bg-blue-900" />
+        {!loading && !error && (
+          <div className="absolute left-5 h-full w-1 rounded-full bg-blue-900" />
+        )}
         {/* Points */}
         <section>
           {callingPoints.map((callingPoint: CallingPoint) => (
@@ -51,7 +75,11 @@ export default function TrainPage() {
                 </p>
                 <p>
                   {callingPoint.departureTime}
-                  {formatEstimated(callingPoint.estimatedDepartureTime)}
+                  {callingPoint.estimatedDepartureTime && (
+                    <span className="text-gray-600">
+                      {formatEstimated(callingPoint.estimatedDepartureTime)}
+                    </span>
+                  )}
                 </p>
               </section>
             </section>
