@@ -43,7 +43,9 @@ export default function TrainPage() {
         Return to Departures
       </h1>
       {/* Calling points */}
-      <div className="relative flex min-h-[100vh] w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
+      <div
+        className={`relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px] ${loading ? 'h-[100vh]' : ''}`}
+      >
         {/* Loading message */}
         {loading && (
           <h2 className="py-4 text-center text-xl text-gray-400">Loading service details...</h2>
@@ -76,7 +78,13 @@ export default function TrainPage() {
                 <p>
                   {callingPoint.departureTime}
                   {callingPoint.estimatedDepartureTime && (
-                    <span className="text-gray-600">
+                    <span
+                      className={
+                        callingPoint.estimatedDepartureTime === 'Cancelled'
+                          ? 'font-medium text-red-700'
+                          : 'text-gray-600'
+                      }
+                    >
                       {formatEstimated(callingPoint.estimatedDepartureTime)}
                     </span>
                   )}
