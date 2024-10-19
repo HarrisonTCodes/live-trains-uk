@@ -53,7 +53,7 @@ export default function Navbar() {
       </section>
       {/* Hamburger Menu */}
       {hamburgerMenuOpen && (
-        <div className="absolute right-2 top-16 flex w-48 cursor-pointer flex-col divide-y-2 divide-stone-300 rounded-xl border-2 border-stone-300 bg-white shadow-xl md:hidden">
+        <div className="absolute right-2 top-16 z-20 flex w-48 cursor-pointer flex-col divide-y-2 divide-stone-300 rounded-xl border-2 border-stone-300 bg-white shadow-xl md:hidden">
           {buttonData.map((data) => (
             <button
               onClick={() => menuButtonPressed(data.href)}
