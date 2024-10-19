@@ -11,7 +11,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   // Get service details
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-service-details/LDBWS/api/20220120/GetServiceDetails/${serviceId}`,
-    { headers },
+    { headers, cache: 'no-cache' },
   ).then((response) => response.json());
 
   // Get details on all calling points
