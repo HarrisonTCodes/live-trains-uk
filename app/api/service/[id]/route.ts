@@ -53,6 +53,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       estimatedDepartureTime: response.etd,
       cancelReason: response.cancelReason,
       platform: response.platform,
+      focus: true,
     },
     ...subsequentCallingPoints,
   ];

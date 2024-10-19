@@ -30,4 +30,5 @@ export interface CallingPoint {
   estimatedDepartureTime?: string;
   cancelReason?: string;
   platform?: string;
+  focus?: boolean;
 }

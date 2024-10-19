@@ -42,7 +42,9 @@ export default function TrainPage() {
               <div className="z-10 my-10 h-[16px] w-[16px] rounded-full bg-blue-700" />
               {/* Details */}
               <section className="w-full">
-                <p>{callingPoint.station}</p>
+                <p className={`text-lg ${callingPoint.focus ? 'font-bold' : ''}`}>
+                  {callingPoint.station}
+                </p>
                 <p>
                   {callingPoint.departureTime}
                   {callingPoint.estimatedDepartureTime
