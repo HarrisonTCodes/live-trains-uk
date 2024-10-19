@@ -6,6 +6,7 @@ import { FaArrowRightArrowLeft, FaArrowRotateRight, FaTriangleExclamation } from
 import TrainInfo from '../components/train-info/TrainInfo';
 import { useRouter } from 'next/navigation';
 import TrainInfoSkeletons from '../components/train-info/TrainInfoSkeletons';
+import toTitleCase from '../utils/toTitleCase';
 
 export default function TrainsPage({
   searchParams,
@@ -62,7 +63,7 @@ export default function TrainsPage({
       <section className="text-center">
         <h1 className="text-3xl font-medium text-blue-900">Live Departures</h1>
         <h2 className="text-lg font-medium text-blue-900">
-          {searchParams.from} to {searchParams.to}
+          {toTitleCase(searchParams.from)} to {toTitleCase(searchParams.to)}
         </h2>
       </section>
       {/* Buttons */}
