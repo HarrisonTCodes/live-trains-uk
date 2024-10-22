@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write . --end-of-line crlf",
-    "test": "jest"
+    "test": "jest",
+    "prismaDev": "dotenv -e .env.local prisma migrate dev"
   },
   "dependencies": {
+    "@prisma/client": "^5.21.1",
     "next": "14.2.14",
     "next-auth": "^4.24.8",
     "react": "^18",
@@ -31,6 +33,7 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
+    "prisma": "^5.21.1",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.2.5",
     "typescript": "^5"
