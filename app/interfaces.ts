@@ -35,6 +35,8 @@ export interface CallingPoint {
 
 export interface Journey {
   firstStation: string;
+  firstCrs: string;
   secondStation: string;
+  secondCrs: string;
   name: string;
 }

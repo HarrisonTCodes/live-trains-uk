@@ -3,6 +3,7 @@ import { options } from '../auth/[...nextauth]/options';
 import prisma from '@/app/utils/prisma';
 import { NextRequest } from 'next/server';
 import { Journey } from '@/app/interfaces';
+import stations from '../shared/stations';
 
 export async function GET() {
   const session = await getServerSession(options);
@@ -23,9 +24,11 @@ export async function GET() {
   const journeys = userWithJourneys?.journeys ?? [];
 
   return Response.json(
-    journeys.map((journey: Journey) => ({
+    journeys.map((journey) => ({
       firstStation: journey.firstStation,
+      firstCrs: stations[journey.firstStation as keyof typeof stations],
       secondStation: journey.secondStation,
+      secondCrs: stations[journey.secondStation as keyof typeof stations],
       name: journey.name,
     })),
   );
