@@ -32,3 +32,9 @@ export interface CallingPoint {
   platform?: string;
   focus?: boolean;
 }
+
+export interface Journey {
+  firstStation: string;
+  secondStation: string;
+  name: string;
+}

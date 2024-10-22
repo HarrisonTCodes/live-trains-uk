@@ -1,0 +1,67 @@
+import { getServerSession } from 'next-auth';
+import { options } from '../auth/[...nextauth]/options';
+import prisma from '@/app/utils/prisma';
+import { NextRequest } from 'next/server';
+import { Journey } from '@/app/interfaces';
+
+export async function GET() {
+  const session = await getServerSession(options);
+  if (!session) {
+    return new Response('Not authenticated', {
+      status: 401,
+    });
+  }
+
+  const userWithJourneys = await prisma.user.findUnique({
+    where: {
+      email: session?.user?.email!,
+    },
+    include: {
+      journeys: true,
+    },
+  });
+  const journeys = userWithJourneys?.journeys ?? [];
+
+  return Response.json(
+    journeys.map((journey: Journey) => ({
+      firstStation: journey.firstStation,
+      secondStation: journey.secondStation,
+      name: journey.name,
+    })),
+  );
+}
+
+export async function POST(request: NextRequest) {
+  const session = await getServerSession(options);
+  if (!session) {
+    return new Response('Not authenticated', {
+      status: 401,
+    });
+  }
+
+  const data: Journey = await request.json();
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session?.user?.email!,
+    },
+  });
+
+  if (!user) {
+    return new Response('User not found', {
+      status: 400,
+    });
+  }
+
+  await prisma.journey.create({
+    data: {
+      firstStation: data.firstStation,
+      secondStation: data.secondStation,
+      name: data.name,
+      authorId: user.id,
+    },
+  });
+
+  return Response.json(data, {
+    status: 201,
+  });
+}
