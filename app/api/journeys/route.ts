@@ -2,7 +2,6 @@ import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]/options';
 import prisma from '@/app/utils/prisma';
 import { NextRequest } from 'next/server';
-import { Journey } from '@/app/interfaces';
 import stations from '../shared/stations';
 
 export async function GET() {
@@ -15,7 +14,7 @@ export async function GET() {
 
   const userWithJourneys = await prisma.user.findUnique({
     where: {
-      email: session?.user?.email!,
+      email: session!.user!.email!,
     },
     include: {
       journeys: true,
@@ -30,6 +29,7 @@ export async function GET() {
       secondStation: journey.secondStation,
       secondCrs: stations[journey.secondStation as keyof typeof stations],
       name: journey.name,
+      id: journey.id,
     })),
   );
 }
@@ -42,10 +42,10 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const data: Journey = await request.json();
+  const data = await request.json();
   const user = await prisma.user.findUnique({
     where: {
-      email: session?.user?.email!,
+      email: session!.user!.email!,
     },
   });
 

@@ -4,7 +4,7 @@ import { Journey } from '../interfaces';
 import JourneyInfo from '../components/journey-info/JourneyInfo';
 
 export default function JourneysPage() {
-  const [journeys, setJourneys] = useState([]);
+  const [journeys, setJourneys] = useState<Journey[]>([]);
 
   useEffect(() => {
     fetch('/api/journeys')
@@ -17,7 +17,12 @@ export default function JourneysPage() {
       <h1 className="text-3xl font-medium text-blue-900">My Journeys</h1>
       <section className="flex w-full flex-col items-center gap-4">
         {journeys.map((journey: Journey) => (
-          <JourneyInfo journey={journey} />
+          <JourneyInfo
+            key={`journey ${journey.name}`}
+            journey={journey}
+            journeys={journeys}
+            setJourneys={setJourneys}
+          />
         ))}
       </section>
     </main>

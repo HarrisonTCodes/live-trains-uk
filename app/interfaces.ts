@@ -39,4 +39,5 @@ export interface Journey {
   secondStation: string;
   secondCrs: string;
   name: string;
+  id: number;
 }
