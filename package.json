@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "format": "prettier --write . --end-of-line crlf",
     "test": "jest",
-    "prismaDev": "dotenv -e .env.local prisma migrate dev"
+    "prismaDev": "dotenv -e .env.local prisma migrate dev",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
