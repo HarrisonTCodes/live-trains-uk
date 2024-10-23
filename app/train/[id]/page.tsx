@@ -15,7 +15,7 @@ export default function TrainPage() {
 
   const getData = () => {
     setLoading(true);
-    fetch(`/api/service/${splitPathname[splitPathname.length - 1]}`)
+    fetch(`/api/services/${splitPathname[splitPathname.length - 1]}`)
       .then((response) => response.json())
       .then((response) => {
         setCallingPoints(response);

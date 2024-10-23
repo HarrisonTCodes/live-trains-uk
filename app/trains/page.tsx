@@ -24,7 +24,7 @@ export default function TrainsPage({
   const getData = () => {
     setLoading(true);
     fetch(
-      `/api/live-departures?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
+      `/api/services?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
     )
       .then((response) => response.json())
       .then((response) => {
