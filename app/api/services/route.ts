@@ -31,22 +31,29 @@ export async function GET(request: NextRequest) {
   }
 
   // Parse data
-  const services = response.trainServices.map((serviceResponse: ServiceResponse) => {
+  const services = response.trainServices.flatMap((serviceResponse: ServiceResponse) => {
     // Get data from calling point matching provided destination station
-    const arrivalData: CallingPointResponse =
+    const arrivalData: CallingPointResponse | undefined =
       serviceResponse.subsequentCallingPoints[0].callingPoint.find(
         ({ crs }: { crs: string }) => crs === to,
-      )!;
+      );
 
-    return {
-      departureTime: serviceResponse.std,
-      estimatedDepartureTime: serviceResponse.etd,
-      platform: serviceResponse.platform,
-      arrivalTime: arrivalData.st,
-      estimatedArrivalTime: arrivalData.et,
-      duration: getDuration(serviceResponse.std, arrivalData.st),
-      serviceId: serviceResponse.serviceID,
-    };
+    // Skip service if destination station not found
+    if (!arrivalData) {
+      return [];
+    }
+
+    return [
+      {
+        departureTime: serviceResponse.std,
+        estimatedDepartureTime: serviceResponse.etd,
+        platform: serviceResponse.platform,
+        arrivalTime: arrivalData.st,
+        estimatedArrivalTime: arrivalData.et,
+        duration: getDuration(serviceResponse.std, arrivalData.st),
+        serviceId: serviceResponse.serviceID,
+      },
+    ];
   });
 
   return Response.json({
