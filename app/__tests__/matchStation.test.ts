@@ -1,4 +1,4 @@
-import { matchStation } from '../route';
+import matchStation from '../utils/matchStation';
 
 test('exact match', () => {
   expect(matchStation('london bridge', 'lon')).toBe(true);

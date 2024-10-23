@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]/options';
 import prisma from '@/app/utils/prisma';
 import { NextRequest } from 'next/server';
-import stations from '../shared/stations';
+import stations from '../../utils/stations';
 
 export async function GET() {
   const session = await getServerSession(options);
