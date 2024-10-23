@@ -45,7 +45,9 @@ export default function JourneysPage() {
             error
           </h2>
         ) : journeys.length === 0 ? (
-          <h2>No journeys</h2>
+          <h2 className="px-2 text-center text-2xl text-gray-400">
+            No journeys found. Click above to add a new journey
+          </h2>
         ) : (
           journeys.map((journey: Journey) => (
             <JourneyInfo
