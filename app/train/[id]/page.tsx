@@ -15,6 +15,7 @@ export default function TrainPage() {
 
   const getData = () => {
     setLoading(true);
+    setError(false);
     fetch(`/api/services/${splitPathname[splitPathname.length - 1]}`)
       .then((response) => response.json())
       .then((response) => {

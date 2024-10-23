@@ -23,6 +23,7 @@ export default function TrainsPage({
 
   const getData = () => {
     setLoading(true);
+    setError(false);
     fetch(
       `/api/services?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
     )
