@@ -5,8 +5,8 @@ import Button from '../components/button/Button';
 import { FaArrowRightArrowLeft, FaArrowRotateRight, FaTriangleExclamation } from 'react-icons/fa6';
 import TrainInfo from '../components/train-info/TrainInfo';
 import { useRouter } from 'next/navigation';
-import TrainInfoSkeletons from '../components/train-info/TrainInfoSkeletons';
 import toTitleCase from '../utils/toTitleCase';
+import Skeletons from '../components/skeletons/Skeletons';
 
 export default function TrainsPage({
   searchParams,
@@ -80,7 +80,7 @@ export default function TrainsPage({
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
         {loading ? (
-          <TrainInfoSkeletons />
+          <Skeletons />
         ) : error ? (
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
             <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
