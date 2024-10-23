@@ -12,10 +12,6 @@ export default function AddJourneyPage() {
   const [secondStation, setSecondStation] = useState<string>('');
 
   const createJourney = () => {
-    if (!name || !firstStation || !secondStation) {
-      return;
-    }
-
     fetch('/api/journeys', {
       method: 'POST',
       body: JSON.stringify({
@@ -23,11 +19,11 @@ export default function AddJourneyPage() {
         firstStation,
         secondStation,
       }),
-    })
-      .then(() => router.push('/my-journeys'))
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((response) => {
+      if (response.ok) {
+        router.push('/my-journeys');
+      }
+    });
   };
 
   return (

@@ -55,11 +55,25 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  if (!data.name || !data.firstStation || !data.secondStation) {
+    return new Response('Malformed syntax', {
+      status: 400,
+    });
+  }
+
+  const firstCrs = stations[data.firstStation.toLowerCase() as keyof typeof stations];
+  const secondCrs = stations[data.secondStation.toLowerCase() as keyof typeof stations];
+  if (!firstCrs || !secondCrs) {
+    return new Response('Station not found', {
+      status: 400,
+    });
+  }
+
   await prisma.journey.create({
     data: {
+      name: data.name,
       firstStation: data.firstStation.toLowerCase(),
       secondStation: data.secondStation.toLowerCase(),
-      name: data.name,
       authorId: user.id,
     },
   });

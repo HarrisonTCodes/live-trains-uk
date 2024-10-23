@@ -33,7 +33,7 @@ export default function JourneysPage() {
       <Link href={'/my-journeys/new'}>
         <Button>
           <FaPlus size={24} color="ffffff" className="text-white" />
-          New Journey
+          Add Journey
         </Button>
       </Link>
       <section className="flex w-full flex-col items-center gap-4">
