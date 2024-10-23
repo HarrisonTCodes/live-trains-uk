@@ -8,7 +8,10 @@ export default function CallingPointInfo({ callingPoint }: { callingPoint: Calli
       <div className="z-10 my-10 h-[16px] w-[16px] rounded-full bg-blue-700" />
       {/* Details */}
       <section className="w-full">
-        <p className={`text-lg ${callingPoint.focus ? 'font-bold' : ''}`}>{callingPoint.station}</p>
+        <p className={`text-lg ${callingPoint.focus ? 'font-bold' : ''}`}>
+          {callingPoint.station}{' '}
+          {callingPoint.platform ? `(Platform ${callingPoint.platform})` : ''}
+        </p>
         <p>
           {callingPoint.departureTime}
           {callingPoint.estimatedDepartureTime && (
