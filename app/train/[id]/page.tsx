@@ -41,7 +41,7 @@ export default function TrainPage() {
         onClick={() => router.back()}
       >
         <FaArrowLeft size={24} />
-        Return to Departures
+        Back to Departures
       </h1>
       {/* Details */}
       <div

@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from './components/navbar/Navbar';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Live Trains UK',
@@ -14,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className={`antialiased ${inter.className}`}>
         <Navbar />
         {children}
       </body>

@@ -63,7 +63,7 @@ export default function TrainsPage({
       {/* Headings */}
       <section className="text-center">
         <h1 className="text-3xl font-medium text-blue-900">Live Departures</h1>
-        <h2 className="text-lg font-medium text-blue-900">
+        <h2 className="px-2 text-lg font-medium text-blue-900">
           {toTitleCase(searchParams.from)} to {toTitleCase(searchParams.to)}
         </h2>
       </section>
