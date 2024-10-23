@@ -57,8 +57,8 @@ export async function POST(request: NextRequest) {
 
   await prisma.journey.create({
     data: {
-      firstStation: data.firstStation,
-      secondStation: data.secondStation,
+      firstStation: data.firstStation.toLowerCase(),
+      secondStation: data.secondStation.toLowerCase(),
       name: data.name,
       authorId: user.id,
     },
