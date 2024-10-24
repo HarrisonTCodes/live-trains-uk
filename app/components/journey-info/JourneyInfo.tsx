@@ -14,7 +14,7 @@ export default function JourneyInfo({
   const router = useRouter();
 
   return (
-    <div className="flex h-20 w-11/12 max-w-[500px] cursor-pointer divide-x-2 divide-gray-300 rounded-xl border-2 border-gray-300">
+    <div className="flex h-20 w-11/12 max-w-[500px] cursor-pointer divide-x-2 divide-gray-300 rounded-xl border-2 border-gray-300 transition-all hover:bg-gray-100">
       {/* Name and stations */}
       <section
         className="m-2 flex w-full flex-col justify-center gap-2"

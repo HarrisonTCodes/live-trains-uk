@@ -6,7 +6,7 @@ export default function NavbarButton({
   href?: string;
 }) {
   return (
-    <button className="hidden rounded-xl p-2 font-medium text-white hover:bg-blue-600 md:block">
+    <button className="hidden rounded-xl p-2 font-medium text-white hover:bg-blue-600 active:bg-blue-500 md:block">
       <a href={href} className="flex items-center justify-center gap-2">
         {children}
       </a>
