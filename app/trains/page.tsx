@@ -7,6 +7,7 @@ import TrainInfo from '../components/train-info/TrainInfo';
 import { useRouter } from 'next/navigation';
 import toTitleCase from '../utils/toTitleCase';
 import Skeletons from '../components/skeletons/Skeletons';
+import PageHeading from '../components/page-heading/PageHeading';
 
 export default function TrainsPage({
   searchParams,
@@ -61,12 +62,11 @@ export default function TrainsPage({
   return (
     <main className="flex flex-col items-center gap-6 py-8">
       {/* Headings */}
-      <section className="text-center">
-        <h1 className="text-3xl font-medium text-blue-900">Live Departures</h1>
-        <h2 className="px-2 text-lg font-medium text-blue-900">
-          {toTitleCase(searchParams.from)} to {toTitleCase(searchParams.to)}
-        </h2>
-      </section>
+      <PageHeading
+        heading="Live Departures"
+        subHeading={`${toTitleCase(searchParams.from)} to ${toTitleCase(searchParams.to)}`}
+        href="/"
+      />
       {/* Buttons */}
       <section className="flex gap-2">
         <Button onClick={getData}>

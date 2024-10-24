@@ -6,6 +6,7 @@ import Button from '../components/button/Button';
 import { FaPlus, FaTriangleExclamation } from 'react-icons/fa6';
 import Link from 'next/link';
 import Skeletons from '../components/skeletons/Skeletons';
+import PageHeading from '../components/page-heading/PageHeading';
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
@@ -30,7 +31,7 @@ export default function JourneysPage() {
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <h1 className="text-3xl font-medium text-blue-900">My Journeys</h1>
+      <PageHeading heading="My Journeys" backEnabled={false} />
       <Link href={'/my-journeys/new'}>
         <Button>
           <FaPlus size={24} color="ffffff" className="text-white" />

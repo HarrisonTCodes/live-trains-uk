@@ -1,5 +1,6 @@
 'use client';
 import Button from '@/app/components/button/Button';
+import PageHeading from '@/app/components/page-heading/PageHeading';
 import Search from '@/app/components/search/Search';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
@@ -28,7 +29,7 @@ export default function AddJourneyPage() {
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <h1 className="text-3xl font-medium text-blue-900">New Journey</h1>
+      <PageHeading heading="New Journey" />
       <section className="flex flex-col gap-6">
         <input
           type="search"

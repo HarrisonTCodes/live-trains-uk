@@ -1,15 +1,15 @@
 'use client';
 import CallingPointInfo from '@/app/components/calling-point-info/CallingPointInfo';
+import PageHeading from '@/app/components/page-heading/PageHeading';
 import { CallingPoint } from '@/app/interfaces';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { FaArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
+import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export default function TrainPage() {
   const [callingPoints, setCallingPoints] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const router = useRouter();
   const pathname = usePathname();
   const splitPathname = pathname.split('/');
 
@@ -36,13 +36,7 @@ export default function TrainPage() {
   return (
     <main className="flex flex-col items-center gap-6 py-8">
       {/* Heading */}
-      <h1
-        className="flex cursor-pointer items-center gap-2 text-3xl font-medium text-blue-900"
-        onClick={() => router.back()}
-      >
-        <FaArrowLeft size={24} />
-        Back to Departures
-      </h1>
+      <PageHeading heading="Service details" />
       {/* Details */}
       <div
         className={`relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px] ${loading ? 'h-[100vh]' : ''}`}
