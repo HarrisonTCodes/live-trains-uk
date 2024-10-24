@@ -15,6 +15,11 @@ export function GET(request: NextRequest) {
 
         return +bMatches - +aMatches;
       })
-      .slice(0, 16), // Get up to only the first 16 stations to avoid overloading
+      .slice(0, 16) // Get up to only the first 16 stations to avoid overloading
+      .map((station) => ({
+        // Send back station name and CRS
+        name: station,
+        crs: stations[station as keyof typeof stations],
+      })),
   );
 }

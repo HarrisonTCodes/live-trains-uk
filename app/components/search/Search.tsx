@@ -1,4 +1,5 @@
 'use client';
+import { Station } from '@/app/interfaces';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { ChangeEvent, useState } from 'react';
 
@@ -11,7 +12,7 @@ export default function Search({
   value: string;
   setValue: (value: string) => void;
 }) {
-  const [options, setOptions] = useState<string[]>([]);
+  const [options, setOptions] = useState<Station[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,11 +48,11 @@ export default function Search({
         <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-14 cursor-pointer divide-y-2 divide-gray-300 overflow-y-scroll rounded-lg border-2 border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
           {options.map((option) => (
             <li
-              key={option}
-              onMouseDown={() => setValue(toTitleCase(option))}
+              key={option.crs}
+              onMouseDown={() => setValue(toTitleCase(option.name))}
               className="p-2 text-lg"
             >
-              {toTitleCase(option)}
+              {toTitleCase(option.name)} <span className="text-gray-500">({option.crs})</span>
             </li>
           ))}
         </ul>

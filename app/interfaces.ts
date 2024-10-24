@@ -41,3 +41,8 @@ export interface Journey {
   name: string;
   id: number;
 }
+
+export interface Station {
+  name: string;
+  crs: string;
+}
