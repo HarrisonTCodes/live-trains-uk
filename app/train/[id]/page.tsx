@@ -54,7 +54,10 @@ export default function TrainPage() {
         )}
         {/* Line */}
         {!loading && !error && (
-          <div className="absolute left-5 h-full w-1 rounded-full bg-blue-900" />
+          <div
+            className="absolute left-5 top-[50px] w-1 rounded-full bg-blue-900"
+            style={{ height: `calc(100% - 100px)` }}
+          />
         )}
         {/* Calling points */}
         <section>
