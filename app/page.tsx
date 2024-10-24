@@ -28,7 +28,7 @@ export default function LiveTrainsPage() {
           <FaArrowRightArrowLeft size={24} color="ffffff" className="text-white" />
           Switch
         </Button>
-        <Link href={`/trains?from=${from}&to=${to}`}>
+        <Link href={`/trains?from=${from}&to=${to}`} prefetch={false}>
           <Button>
             <FaMagnifyingGlass size={24} color="ffffff" className="text-white" />
             Go
