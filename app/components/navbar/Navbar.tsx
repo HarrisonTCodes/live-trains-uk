@@ -32,7 +32,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-blue-800 px-4">
+    <nav className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-blue-800 px-4">
       {/* App Name */}
       <h1 className="text-2xl font-medium text-white">Live Trains UK</h1>
       {/* Buttons */}
