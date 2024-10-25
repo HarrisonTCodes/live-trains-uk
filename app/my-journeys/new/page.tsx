@@ -4,11 +4,12 @@ import PageHeading from '@/app/components/page-heading/PageHeading';
 import Search from '@/app/components/search/Search';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
-import { FaPlus } from 'react-icons/fa6';
+import { FaPlus, FaTriangleExclamation } from 'react-icons/fa6';
 
 export default function AddJourneyPage() {
   const router = useRouter();
   const [name, setName] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
   const [firstStation, setFirstStation] = useState<string>('');
   const [secondStation, setSecondStation] = useState<string>('');
 
@@ -22,7 +23,10 @@ export default function AddJourneyPage() {
       }),
     }).then((response) => {
       if (response.ok) {
+        setError(false);
         router.push('/my-journeys');
+      } else {
+        setError(true);
       }
     });
   };
@@ -45,6 +49,17 @@ export default function AddJourneyPage() {
         <FaPlus size={24} color="ffffff" className="text-white" />
         Add Journey
       </Button>
+      {error && (
+        <div className="flex flex-col items-center gap-1">
+          <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
+            <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
+            error
+          </h2>
+          <p className="text-center text-red-700">
+            Make sure all inputs are filled and valid stations are chosen
+          </p>
+        </div>
+      )}
     </main>
   );
 }
