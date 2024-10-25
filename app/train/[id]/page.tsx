@@ -48,8 +48,7 @@ export default function TrainPage() {
         {/* Error message */}
         {error && (
           <h2 className="flex items-center justify-center gap-2 py-4 text-xl font-medium text-red-700">
-            <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
-            error
+            <FaTriangleExclamation /> There was an error
           </h2>
         )}
         {/* Line */}

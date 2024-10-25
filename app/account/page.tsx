@@ -14,8 +14,7 @@ export default async function AccountPage() {
       <p className="px-2 text-center text-xl">Logged in as {session?.user?.email}</p>
       <Link href={'/api/auth/signout'}>
         <Button>
-          <FaArrowRightToBracket size={24} color="ffffff" className="text-white" />
-          Sign Out
+          <FaArrowRightToBracket /> Sign Out
         </Button>
       </Link>
     </main>

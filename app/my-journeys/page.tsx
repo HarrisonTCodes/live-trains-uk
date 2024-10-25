@@ -34,8 +34,7 @@ export default function JourneysPage() {
       <PageHeading heading="My Journeys" backEnabled={false} />
       <Link href={'/my-journeys/new'}>
         <Button>
-          <FaPlus size={24} color="ffffff" className="text-white" />
-          Add Journey
+          <FaPlus /> Add Journey
         </Button>
       </Link>
       <section className="flex w-full flex-col items-center gap-4">
@@ -43,8 +42,7 @@ export default function JourneysPage() {
           <Skeletons />
         ) : error ? (
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-            <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
-            error
+            <FaTriangleExclamation /> There was an error
           </h2>
         ) : journeys.length === 0 ? (
           <h2 className="px-2 text-center text-2xl text-gray-400">

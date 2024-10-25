@@ -31,8 +31,7 @@ export default function PageHeading({
           className="flex cursor-pointer items-center gap-2 text-lg font-medium text-blue-900"
           onClick={() => (href ? router.push(href) : router.back())}
         >
-          <FaArrowLeft size={24} />
-          Go Back
+          <FaArrowLeft /> Go Back
         </h2>
       ) : (
         <></>

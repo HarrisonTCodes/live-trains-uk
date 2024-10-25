@@ -62,9 +62,9 @@ export default function Navbar() {
         {/* Hamburger Button */}
         <button className="md:hidden" onClick={() => setHamburgerMenuOpen(!hamburgerMenuOpen)}>
           {hamburgerMenuOpen ? (
-            <FaXmark size={32} color="ffffff" className="text-white" />
+            <FaXmark size={32} className="text-white" />
           ) : (
-            <FaBars size={32} color="ffffff" className="text-white" />
+            <FaBars size={32} className="text-white" />
           )}
         </button>
       </section>

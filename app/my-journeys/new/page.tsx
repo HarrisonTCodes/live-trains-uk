@@ -46,14 +46,12 @@ export default function AddJourneyPage() {
         <Search label="Second station" value={secondStation} setValue={setSecondStation} />
       </section>
       <Button onClick={createJourney}>
-        <FaPlus size={24} color="ffffff" className="text-white" />
-        Add Journey
+        <FaPlus /> Add Journey
       </Button>
       {error && (
         <div className="flex flex-col items-center gap-1">
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-            <FaTriangleExclamation size={24} color="ff0000" className="text-red-700" /> There was an
-            error
+            <FaTriangleExclamation /> There was an error
           </h2>
           <p className="text-center text-red-700">
             Make sure all inputs are filled and valid stations are chosen

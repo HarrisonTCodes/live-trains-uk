@@ -25,13 +25,11 @@ export default function LiveTrainsPage() {
       </section>
       <section className="flex flex-col gap-6">
         <Button onClick={swapStations}>
-          <FaArrowRightArrowLeft size={24} color="ffffff" className="text-white" />
-          Switch
+          <FaArrowRightArrowLeft /> Switch
         </Button>
         <Link href={`/trains?from=${from}&to=${to}`} prefetch={false}>
           <Button>
-            <FaMagnifyingGlass size={24} color="ffffff" className="text-white" />
-            Go
+            <FaMagnifyingGlass /> Go
           </Button>
         </Link>
       </section>

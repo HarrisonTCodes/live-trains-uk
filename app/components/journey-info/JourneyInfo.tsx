@@ -41,7 +41,7 @@ export default function JourneyInfo({
           );
         }}
       >
-        <FaTrash size={20} color="888888" className="text-[#888888]" />
+        <FaTrash className="text-xl text-[#888888]" />
       </button>
     </div>
   );
