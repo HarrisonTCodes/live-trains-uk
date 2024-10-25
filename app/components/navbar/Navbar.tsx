@@ -8,22 +8,22 @@ const buttonData = [
   {
     label: 'Live Trains',
     href: '/',
-    icon: <FaTrain size={24} color="ffffff" className="text-white" />,
+    icon: <FaTrain />,
   },
   {
     label: 'My Journeys',
     href: '/my-journeys',
-    icon: <FaBookmark size={24} color="ffffff" className="text-white" />,
+    icon: <FaBookmark />,
   },
   {
     label: 'Alerts',
     href: '/alerts',
-    icon: <FaCircleExclamation size={24} color="ffffff" className="text-white" />,
+    icon: <FaCircleExclamation />,
   },
   {
     label: 'Account',
     href: '/account',
-    icon: <FaUser size={24} color="ffffff" className="text-white" />,
+    icon: <FaUser />,
   },
 ];
 
@@ -56,7 +56,7 @@ export default function Navbar() {
       <section className="flex gap-6">
         {buttonData.map((data) => (
           <NavbarButton href={data.href} key={`${data.label} nav option`}>
-            {data.icon} {data.label}
+            <span className="text-2xl">{data.icon}</span> {data.label}
           </NavbarButton>
         ))}
         {/* Hamburger Button */}
@@ -77,10 +77,10 @@ export default function Navbar() {
           {buttonData.map((data) => (
             <button
               onClick={() => menuButtonPressed(data.href)}
-              className="px-2 py-2 text-left text-lg font-medium text-stone-600 active:bg-stone-200"
+              className="flex items-center gap-2 px-2 py-2 text-left text-lg font-medium text-stone-600 active:bg-stone-200"
               key={`${data.label} menu option`}
             >
-              {data.label}
+              {data.icon} {data.label}
             </button>
           ))}
         </div>
