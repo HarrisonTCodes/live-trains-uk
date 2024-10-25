@@ -13,6 +13,7 @@ export default function Search({
   setValue: (value: string) => void;
 }) {
   const [options, setOptions] = useState<Station[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [focused, setFocused] = useState<boolean>(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,9 +26,13 @@ export default function Search({
 
     // Get stations
     if (input.length % 2 != 0 && input.length < 10) {
+      setLoading(true);
       fetch(`/api/stations?prompt=${event.target.value}`)
         .then((response) => response.json())
-        .then((stations) => setOptions(stations));
+        .then((stations) => {
+          setLoading(false);
+          setOptions(stations);
+        });
     }
   };
 
@@ -44,8 +49,11 @@ export default function Search({
         onBlur={() => setFocused(false)}
       />
       {/* Matching options dropdown */}
-      {options.length > 0 && focused && (
+      {(loading || options.length > 0) && focused && (
         <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-14 cursor-pointer divide-y-2 divide-gray-300 overflow-y-scroll rounded-lg border-2 border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
+          {loading && options.length === 0 && (
+            <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
+          )}
           {options.map((option) => (
             <li
               key={option.crs}
