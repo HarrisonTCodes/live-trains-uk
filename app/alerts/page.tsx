@@ -12,8 +12,8 @@ export default async function AlertsPage() {
       <PageHeading heading="Alerts and Disruptions" backEnabled={false} />
       {alerts ? (
         alerts.length > 0 ? (
-          alerts.map((alert: { name: string; summary: string }) => (
-            <AlertInfo station={alert.name} description={alert.summary} />
+          alerts.map((alert: { name: string; summary: string }, index: number) => (
+            <AlertInfo key={`alert${index}`} station={alert.name} description={alert.summary} />
           ))
         ) : (
           <h2 className="text-2xl font-medium text-gray-500">
