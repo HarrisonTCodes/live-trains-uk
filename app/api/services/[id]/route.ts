@@ -12,7 +12,16 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-service-details/LDBWS/api/20220120/GetServiceDetails/${serviceId}`,
     { headers, cache: 'no-cache' },
-  ).then((response) => response.json());
+  )
+    .then((response) => response.json())
+    .catch((err) => console.error(err));
+
+  // If the response has a message attribute, something has necessarily gone wrong
+  if (response.Message) {
+    return new Response('Service not found', {
+      status: 404,
+    });
+  }
 
   // Get details on all calling points
   const previousCallingPointsResponse = response.previousCallingPoints

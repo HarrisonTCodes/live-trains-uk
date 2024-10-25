@@ -39,7 +39,7 @@ export default function TrainPage() {
       <PageHeading heading="Service details" />
       {/* Details */}
       <div
-        className={`relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px] ${loading ? 'h-[100vh]' : ''}`}
+        className={`relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px] ${loading || error ? 'h-[100vh]' : ''}`}
       >
         {/* Loading message */}
         {loading && (
