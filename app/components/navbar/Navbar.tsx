@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import NavbarButton from './NavbarButton';
-import { FaBookmark, FaUser, FaTrain, FaBars, FaXmark } from 'react-icons/fa6';
+import { FaBookmark, FaUser, FaTrain, FaBars, FaXmark, FaCircleExclamation } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 
 const buttonData = [
@@ -14,6 +14,11 @@ const buttonData = [
     label: 'My Journeys',
     href: '/my-journeys',
     icon: <FaBookmark size={24} color="ffffff" className="text-white" />,
+  },
+  {
+    label: 'Alerts',
+    href: '/alerts',
+    icon: <FaCircleExclamation size={24} color="ffffff" className="text-white" />,
   },
   {
     label: 'Account',
@@ -48,7 +53,7 @@ export default function Navbar() {
       {/* App Name */}
       <h1 className="text-2xl font-medium text-white">Live Trains UK</h1>
       {/* Buttons */}
-      <section className="flex gap-8">
+      <section className="flex gap-6">
         {buttonData.map((data) => (
           <NavbarButton href={data.href} key={`${data.label} nav option`}>
             {data.icon} {data.label}
