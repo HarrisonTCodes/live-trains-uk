@@ -6,9 +6,8 @@ import { FaArrowRightArrowLeft, FaArrowRotateRight, FaTriangleExclamation } from
 import TrainInfo from '../components/train-info/TrainInfo';
 import { useRouter } from 'next/navigation';
 import toTitleCase from '../utils/toTitleCase';
-import Skeletons from '../components/skeletons/Skeletons';
+import TrainSkeletons from '../components/skeletons/TrainSkeletons';
 import PageHeading from '../components/page-heading/PageHeading';
-import formatDuration from '../utils/formatDuration';
 
 export default function TrainsPage({
   searchParams,
@@ -80,7 +79,7 @@ export default function TrainsPage({
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
         {loading ? (
-          <Skeletons />
+          <TrainSkeletons />
         ) : error ? (
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
             <FaTriangleExclamation /> There was an error

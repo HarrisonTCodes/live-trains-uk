@@ -1,5 +1,5 @@
 import PageHeading from '../components/page-heading/PageHeading';
-import Skeletons from '../components/skeletons/Skeletons';
+import Skeletons from '../components/skeletons/JourneySkeletons';
 
 export default function Loading() {
   return (

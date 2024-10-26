@@ -5,7 +5,7 @@ import JourneyInfo from '../components/journey-info/JourneyInfo';
 import Button from '../components/button/Button';
 import { FaPlus, FaTriangleExclamation } from 'react-icons/fa6';
 import Link from 'next/link';
-import Skeletons from '../components/skeletons/Skeletons';
+import JourneySkeletons from '../components/skeletons/JourneySkeletons';
 import PageHeading from '../components/page-heading/PageHeading';
 
 export default function JourneysPage() {
@@ -39,7 +39,7 @@ export default function JourneysPage() {
       </Link>
       <section className="flex w-full flex-col items-center gap-4">
         {loading ? (
-          <Skeletons />
+          <JourneySkeletons />
         ) : error ? (
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
             <FaTriangleExclamation /> There was an error
