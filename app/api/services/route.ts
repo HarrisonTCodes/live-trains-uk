@@ -32,16 +32,19 @@ export async function GET(request: NextRequest) {
 
   // Parse data
   const services = response.trainServices.flatMap((serviceResponse: ServiceResponse) => {
-    // Get data from calling point matching provided destination station
-    const arrivalData: CallingPointResponse | undefined =
-      serviceResponse.subsequentCallingPoints[0].callingPoint.find(
-        ({ crs }: { crs: string }) => crs === to,
-      );
+    // Get index of arrival calling point data
+    const arrivalDataIndex = serviceResponse.subsequentCallingPoints[0].callingPoint.findIndex(
+      ({ crs }: { crs: string }) => crs === to,
+    );
 
     // Skip service if destination station not found
-    if (!arrivalData) {
+    if (arrivalDataIndex === -1) {
       return [];
     }
+
+    // Get data from calling point matching provided destination station
+    const arrivalData: CallingPointResponse =
+      serviceResponse.subsequentCallingPoints[0].callingPoint[arrivalDataIndex];
 
     return [
       {
@@ -51,6 +54,7 @@ export async function GET(request: NextRequest) {
         arrivalTime: arrivalData.st,
         estimatedArrivalTime: arrivalData.et,
         duration: getDuration(serviceResponse.std, arrivalData.st),
+        numberOfStops: arrivalDataIndex + 1,
         serviceId: serviceResponse.serviceID,
       },
     ];

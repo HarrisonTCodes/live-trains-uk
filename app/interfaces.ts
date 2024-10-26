@@ -21,6 +21,7 @@ export interface Service {
   arrivalTime: string;
   estimatedArrivalTime: string;
   duration: number;
+  numberOfStops: number;
   serviceId: string;
 }
 
