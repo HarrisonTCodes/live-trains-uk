@@ -2,59 +2,74 @@ import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
 import { GiRabbit, GiTortoise } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
+import toTitleCase from '@/app/utils/toTitleCase';
+import formatEstimated from '@/app/utils/formatEstimated';
 
 export default function TrainInfo({
   service,
-  from,
-  to,
+  fromStation,
+  fromCrs,
+  toStation,
+  toCrs,
   averageDuration,
 }: {
   service: Service;
-  from: string;
-  to: string;
+  fromStation: string;
+  fromCrs: string;
+  toStation: string;
+  toCrs: string;
   averageDuration: number;
 }) {
-  const speed = service.duration <= averageDuration ? 'Fast' : 'Slow';
+  const fast = service.duration <= averageDuration;
   const router = useRouter();
 
   return (
     <div
-      className="flex w-11/12 max-w-[500px] cursor-pointer divide-x-2 divide-gray-300 rounded-xl border-2 border-gray-300 transition-all hover:bg-gray-100"
+      className="flex min-h-40 w-[90vw] max-w-[700px] flex-col gap-2 rounded-xl border-2 border-gray-300 bg-white p-2"
       onClick={() => router.push(`/train/${service.serviceId}`)}
     >
-      {/* Departure station */}
-      <section className="flex w-1/3 flex-col items-center gap-1">
-        <h2>
-          {from} {service.platform ? `P${service.platform}` : ''}
+      {/* From */}
+      <section>
+        <h2 className="text-xl font-medium">
+          {toTitleCase(fromStation)} <span className="text-sm text-gray-500">({fromCrs})</span>
         </h2>
-        <p className="text-2xl">{service.departureTime}</p>
-        <p
-          className={`${service.estimatedDepartureTime === 'Cancelled' ? 'text-red-700' : 'text-gray-500'} ${service.estimatedDepartureTime === 'On time' ? 'font-normal' : 'font-medium'}`}
-        >
-          {service.estimatedDepartureTime}
+        <p>
+          {service.departureTime}
+          {service.estimatedDepartureTime ? ' | ' : ''}
+          <span
+            className={`font-medium ${service.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
+          >
+            {formatEstimated(service.estimatedDepartureTime)}
+          </span>
+          {service.platform ? ` | Platform ${service.platform}` : ''}
         </p>
       </section>
-      {/* Arrival station */}
-      <section className="flex w-1/3 flex-col items-center gap-1">
-        <h2>{to}</h2>
-        <p className="text-2xl">{service.arrivalTime}</p>
-        <p
-          className={`${service.estimatedArrivalTime === 'Cancelled' ? 'text-red-700' : 'text-gray-500'} ${service.estimatedArrivalTime === 'On time' ? 'font-normal' : 'font-medium'}`}
-        >
-          {service.estimatedArrivalTime}
+      {/* To */}
+      <section>
+        <h2 className="text-xl font-medium">
+          {toTitleCase(toStation)} <span className="text-sm text-gray-500">({toCrs})</span>
+        </h2>
+        <p>
+          {service.arrivalTime}
+          {service.estimatedArrivalTime ? ' | ' : ''}
+          <span
+            className={`font-medium ${service.estimatedArrivalTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
+          >
+            {formatEstimated(service.estimatedArrivalTime)}
+          </span>
         </p>
       </section>
       {/* Duration */}
-      <section className="flex w-1/3 flex-col items-center gap-1">
-        <h2>DURATION</h2>
-        <p className="text-2xl">{formatDuration(service.duration)}</p>
-        <p
-          className={`flex items-center gap-1 font-medium ${speed === 'Fast' ? 'text-green-700' : 'text-red-700'}`}
+      <p className="flex text-lg">
+        {service.numberOfStops} Stop{service.numberOfStops > 1 ? 's' : ''} |{' '}
+        <span className="px-1 font-medium">{formatDuration(service.duration)}</span> |{' '}
+        <span
+          className={`flex items-center gap-1 pl-1 font-medium ${fast ? 'text-green-700' : 'text-red-800'}`}
         >
-          {speed === 'Fast' ? <GiRabbit /> : <GiTortoise />}
-          {speed}
-        </p>
-      </section>
+          {fast ? <GiRabbit /> : <GiTortoise />}
+          {fast ? 'Fast' : 'Slow'}
+        </span>
+      </p>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function CallingPointInfo({ callingPoint }: { callingPoint: Calli
                   : 'text-gray-600'
               }
             >
-              {formatEstimated(callingPoint.estimatedDepartureTime)}
+              {' ' + formatEstimated(callingPoint.estimatedDepartureTime)}
             </span>
           )}
         </p>

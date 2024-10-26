@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import toTitleCase from '../utils/toTitleCase';
 import Skeletons from '../components/skeletons/Skeletons';
 import PageHeading from '../components/page-heading/PageHeading';
+import formatDuration from '../utils/formatDuration';
 
 export default function TrainsPage({
   searchParams,
@@ -93,8 +94,10 @@ export default function TrainsPage({
             <TrainInfo
               key={service.serviceId}
               service={service}
-              from={fromCrs}
-              to={toCrs}
+              fromStation={searchParams.from}
+              fromCrs={fromCrs}
+              toStation={searchParams.to}
+              toCrs={toCrs}
               averageDuration={averageDuration}
             />
           ))
