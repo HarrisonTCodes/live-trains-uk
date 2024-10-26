@@ -25,7 +25,7 @@ export default function TrainInfo({
 
   return (
     <div
-      className="flex min-h-40 w-[90vw] max-w-[700px] flex-col gap-2 rounded-xl border-2 border-gray-300 bg-white p-2"
+      className="flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 rounded-xl border-2 border-gray-300 bg-white p-2 transition-all hover:bg-gray-100"
       onClick={() => router.push(`/train/${service.serviceId}`)}
     >
       {/* From */}
