@@ -3,7 +3,9 @@ import AlertInfo from '../components/alert-info/AlertInfo';
 import PageHeading from '../components/page-heading/PageHeading';
 
 export default async function AlertsPage() {
-  const alerts = await fetch('https://www.nationalrail.co.uk/nreapi/incidents/alerts/')
+  const alerts = await fetch('https://www.nationalrail.co.uk/nreapi/incidents/alerts/', {
+    cache: 'no-cache',
+  })
     .then((response) => response.json())
     .catch((err) => console.error(err));
 

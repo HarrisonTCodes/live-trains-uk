@@ -27,6 +27,7 @@ export default function TrainsPage({
     setError(false);
     fetch(
       `/api/services?from=${searchParams.from.toLowerCase()}&to=${searchParams.to.toLowerCase()}`,
+      { cache: 'no-cache' },
     )
       .then((response) => response.json())
       .then((response) => {
