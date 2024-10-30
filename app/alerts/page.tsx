@@ -18,7 +18,7 @@ export default async function AlertsPage() {
             <AlertInfo key={`alert${index}`} station={alert.name} description={alert.summary} />
           ))
         ) : (
-          <h2 className="text-2xl font-medium text-gray-500">
+          <h2 className="text-center text-2xl font-medium text-gray-500">
             No alerts or disruptions at the moment
           </h2>
         )
