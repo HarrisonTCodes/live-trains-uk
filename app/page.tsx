@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Search from './components/search/Search';
 import Button from './components/button/Button';
 import { FaArrowRightArrowLeft, FaMagnifyingGlass } from 'react-icons/fa6';
-import Link from 'next/link';
 import PageHeading from './components/page-heading/PageHeading';
 import { useRouter } from 'next/navigation';
 
