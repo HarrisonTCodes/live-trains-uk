@@ -5,15 +5,25 @@ import Button from './components/button/Button';
 import { FaArrowRightArrowLeft, FaMagnifyingGlass } from 'react-icons/fa6';
 import Link from 'next/link';
 import PageHeading from './components/page-heading/PageHeading';
+import { useRouter } from 'next/navigation';
 
 export default function LiveTrainsPage() {
   const [from, setFrom] = useState<string>('');
   const [to, setTo] = useState<string>('');
+  const router = useRouter();
 
   const swapStations = () => {
     const oldFrom = from;
     setFrom(to);
     setTo(oldFrom);
+  };
+
+  const getJourneys = () => {
+    if (!from || !to) {
+      return;
+    }
+
+    router.push(`/trains?from=${from}&to=${to}`);
   };
 
   return (
@@ -27,11 +37,9 @@ export default function LiveTrainsPage() {
         <Button onClick={swapStations}>
           <FaArrowRightArrowLeft /> Switch
         </Button>
-        <Link href={`/trains?from=${from}&to=${to}`} prefetch={false}>
-          <Button>
-            <FaMagnifyingGlass /> Go
-          </Button>
-        </Link>
+        <Button onClick={getJourneys}>
+          <FaMagnifyingGlass /> Go
+        </Button>
       </section>
     </main>
   );
