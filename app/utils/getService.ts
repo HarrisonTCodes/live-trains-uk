@@ -1,9 +1,6 @@
 import { CallingPointResponse } from '@/app/interfaces';
-import { NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const serviceId = params.id;
-
+export default async function GET(serviceId: string) {
   // Set API key in headers
   const headers = new Headers();
   headers.set('x-apikey', process.env.SERVICE_DETAILS_API_KEY!);
@@ -18,9 +15,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
   // If the response has a message attribute, something has necessarily gone wrong
   if (response.Message) {
-    return new Response('Service not found', {
-      status: 404,
-    });
+    throw Error('Service not found');
   }
 
   // Get details on all calling points
@@ -67,5 +62,5 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     ...subsequentCallingPoints,
   ];
 
-  return Response.json(callingPoints);
+  return callingPoints;
 }
