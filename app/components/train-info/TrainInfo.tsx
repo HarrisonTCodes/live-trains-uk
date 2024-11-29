@@ -26,6 +26,7 @@ export default function TrainInfo({
     <Link
       className="flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 rounded-xl border-2 border-gray-300 bg-white p-2 transition-all hover:bg-gray-100"
       href={`/train/${service.serviceId}`}
+      prefetch={false}
     >
       {/* From */}
       <section>
