@@ -1,18 +1,15 @@
-import { CallingPointResponse, ServiceResponse } from '@/app/interfaces';
-import { NextRequest } from 'next/server';
-import stations from '../../utils/stations';
-import getDuration from '@/app/utils/getDuration';
+import { CallingPointResponse, ServiceResponse } from '../interfaces';
+import getDuration from './getDuration';
+import stations from './stations';
 
-export async function GET(request: NextRequest) {
+export default async function getServices(from: string, to: string) {
   // Get query parameters
-  const from = stations[request.nextUrl.searchParams.get('from') as keyof typeof stations];
-  const to = stations[request.nextUrl.searchParams.get('to') as keyof typeof stations];
+  const fromCrs = stations[from as keyof typeof stations];
+  const toCrs = stations[to as keyof typeof stations];
 
   // If invalid or missing stations provided
-  if (!from || !to) {
-    return new Response('Invalid stations provided', {
-      status: 400,
-    });
+  if (!fromCrs || !toCrs) {
+    throw Error(`Invalid station(s) provided: '${from}' and '${to}'`);
   }
 
   // Set API key in headers
@@ -21,20 +18,24 @@ export async function GET(request: NextRequest) {
 
   // Get service details
   const response = await fetch(
-    `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${from}?numRows=10&filterCrs=${to}`,
-    { headers },
+    `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${fromCrs}?numRows=10&filterCrs=${toCrs}`,
+    { headers, cache: 'no-store' },
   ).then((response) => response.json());
 
   // If no services
   if (!response.trainServices) {
-    return Response.json([]);
+    return {
+      services: [],
+      fromCrs,
+      toCrs,
+    };
   }
 
   // Parse data
   const services = response.trainServices.flatMap((serviceResponse: ServiceResponse) => {
     // Get index of arrival calling point data
     const arrivalDataIndex = serviceResponse.subsequentCallingPoints[0].callingPoint.findIndex(
-      ({ crs }: { crs: string }) => crs === to,
+      ({ crs }: { crs: string }) => crs === toCrs,
     );
 
     // Skip service if destination station not found
@@ -60,9 +61,9 @@ export async function GET(request: NextRequest) {
     ];
   });
 
-  return Response.json({
+  return {
     services,
-    from,
-    to,
-  });
+    fromCrs,
+    toCrs,
+  };
 }

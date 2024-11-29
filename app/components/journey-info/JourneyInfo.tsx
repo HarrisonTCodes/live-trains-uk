@@ -18,9 +18,7 @@ export default function JourneyInfo({
       {/* Name and stations */}
       <section
         className="m-2 flex w-full flex-col justify-center gap-2"
-        onClick={() =>
-          router.push(`/trains?from=${journey.firstStation}&to=${journey.secondStation}`)
-        }
+        onClick={() => router.push(`/trains/${journey.firstStation}/${journey.secondStation}`)}
       >
         <h2 className="text-xl font-medium text-blue-900">{journey.name}</h2>
         <p className="flex flex-wrap items-center gap-2 text-lg text-gray-600 sm:text-lg">

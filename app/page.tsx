@@ -22,7 +22,7 @@ export default function LiveTrainsPage() {
       return;
     }
 
-    router.push(`/trains?from=${from}&to=${to}`);
+    router.push(`/trains/${from}/${to}`);
   };
 
   return (

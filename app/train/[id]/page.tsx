@@ -30,3 +30,5 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
     </main>
   );
 }
+
+export const dynamic = 'force-dynamic';

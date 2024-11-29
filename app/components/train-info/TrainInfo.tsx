@@ -1,9 +1,9 @@
 import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
 import { GiRabbit, GiTortoise } from 'react-icons/gi';
-import { useRouter } from 'next/navigation';
 import toTitleCase from '@/app/utils/toTitleCase';
 import formatEstimated from '@/app/utils/formatEstimated';
+import Link from 'next/link';
 
 export default function TrainInfo({
   service,
@@ -21,12 +21,11 @@ export default function TrainInfo({
   averageDuration: number;
 }) {
   const fast = service.duration <= averageDuration;
-  const router = useRouter();
 
   return (
-    <div
+    <Link
       className="flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 rounded-xl border-2 border-gray-300 bg-white p-2 transition-all hover:bg-gray-100"
-      onClick={() => router.push(`/train/${service.serviceId}`)}
+      href={`/train/${service.serviceId}`}
     >
       {/* From */}
       <section>
@@ -70,6 +69,6 @@ export default function TrainInfo({
           {fast ? 'Fast' : 'Slow'}
         </span>
       </p>
-    </div>
+    </Link>
   );
 }

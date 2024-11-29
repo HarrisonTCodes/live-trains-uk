@@ -8,7 +8,7 @@ export default async function GET(serviceId: string) {
   // Get service details
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-service-details/LDBWS/api/20220120/GetServiceDetails/${serviceId}`,
-    { headers, cache: 'no-cache' },
+    { headers, cache: 'no-store' },
   )
     .then((response) => response.json())
     .catch((err) => console.error(err));
