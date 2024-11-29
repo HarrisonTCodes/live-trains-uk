@@ -1,5 +1,6 @@
 import { CallingPointResponse, ServiceResponse } from '../interfaces';
 import getDuration from './getDuration';
+import getTime from './getTime';
 import stations from './stations';
 
 export default async function getServices(from: string, to: string) {
@@ -17,6 +18,7 @@ export default async function getServices(from: string, to: string) {
   headers.set('x-apikey', process.env.DEPARTURE_BOARD_API_KEY!);
 
   // Get service details
+  const time = getTime();
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${fromCrs}?numRows=10&filterCrs=${toCrs}`,
     { headers, cache: 'no-store' },
@@ -65,5 +67,6 @@ export default async function getServices(from: string, to: string) {
     services,
     fromCrs,
     toCrs,
+    time,
   };
 }

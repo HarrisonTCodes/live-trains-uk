@@ -9,7 +9,10 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
       {/* Heading */}
-      <PageHeading heading="Service details" />
+      <PageHeading
+        heading="Service details"
+        subHeading={`(Last Updated at ${callingPoints.time})`}
+      />
       {/* Details */}
       <div className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
         {/* Line */}
@@ -19,7 +22,7 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
         />
         {/* Calling points */}
         <section>
-          {callingPoints.map((callingPoint: CallingPoint) => (
+          {callingPoints.callingPoints.map((callingPoint: CallingPoint) => (
             <CallingPointInfo
               key={`calling point ${callingPoint.station}`}
               callingPoint={callingPoint}

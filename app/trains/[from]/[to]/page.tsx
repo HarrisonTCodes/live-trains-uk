@@ -17,7 +17,7 @@ export default async function TrainsPage({ params }: { params: { from: string; t
       {/* Headings */}
       <PageHeading
         heading="Live Departures"
-        subHeading={`${toTitleCase(parsedFrom)} to ${toTitleCase(parsedTo)}`}
+        subHeading={`${toTitleCase(parsedFrom)} to ${toTitleCase(parsedTo)} (Last Updated at ${services.time})`}
         href="/"
       />
       {/* Switch Button */}
