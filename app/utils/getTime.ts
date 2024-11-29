@@ -1,6 +1,6 @@
 export default function getTime() {
   const date = new Date();
-  return `${formatNumber(date.getHours())}:${formatNumber(date.getMinutes())}:${formatNumber(date.getSeconds())}`;
+  return `${formatNumber(date.getHours())}:${formatNumber(date.getMinutes())}`;
 }
 
 function formatNumber(number: number) {
