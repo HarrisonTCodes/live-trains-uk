@@ -41,9 +41,14 @@ export default function JourneysPage() {
         {loading ? (
           <JourneySkeletons />
         ) : error ? (
-          <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-            <FaTriangleExclamation /> There was an error
-          </h2>
+          <section className="flex flex-col items-center">
+            <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
+              <FaTriangleExclamation /> Error
+            </h2>
+            <p className="px-2 text-center text-lg text-red-700">
+              There was an error getting journeys, please try again
+            </p>
+          </section>
         ) : journeys.length === 0 ? (
           <h2 className="px-2 text-center text-2xl text-gray-400">
             No journeys found. Click above to add a new journey

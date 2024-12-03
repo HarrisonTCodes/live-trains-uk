@@ -47,15 +47,15 @@ export default async function TrainsPage({ params }: { params: { from: string; t
             />
           ))
         ) : (
-          <>
+          <section className="flex flex-col items-center">
             <h2 className="flex items-center gap-2 text-2xl font-medium text-gray-500">
               <FaTriangleExclamation color="#ffbf00" /> No services
             </h2>
-            <p className="px-2 text-center font-medium text-gray-500">
+            <p className="px-2 text-center text-lg text-gray-500">
               There are currently no direct services running between {toTitleCase(parsedFrom)} and{' '}
-              {toTitleCase(parsedTo)}.
+              {toTitleCase(parsedTo)}
             </p>
-          </>
+          </section>
         )}
       </section>
     </main>

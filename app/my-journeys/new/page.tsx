@@ -49,14 +49,15 @@ export default function AddJourneyPage() {
         <FaPlus /> Add Journey
       </Button>
       {error && (
-        <div className="flex flex-col items-center gap-1">
+        <section className="flex flex-col items-center">
           <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-            <FaTriangleExclamation /> There was an error
+            <FaTriangleExclamation /> Error
           </h2>
-          <p className="text-center text-red-700">
-            Make sure all inputs are filled and valid stations are chosen
+          <p className="px-2 text-center text-lg text-red-700">
+            There was an error trying to create a journey. Please make sure all inputs are valid and
+            populated
           </p>
-        </div>
+        </section>
       )}
     </main>
   );
