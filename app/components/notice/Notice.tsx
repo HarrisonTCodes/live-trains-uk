@@ -10,7 +10,7 @@ export default function Notice({
   color?: string;
 }) {
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex max-w-[500px] flex-col items-center">
       <h2
         className={`flex items-center gap-2 text-center text-2xl font-medium text-${color ?? 'gray-500'}`}
       >
