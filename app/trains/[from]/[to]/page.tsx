@@ -6,6 +6,7 @@ import PageHeading from '../../../components/page-heading/PageHeading';
 import getServices from '../../../utils/getServices';
 import Link from 'next/link';
 import { Service } from '@/app/interfaces';
+import Notice from '@/app/components/notice/Notice';
 
 export default async function TrainsPage({ params }: { params: { from: string; to: string } }) {
   const parsedFrom = params.from.replaceAll('%2B', ' ').replaceAll('%20', ' ').toLowerCase();
@@ -47,15 +48,11 @@ export default async function TrainsPage({ params }: { params: { from: string; t
             />
           ))
         ) : (
-          <section className="flex flex-col items-center">
-            <h2 className="flex items-center gap-2 text-2xl font-medium text-gray-500">
-              <FaTriangleExclamation color="#ffbf00" /> No services
-            </h2>
-            <p className="px-2 text-center text-lg text-gray-500">
-              There are currently no direct services running between {toTitleCase(parsedFrom)} and{' '}
-              {toTitleCase(parsedTo)}
-            </p>
-          </section>
+          <Notice
+            notice="No services"
+            description={`There are currently no direct services running between ${toTitleCase(parsedFrom)} and ${toTitleCase(parsedTo)}`}
+            icon={<FaTriangleExclamation color="#ffbf00" />}
+          />
         )}
       </section>
     </main>

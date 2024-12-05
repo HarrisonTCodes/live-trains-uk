@@ -7,6 +7,7 @@ import { FaPlus, FaTriangleExclamation } from 'react-icons/fa6';
 import Link from 'next/link';
 import JourneySkeletons from '../components/skeletons/JourneySkeletons';
 import PageHeading from '../components/page-heading/PageHeading';
+import Notice from '../components/notice/Notice';
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
@@ -41,14 +42,12 @@ export default function JourneysPage() {
         {loading ? (
           <JourneySkeletons />
         ) : error ? (
-          <section className="flex flex-col items-center">
-            <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-              <FaTriangleExclamation /> Error
-            </h2>
-            <p className="px-2 text-center text-lg text-red-700">
-              There was an error getting journeys, please try again
-            </p>
-          </section>
+          <Notice
+            notice="Error"
+            description="There was an error getting journeys, please try again"
+            icon={<FaTriangleExclamation />}
+            color="red-700"
+          />
         ) : journeys.length === 0 ? (
           <h2 className="px-2 text-center text-2xl text-gray-400">
             No journeys found. Click above to add a new journey

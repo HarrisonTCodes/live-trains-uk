@@ -1,5 +1,6 @@
 'use client';
 import Button from '@/app/components/button/Button';
+import Notice from '@/app/components/notice/Notice';
 import PageHeading from '@/app/components/page-heading/PageHeading';
 import Search from '@/app/components/search/Search';
 import { useRouter } from 'next/navigation';
@@ -49,15 +50,12 @@ export default function AddJourneyPage() {
         <FaPlus /> Add Journey
       </Button>
       {error && (
-        <section className="flex flex-col items-center">
-          <h2 className="flex items-center gap-2 text-2xl font-medium text-red-700">
-            <FaTriangleExclamation /> Error
-          </h2>
-          <p className="px-2 text-center text-lg text-red-700">
-            There was an error trying to create a journey. Please make sure all inputs are valid and
-            populated
-          </p>
-        </section>
+        <Notice
+          notice="Error"
+          description="There was an error trying to create a journey. Please make sure all inputs are valid and populated"
+          icon={<FaTriangleExclamation />}
+          color="red-700"
+        />
       )}
     </main>
   );
