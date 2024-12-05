@@ -16,7 +16,7 @@ export default async function AlertsPage() {
       {alerts ? (
         alerts.length > 0 ? (
           alerts.map((alert: { name: string; summary: string }, index: number) => (
-            <AlertInfo key={`alert${index}`} station={alert.name} description={alert.summary} />
+            <AlertInfo key={`alert${index}`} alert={alert.name} description={alert.summary} />
           ))
         ) : (
           <Notice
