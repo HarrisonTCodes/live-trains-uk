@@ -4,12 +4,10 @@ import { FaArrowRightArrowLeft, FaTrash } from 'react-icons/fa6';
 
 export default function JourneyInfo({
   journey,
-  journeys,
-  setJourneys,
+  setDeleteJourneyId,
 }: {
   journey: Journey;
-  journeys: Journey[];
-  setJourneys: (value: Journey[]) => void;
+  setDeleteJourneyId: (value: number) => void;
 }) {
   const router = useRouter();
 
@@ -28,16 +26,7 @@ export default function JourneyInfo({
       {/* Delete button */}
       <button
         className="flex w-[50px] items-center justify-center"
-        onClick={() => {
-          // Actually delete journey
-          fetch(`/api/journeys/${journey.id}`, {
-            method: 'DELETE',
-          });
-          // Remove journey from current list (so no need to refetch data)
-          setJourneys(
-            journeys.filter((currentJourney: Journey) => currentJourney.id !== journey.id),
-          );
-        }}
+        onClick={() => setDeleteJourneyId(journey.id)}
       >
         <FaTrash className="text-xl text-[#888888]" />
       </button>
