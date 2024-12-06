@@ -20,7 +20,7 @@ export default function Modal({
     <div className="absolute left-[50%] top-[50%] z-50 flex min-h-[250px] w-[90%] max-w-[500px] translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-between rounded-xl border-2 border-gray-300 bg-white px-2 py-4 shadow-lg">
       <h2 className="text-xl font-medium text-blue-900">{title}</h2>
       {children}
-      <section className="flex gap-1">
+      <section className="flex w-full justify-evenly">
         <Button onClick={confirmAction}>
           {confirmIcon ?? <FaCheck />} {confirmLabel ?? 'OK'}
         </Button>
