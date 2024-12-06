@@ -20,6 +20,9 @@ export default async function GET(serviceId: string) {
     throw Error('Service not found');
   }
 
+  // Initialise array to store reasons calling points are cancelled
+  const cancelReasons: string[] = [];
+
   // Get details on all calling points
   const previousCallingPointsResponse = response.previousCallingPoints
     ? response.previousCallingPoints[0].callingPoint
@@ -30,22 +33,28 @@ export default async function GET(serviceId: string) {
 
   const previousCallingPoints = previousCallingPointsResponse.map(
     (callingPoint: CallingPointResponse) => {
+      if (callingPoint.cancelReason && !cancelReasons.includes(callingPoint.cancelReason)) {
+        cancelReasons.push(callingPoint.cancelReason);
+      }
+
       return {
         station: callingPoint.locationName,
         departureTime: callingPoint.st,
         estimatedDepartureTime: callingPoint.et,
-        cancelReason: callingPoint.cancelReason,
       };
     },
   );
 
   const subsequentCallingPoints = subsequentCallingPointsResponse.map(
     (callingPoint: CallingPointResponse) => {
+      if (callingPoint.cancelReason && !cancelReasons.includes(callingPoint.cancelReason)) {
+        cancelReasons.push(callingPoint.cancelReason);
+      }
+
       return {
         station: callingPoint.locationName,
         departureTime: callingPoint.st,
         estimatedDepartureTime: callingPoint.et,
-        cancelReason: callingPoint.cancelReason,
       };
     },
   );
@@ -57,15 +66,20 @@ export default async function GET(serviceId: string) {
       station: response.locationName,
       departureTime: response.std ?? response.sta,
       estimatedDepartureTime: response.etd ?? response.eta,
-      cancelReason: response.cancelReason,
       platform: response.platform,
       focus: true,
     },
     ...subsequentCallingPoints,
   ];
 
+  // Add cancel reason of focussed calling point, if it exists and isn't duplicate
+  if (response.cancelReason && !cancelReasons.includes(response.cancelReason)) {
+    cancelReasons.push(response.cancelReason);
+  }
+
   return {
     callingPoints,
+    cancelReasons,
     time,
   };
 }

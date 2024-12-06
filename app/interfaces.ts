@@ -29,7 +29,6 @@ export interface CallingPoint {
   station: string;
   departureTime: string;
   estimatedDepartureTime?: string;
-  cancelReason?: string;
   platform?: string;
   focus?: boolean;
 }

@@ -1,3 +1,4 @@
+import AlertInfo from '@/app/components/alert-info/AlertInfo';
 import CallingPointInfo from '@/app/components/calling-point-info/CallingPointInfo';
 import PageHeading from '@/app/components/page-heading/PageHeading';
 import { CallingPoint } from '@/app/interfaces';
@@ -13,6 +14,14 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
         heading="Service details"
         subHeading={`(Last Updated at ${callingPoints.time})`}
       />
+      {/* Cancel reasons */}
+      {callingPoints.cancelReasons.map((cancelReason: string) => (
+        <AlertInfo
+          key={cancelReason}
+          alert="Some stops cancelled"
+          description={`${cancelReason}. See affected calling points below.`}
+        />
+      ))}
       {/* Details */}
       <div className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
         {/* Line */}
