@@ -1,5 +1,5 @@
 import Button from '../../../components/button/Button';
-import { FaArrowRightArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaBookmark, FaTriangleExclamation } from 'react-icons/fa6';
 import TrainInfo from '../../../components/train-info/TrainInfo';
 import toTitleCase from '../../../utils/toTitleCase';
 import PageHeading from '../../../components/page-heading/PageHeading';
@@ -27,12 +27,19 @@ export default async function TrainsPage({ params }: { params: { from: string; t
         subHeading={`${toTitleCase(parsedFrom)} to ${toTitleCase(parsedTo)}${lastUpdated}`}
         href="/"
       />
-      {/* Switch Button */}
-      <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-        <Button>
-          <FaArrowRightArrowLeft /> Switch
-        </Button>
-      </Link>
+      {/* Buttons */}
+      <section className="flex gap-2">
+        <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
+          <Button>
+            <FaArrowRightArrowLeft /> Switch
+          </Button>
+        </Link>
+        <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
+          <Button>
+            <FaBookmark /> Save
+          </Button>
+        </Link>
+      </section>
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
         {services.services.length > 0 ? (

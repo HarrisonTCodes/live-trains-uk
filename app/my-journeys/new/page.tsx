@@ -3,16 +3,22 @@ import Button from '@/app/components/button/Button';
 import Notice from '@/app/components/notice/Notice';
 import PageHeading from '@/app/components/page-heading/PageHeading';
 import Search from '@/app/components/search/Search';
-import { useRouter } from 'next/navigation';
+import toTitleCase from '@/app/utils/toTitleCase';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import { FaPlus, FaTriangleExclamation } from 'react-icons/fa6';
 
 export default function AddJourneyPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [name, setName] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
-  const [firstStation, setFirstStation] = useState<string>('');
-  const [secondStation, setSecondStation] = useState<string>('');
+  const [firstStation, setFirstStation] = useState<string>(
+    toTitleCase(searchParams.get('from') ?? ''),
+  );
+  const [secondStation, setSecondStation] = useState<string>(
+    toTitleCase(searchParams.get('to') ?? ''),
+  );
 
   const createJourney = () => {
     fetch('/api/journeys', {
