@@ -49,20 +49,30 @@ export async function POST(request: NextRequest) {
     },
   });
 
+  // If the user is not logged in (or not found)
   if (!user) {
     return new Response('User not found', {
       status: 400,
     });
   }
 
+  // If any of the required attributes are not provided
   if (!data.name || !data.firstStation || !data.secondStation) {
     return new Response('Malformed syntax', {
       status: 400,
     });
   }
 
+  // If the provided name is too long
+  if (data.name.length > 30) {
+    return new Response('Name too long', {
+      status: 400,
+    });
+  }
+
   const firstCrs = stations[data.firstStation.toLowerCase() as keyof typeof stations];
   const secondCrs = stations[data.secondStation.toLowerCase() as keyof typeof stations];
+  // If the provided stations are invalid
   if (!firstCrs || !secondCrs) {
     return new Response('Station not found', {
       status: 400,
