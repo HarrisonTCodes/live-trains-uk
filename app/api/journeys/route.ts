@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  return Response.json(data, {
+  return new Response('Journey created', {
     status: 201,
   });
 }
