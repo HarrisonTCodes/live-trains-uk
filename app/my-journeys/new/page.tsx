@@ -12,7 +12,7 @@ export default function AddJourneyPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [name, setName] = useState<string>('');
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
   const [firstStation, setFirstStation] = useState<string>(
     toTitleCase(searchParams.get('from') ?? ''),
   );
@@ -21,6 +21,18 @@ export default function AddJourneyPage() {
   );
 
   const createJourney = () => {
+    // Make sure all inputs are filled
+    if (!name || !firstStation || !secondStation) {
+      setError('Please fill in all the inputs above');
+      return;
+    }
+
+    // Make sure the name isn't too long
+    if (name.length > 30) {
+      setError('Please make sure your journey name is less than 30 characters');
+      return;
+    }
+
     fetch('/api/journeys', {
       method: 'POST',
       body: JSON.stringify({
@@ -30,10 +42,12 @@ export default function AddJourneyPage() {
       }),
     }).then((response) => {
       if (response.ok) {
-        setError(false);
+        setError(undefined);
         router.push('/my-journeys');
       } else {
-        setError(true);
+        setError(
+          'There was an error processing your journey. Please make sure both stations are valid, and chosen from the dropdown menu',
+        );
       }
     });
   };
@@ -58,7 +72,7 @@ export default function AddJourneyPage() {
       {error && (
         <Notice
           notice="Error"
-          description="There was an error trying to create a journey. Please make sure all inputs are valid and populated"
+          description={error}
           icon={<FaTriangleExclamation />}
           color="red-700"
         />
