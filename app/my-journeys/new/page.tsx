@@ -40,14 +40,13 @@ export default function AddJourneyPage() {
         firstStation,
         secondStation,
       }),
-    }).then((response) => {
+    }).then(async (response) => {
       if (response.ok) {
         setError(undefined);
         router.push('/my-journeys');
       } else {
-        setError(
-          'There was an error processing your journey. Please make sure both stations are valid, and chosen from the dropdown menu',
-        );
+        const message = await response.text();
+        setError(`Error processing journey: ${message.length > 0 ? message : 'Please try again'}`);
       }
     });
   };

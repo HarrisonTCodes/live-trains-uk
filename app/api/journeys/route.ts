@@ -74,9 +74,12 @@ export async function POST(request: NextRequest) {
   const secondCrs = stations[data.secondStation.toLowerCase() as keyof typeof stations];
   // If the provided stations are invalid
   if (!firstCrs || !secondCrs) {
-    return new Response('Invalid station(s) provided', {
-      status: 400,
-    });
+    return new Response(
+      'Invalid station(s) provided, please choose stations from the dropdown menu',
+      {
+        status: 400,
+      },
+    );
   }
 
   await prisma.journey.create({
