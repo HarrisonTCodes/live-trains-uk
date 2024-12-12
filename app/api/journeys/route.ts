@@ -1,11 +1,10 @@
-import { getServerSession } from 'next-auth';
-import { options } from '../auth/[...nextauth]/options';
 import prisma from '@/app/utils/prisma';
 import { NextRequest } from 'next/server';
 import stations from '../../utils/stations';
+import { auth } from '@/auth';
 
 export async function GET() {
-  const session = await getServerSession(options);
+  const session = await auth();
   if (!session) {
     return new Response('Not authenticated', {
       status: 401,
@@ -35,7 +34,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession(options);
+  const session = await auth();
   if (!session) {
     return new Response('Not authenticated', {
       status: 401,

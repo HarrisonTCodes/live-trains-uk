@@ -1,8 +1,8 @@
 import prisma from '@/app/utils/prisma';
-import type { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 
-export const options: NextAuthOptions = {
+export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -29,5 +29,9 @@ export const options: NextAuthOptions = {
 
       return true;
     },
+
+    authorized: async ({ auth }) => {
+      return !!auth;
+    },
   },
-};
+});

@@ -1,12 +1,11 @@
-import { options } from '../api/auth/[...nextauth]/options';
-import { getServerSession } from 'next-auth';
 import Button from '../components/button/Button';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 import Link from 'next/link';
 import PageHeading from '../components/page-heading/PageHeading';
+import { auth } from '@/auth';
 
 export default async function AccountPage() {
-  const session = await getServerSession(options);
+  const session = await auth();
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">

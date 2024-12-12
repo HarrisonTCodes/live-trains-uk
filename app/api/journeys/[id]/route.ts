@@ -1,10 +1,9 @@
-import { getServerSession } from 'next-auth';
 import { NextRequest } from 'next/server';
-import { options } from '../../auth/[...nextauth]/options';
 import prisma from '@/app/utils/prisma';
+import { auth } from '@/auth';
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(options);
+  const session = await auth();
   if (!session) {
     return new Response('Not authenticated', {
       status: 401,
