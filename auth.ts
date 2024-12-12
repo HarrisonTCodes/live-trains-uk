@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import type { Provider } from 'next-auth/providers';
 import Google from 'next-auth/providers/google';
 
+// Auth providers
 const providers: Provider[] = [
   Google({
     clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -10,6 +11,7 @@ const providers: Provider[] = [
   }),
 ];
 
+// Map of auth providers for app to use
 export const providerMap = providers.map((provider) => {
   if (typeof provider === 'function') {
     const providerData = provider();

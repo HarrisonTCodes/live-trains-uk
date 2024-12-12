@@ -17,6 +17,7 @@ export default async function SignInPage(props: {
         subHeading="Sign in with any of the below providers"
         href="/"
       />
+      {/* Sign In button for each auth provider */}
       {Object.values(providerMap).map((provider) => (
         <form
           key={provider.name}

@@ -11,6 +11,7 @@ export default function SignOutPage() {
         subHeading="Are you sure you want to sign out of your account?"
         href="/account"
       />
+      {/* Sign Out button */}
       <form
         action={async () => {
           'use server';
