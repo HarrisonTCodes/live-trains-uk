@@ -27,7 +27,7 @@ export default async function SignInPage(props: {
           }}
         >
           <Button submit>
-            {icons[provider.name as keyof typeof icons]} Sign in with {provider.name}
+            {icons[provider.name as keyof typeof icons]} Sign In with {provider.name}
           </Button>
         </form>
       ))}
