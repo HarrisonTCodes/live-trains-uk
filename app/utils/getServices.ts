@@ -35,6 +35,11 @@ export default async function getServices(from: string, to: string) {
 
   // Parse data
   const services = response.trainServices.flatMap((serviceResponse: ServiceResponse) => {
+    // Skip service if no subsequent calling points
+    if (!serviceResponse.subsequentCallingPoints) {
+      return [];
+    }
+
     // Get index of arrival calling point data
     const arrivalDataIndex = serviceResponse.subsequentCallingPoints[0].callingPoint.findIndex(
       ({ crs }: { crs: string }) => crs === toCrs,
