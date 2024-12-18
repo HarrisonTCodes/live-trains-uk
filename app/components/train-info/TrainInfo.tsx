@@ -21,10 +21,12 @@ export default function TrainInfo({
   averageDuration: number;
 }) {
   const fast = service.duration <= averageDuration;
+  const cancelled =
+    service.estimatedArrivalTime == 'Cancelled' || service.estimatedDepartureTime == 'Cancelled';
 
   return (
     <Link
-      className="flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 rounded-xl border-2 border-gray-300 bg-white p-2 transition-all hover:bg-gray-100"
+      className={`flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 rounded-xl border-2 p-2 transition-all ${cancelled ? 'border-red-700 bg-red-50' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
       href={`/train/${service.serviceId}`}
       prefetch={false}
     >
