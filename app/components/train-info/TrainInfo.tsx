@@ -4,6 +4,7 @@ import { GiRabbit, GiTortoise } from 'react-icons/gi';
 import toTitleCase from '@/app/utils/toTitleCase';
 import formatEstimated from '@/app/utils/formatEstimated';
 import Link from 'next/link';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export default function TrainInfo({
   service,
@@ -35,15 +36,16 @@ export default function TrainInfo({
         <h2 className="text-xl font-medium">
           {toTitleCase(fromStation)} <span className="text-sm text-gray-500">({fromCrs})</span>
         </h2>
-        <p>
+        <p className="flex items-center gap-1">
           {service.departureTime}
-          {service.estimatedDepartureTime ? ' | ' : ''}
+          {service.estimatedDepartureTime && ' | '}
           <span
-            className={`font-medium ${service.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
+            className={`flex items-center gap-1 font-medium ${service.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
           >
+            {service.estimatedDepartureTime == 'Cancelled' && <AiOutlineExclamationCircle />}{' '}
             {formatEstimated(service.estimatedDepartureTime)}
           </span>
-          {service.platform ? ` | Platform ${service.platform}` : ''}
+          {service.platform && ` | Platform ${service.platform}`}
         </p>
       </section>
       {/* To */}
@@ -51,19 +53,20 @@ export default function TrainInfo({
         <h2 className="text-xl font-medium">
           {toTitleCase(toStation)} <span className="text-sm text-gray-500">({toCrs})</span>
         </h2>
-        <p>
+        <p className="flex items-center gap-1">
           {service.arrivalTime}
-          {service.estimatedArrivalTime ? ' | ' : ''}
+          {service.estimatedArrivalTime && ' | '}
           <span
-            className={`font-medium ${service.estimatedArrivalTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
+            className={`flex items-center gap-1 font-medium ${service.estimatedArrivalTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
           >
+            {service.estimatedArrivalTime == 'Cancelled' && <AiOutlineExclamationCircle />}{' '}
             {formatEstimated(service.estimatedArrivalTime)}
           </span>
         </p>
       </section>
       {/* Duration */}
       <p className="flex text-lg">
-        {service.numberOfStops} Stop{service.numberOfStops > 1 ? 's' : ''} |{' '}
+        {service.numberOfStops} Stop{service.numberOfStops > 1 && 's'} |{' '}
         <span className="px-1 font-medium">{formatDuration(service.duration)}</span> |{' '}
         <span
           className={`flex items-center gap-1 pl-1 font-medium ${fast ? 'text-green-700' : 'text-red-800'}`}
