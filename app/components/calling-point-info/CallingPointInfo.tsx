@@ -1,5 +1,6 @@
 import { CallingPoint } from '@/app/interfaces';
 import formatEstimated from '@/app/utils/formatEstimated';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export default function CallingPointInfo({ callingPoint }: { callingPoint: CallingPoint }) {
   return (
@@ -16,8 +17,9 @@ export default function CallingPointInfo({ callingPoint }: { callingPoint: Calli
           {callingPoint.departureTime}
           {callingPoint.estimatedDepartureTime && (
             <span
-              className={`font-medium ${callingPoint.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'}`}
+              className={`flex items-center gap-1 font-medium ${callingPoint.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'}`}
             >
+              {callingPoint.estimatedDepartureTime == 'Cancelled' && <AiOutlineExclamationCircle />}
               {formatEstimated(callingPoint.estimatedDepartureTime)}
             </span>
           )}

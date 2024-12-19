@@ -59,7 +59,7 @@ export default function TrainInfo({
           <span
             className={`flex items-center gap-1 font-medium ${service.estimatedArrivalTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
           >
-            {service.estimatedArrivalTime == 'Cancelled' && <AiOutlineExclamationCircle />}{' '}
+            {service.estimatedArrivalTime == 'Cancelled' && <AiOutlineExclamationCircle />}
             {formatEstimated(service.estimatedArrivalTime)}
           </span>
         </p>
