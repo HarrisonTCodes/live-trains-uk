@@ -21,7 +21,7 @@ export default function Search({
     setValue(input);
 
     if (!input) {
-      setOptions([]);
+      setOptions(JSON.parse(localStorage.getItem('recentStations') ?? '[]'));
     }
 
     // Get stations
@@ -36,6 +36,39 @@ export default function Search({
     }
   };
 
+  const onFocus = () => {
+    setFocused(true);
+
+    // If input field is empty, set options to recent stations
+    if (!value) {
+      setOptions(JSON.parse(localStorage.getItem('recentStations') ?? '[]'));
+    }
+  };
+
+  const onOptionClick = (option: Station) => {
+    setValue(toTitleCase(option.name));
+
+    // Get recently clicked stations from local storage
+    const recentStations = JSON.parse(localStorage.getItem('recentStations') ?? '[]');
+    const optionIndex = recentStations.findIndex((station: Station) => station.crs === option.crs);
+
+    // If clicked station already exists in recent stations, remove it
+    if (optionIndex !== -1) {
+      recentStations.splice(optionIndex, 1);
+    }
+
+    // Add clicked station to front of recent stations
+    recentStations.unshift(option);
+
+    // If number of recent stations is above max, remove least recent station
+    if (recentStations.length > 3) {
+      recentStations.pop();
+    }
+
+    // Update local storage with new recent stations
+    localStorage.setItem('recentStations', JSON.stringify(recentStations));
+  };
+
   return (
     <div className="flex w-[80vw] max-w-96 flex-col md:w-[40vw]">
       {/* Search bar */}
@@ -45,7 +78,7 @@ export default function Search({
         placeholder={label}
         value={value}
         onChange={onChange}
-        onFocus={() => setFocused(true)}
+        onFocus={onFocus}
         onBlur={() => setFocused(false)}
       />
       {/* Matching options dropdown */}
@@ -55,11 +88,7 @@ export default function Search({
             <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
           )}
           {options.map((option) => (
-            <li
-              key={option.crs}
-              onMouseDown={() => setValue(toTitleCase(option.name))}
-              className="p-2 text-lg"
-            >
+            <li key={option.crs} onMouseDown={() => onOptionClick(option)} className="p-2 text-lg">
               {toTitleCase(option.name)} <span className="text-gray-500">({option.crs})</span>
             </li>
           ))}
