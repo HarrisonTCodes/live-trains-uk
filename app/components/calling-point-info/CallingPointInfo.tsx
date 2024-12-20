@@ -3,11 +3,19 @@ import formatEstimated from '@/app/utils/formatEstimated';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import CallingPointGraphic from './CallingPointGraphic';
 
-export default function CallingPointInfo({ callingPoint }: { callingPoint: CallingPoint }) {
+export default function CallingPointInfo({
+  callingPoint,
+  isFirstPoint,
+  isLastPoint,
+}: {
+  callingPoint: CallingPoint;
+  isFirstPoint?: boolean;
+  isLastPoint?: boolean;
+}) {
   return (
     <section className="flex items-center gap-2">
       {/* Graphic */}
-      <CallingPointGraphic />
+      <CallingPointGraphic isFirstPoint={isFirstPoint} isLastPoint={isLastPoint} />
       {/* Details */}
       <section className="w-full">
         <p className={`text-lg ${callingPoint.focus ? 'font-bold' : 'font-medium'}`}>
