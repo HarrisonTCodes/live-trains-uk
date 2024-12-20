@@ -17,7 +17,7 @@ export default function CallingPointInfo({
       {/* Graphic */}
       <CallingPointGraphic isFirstPoint={isFirstPoint} isLastPoint={isLastPoint} />
       {/* Details */}
-      <section className="w-full">
+      <section className="w-full pt-6">
         <p className={`text-lg ${callingPoint.focus ? 'font-bold' : 'font-medium'}`}>
           {callingPoint.station}{' '}
           {callingPoint.platform ? `(Platform ${callingPoint.platform})` : ''}

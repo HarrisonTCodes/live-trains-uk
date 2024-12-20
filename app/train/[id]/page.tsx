@@ -23,7 +23,7 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
         />
       ))}
       {/* Calling points */}
-      <section className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
+      <section className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-2 pb-4">
         {callingPoints.callingPoints.map((callingPoint: CallingPoint, index: number) => (
           <CallingPointInfo
             key={`calling point ${callingPoint.station}`}
