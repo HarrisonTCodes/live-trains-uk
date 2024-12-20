@@ -22,23 +22,15 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
           description={`${cancelReason}. See affected calling points below.`}
         />
       ))}
-      {/* Details */}
-      <div className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
-        {/* Line */}
-        <div
-          className="absolute left-5 top-[50px] w-1 rounded-full bg-blue-900"
-          style={{ height: `calc(100% - 100px)` }}
-        />
-        {/* Calling points */}
-        <section>
-          {callingPoints.callingPoints.map((callingPoint: CallingPoint) => (
-            <CallingPointInfo
-              key={`calling point ${callingPoint.station}`}
-              callingPoint={callingPoint}
-            />
-          ))}
-        </section>
-      </div>
+      {/* Calling points */}
+      <section className="relative flex w-[90vw] max-w-[500px] flex-col rounded-xl bg-gray-200 px-[14.5px]">
+        {callingPoints.callingPoints.map((callingPoint: CallingPoint) => (
+          <CallingPointInfo
+            key={`calling point ${callingPoint.station}`}
+            callingPoint={callingPoint}
+          />
+        ))}
+      </section>
     </main>
   );
 }
