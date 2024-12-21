@@ -25,7 +25,7 @@ export default function Search({
     }
 
     // Get stations
-    if (input.length % 2 != 0 && input.length < 10) {
+    if (input.length % 2 != 0 && input.length < 16) {
       setLoading(true);
       fetch(`/api/stations?prompt=${event.target.value}`)
         .then((response) => response.json())
