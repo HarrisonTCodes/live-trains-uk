@@ -10,8 +10,8 @@ export function GET(request: NextRequest) {
       .filter((station) => matchStation(station, prompt)) // Get stations that match prompt
       .sort((a, b) => {
         // Sort matches so those that exactly match are bumped to the top
-        const aMatches = a.toLowerCase().startsWith(prompt);
-        const bMatches = b.toLowerCase().startsWith(prompt);
+        const aMatches = a.toLowerCase().includes(prompt);
+        const bMatches = b.toLowerCase().includes(prompt);
 
         return +bMatches - +aMatches;
       })
