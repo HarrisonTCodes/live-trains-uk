@@ -1,7 +1,8 @@
 'use client';
 import { Station } from '@/app/interfaces';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
+import debounce from 'lodash.debounce';
 
 export default function Search({
   label,
@@ -16,24 +17,36 @@ export default function Search({
   const [loading, setLoading] = useState<boolean>(false);
   const [focused, setFocused] = useState<boolean>(false);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-    setValue(input);
-
-    if (!input) {
-      setOptions([]);
-    }
-
-    // Get stations
-    if (input.length % 2 != 0 && input.length < 16) {
+  const getStations = useCallback(
+    debounce((input: string) => {
       setLoading(true);
-      fetch(`/api/stations?prompt=${event.target.value}`)
+      fetch(`/api/stations?prompt=${input}`)
         .then((response) => response.json())
         .then((stations) => {
           setLoading(false);
           setOptions(stations);
+        })
+        .catch((error) => {
+          setLoading(false);
+          console.error('Error fetching stations:', error);
         });
+    }, 250),
+    [],
+  );
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // Update state
+    const input = event.target.value;
+    setValue(input);
+
+    // Clear options if input is empty
+    if (!input) {
+      setOptions([]);
+      return;
     }
+
+    // Fetch matching stations
+    getStations(event.target.value);
   };
 
   return (
