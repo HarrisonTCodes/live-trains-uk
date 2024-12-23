@@ -15,6 +15,13 @@ const config: Config = {
     },
   },
   plugins: [],
-  safelist: ['text-red-700', 'text-green-700', 'text-gray-500'],
+  safelist: [
+    'text-red-700',
+    'text-green-700',
+    'text-gray-600',
+    'border-red-700',
+    'border-green-700',
+    'border-gray-400',
+  ],
 };
 export default config;

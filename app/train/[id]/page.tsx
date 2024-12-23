@@ -1,8 +1,9 @@
-import AlertInfo from '@/app/components/alert-info/AlertInfo';
 import CallingPointInfo from '@/app/components/calling-point-info/CallingPointInfo';
+import Notice from '@/app/components/notice/Notice';
 import PageHeading from '@/app/components/page-heading/PageHeading';
 import { CallingPoint } from '@/app/interfaces';
 import getService from '@/app/utils/getService';
+import { FaCircleExclamation } from 'react-icons/fa6';
 
 export default async function TrainPage({ params }: { params: { id: string } }) {
   const callingPoints = await getService(params.id);
@@ -16,10 +17,12 @@ export default async function TrainPage({ params }: { params: { id: string } }) 
       />
       {/* Cancel reasons */}
       {callingPoints.cancelReasons.map((cancelReason: string) => (
-        <AlertInfo
+        <Notice
           key={cancelReason}
-          alert="Some stops cancelled"
+          notice="Some stops cancelled"
           description={`${cancelReason}. See affected calling points below.`}
+          icon={<FaCircleExclamation />}
+          color="red-700"
         />
       ))}
       {/* Calling points */}

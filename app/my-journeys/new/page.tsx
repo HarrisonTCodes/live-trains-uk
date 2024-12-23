@@ -71,7 +71,7 @@ export default function AddJourneyPage() {
       {error && (
         <Notice
           notice="Error"
-          description={error}
+          description={`${error}.`}
           icon={<FaTriangleExclamation />}
           color="red-700"
         />

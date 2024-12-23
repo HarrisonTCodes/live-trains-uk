@@ -10,13 +10,13 @@ export default function Notice({
   color?: string;
 }) {
   return (
-    <section className="flex max-w-[500px] flex-col items-center">
-      <h2
-        className={`flex items-center gap-2 text-center text-2xl font-medium text-${color ?? 'gray-500'}`}
-      >
+    <div
+      className={`min-h-24 w-11/12 max-w-[500px] rounded-xl border-2 border-${color ?? 'gray-400'} bg-white p-2`}
+    >
+      <h2 className={`flex items-center gap-2 text-xl font-medium text-${color ?? 'gray-600'}`}>
         {icon} {notice}
       </h2>
-      <p className={`px-2 text-center text-lg text-${color ?? 'gray-500'}`}>{description}</p>
-    </section>
+      <p className={`text-${color ?? 'gray-600'} brightness-[60%]`}>{description}</p>
+    </div>
   );
 }

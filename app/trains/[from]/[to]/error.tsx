@@ -9,7 +9,7 @@ export default function Error() {
       <PageHeading heading="Live Departures" />
       <Notice
         notice="Error"
-        description="There was an error retrieving services between these stations. Please make sure you choose valid stations from the dropdown menu"
+        description="There was an error retrieving services between these stations. Please make sure you choose valid stations from the dropdown menu."
         icon={<FaTriangleExclamation />}
         color="red-700"
       />

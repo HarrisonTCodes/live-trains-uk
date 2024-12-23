@@ -83,7 +83,7 @@ export default function JourneysPage() {
           ) : error ? (
             <Notice
               notice="Error"
-              description="There was an error getting journeys, please try again"
+              description="There was an error getting journeys, please try again."
               icon={<FaTriangleExclamation />}
               color="red-700"
             />

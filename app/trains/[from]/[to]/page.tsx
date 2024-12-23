@@ -57,7 +57,7 @@ export default async function TrainsPage({ params }: { params: { from: string; t
         ) : (
           <Notice
             notice="No services"
-            description={`There are currently no direct services running between ${toTitleCase(parsedFrom)} and ${toTitleCase(parsedTo)}`}
+            description={`There are currently no direct services running between ${toTitleCase(parsedFrom)} and ${toTitleCase(parsedTo)}.`}
             icon={<FaTriangleExclamation className="text-[#ffbf00]" color="#ffbf00" />}
           />
         )}
