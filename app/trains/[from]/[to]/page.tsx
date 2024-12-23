@@ -9,8 +9,16 @@ import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
 
 export default async function TrainsPage({ params }: { params: { from: string; to: string } }) {
-  const parsedFrom = params.from.replaceAll('%2B', ' ').replaceAll('%20', ' ').toLowerCase();
-  const parsedTo = params.to.replaceAll('%2B', ' ').replaceAll('%20', ' ').toLowerCase();
+  const parsedFrom = params.from
+    .replaceAll('%2B', ' ')
+    .replaceAll('%20', ' ')
+    .replaceAll('%26', '&')
+    .toLowerCase();
+  const parsedTo = params.to
+    .replaceAll('%2B', ' ')
+    .replaceAll('%20', ' ')
+    .replaceAll('%26', '&')
+    .toLowerCase();
   const services = await getServices(parsedFrom, parsedTo);
   const lastUpdated = services.time ? ` (Last Updated at ${services.time})` : '';
   const averageDuration =
