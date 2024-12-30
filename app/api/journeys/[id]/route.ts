@@ -2,7 +2,8 @@ import { NextRequest } from 'next/server';
 import prisma from '@/app/utils/prisma';
 import { auth } from '@/auth';
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const session = await auth();
   if (!session) {
     return new Response('Not authenticated', {

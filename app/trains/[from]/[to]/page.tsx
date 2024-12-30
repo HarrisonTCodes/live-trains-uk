@@ -8,7 +8,8 @@ import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
 
-export default async function TrainsPage({ params }: { params: { from: string; to: string } }) {
+export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
+  const params = await props.params;
   const parsedFrom = params.from
     .replaceAll('%2B', ' ')
     .replaceAll('%20', ' ')

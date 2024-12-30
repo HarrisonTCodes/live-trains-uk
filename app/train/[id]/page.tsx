@@ -5,7 +5,8 @@ import { CallingPoint } from '@/app/interfaces';
 import getService from '@/app/utils/getService';
 import { FaCircleExclamation } from 'react-icons/fa6';
 
-export default async function TrainPage({ params }: { params: { id: string } }) {
+export default async function TrainPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const callingPoints = await getService(params.id);
 
   return (

@@ -4,8 +4,9 @@ import { FaGoogle } from 'react-icons/fa6';
 import PageHeading from '../components/page-heading/PageHeading';
 
 export default async function SignInPage(props: {
-  searchParams: { callbackUrl: string | undefined };
+  searchParams: Promise<{ callbackUrl: string | undefined }>;
 }) {
+  const searchParams = await props.searchParams;
   const icons = {
     Google: <FaGoogle />,
   };
@@ -24,7 +25,7 @@ export default async function SignInPage(props: {
           action={async () => {
             'use server';
             await signIn(provider.id, {
-              redirectTo: props.searchParams?.callbackUrl ?? '',
+              redirectTo: searchParams?.callbackUrl ?? '',
             });
           }}
         >
