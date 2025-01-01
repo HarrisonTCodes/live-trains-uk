@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Journey } from '../interfaces';
 import JourneyInfo from '../components/journey-info/JourneyInfo';
 import Button from '../components/button/Button';
-import { FaPlus, FaTrash, FaTriangleExclamation } from 'react-icons/fa6';
+import { FaCircleInfo, FaPlus, FaTrash, FaTriangleExclamation } from 'react-icons/fa6';
 import Link from 'next/link';
 import JourneySkeletons from '../components/skeletons/JourneySkeletons';
 import PageHeading from '../components/page-heading/PageHeading';
@@ -88,9 +88,11 @@ export default function JourneysPage() {
               color="red-700"
             />
           ) : journeys.length === 0 ? (
-            <h2 className="px-2 text-center text-2xl text-gray-400">
-              No journeys found. Click above to add a new journey
-            </h2>
+            <Notice
+              notice="No journeys"
+              description="You don't have any saved journeys yet. Click 'Add Journey' to create one."
+              icon={<FaCircleInfo className="text-[#1e40af]" color="#1e40af" />}
+            />
           ) : (
             journeys.map((journey: Journey) => (
               <JourneyInfo
