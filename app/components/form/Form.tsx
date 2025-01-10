@@ -17,7 +17,7 @@ export default function Form({
         }
       }}
     >
-      <h1 className="text-2xl text-blue-900">{heading}</h1>
+      <h1 className="text-2xl font-medium text-blue-900">{heading}</h1>
       {children}
     </form>
   );
