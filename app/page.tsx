@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Search from './components/search/Search';
 import Button from './components/button/Button';
 import { FaArrowRightArrowLeft, FaMagnifyingGlass } from 'react-icons/fa6';
-import PageHeading from './components/page-heading/PageHeading';
 import { useRouter } from 'next/navigation';
 import Form from './components/form/Form';
 
@@ -27,8 +26,7 @@ export default function LiveTrainsPage() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center gap-6 py-8">
-      <PageHeading heading="Live Trains UK" backEnabled={false} />
+    <main className="flex flex-col items-center gap-6 py-8">
       <Form onSubmit={getJourneys} heading="Get Live Departures">
         <section className="flex flex-col gap-4 py-4">
           <Search label="From" value={from} setValue={setFrom} />
