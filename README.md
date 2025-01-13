@@ -1,8 +1,10 @@
-# Live Trains UK
+# [Live Trains UK](https://live-trains-uk.vercel.app/)
 
 ## An app for viewing live train departures between stations in the UK
 
-A mobile-first app built with Next.js and National Rail API(s) for viewing live, real-time information about UK rail. Functionality and features include:
+A mobile-first app built with Next.js and National Rail API(s) for viewing live, real-time information about UK rail. You can access the site [here](https://live-trains-uk.vercel.app/).
+
+Functionality and features include:
 
 - Viewing live direct departures between 2 stations
 - Clear UI for distinguishing between fast and slow services
