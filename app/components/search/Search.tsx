@@ -19,6 +19,7 @@ export default function Search({
 
   const getStations = useCallback(
     debounce((input: string) => {
+      if (!input) return;
       setLoading(true);
       fetch(`/api/stations?prompt=${input}`)
         .then((response) => response.json())
@@ -39,9 +40,9 @@ export default function Search({
     const input = event.target.value;
     setValue(input);
 
-    // Clear options if input is empty
+    // Show recently searched stations if input is empty
     if (!input) {
-      setOptions([]);
+      setOptions(JSON.parse(localStorage.getItem('recentStations') ?? '[]'));
       return;
     }
 
@@ -58,7 +59,12 @@ export default function Search({
         placeholder={label}
         value={value}
         onChange={onChange}
-        onFocus={() => setFocused(true)}
+        onFocus={() => {
+          setFocused(true);
+          if (!value) {
+            setOptions(JSON.parse(localStorage.getItem('recentStations') ?? '[]'));
+          }
+        }}
         onBlur={() => setFocused(false)}
       />
       {/* Matching options dropdown */}
@@ -70,7 +76,24 @@ export default function Search({
           {options.map((option) => (
             <li
               key={option.crs}
-              onMouseDown={() => setValue(toTitleCase(option.name))}
+              onMouseDown={() => {
+                setValue(toTitleCase(option.name));
+
+                // Update recent stations
+                const recentStations = JSON.parse(localStorage.getItem('recentStations') ?? '[]');
+                const index = recentStations.findIndex(
+                  (recentStation: Station) => recentStation.name === option.name,
+                );
+
+                if (index > -1) {
+                  recentStations.splice(index, 1);
+                } else if (recentStations.length >= 3) {
+                  recentStations.pop();
+                }
+
+                recentStations.unshift(option);
+                localStorage.setItem('recentStations', JSON.stringify(recentStations));
+              }}
               className="p-2 text-lg"
             >
               {toTitleCase(option.name)} <span className="text-gray-500">({option.crs})</span>
