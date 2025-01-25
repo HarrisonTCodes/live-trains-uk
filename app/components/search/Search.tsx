@@ -45,7 +45,7 @@ export default function Search({
 
   const getStations = useCallback(
     debounce((input: string) => {
-      if (!input) return;
+      if (input.length < 2) return;
       setLoading(true);
       fetch(`/api/stations?prompt=${input}`)
         .then((response) => response.json())
