@@ -17,6 +17,32 @@ export default function Search({
   const [loading, setLoading] = useState<boolean>(false);
   const [focused, setFocused] = useState<boolean>(false);
 
+  const getRecentOptions = () => {
+    try {
+      // Get recent stations from local storage
+      const retrievedRecentOptions = JSON.parse(localStorage.getItem('recentStations')!);
+
+      // Check all relevant (first 3) entries are valid
+      if (
+        !retrievedRecentOptions
+          .slice(0, 3)
+          .every((recentOption: Station) => !!recentOption.name && !!recentOption.crs)
+      ) {
+        throw Error('Local storage recentStations invalid!');
+      }
+
+      // Return first 3 items
+      return retrievedRecentOptions.slice(0, 3);
+    } catch {
+      setRecentOptions([]);
+      return [];
+    }
+  };
+
+  const setRecentOptions = (newRecentOptions: Station[]) => {
+    localStorage.setItem('recentStations', JSON.stringify(newRecentOptions));
+  };
+
   const getStations = useCallback(
     debounce((input: string) => {
       if (!input) return;
@@ -42,7 +68,7 @@ export default function Search({
 
     // Show recently searched stations if input is empty
     if (!input) {
-      setOptions(JSON.parse(localStorage.getItem('recentStations') ?? '[]'));
+      setOptions(getRecentOptions());
       return;
     }
 
@@ -62,7 +88,7 @@ export default function Search({
         onFocus={() => {
           setFocused(true);
           if (!value) {
-            setOptions(JSON.parse(localStorage.getItem('recentStations') ?? '[]'));
+            setOptions(getRecentOptions());
           }
         }}
         onBlur={() => setFocused(false)}
@@ -80,19 +106,19 @@ export default function Search({
                 setValue(toTitleCase(option.name));
 
                 // Update recent stations
-                const recentStations = JSON.parse(localStorage.getItem('recentStations') ?? '[]');
-                const index = recentStations.findIndex(
+                const newRecentOptions = getRecentOptions();
+                const index = newRecentOptions.findIndex(
                   (recentStation: Station) => recentStation.name === option.name,
                 );
 
                 if (index > -1) {
-                  recentStations.splice(index, 1);
-                } else if (recentStations.length >= 3) {
-                  recentStations.pop();
+                  newRecentOptions.splice(index, 1);
+                } else if (newRecentOptions.length >= 3) {
+                  newRecentOptions.pop();
                 }
 
-                recentStations.unshift(option);
-                localStorage.setItem('recentStations', JSON.stringify(recentStations));
+                newRecentOptions.unshift(option);
+                setRecentOptions(newRecentOptions);
               }}
               className="p-2 text-lg"
             >
