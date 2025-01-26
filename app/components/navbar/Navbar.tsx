@@ -71,7 +71,7 @@ export default function Navbar() {
       {/* Hamburger Menu */}
       {hamburgerMenuOpen && (
         <div
-          className="absolute right-2 top-16 z-20 flex w-48 cursor-pointer flex-col divide-y-2 divide-stone-300 rounded-lg border-2 border-stone-300 bg-white shadow-xl md:hidden"
+          className="absolute right-2 top-16 z-20 flex w-48 cursor-pointer flex-col divide-y-2 divide-stone-300 rounded-lg border border-stone-300 bg-white shadow-xl md:hidden"
           ref={hamburgerMenuRef}
         >
           {buttonData.map((data) => (

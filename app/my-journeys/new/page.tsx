@@ -59,7 +59,7 @@ export default function AddJourneyPage() {
         <section className="flex flex-col gap-6">
           <input
             type="search"
-            className="w-[80vw] max-w-96 rounded-lg border-2 border-gray-400 bg-gray-100 p-2 text-xl focus:border-blue-800 focus:outline-none md:w-[40vw]"
+            className="w-[80vw] max-w-96 rounded-lg border border-gray-400 bg-gray-100 p-2 text-xl focus:border-blue-800 focus:outline-none md:w-[40vw]"
             placeholder="Name"
             value={name}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}

@@ -11,7 +11,7 @@ export default function Notice({
 }) {
   return (
     <div
-      className={`min-h-24 w-11/12 max-w-[500px] rounded-lg border-2 border-${color ?? 'gray-400'} bg-white p-2`}
+      className={`min-h-24 w-11/12 max-w-[500px] rounded-lg border border-${color ?? 'gray-400'} bg-white p-2`}
     >
       <h2 className={`flex items-center gap-2 text-xl font-medium text-${color ?? 'gray-600'}`}>
         {icon} {notice}
