@@ -78,11 +78,11 @@ export default function Search({
   };
 
   return (
-    <div className="flex w-[80vw] max-w-96 flex-col md:w-[40vw]">
+    <div className="relative flex w-full flex-col">
       {/* Search bar */}
       <input
         type="search"
-        className="w-full rounded-lg border border-gray-400 bg-white p-2 text-lg focus:border-blue-800 focus:outline-none"
+        className="rounded-lg border border-gray-400 bg-white p-2 text-lg transition focus:border-blue-800 focus:outline-none"
         placeholder={label}
         value={value}
         onChange={onChange}
@@ -97,7 +97,7 @@ export default function Search({
       />
       {/* Matching options dropdown */}
       {(loading || options.length > 0) && focused && (
-        <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-12 cursor-pointer divide-y divide-gray-300 overflow-y-scroll rounded-lg border border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
+        <ul className="absolute z-10 max-h-40 w-full translate-y-14 cursor-pointer divide-y divide-gray-300 overflow-y-scroll rounded-lg border border-gray-300 bg-white md:max-h-96">
           {loading && options.length === 0 && (
             <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
           )}
@@ -124,7 +124,7 @@ export default function Search({
               }}
               className="flex items-center justify-between p-2 transition hover:bg-stone-100"
             >
-              <span className="text-md">{toTitleCase(option.name)}</span>
+              {toTitleCase(option.name)}
               <Tag>{option.crs}</Tag>
             </li>
           ))}

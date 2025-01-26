@@ -55,11 +55,15 @@ export default function AddJourneyPage() {
   return (
     <main className="flex flex-col items-center gap-6 py-8">
       <PageHeading heading="New Journey" />
-      <Form onSubmit={createJourney} heading="Create a new journey">
-        <section className="flex flex-col gap-6">
+      <Form
+        onSubmit={createJourney}
+        heading="Create a new journey"
+        subHeading="Save your regular routes for quick access to live departures"
+      >
+        <section className="flex w-full flex-col gap-4">
           <input
             type="search"
-            className="w-[80vw] max-w-96 rounded-lg border border-gray-400 bg-gray-100 p-2 text-xl focus:border-blue-800 focus:outline-none md:w-[40vw]"
+            className="w-full rounded-lg border border-gray-400 bg-white p-2 text-lg focus:border-blue-800 focus:outline-none"
             placeholder="Name"
             value={name}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
@@ -67,7 +71,7 @@ export default function AddJourneyPage() {
           <Search label="First station" value={firstStation} setValue={setFirstStation} />
           <Search label="Second station" value={secondStation} setValue={setSecondStation} />
         </section>
-        <Button submit>
+        <Button submit width="w-full">
           <FaPlus /> Create Journey
         </Button>
       </Form>

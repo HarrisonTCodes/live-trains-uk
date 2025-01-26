@@ -10,10 +10,10 @@ export default function Loading() {
 
       {/* Buttons */}
       <section className="flex gap-2">
-        <Button>
+        <Button width="w-28">
           <FaArrowRightArrowLeft /> Switch
         </Button>
-        <Button>
+        <Button width="w-28">
           <FaBookmark /> Save
         </Button>
       </section>

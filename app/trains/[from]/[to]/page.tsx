@@ -39,12 +39,12 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
       {/* Buttons */}
       <section className="flex gap-2">
         <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-          <Button>
+          <Button width="w-28">
             <FaArrowRightArrowLeft /> Switch
           </Button>
         </Link>
         <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
-          <Button>
+          <Button width="w-28">
             <FaBookmark /> Save
           </Button>
         </Link>
