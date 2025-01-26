@@ -93,6 +93,7 @@ export default function Search({
           }
         }}
         onBlur={() => setFocused(false)}
+        spellCheck={false}
       />
       {/* Matching options dropdown */}
       {(loading || options.length > 0) && focused && (
