@@ -3,6 +3,7 @@ import { Station } from '@/app/interfaces';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { ChangeEvent, useCallback, useState } from 'react';
 import debounce from 'lodash.debounce';
+import Tag from '../tag/Tag';
 
 export default function Search({
   label,
@@ -81,7 +82,7 @@ export default function Search({
       {/* Search bar */}
       <input
         type="search"
-        className="w-full rounded-lg border-2 border-gray-400 bg-gray-100 p-2 text-xl focus:border-blue-800 focus:outline-none"
+        className="w-full rounded-lg border border-gray-400 bg-white p-2 text-lg focus:border-blue-800 focus:outline-none"
         placeholder={label}
         value={value}
         onChange={onChange}
@@ -95,7 +96,7 @@ export default function Search({
       />
       {/* Matching options dropdown */}
       {(loading || options.length > 0) && focused && (
-        <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-14 cursor-pointer divide-y-2 divide-gray-300 overflow-y-scroll rounded-lg border-2 border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
+        <ul className="absolute max-h-40 w-[80vw] max-w-96 translate-y-12 cursor-pointer divide-y divide-gray-300 overflow-y-scroll rounded-lg border border-gray-300 bg-white md:max-h-96 md:w-[40vw]">
           {loading && options.length === 0 && (
             <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
           )}
@@ -120,9 +121,10 @@ export default function Search({
                 newRecentOptions.unshift(option);
                 setRecentOptions(newRecentOptions);
               }}
-              className="p-2 text-lg"
+              className="flex items-center justify-between p-2 transition hover:bg-stone-100"
             >
-              {toTitleCase(option.name)} <span className="text-gray-500">({option.crs})</span>
+              <span className="text-md">{toTitleCase(option.name)}</span>
+              <Tag>{option.crs}</Tag>
             </li>
           ))}
         </ul>
