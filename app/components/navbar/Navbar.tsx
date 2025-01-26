@@ -51,7 +51,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-blue-800 px-4">
       {/* App Name */}
-      <h1 className="text-2xl font-medium text-white">Live Trains UK</h1>
+      <h1 className="text-xl font-bold text-white">Live Trains UK</h1>
       {/* Buttons */}
       <section className="flex gap-6">
         {buttonData.map((data) => (
