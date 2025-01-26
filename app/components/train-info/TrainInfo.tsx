@@ -4,7 +4,8 @@ import { GiRabbit, GiTortoise } from 'react-icons/gi';
 import toTitleCase from '@/app/utils/toTitleCase';
 import formatEstimated from '@/app/utils/formatEstimated';
 import Link from 'next/link';
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import Tag from '../tag/Tag';
+import { FaClock, FaLocationDot } from 'react-icons/fa6';
 
 export default function TrainInfo({
   service,
@@ -27,54 +28,66 @@ export default function TrainInfo({
 
   return (
     <Link
-      className={`flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 rounded-lg border p-2 transition-all ${cancelled ? 'border-red-700 bg-red-50' : 'border-gray-300 bg-white hover:bg-gray-100'}`}
+      className={`flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 divide-y rounded-lg border transition-all ${cancelled ? 'divide-red-700 border-red-700 bg-red-50' : 'divide-gray-300 border-gray-300 bg-white hover:bg-stone-100'}`}
       href={`/train/${service.serviceId}`}
       prefetch={false}
     >
       {/* From */}
-      <section>
-        <h2 className="text-xl font-medium">
-          {toTitleCase(fromStation)} <span className="text-sm text-gray-500">({fromCrs})</span>
-        </h2>
-        <p className="flex items-center gap-1">
-          {service.departureTime}
-          {service.estimatedDepartureTime && ' | '}
-          <span
-            className={`flex items-center gap-1 font-medium ${service.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
-          >
-            {service.estimatedDepartureTime == 'Cancelled' && <AiOutlineExclamationCircle />}{' '}
-            {formatEstimated(service.estimatedDepartureTime)}
-          </span>
-          {service.platform && ` | Platform ${service.platform}`}
-        </p>
+      <section className="flex h-20 w-full flex-col gap-1 p-2">
+        <div className="flex w-full items-center justify-between">
+          <h2 className="px-1 text-lg font-medium">{toTitleCase(fromStation)}</h2>
+          <h2 className="px-1 text-lg font-medium">{service.departureTime}</h2>
+        </div>
+        <div className="flex w-full justify-between">
+          <div className="flex gap-2">
+            <Tag>{fromCrs}</Tag>
+            {service.platform && <Tag>Platform {service.platform}</Tag>}
+          </div>
+          {service.estimatedDepartureTime && (
+            <Tag status={service.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
+              {formatEstimated(service.estimatedDepartureTime)}
+            </Tag>
+          )}
+        </div>
       </section>
+
       {/* To */}
-      <section>
-        <h2 className="text-xl font-medium">
-          {toTitleCase(toStation)} <span className="text-sm text-gray-500">({toCrs})</span>
-        </h2>
-        <p className="flex items-center gap-1">
-          {service.arrivalTime}
-          {service.estimatedArrivalTime && ' | '}
-          <span
-            className={`flex items-center gap-1 font-medium ${service.estimatedArrivalTime === 'On time' ? 'text-green-700' : 'text-red-800'} `}
-          >
-            {service.estimatedArrivalTime == 'Cancelled' && <AiOutlineExclamationCircle />}
-            {formatEstimated(service.estimatedArrivalTime)}
-          </span>
-        </p>
+      <section className="h-20 p-2">
+        <div className="flex w-full justify-between">
+          <h2 className="px-1 text-lg font-medium">{toTitleCase(toStation)}</h2>
+          <h2 className="px-1 text-lg font-medium">{service.arrivalTime}</h2>
+        </div>
+        <div className="flex w-full justify-between">
+          <Tag>{toCrs}</Tag>
+          {service.estimatedArrivalTime && (
+            <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
+              {formatEstimated(service.estimatedArrivalTime)}
+            </Tag>
+          )}
+        </div>
       </section>
+
       {/* Duration */}
-      <p className="flex text-lg">
-        {service.numberOfStops} Stop{service.numberOfStops > 1 && 's'} |{' '}
-        <span className="px-1 font-medium">{formatDuration(service.duration)}</span> |{' '}
-        <span
-          className={`flex items-center gap-1 pl-1 font-medium ${fast ? 'text-green-700' : 'text-red-800'}`}
-        >
-          {fast ? <GiRabbit /> : <GiTortoise />}
-          {fast ? 'Fast' : 'Slow'}
+      <section className="grid h-12 w-full grid-cols-3 grid-rows-1 py-2 pl-3 pr-2">
+        <p className="flex items-center justify-start gap-1">
+          <FaLocationDot className="text-stone-600" /> {service.numberOfStops} Stop
+          {service.numberOfStops > 1 && 's'}
+        </p>
+        <p className="flex items-center justify-center gap-1">
+          <FaClock className="text-stone-600" /> {formatDuration(service.duration)}
+        </p>
+        <span className="flex items-center justify-end">
+          {fast ? (
+            <Tag status="success">
+              <GiRabbit className="text-green-800" /> Fast
+            </Tag>
+          ) : (
+            <Tag status="fail">
+              <GiTortoise className="text-red-700" /> Slow
+            </Tag>
+          )}
         </span>
-      </p>
+      </section>
     </Link>
   );
 }
