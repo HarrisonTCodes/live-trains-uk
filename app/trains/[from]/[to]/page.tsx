@@ -30,30 +30,37 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      {/* Heading */}
       <section className="flex flex-col items-center gap-1">
-        <h1 className="text-center text-2xl font-bold text-blue-900">Live Departures</h1>
-        <h2 className="text-center text-stone-600">
-          {toTitleCase(parsedFrom)} to {toTitleCase(parsedTo)}
-        </h2>
-        {services.time && (
-          <Tag>
-            <FaClock className="text-stone-600" /> Last updated at {services.time}
-          </Tag>
-        )}
-      </section>
-      {/* Buttons */}
-      <section className="flex gap-2">
-        <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-          <Button width="w-28">
-            <FaArrowRightArrowLeft /> Switch
-          </Button>
-        </Link>
-        <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
-          <Button width="w-28">
-            <FaBookmark /> Save
-          </Button>
-        </Link>
+        {/* Heading */}
+        <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Live Departures</h1>
+
+        <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 md:flex-row md:justify-between">
+          {/* Stations and last updated */}
+          <div className="flex flex-col items-center gap-1 md:items-start">
+            <h2 className="text-center text-stone-600 md:pl-1">
+              {toTitleCase(parsedFrom)} to {toTitleCase(parsedTo)}
+            </h2>
+            {services.time && (
+              <Tag>
+                <FaClock className="text-stone-600" /> Last updated at {services.time}
+              </Tag>
+            )}
+          </div>
+
+          {/* Switch and save buttons */}
+          <div className="flex w-full justify-center gap-2 md:w-fit md:justify-end">
+            <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
+              <Button width="w-[40vw] md:w-28">
+                <FaArrowRightArrowLeft /> Switch
+              </Button>
+            </Link>
+            <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
+              <Button width="w-[40vw] md:w-28">
+                <FaBookmark /> Save
+              </Button>
+            </Link>
+          </div>
+        </div>
       </section>
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">

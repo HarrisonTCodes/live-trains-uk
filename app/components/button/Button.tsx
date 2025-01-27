@@ -11,7 +11,7 @@ export default function Button({
 }) {
   return (
     <button
-      className={`flex items-center justify-center gap-2 rounded-lg bg-blue-800 p-2.5 font-medium text-white hover:bg-blue-600 active:bg-blue-500 ${width}`}
+      className={`flex items-center justify-center gap-2 rounded-lg bg-blue-800 p-2 font-medium text-white hover:bg-blue-600 active:bg-blue-500 ${width}`}
       onClick={onClick}
       type={submit ? 'submit' : 'button'}
     >
