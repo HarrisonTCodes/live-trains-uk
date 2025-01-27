@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
 import Tag from '@/app/components/tag/Tag';
+import TrainSkeletons from '@/app/components/skeletons/TrainSkeletons';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -62,6 +63,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
           </div>
         </div>
       </section>
+
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
         {services.services.length > 0 ? (
