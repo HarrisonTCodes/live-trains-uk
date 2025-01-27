@@ -6,6 +6,7 @@ import formatEstimated from '@/app/utils/formatEstimated';
 import Link from 'next/link';
 import Tag from '../tag/Tag';
 import { FaClock, FaLocationDot } from 'react-icons/fa6';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export default function TrainInfo({
   service,
@@ -46,6 +47,7 @@ export default function TrainInfo({
           </div>
           {service.estimatedDepartureTime && (
             <Tag status={service.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
+              {service.estimatedDepartureTime === 'Cancelled' && <AiOutlineExclamationCircle />}
               {formatEstimated(service.estimatedDepartureTime)}
             </Tag>
           )}
@@ -62,6 +64,7 @@ export default function TrainInfo({
           <Tag>{toCrs}</Tag>
           {service.estimatedArrivalTime && (
             <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
+              {service.estimatedDepartureTime === 'Cancelled' && <AiOutlineExclamationCircle />}
               {formatEstimated(service.estimatedArrivalTime)}
             </Tag>
           )}
