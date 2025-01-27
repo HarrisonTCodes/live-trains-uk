@@ -79,11 +79,11 @@ export default function TrainInfo({
         <span className="flex items-center justify-end">
           {fast ? (
             <Tag status="success">
-              <GiRabbit className="text-green-800" /> Fast
+              <GiRabbit /> Fast
             </Tag>
           ) : (
             <Tag status="fail">
-              <GiTortoise className="text-red-700" /> Slow
+              <GiTortoise /> Slow
             </Tag>
           )}
         </span>
