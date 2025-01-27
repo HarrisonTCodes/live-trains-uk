@@ -1,12 +1,12 @@
 import Button from '../../../components/button/Button';
-import { FaArrowRightArrowLeft, FaBookmark, FaTriangleExclamation } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaBookmark, FaClock, FaTriangleExclamation } from 'react-icons/fa6';
 import TrainInfo from '../../../components/train-info/TrainInfo';
 import toTitleCase from '../../../utils/toTitleCase';
-import PageHeading from '../../../components/page-heading/PageHeading';
 import getServices from '../../../utils/getServices';
 import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
+import Tag from '@/app/components/tag/Tag';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -30,12 +30,18 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      {/* Headings */}
-      <PageHeading
-        heading="Live Departures"
-        subHeading={`${toTitleCase(parsedFrom)} to ${toTitleCase(parsedTo)}${lastUpdated}`}
-        href="/"
-      />
+      {/* Heading */}
+      <section className="flex flex-col items-center gap-1">
+        <h1 className="text-center text-2xl font-bold text-blue-900">Live Departures</h1>
+        <h2 className="text-center text-stone-600">
+          {toTitleCase(parsedFrom)} to {toTitleCase(parsedTo)}
+        </h2>
+        {services.time && (
+          <Tag>
+            <FaClock className="text-stone-600" /> Last updated at {services.time}
+          </Tag>
+        )}
+      </section>
       {/* Buttons */}
       <section className="flex gap-2">
         <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
