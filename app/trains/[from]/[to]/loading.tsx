@@ -1,5 +1,4 @@
 import Button from '@/app/components/button/Button';
-import PageHeading from '@/app/components/page-heading/PageHeading';
 import TrainSkeletons from '@/app/components/skeletons/TrainSkeletons';
 import Tag from '@/app/components/tag/Tag';
 import { FaArrowRightArrowLeft, FaBookmark, FaClock } from 'react-icons/fa6';

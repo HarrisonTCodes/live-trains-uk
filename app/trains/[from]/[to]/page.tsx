@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
 import Tag from '@/app/components/tag/Tag';
-import TrainSkeletons from '@/app/components/skeletons/TrainSkeletons';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -22,7 +21,6 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
     .replaceAll('%26', '&')
     .toLowerCase();
   const services = await getServices(parsedFrom, parsedTo);
-  const lastUpdated = services.time ? ` (Last Updated at ${services.time})` : '';
   const averageDuration =
     services.services.reduce(
       (accumulator: number, service: Service) => accumulator + service.duration,
