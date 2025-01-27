@@ -31,6 +31,7 @@ export default function TrainInfo({
       className={`flex min-h-40 w-[90vw] max-w-[700px] cursor-pointer flex-col gap-2 divide-y rounded-lg border transition-all ${cancelled ? 'divide-red-700 border-red-700 bg-red-50' : 'divide-gray-300 border-gray-300 bg-white hover:bg-stone-100'}`}
       href={`/train/${service.serviceId}`}
       prefetch={false}
+      scroll={true}
     >
       {/* From */}
       <section className="flex h-20 w-full flex-col gap-1 p-2">
