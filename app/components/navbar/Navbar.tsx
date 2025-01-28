@@ -77,7 +77,7 @@ export default function Navbar() {
           {buttonData.map((data) => (
             <button
               onClick={() => menuButtonPressed(data.href)}
-              className="flex items-center gap-2 px-2 py-2 text-left text-lg font-medium text-stone-600 active:bg-stone-200"
+              className="flex items-center gap-2 px-2 py-2 text-left text-lg active:bg-stone-200"
               key={`${data.label} menu option`}
             >
               <span className="text-blue-900">{data.icon}</span> {data.label}
