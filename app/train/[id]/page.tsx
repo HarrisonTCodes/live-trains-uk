@@ -61,6 +61,7 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
             callingPoint={callingPoint}
             isFirstPoint={index === 0}
             isLastPoint={index === callingPoints.callingPoints.length - 1}
+            departed={!callingPoint.estimatedDepartureTime}
           />
         ))}
       </section>

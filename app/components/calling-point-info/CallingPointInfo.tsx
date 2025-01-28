@@ -8,17 +8,21 @@ export default function CallingPointInfo({
   callingPoint,
   isFirstPoint,
   isLastPoint,
+  departed,
 }: {
   callingPoint: CallingPoint;
   isFirstPoint?: boolean;
   isLastPoint?: boolean;
+  departed?: boolean;
 }) {
-  const departed = !!callingPoint.estimatedDepartureTime;
-
   return (
     <section className="flex items-center gap-2">
       {/* Graphic */}
-      <CallingPointGraphic isFirstPoint={isFirstPoint} isLastPoint={isLastPoint} />
+      <CallingPointGraphic
+        isFirstPoint={isFirstPoint}
+        isLastPoint={isLastPoint}
+        departed={departed}
+      />
 
       {/* Details */}
       <section className="flex h-24 w-full justify-between gap-1 pr-2 pt-9">
@@ -34,14 +38,14 @@ export default function CallingPointInfo({
             {callingPoint.departureTime}
           </p>
           {departed ? (
+            <Tag>Departed</Tag>
+          ) : (
             <Tag status={callingPoint.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
               {callingPoint.estimatedDepartureTime === 'Cancelled' && (
                 <AiOutlineExclamationCircle />
               )}
               {formatEstimated(callingPoint.estimatedDepartureTime)}
             </Tag>
-          ) : (
-            <Tag>Departed</Tag>
           )}
         </div>
       </section>
