@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { Journey } from '../interfaces';
 import JourneyInfo from '../components/journey-info/JourneyInfo';
 import Button from '../components/button/Button';
-import { FaCircleInfo, FaPlus, FaTrash, FaTriangleExclamation } from 'react-icons/fa6';
 import Link from 'next/link';
-import JourneySkeletons from '../components/skeletons/Skeletons';
 import PageHeading from '../components/page-heading/PageHeading';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
+import { FaPlus, FaTrash } from 'react-icons/fa6';
+import Skeletons from '../components/skeletons/Skeletons';
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
@@ -79,19 +79,17 @@ export default function JourneysPage() {
         </Link>
         <section className="flex w-full flex-col items-center gap-4">
           {loading ? (
-            <JourneySkeletons />
+            <Skeletons height="h-20" />
           ) : error ? (
             <Notice
               notice="Error"
               description="There was an error getting journeys, please try again."
-              icon={<FaTriangleExclamation />}
-              color="red-700"
+              status="fail"
             />
           ) : journeys.length === 0 ? (
             <Notice
               notice="No journeys"
               description="You don't have any saved journeys yet. Click 'Add Journey' to create one."
-              icon={<FaCircleInfo className="text-[#1e40af]" color="#1e40af" />}
             />
           ) : (
             journeys.map((journey: Journey) => (

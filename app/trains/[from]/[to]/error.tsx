@@ -1,6 +1,5 @@
 'use client';
 import Notice from '@/app/components/notice/Notice';
-import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export default function Error() {
   return (

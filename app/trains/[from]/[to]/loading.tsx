@@ -1,5 +1,5 @@
 import Button from '@/app/components/button/Button';
-import TrainSkeletons from '@/app/components/skeletons/TrainSkeletons';
+import Skeletons from '@/app/components/skeletons/Skeletons';
 import Tag from '@/app/components/tag/Tag';
 import { FaArrowRightArrowLeft, FaBookmark, FaClock } from 'react-icons/fa6';
 
@@ -32,7 +32,7 @@ export default function Loading() {
       </section>
 
       <section className="flex w-full flex-col items-center gap-4">
-        <TrainSkeletons />
+        <Skeletons height="h-40" />
       </section>
     </main>
   );
