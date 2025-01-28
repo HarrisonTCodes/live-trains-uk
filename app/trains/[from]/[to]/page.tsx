@@ -39,11 +39,10 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
             <h2 className="text-center text-stone-600 md:pl-1">
               {toTitleCase(parsedFrom)} to {toTitleCase(parsedTo)}
             </h2>
-            {services.time && (
-              <Tag>
-                <FaClock className="text-stone-600" /> Last updated at {services.time}
-              </Tag>
-            )}
+            <Tag>
+              <FaClock className="text-stone-600" />{' '}
+              {services.time ? `Last updated at ${services.time}` : 'Not yet updated'}
+            </Tag>
           </div>
 
           {/* Switch and save buttons */}
