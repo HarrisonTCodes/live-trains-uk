@@ -2270,7 +2270,7 @@ const stations = {
   'sutton parkway': 'SPK',
   swale: 'SWL',
   swanley: 'SAY',
-  'swanscombe- george & dragon': 'SWM',
+  swanscombe: 'SWM',
   swansea: 'SWA',
   swanwick: 'SNW',
   sway: 'SWY',
