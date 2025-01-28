@@ -2,6 +2,7 @@ import { CallingPoint } from '@/app/interfaces';
 import formatEstimated from '@/app/utils/formatEstimated';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import CallingPointGraphic from './CallingPointGraphic';
+import Tag from '../tag/Tag';
 
 export default function CallingPointInfo({
   callingPoint,
@@ -12,35 +13,37 @@ export default function CallingPointInfo({
   isFirstPoint?: boolean;
   isLastPoint?: boolean;
 }) {
+  const departed = !!callingPoint.estimatedDepartureTime;
+
   return (
     <section className="flex items-center gap-2">
       {/* Graphic */}
       <CallingPointGraphic isFirstPoint={isFirstPoint} isLastPoint={isLastPoint} />
+
       {/* Details */}
-      <section className="w-full pt-6">
+      <section className="flex h-24 w-full justify-between gap-1 pr-2 pt-9">
         {/* Station and platform */}
-        <p className={`text-lg ${callingPoint.focus ? 'font-bold' : 'font-medium'}`}>
-          {callingPoint.station}{' '}
-          {callingPoint.platform ? `(Platform ${callingPoint.platform})` : ''}
-        </p>
+        <div className="flex flex-col gap-1">
+          <p className={`pl-1 ${callingPoint.focus && 'font-medium'}`}>{callingPoint.station}</p>
+          {callingPoint.platform && <Tag>Platform {callingPoint.platform}</Tag>}
+        </div>
+
         {/* Times */}
-        <p className="flex gap-2">
-          {/* Departure time */}
-          {callingPoint.estimatedDepartureTime ? (
-            callingPoint.departureTime
-          ) : (
-            <span className="text-gray-600">{callingPoint.departureTime} (Departed)</span>
-          )}
-          {/* Estimated time */}
-          {callingPoint.estimatedDepartureTime && (
-            <span
-              className={`flex items-center gap-1 font-medium ${callingPoint.estimatedDepartureTime === 'On time' ? 'text-green-700' : 'text-red-800'}`}
-            >
-              {callingPoint.estimatedDepartureTime == 'Cancelled' && <AiOutlineExclamationCircle />}
+        <div className="flex flex-col items-end gap-1">
+          <p className={`pr-1 ${callingPoint.focus && 'font-medium'}`}>
+            {callingPoint.departureTime}
+          </p>
+          {departed ? (
+            <Tag status={callingPoint.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
+              {callingPoint.estimatedDepartureTime === 'Cancelled' && (
+                <AiOutlineExclamationCircle />
+              )}
               {formatEstimated(callingPoint.estimatedDepartureTime)}
-            </span>
+            </Tag>
+          ) : (
+            <Tag>Departed</Tag>
           )}
-        </p>
+        </div>
       </section>
     </section>
   );
