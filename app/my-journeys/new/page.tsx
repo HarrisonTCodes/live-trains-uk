@@ -2,7 +2,6 @@
 import Button from '@/app/components/button/Button';
 import Form from '@/app/components/form/Form';
 import Notice from '@/app/components/notice/Notice';
-import PageHeading from '@/app/components/page-heading/PageHeading';
 import Search from '@/app/components/search/Search';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -54,7 +53,6 @@ export default function AddJourneyPage() {
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <PageHeading heading="New Journey" />
       <Form
         onSubmit={createJourney}
         heading="Create a new journey"
