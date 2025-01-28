@@ -1,5 +1,3 @@
-import { FaCircleCheck, FaCircleExclamation, FaTriangleExclamation } from 'react-icons/fa6';
-import PageHeading from '../components/page-heading/PageHeading';
 import Notice from '../components/notice/Notice';
 import toTitleCase from '../utils/toTitleCase';
 
@@ -12,7 +10,7 @@ export default async function AlertsPage() {
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <PageHeading heading="Alerts and Disruptions" backEnabled={false} />
+      <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Alerts and Disruptions</h1>
       {alerts ? (
         alerts.length > 0 ? (
           alerts.map((alert: { name: string; summary: string }, index: number) => (
@@ -20,16 +18,14 @@ export default async function AlertsPage() {
               key={`alert-${index}`}
               notice={toTitleCase(alert.name.replaceAll('-', ' '))}
               description={alert.summary}
-              icon={<FaCircleExclamation />}
-              color="red-700"
+              status="alert"
             />
           ))
         ) : (
           <Notice
             notice="No alerts"
             description="No alerts or disruptions at the moment."
-            icon={<FaCircleCheck />}
-            color="green-700"
+            status="success"
           />
         )
       ) : (
@@ -37,8 +33,7 @@ export default async function AlertsPage() {
         <Notice
           notice="Error"
           description="There was an error trying to retrieve alerts and disruptions."
-          icon={<FaTriangleExclamation />}
-          color="red-700"
+          status="fail"
         />
       )}
     </main>

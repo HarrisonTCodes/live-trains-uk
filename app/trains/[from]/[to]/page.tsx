@@ -1,5 +1,5 @@
 import Button from '../../../components/button/Button';
-import { FaArrowRightArrowLeft, FaBookmark, FaClock, FaTriangleExclamation } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaBookmark, FaClock } from 'react-icons/fa6';
 import TrainInfo from '../../../components/train-info/TrainInfo';
 import toTitleCase from '../../../utils/toTitleCase';
 import getServices from '../../../utils/getServices';
@@ -80,7 +80,6 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
           <Notice
             notice="No services"
             description={`There are currently no direct services running between ${toTitleCase(parsedFrom)} and ${toTitleCase(parsedTo)}.`}
-            icon={<FaTriangleExclamation className="text-[#ffbf00]" color="#ffbf00" />}
           />
         )}
       </section>

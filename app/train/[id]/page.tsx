@@ -5,7 +5,7 @@ import Tag from '@/app/components/tag/Tag';
 import { CallingPoint } from '@/app/interfaces';
 import getService from '@/app/utils/getService';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { FaArrowLeft, FaCircleExclamation, FaClock } from 'react-icons/fa6';
+import { FaArrowLeft, FaClock } from 'react-icons/fa6';
 
 export default async function TrainPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -48,8 +48,7 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
           key={cancelReason}
           notice="Some stops cancelled"
           description={`${cancelReason}. See affected calling points below.`}
-          icon={<FaCircleExclamation />}
-          color="red-700"
+          status="alert"
         />
       ))}
 
@@ -57,7 +56,7 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
       <section className="relative flex w-[90vw] max-w-[700px] flex-col rounded-lg border border-gray-300 bg-white px-2 pb-4">
         {callingPoints.callingPoints.map((callingPoint: CallingPoint, index: number) => (
           <CallingPointInfo
-            key={`calling point ${callingPoint.station}`}
+            key={`calling point ${index}`}
             callingPoint={callingPoint}
             isFirstPoint={index === 0}
             isLastPoint={index === callingPoints.callingPoints.length - 1}

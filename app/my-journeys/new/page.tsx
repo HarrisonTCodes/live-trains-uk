@@ -6,7 +6,7 @@ import Search from '@/app/components/search/Search';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
-import { FaPlus, FaTriangleExclamation } from 'react-icons/fa6';
+import { FaPlus } from 'react-icons/fa6';
 
 export default function AddJourneyPage() {
   const router = useRouter();
@@ -73,14 +73,7 @@ export default function AddJourneyPage() {
           <FaPlus /> Create Journey
         </Button>
       </Form>
-      {error && (
-        <Notice
-          notice="Error"
-          description={`${error}.`}
-          icon={<FaTriangleExclamation />}
-          color="red-700"
-        />
-      )}
+      {error && <Notice notice="Error" description={`${error}.`} status="fail" />}
     </main>
   );
 }

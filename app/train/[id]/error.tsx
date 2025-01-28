@@ -1,6 +1,5 @@
 'use client';
 import Notice from '@/app/components/notice/Notice';
-import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export default function Error() {
   return (
@@ -9,8 +8,7 @@ export default function Error() {
       <Notice
         notice="Error"
         description="There was an error trying to retrieve the service. This service may no longer exist"
-        icon={<FaTriangleExclamation />}
-        color="red-700"
+        status="fail"
       />
     </main>
   );

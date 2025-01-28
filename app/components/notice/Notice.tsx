@@ -1,22 +1,31 @@
+import {
+  FaCircleCheck,
+  FaCircleExclamation,
+  FaCircleInfo,
+  FaTriangleExclamation,
+} from 'react-icons/fa6';
+
 export default function Notice({
   notice,
   description,
-  icon,
-  color,
+  status,
 }: {
   notice: string;
   description: string;
-  icon?: React.ReactNode;
-  color?: string;
+  status?: 'success' | 'fail' | 'alert';
 }) {
   return (
     <div
-      className={`min-h-24 w-11/12 max-w-[500px] rounded-lg border border-${color ?? 'gray-400'} bg-white p-2`}
+      className={`min-h-24 w-[90vw] max-w-[700px] gap-2 rounded-lg border p-2 ${!status && 'border-stone-300 bg-white'} ${status === 'success' && 'border-green-700 bg-green-50 text-green-900'} ${(status === 'fail' || status === 'alert') && 'border-red-700 bg-red-50 text-red-900'}`}
     >
-      <h2 className={`flex items-center gap-2 text-xl font-medium text-${color ?? 'gray-600'}`}>
-        {icon} {notice}
+      <h2 className={`flex items-center gap-2 text-xl font-medium`}>
+        {!status && <FaCircleInfo className="text-stone-600" />}
+        {status === 'success' && <FaCircleCheck />}
+        {status === 'fail' && <FaTriangleExclamation />}
+        {status === 'alert' && <FaCircleExclamation />}
+        {notice}
       </h2>
-      <p className={`text-${color ?? 'gray-600'} brightness-[60%]`}>{description}</p>
+      <p className="">{description}</p>
     </div>
   );
 }

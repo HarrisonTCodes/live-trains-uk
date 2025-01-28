@@ -9,8 +9,7 @@ export default function Error() {
       <Notice
         notice="Error"
         description="There was an error retrieving services between these stations. Please make sure you choose valid stations from the dropdown menu."
-        icon={<FaTriangleExclamation />}
-        color="red-700"
+        status="fail"
       />
     </main>
   );
