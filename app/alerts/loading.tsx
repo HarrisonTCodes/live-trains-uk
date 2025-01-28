@@ -1,10 +1,9 @@
-import PageHeading from '../components/page-heading/PageHeading';
-import Skeletons from '../components/skeletons/JourneySkeletons';
+import Skeletons from '../components/skeletons/Skeletons';
 
 export default function Loading() {
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <PageHeading heading="Alerts and Disruptions" backEnabled={false} />
+      <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Alerts and Disruptions</h1>
       <Skeletons />
     </main>
   );

@@ -5,7 +5,7 @@ import JourneyInfo from '../components/journey-info/JourneyInfo';
 import Button from '../components/button/Button';
 import { FaCircleInfo, FaPlus, FaTrash, FaTriangleExclamation } from 'react-icons/fa6';
 import Link from 'next/link';
-import JourneySkeletons from '../components/skeletons/JourneySkeletons';
+import JourneySkeletons from '../components/skeletons/Skeletons';
 import PageHeading from '../components/page-heading/PageHeading';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
