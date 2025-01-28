@@ -1887,7 +1887,7 @@ const stations = {
   preston: 'PRE',
   'preston park': 'PRP',
   prestonpans: 'PST',
-  'prestwick international airport': 'PRA',
+  'prestwick international': 'PRA',
   'prestwick town': 'PTW',
   'priesthill & darnley': 'PTL',
   'princes risborough': 'PRR',
