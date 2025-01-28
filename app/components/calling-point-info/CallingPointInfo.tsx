@@ -28,13 +28,19 @@ export default function CallingPointInfo({
       <section className="flex h-24 w-full justify-between gap-1 pr-2 pt-9">
         {/* Station and platform */}
         <div className="flex flex-col gap-1">
-          <p className={`pl-1 ${callingPoint.focus && 'font-medium'}`}>{callingPoint.station}</p>
+          <p
+            className={`pl-1 ${callingPoint.focus && 'font-medium'} ${departed && 'text-stone-600'}`}
+          >
+            {callingPoint.station}
+          </p>
           {callingPoint.platform && <Tag>Platform {callingPoint.platform}</Tag>}
         </div>
 
         {/* Times */}
         <div className="flex flex-col items-end gap-1">
-          <p className={`pr-1 ${callingPoint.focus && 'font-medium'}`}>
+          <p
+            className={`pr-1 ${callingPoint.focus && 'font-medium'} ${departed && 'text-stone-600'}`}
+          >
             {callingPoint.departureTime}
           </p>
           {departed ? (
