@@ -1,8 +1,7 @@
 import Button from '@/app/components/button/Button';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Skeletons from '@/app/components/skeletons/Skeletons';
-import Tag from '@/app/components/tag/Tag';
-import { FaArrowRightArrowLeft, FaBookmark, FaClock } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaBookmark } from 'react-icons/fa6';
 
 export default function Loading() {
   return (

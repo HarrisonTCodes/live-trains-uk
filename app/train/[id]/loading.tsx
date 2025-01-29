@@ -1,7 +1,6 @@
 import Button from '@/app/components/button/Button';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
-import Tag from '@/app/components/tag/Tag';
-import { FaArrowLeft, FaClock } from 'react-icons/fa6';
+import { FaArrowLeft } from 'react-icons/fa6';
 
 export default function Loading() {
   return (

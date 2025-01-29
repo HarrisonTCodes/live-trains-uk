@@ -1,12 +1,11 @@
 import Button from '../../../components/button/Button';
-import { FaArrowRightArrowLeft, FaBookmark, FaClock } from 'react-icons/fa6';
+import { FaArrowRightArrowLeft, FaBookmark } from 'react-icons/fa6';
 import TrainInfo from '../../../components/train-info/TrainInfo';
 import toTitleCase from '../../../utils/toTitleCase';
 import getServices from '../../../utils/getServices';
 import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
-import Tag from '@/app/components/tag/Tag';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {

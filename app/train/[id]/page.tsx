@@ -2,11 +2,10 @@ import Button from '@/app/components/button/Button';
 import CallingPointInfo from '@/app/components/calling-point-info/CallingPointInfo';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Notice from '@/app/components/notice/Notice';
-import Tag from '@/app/components/tag/Tag';
 import { CallingPoint } from '@/app/interfaces';
 import getService from '@/app/utils/getService';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { FaArrowLeft, FaClock } from 'react-icons/fa6';
+import { FaArrowLeft } from 'react-icons/fa6';
 
 export default async function TrainPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
