@@ -78,14 +78,14 @@ export default function JourneysPage() {
 
             {/* New journey button */}
             <div className="flex w-full flex-col justify-center gap-2 sm:flex-row md:w-fit md:justify-end">
-              <Link href={'/my-journeys/new'}>
-                <Button width="w-full sm:w-[40vw] md:w-40">
-                  <FaPlus /> Add Journey
-                </Button>
-              </Link>
               <Link href={'/signout'}>
                 <Button width="w-full sm:w-[40vw] md:w-40">
                   <FaArrowRightToBracket /> Sign Out
+                </Button>
+              </Link>
+              <Link href={'/my-journeys/new'}>
+                <Button width="w-full sm:w-[40vw] md:w-40">
+                  <FaPlus /> Add Journey
                 </Button>
               </Link>
             </div>
