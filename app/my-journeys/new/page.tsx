@@ -55,7 +55,7 @@ export default function AddJourneyPage() {
     <main className="flex flex-col items-center gap-6 py-8">
       <Form
         onSubmit={createJourney}
-        heading="Create a new journey"
+        heading="Create a New Journey"
         subHeading="Save your regular routes for quick access to live departures"
       >
         <section className="flex w-full flex-col gap-4">
