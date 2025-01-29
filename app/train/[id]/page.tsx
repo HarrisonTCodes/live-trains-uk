@@ -18,7 +18,7 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
         <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Service Details</h1>
 
         <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 sm:flex-row sm:justify-between">
-          {/* Stations and last updated */}
+          {/* Terminating station and last updated */}
           <div className="flex flex-col items-center gap-1 sm:items-start">
             <h2 className="text-center text-stone-600 sm:pl-1">
               Terminating at{' '}
@@ -33,7 +33,7 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
             )}
           </div>
 
-          {/* Switch and save buttons */}
+          {/* Back button */}
           <div className="flex w-full sm:w-fit sm:justify-end">
             <Button width="w-full sm:w-56" back>
               <FaArrowLeft /> Back to departures
