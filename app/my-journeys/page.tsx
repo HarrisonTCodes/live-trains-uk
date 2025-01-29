@@ -6,7 +6,7 @@ import Button from '../components/button/Button';
 import Link from 'next/link';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
-import { FaPlus, FaTrash } from 'react-icons/fa6';
+import { FaArrowRightToBracket, FaPlus, FaTrash } from 'react-icons/fa6';
 import Skeletons from '../components/skeletons/Skeletons';
 
 export default function JourneysPage() {
@@ -70,18 +70,25 @@ export default function JourneysPage() {
       >
         <section className="flex flex-col items-center gap-1">
           <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">My Journeys</h1>
-          <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 sm:flex-row sm:justify-between">
+          <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 md:flex-row md:justify-between">
             {/* Caption*/}
-            <h2 className="text-center text-stone-600 sm:text-left">
+            <h2 className="text-center text-stone-600 md:text-left">
               Save your regular routes for quick access to live departures
             </h2>
 
             {/* New journey button */}
-            <Link href={'/my-journeys/new'} className="w-full sm:w-56">
-              <Button width="w-full">
-                <FaPlus /> Add Journey
-              </Button>
-            </Link>
+            <div className="flex w-full flex-col justify-center gap-2 sm:flex-row md:w-fit md:justify-end">
+              <Link href={'/my-journeys/new'}>
+                <Button width="w-full sm:w-[40vw] md:w-40">
+                  <FaPlus /> Add Journey
+                </Button>
+              </Link>
+              <Link href={'/signout'}>
+                <Button width="w-full sm:w-[40vw] md:w-40">
+                  <FaArrowRightToBracket /> Sign Out
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
 

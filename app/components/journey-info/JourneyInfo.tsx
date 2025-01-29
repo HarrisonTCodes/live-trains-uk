@@ -13,7 +13,7 @@ export default function JourneyInfo({
   setDeleteJourneyId: (value: number) => void;
 }) {
   return (
-    <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-3">
+    <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
       {/* Name and stations */}
       <div className="flex flex-col items-start gap-1">
         <h2 className="pb-2 text-xl font-medium text-blue-900">{journey.name}</h2>
