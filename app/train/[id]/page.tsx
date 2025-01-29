@@ -20,7 +20,7 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
         <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 sm:flex-row sm:justify-between">
           {/* Terminating station and last updated */}
           <div className="flex flex-col items-center gap-1 sm:items-start">
-            <h2 className="text-center text-stone-600 sm:pl-1">
+            <h2 className="text-center text-stone-600 sm:pl-1 md:text-left">
               Terminating at{' '}
               {toTitleCase(
                 callingPoints.callingPoints[callingPoints.callingPoints.length - 1].station,

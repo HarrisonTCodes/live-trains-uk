@@ -27,6 +27,9 @@ export default function JourneyInfo({
 
       {/* Search departures and delete journey buttons */}
       <div className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
+        <Button width="w-full" onClick={() => setDeleteJourneyId(journey.id)}>
+          <FaTrash /> Delete Journey
+        </Button>
         <Link
           prefetch={false}
           href={`/trains/${journey.firstStation}/${journey.secondStation}`}
@@ -36,9 +39,6 @@ export default function JourneyInfo({
             <FaMagnifyingGlass /> Search Departures
           </Button>
         </Link>
-        <Button width="w-full" onClick={() => setDeleteJourneyId(journey.id)}>
-          <FaTrash /> Delete Journey
-        </Button>
       </div>
     </div>
   );
