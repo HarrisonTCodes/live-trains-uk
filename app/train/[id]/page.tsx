@@ -34,11 +34,9 @@ export default async function TrainPage(props: { params: Promise<{ id: string }>
           </div>
 
           {/* Back button */}
-          <div className="flex w-full sm:w-fit sm:justify-end">
-            <Button width="w-full sm:w-56" back>
-              <FaArrowLeft /> Back to departures
-            </Button>
-          </div>
+          <Button width="w-full sm:w-56" back>
+            <FaArrowLeft /> Back to departures
+          </Button>
         </div>
       </section>
 
