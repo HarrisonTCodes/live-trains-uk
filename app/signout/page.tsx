@@ -1,6 +1,5 @@
 import { auth, signOut } from '@/auth';
 import Button from '../components/button/Button';
-import PageHeading from '../components/page-heading/PageHeading';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 
 export default async function SignOutPage() {
