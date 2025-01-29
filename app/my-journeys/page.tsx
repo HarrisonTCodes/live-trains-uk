@@ -4,7 +4,6 @@ import { Journey } from '../interfaces';
 import JourneyInfo from '../components/journey-info/JourneyInfo';
 import Button from '../components/button/Button';
 import Link from 'next/link';
-import PageHeading from '../components/page-heading/PageHeading';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
 import { FaPlus, FaTrash } from 'react-icons/fa6';
@@ -48,7 +47,7 @@ export default function JourneysPage() {
   return (
     <>
       {/* Modal */}
-      {deleteJourneyId !== undefined ? (
+      {deleteJourneyId !== undefined && (
         <Modal
           title="Delete Journey?"
           confirmAction={() => deleteJourney(deleteJourneyId)}
@@ -64,22 +63,32 @@ export default function JourneysPage() {
             ? This action cannot be reversed.
           </p>
         </Modal>
-      ) : (
-        <></>
       )}
       {/* Page content */}
       <main
-        className={`flex flex-col items-center gap-6 py-8 ${deleteJourneyId !== undefined ? 'pointer-events-none blur-sm' : ''}`}
+        className={`flex flex-col items-center gap-6 py-8 ${deleteJourneyId !== undefined && 'pointer-events-none blur-sm'}`}
       >
-        <PageHeading heading="My Journeys" backEnabled={false} />
-        <Link href={'/my-journeys/new'}>
-          <Button>
-            <FaPlus /> Add Journey
-          </Button>
-        </Link>
+        <section className="flex flex-col items-center gap-1">
+          <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">My Journeys</h1>
+          <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 sm:flex-row sm:justify-between">
+            {/* Caption*/}
+            <h2 className="text-center text-stone-600 sm:text-left">
+              Save your regular routes for quick access to live departures
+            </h2>
+
+            {/* New journey button */}
+            <Link href={'/my-journeys/new'} className="w-full sm:w-56">
+              <Button width="w-full">
+                <FaPlus /> Add Journey
+              </Button>
+            </Link>
+          </div>
+        </section>
+
+        {/* Journeys */}
         <section className="flex w-full flex-col items-center gap-4">
           {loading ? (
-            <Skeletons height="h-20" />
+            <Skeletons height="h-40" />
           ) : error ? (
             <Notice
               notice="Error"

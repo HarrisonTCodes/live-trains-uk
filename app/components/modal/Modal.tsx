@@ -18,13 +18,13 @@ export default function Modal({
 }) {
   return (
     <div className="fixed left-[50%] top-[50%] z-50 flex min-h-[250px] w-[90%] max-w-[450px] translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-between rounded-lg border border-gray-300 bg-white px-2 py-4 shadow-lg">
-      <h2 className="text-xl font-medium text-blue-900">{title}</h2>
+      <h2 className="text-xl font-bold text-blue-900">{title}</h2>
       {children}
-      <section className="flex w-full justify-evenly">
-        <Button onClick={confirmAction}>
+      <section className="flex w-full justify-evenly gap-2">
+        <Button onClick={confirmAction} width="w-full">
           {confirmIcon ?? <FaCheck />} {confirmLabel ?? 'OK'}
         </Button>
-        <Button onClick={cancelAction}>
+        <Button onClick={cancelAction} width="w-full">
           <FaX /> Cancel
         </Button>
       </section>
