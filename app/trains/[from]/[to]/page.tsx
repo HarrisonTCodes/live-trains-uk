@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
 import Tag from '@/app/components/tag/Tag';
+import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -33,32 +34,22 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
         {/* Heading */}
         <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Live Departures</h1>
 
-        <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 md:flex-row md:justify-between">
-          {/* Stations and last updated */}
-          <div className="flex flex-col items-center gap-1 md:items-start">
-            <h2 className="text-center text-stone-600 md:pl-1 md:text-left">
-              {toTitleCase(parsedFrom)} to {toTitleCase(parsedTo)}
-            </h2>
-            <Tag>
-              <FaClock className="text-stone-600" />{' '}
-              {services.time ? `Last updated at ${services.time}` : 'Not yet updated'}
-            </Tag>
-          </div>
-
-          {/* Switch and save buttons */}
-          <div className="flex w-full justify-center gap-2 md:w-fit md:justify-end">
-            <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-              <Button width="w-[40vw] md:w-28">
-                <FaArrowRightArrowLeft /> Switch
-              </Button>
-            </Link>
-            <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
-              <Button width="w-[40vw] md:w-28">
-                <FaBookmark /> Save
-              </Button>
-            </Link>
-          </div>
-        </div>
+        {/* Station, last updated and buttons */}
+        <HeadingWidget
+          text={`${toTitleCase(parsedFrom)} to ${toTitleCase(parsedTo)}`}
+          tag={services.time ? `Last updated at ${services.time}` : 'Not yet updated'}
+        >
+          <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
+            <Button width="w-[40vw] md:w-28">
+              <FaArrowRightArrowLeft /> Switch
+            </Button>
+          </Link>
+          <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
+            <Button width="w-[40vw] md:w-28">
+              <FaBookmark /> Save
+            </Button>
+          </Link>
+        </HeadingWidget>
       </section>
 
       {/* Trains */}

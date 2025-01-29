@@ -8,6 +8,7 @@ import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
 import { FaArrowRightToBracket, FaPlus, FaTrash } from 'react-icons/fa6';
 import Skeletons from '../components/skeletons/Skeletons';
+import HeadingWidget from '../components/heading-widget/HeadingWidget';
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
@@ -69,27 +70,22 @@ export default function JourneysPage() {
         className={`flex flex-col items-center gap-6 py-8 ${deleteJourneyId !== undefined && 'pointer-events-none blur-sm'}`}
       >
         <section className="flex flex-col items-center gap-1">
+          {/* Heading */}
           <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">My Journeys</h1>
-          <div className="flex w-[90vw] max-w-[700px] flex-col items-center justify-center gap-4 rounded-lg border border-stone-300 bg-white p-3 md:flex-row md:justify-between">
-            {/* Caption*/}
-            <h2 className="text-center text-stone-600 md:text-left">
-              Save your regular routes for quick access to live departures
-            </h2>
 
-            {/* New journey button */}
-            <div className="flex w-full flex-col justify-center gap-2 sm:flex-row md:w-fit md:justify-end">
-              <Link href={'/signout'}>
-                <Button width="w-full sm:w-[40vw] md:w-40">
-                  <FaArrowRightToBracket /> Sign Out
-                </Button>
-              </Link>
-              <Link href={'/my-journeys/new'}>
-                <Button width="w-full sm:w-[40vw] md:w-40">
-                  <FaPlus /> Add Journey
-                </Button>
-              </Link>
-            </div>
-          </div>
+          {/* Caption and buttons */}
+          <HeadingWidget text="Save your regular routes for quick access to live departures">
+            <Link href={'/signout'} className="w-full whitespace-nowrap md:w-40">
+              <Button width="w-full">
+                <FaArrowRightToBracket /> Sign Out
+              </Button>
+            </Link>
+            <Link href={'/my-journeys/new'} className="w-full md:w-40">
+              <Button width="w-full whitespace-nowrap">
+                <FaPlus /> Add Journey
+              </Button>
+            </Link>
+          </HeadingWidget>
         </section>
 
         {/* Journeys */}
