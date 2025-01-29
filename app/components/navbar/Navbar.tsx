@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import NavbarButton from './NavbarButton';
-import { FaBookmark, FaUser, FaTrain, FaBars, FaXmark, FaCircleExclamation } from 'react-icons/fa6';
+import { FaBookmark, FaTrain, FaBars, FaXmark, FaCircleExclamation } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 
 const buttonData = [
@@ -19,11 +19,6 @@ const buttonData = [
     label: 'Alerts',
     href: '/alerts',
     icon: <FaCircleExclamation />,
-  },
-  {
-    label: 'Account',
-    href: '/account',
-    icon: <FaUser />,
   },
 ];
 
