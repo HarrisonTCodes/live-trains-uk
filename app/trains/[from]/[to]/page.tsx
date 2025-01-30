@@ -39,12 +39,12 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
           tag={services.time ? `Last updated at ${services.time}` : 'Not yet updated'}
         >
           <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-            <Button width="w-[40vw] md:w-28">
+            <Button width="w-[40vw] md:w-40" secondary>
               <FaArrowRightArrowLeft /> Switch
             </Button>
           </Link>
           <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
-            <Button width="w-[40vw] md:w-28">
+            <Button width="w-[40vw] md:w-40">
               <FaBookmark /> Save
             </Button>
           </Link>

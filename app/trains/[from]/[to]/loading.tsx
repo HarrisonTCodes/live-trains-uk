@@ -12,10 +12,10 @@ export default function Loading() {
 
         {/* Station, last updated and buttons */}
         <HeadingWidget text="Loading departures..." tag="Not yet updated">
-          <Button width="w-[40vw] md:w-28">
+          <Button width="w-[40vw] md:w-40" secondary>
             <FaArrowRightArrowLeft /> Switch
           </Button>
-          <Button width="w-[40vw] md:w-28">
+          <Button width="w-[40vw] md:w-40">
             <FaBookmark /> Save
           </Button>
         </HeadingWidget>

@@ -76,7 +76,7 @@ export default function JourneysPage() {
           {/* Caption and buttons */}
           <HeadingWidget text="Save your regular routes for quick access to live departures">
             <Link href={'/signout'} className="w-full whitespace-nowrap md:w-40">
-              <Button width="w-full">
+              <Button width="w-full" secondary>
                 <FaArrowRightToBracket /> Sign Out
               </Button>
             </Link>
