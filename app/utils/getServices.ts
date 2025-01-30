@@ -9,7 +9,7 @@ export default async function getServices(from: string, to?: string) {
   const toCrs = stations[to as keyof typeof stations];
 
   // If invalid or missing stations provided
-  if (!fromCrs || (!!to && !toCrs)) {
+  if (!fromCrs || (to && !toCrs)) {
     throw Error(`Invalid station(s) provided: '${from}' and '${to}'`);
   }
 
