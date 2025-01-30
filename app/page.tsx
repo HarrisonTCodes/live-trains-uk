@@ -16,7 +16,7 @@ export default function LiveTrainsPage() {
       return;
     }
 
-    router.push(`/trains/${from}/${!!to ? to : 'any'}`);
+    router.push(`/trains/${from}/${to ? to : 'any'}`);
   };
 
   return (
