@@ -69,7 +69,11 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
         ) : (
           <Notice
             notice="No services"
-            description={`There are currently no direct services running between ${toTitleCase(parsedFrom)} and ${toTitleCase(parsedTo)}.`}
+            description={
+              parsedTo === 'any'
+                ? `There are currently no departures running from ${toTitleCase(parsedFrom)}`
+                : `There are currently no direct services running between ${toTitleCase(parsedFrom)} and ${toTitleCase(parsedTo)}.`
+            }
           />
         )}
       </section>
