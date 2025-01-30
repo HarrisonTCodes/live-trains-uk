@@ -17,7 +17,9 @@ export default function AddJourneyPage() {
     toTitleCase(searchParams.get('from') ?? ''),
   );
   const [secondStation, setSecondStation] = useState<string>(
-    toTitleCase(searchParams.get('to') ?? ''),
+    toTitleCase(
+      !searchParams.get('to') || searchParams.get('to') === 'any' ? '' : searchParams.get('to')!,
+    ),
   );
 
   const createJourney = () => {

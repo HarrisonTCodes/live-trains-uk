@@ -20,6 +20,8 @@ export interface Service {
   platform: string;
   arrivalTime: string;
   estimatedArrivalTime: string;
+  arrivalCrs: string;
+  arrivalStation: string;
   duration: number;
   numberOfStops: number;
   serviceId: string;

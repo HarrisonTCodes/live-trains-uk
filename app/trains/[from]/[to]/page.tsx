@@ -10,6 +10,7 @@ import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
+
   const parsedFrom = params.from
     .replaceAll('%2B', ' ')
     .replaceAll('%20', ' ')
@@ -20,7 +21,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
     .replaceAll('%20', ' ')
     .replaceAll('%26', '&')
     .toLowerCase();
-  const services = await getServices(parsedFrom, parsedTo);
+  const services = await getServices(parsedFrom, parsedTo === 'any' ? undefined : parsedTo);
   const averageDuration =
     services.services.reduce(
       (accumulator: number, service: Service) => accumulator + service.duration,
@@ -39,7 +40,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
           tag={services.time ? `Last updated at ${services.time}` : 'Not yet updated'}
         >
           <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-            <Button width="w-[40vw] md:w-40" secondary>
+            <Button width="w-[40vw] md:w-40" secondary disabled={parsedTo === 'any'}>
               <FaArrowRightArrowLeft /> Switch
             </Button>
           </Link>
@@ -60,8 +61,8 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
               service={service}
               fromStation={parsedFrom}
               fromCrs={services.fromCrs}
-              toStation={parsedTo}
-              toCrs={services.toCrs}
+              toStation={service.arrivalStation}
+              toCrs={service.arrivalCrs}
               averageDuration={averageDuration}
             />
           ))

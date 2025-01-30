@@ -12,11 +12,11 @@ export default function LiveTrainsPage() {
   const router = useRouter();
 
   const getJourneys = () => {
-    if (!from || !to) {
+    if (!from) {
       return;
     }
 
-    router.push(`/trains/${from}/${to}`);
+    router.push(`/trains/${from}/${!!to ? to : 'any'}`);
   };
 
   return (
@@ -28,7 +28,7 @@ export default function LiveTrainsPage() {
       >
         <section className="flex w-full flex-col gap-4 py-4">
           <Search label="From" value={from} setValue={setFrom} />
-          <Search label="To" value={to} setValue={setTo} />
+          <Search label="To (Optional)" value={to} setValue={setTo} />
         </section>
         <Button submit width="w-full">
           <FaMagnifyingGlass /> Search Departures

@@ -3,13 +3,13 @@ import getDuration from './getDuration';
 import getTime from './getTime';
 import stations from './stations';
 
-export default async function getServices(from: string, to: string) {
+export default async function getServices(from: string, to?: string) {
   // Get query parameters
   const fromCrs = stations[from as keyof typeof stations];
   const toCrs = stations[to as keyof typeof stations];
 
   // If invalid or missing stations provided
-  if (!fromCrs || !toCrs) {
+  if (!fromCrs || (!!to && !toCrs)) {
     throw Error(`Invalid station(s) provided: '${from}' and '${to}'`);
   }
 
@@ -20,7 +20,7 @@ export default async function getServices(from: string, to: string) {
   // Get service details
   const time = getTime();
   const response = await fetch(
-    `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${fromCrs}?numRows=10&filterCrs=${toCrs}`,
+    `https://api1.raildata.org.uk/1010-live-departure-board-dep/LDBWS/api/20220120/GetDepBoardWithDetails/${fromCrs}?numRows=10${toCrs && `&filterCrs=${toCrs}`}`,
     { headers, cache: 'no-store' },
   ).then((response) => response.json());
 
@@ -40,10 +40,15 @@ export default async function getServices(from: string, to: string) {
       return [];
     }
 
-    // Get index of arrival calling point data
-    const arrivalDataIndex = serviceResponse.subsequentCallingPoints[0].callingPoint.findIndex(
-      ({ crs }: { crs: string }) => crs === toCrs,
-    );
+    // Get index of arrival calling point data (or terminating station if not provided)
+    let arrivalDataIndex;
+    if (to) {
+      arrivalDataIndex = serviceResponse.subsequentCallingPoints[0].callingPoint.findIndex(
+        ({ crs }: { crs: string }) => crs === toCrs,
+      );
+    } else {
+      arrivalDataIndex = serviceResponse.subsequentCallingPoints[0].callingPoint.length - 1;
+    }
 
     // Skip service if destination station not found
     if (arrivalDataIndex === -1) {
@@ -61,6 +66,8 @@ export default async function getServices(from: string, to: string) {
         platform: serviceResponse.platform,
         arrivalTime: arrivalData.st,
         estimatedArrivalTime: arrivalData.et,
+        arrivalCrs: arrivalData.crs,
+        arrivalStation: arrivalData.locationName,
         duration: getDuration(serviceResponse.std, arrivalData.st),
         numberOfStops: arrivalDataIndex + 1,
         serviceId: serviceResponse.serviceID,
@@ -71,7 +78,6 @@ export default async function getServices(from: string, to: string) {
   return {
     services,
     fromCrs,
-    toCrs,
     time,
   };
 }
