@@ -22,7 +22,7 @@ export default function Loading() {
       </section>
 
       <section className="flex w-full flex-col items-center gap-4">
-        <Skeletons height="h-40" />
+        <Skeletons height="h-56" />
       </section>
     </main>
   );
