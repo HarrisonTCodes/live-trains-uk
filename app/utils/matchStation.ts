@@ -9,8 +9,8 @@ export default function matchStation(station: string, prompt: string) {
   if (crs.toLowerCase() === prompt) return true;
 
   // Check each word of prompt against each word of station
-  const stationWords = station.split(' ');
-  const promptWords = prompt.split(' ');
+  const stationWords = station.replaceAll('-', ' ').split(' ');
+  const promptWords = prompt.replaceAll('-', ' ').split(' ');
   for (const promptWord of promptWords) {
     for (const stationWord of stationWords) {
       if (stationWord.startsWith(promptWord)) return true;
