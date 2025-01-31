@@ -42,7 +42,9 @@ export default function TrainInfo({
         <div className="flex w-full justify-between">
           <div className="flex gap-2">
             <Tag status={cancelled ? 'fail' : 'neutral'}>{fromCrs}</Tag>
-            {service.platform && <Tag>Platform {service.platform}</Tag>}
+            {service.platform && (
+              <Tag status={cancelled ? 'fail' : 'neutral'}>Platform {service.platform}</Tag>
+            )}
           </div>
           {service.estimatedDepartureTime && (
             <Tag status={service.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
