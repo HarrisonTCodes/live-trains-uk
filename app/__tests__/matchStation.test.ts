@@ -1,3 +1,4 @@
+import { text } from 'stream/consumers';
 import matchStation from '../utils/matchStation';
 
 test('exact match', () => {
@@ -22,4 +23,9 @@ test('no match', () => {
   expect(matchStation('london bridge', 'londn')).toBe(false);
   expect(matchStation('ashchurch for tewkesbury', 'bridge')).toBe(false);
   expect(matchStation('barrhill', 'hill')).toBe(false);
+});
+
+test('kebab case match', () => {
+  expect(matchStation('weston-super-mare', 'super')).toBe(true);
+  expect(matchStation('chapel-en-le-frith', 'en-le')).toBe(true);
 });
