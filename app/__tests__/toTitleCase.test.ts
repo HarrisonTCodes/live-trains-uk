@@ -24,6 +24,13 @@ test('handles empty string input', () => {
   expect(toTitleCase('')).toBe('');
 });
 
-test('handles single character words', () => {
-  expect(toTitleCase('a b c d')).toBe('A B C D');
+test('handles kebab-case', () => {
+  expect(toTitleCase('tir-phil')).toBe('Tir-Phil');
+});
+
+test('handles special untitled words', () => {
+  expect(toTitleCase('ashton-under-lyne')).toBe('Ashton-under-Lyne');
+  expect(toTitleCase('clacton-on-sea')).toBe('Clacton-on-Sea');
+  expect(toTitleCase('chapel-en-le-frith')).toBe('Chapel-en-le-Frith');
+  expect(toTitleCase('ashchurch for tewkesbury')).toBe('Ashchurch for Tewkesbury');
 });
