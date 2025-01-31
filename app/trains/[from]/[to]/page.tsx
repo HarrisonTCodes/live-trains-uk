@@ -11,16 +11,9 @@ import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
 
-  const parsedFrom = params.from
-    .replaceAll('%2B', ' ')
-    .replaceAll('%20', ' ')
-    .replaceAll('%26', '&')
-    .toLowerCase();
-  const parsedTo = params.to
-    .replaceAll('%2B', ' ')
-    .replaceAll('%20', ' ')
-    .replaceAll('%26', '&')
-    .toLowerCase();
+  const parsedFrom = decodeURIComponent(params.from).replaceAll('+', ' ').toLowerCase();
+  const parsedTo = decodeURIComponent(params.to).replaceAll('+', ' ').toLowerCase();
+
   const services = await getServices(parsedFrom, parsedTo === 'any' ? undefined : parsedTo);
   const averageDuration =
     services.services.reduce(
