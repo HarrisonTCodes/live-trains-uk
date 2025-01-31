@@ -41,7 +41,7 @@ export default function TrainInfo({
         </div>
         <div className="flex w-full justify-between">
           <div className="flex gap-2">
-            <Tag>{fromCrs}</Tag>
+            <Tag status={cancelled ? 'fail' : 'neutral'}>{fromCrs}</Tag>
             {service.platform && <Tag>Platform {service.platform}</Tag>}
           </div>
           {service.estimatedDepartureTime && (
@@ -60,7 +60,7 @@ export default function TrainInfo({
           <h2 className="px-1 text-lg font-medium">{service.arrivalTime}</h2>
         </div>
         <div className="flex w-full justify-between">
-          <Tag>{toCrs}</Tag>
+          <Tag status={cancelled ? 'fail' : 'neutral'}>{toCrs}</Tag>
           {service.estimatedArrivalTime && (
             <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
               {service.estimatedDepartureTime === 'Cancelled' && <AiOutlineExclamationCircle />}
