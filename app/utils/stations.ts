@@ -2048,7 +2048,6 @@ const stations = {
   'seer green & jordans': 'SRG',
   selby: 'SBY',
   selhurst: 'SRS',
-  selkirk: 'SKK',
   sellafield: 'SEL',
   selling: 'SEG',
   'selly oak': 'SLY',
