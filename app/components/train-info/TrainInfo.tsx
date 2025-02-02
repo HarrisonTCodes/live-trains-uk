@@ -35,7 +35,7 @@ export default function TrainInfo({
     >
       {/* From */}
       <section className="flex min-h-20 w-full flex-col gap-1 p-2">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full justify-between">
           <h2 className="px-1 text-lg font-medium">{toTitleCase(fromStation)}</h2>
           <h2 className="px-1 text-lg font-medium">{service.departureTime}</h2>
         </div>
@@ -56,7 +56,7 @@ export default function TrainInfo({
       </section>
 
       {/* To */}
-      <section className="min-h-20 p-2">
+      <section className="flex min-h-20 w-full flex-col gap-1 p-2">
         <div className="flex w-full justify-between">
           <h2 className="px-1 text-lg font-medium">{toTitleCase(toStation)}</h2>
           <h2 className="px-1 text-lg font-medium">{service.arrivalTime}</h2>
