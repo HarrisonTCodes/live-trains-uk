@@ -65,7 +65,7 @@ export default function TrainInfo({
           <Tag status={cancelled ? 'fail' : 'neutral'}>{toCrs}</Tag>
           {service.estimatedArrivalTime && (
             <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
-              {service.estimatedDepartureTime === 'Cancelled' && <AiOutlineExclamationCircle />}
+              {service.estimatedArrivalTime === 'Cancelled' && <AiOutlineExclamationCircle />}
               {formatEstimated(service.estimatedArrivalTime)}
             </Tag>
           )}
