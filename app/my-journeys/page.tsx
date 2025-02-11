@@ -91,7 +91,7 @@ export default function JourneysPage() {
         {/* Journeys */}
         <section className="flex w-full flex-col items-center gap-4">
           {loading ? (
-            <Skeletons height="h-40" />
+            <Skeletons height="h-56 sm:h-48" />
           ) : error ? (
             <Notice
               notice="Error"
