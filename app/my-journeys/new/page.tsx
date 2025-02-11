@@ -76,7 +76,7 @@ export default function AddJourneyPage() {
             <FaArrowLeft /> Cancel
           </Button>
           <Button submit width="w-1/2">
-            <FaPlus /> Create Journey
+            <FaPlus /> Create
           </Button>
         </section>
       </Form>
