@@ -6,7 +6,7 @@ import Search from '@/app/components/search/Search';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
-import { FaPlus } from 'react-icons/fa6';
+import { FaArrowLeft, FaPlus } from 'react-icons/fa6';
 
 export default function AddJourneyPage() {
   const router = useRouter();
@@ -71,9 +71,14 @@ export default function AddJourneyPage() {
           <Search label="First station" value={firstStation} setValue={setFirstStation} />
           <Search label="Second station" value={secondStation} setValue={setSecondStation} />
         </section>
-        <Button submit width="w-full">
-          <FaPlus /> Create Journey
-        </Button>
+        <section className="flex w-full justify-evenly gap-2">
+          <Button back secondary width="w-1/2">
+            <FaArrowLeft /> Cancel
+          </Button>
+          <Button submit width="w-1/2">
+            <FaPlus /> Create Journey
+          </Button>
+        </section>
       </Form>
       {error && <Notice notice="Error" description={`${error}.`} status="fail" />}
     </main>
