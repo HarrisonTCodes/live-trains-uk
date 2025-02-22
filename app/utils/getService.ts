@@ -1,7 +1,7 @@
 import { CallingPointResponse } from '@/app/interfaces';
 import getTime from './getTime';
 
-export default async function GET(serviceId: string) {
+export default async function getService(serviceId: string) {
   // Set API key in headers
   const headers = new Headers();
   headers.set('x-apikey', process.env.SERVICE_DETAILS_API_KEY!);
