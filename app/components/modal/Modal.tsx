@@ -1,5 +1,5 @@
-import { FaCheck, FaX } from 'react-icons/fa6';
 import Button from '../button/Button';
+import { CheckIcon, XIcon } from 'lucide-react';
 
 export default function Modal({
   children,
@@ -22,10 +22,10 @@ export default function Modal({
       {children}
       <section className="flex w-full justify-evenly gap-2 px-2">
         <Button onClick={cancelAction} width="w-full" secondary>
-          <FaX /> Cancel
+          <XIcon /> Cancel
         </Button>
         <Button onClick={confirmAction} width="w-full">
-          {confirmIcon ?? <FaCheck />} {confirmLabel ?? 'OK'}
+          {confirmIcon ?? <CheckIcon />} {confirmLabel ?? 'OK'}
         </Button>
       </section>
     </div>

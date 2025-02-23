@@ -1,24 +1,24 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import NavbarButton from './NavbarButton';
-import { FaBookmark, FaTrain, FaBars, FaXmark, FaCircleExclamation } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
+import { BookmarkIcon, CircleAlertIcon, MenuIcon, TrainFrontIcon, XIcon } from 'lucide-react';
 
 const buttonData = [
   {
     label: 'Live Trains',
     href: '/',
-    icon: <FaTrain />,
+    icon: <TrainFrontIcon />,
   },
   {
     label: 'My Journeys',
     href: '/my-journeys',
-    icon: <FaBookmark />,
+    icon: <BookmarkIcon />,
   },
   {
     label: 'Alerts',
     href: '/alerts',
-    icon: <FaCircleExclamation />,
+    icon: <CircleAlertIcon />,
   },
 ];
 
@@ -59,9 +59,9 @@ export default function Navbar() {
         {/* Hamburger Button */}
         <button className="md:hidden" onClick={() => setHamburgerMenuOpen(!hamburgerMenuOpen)}>
           {hamburgerMenuOpen ? (
-            <FaXmark size={32} className="text-white" />
+            <XIcon size={32} className="text-white" />
           ) : (
-            <FaBars size={32} className="text-white" />
+            <MenuIcon size={32} className="text-white" />
           )}
         </button>
       </section>

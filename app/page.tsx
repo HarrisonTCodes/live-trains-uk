@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import Search from './components/search/Search';
 import Button from './components/button/Button';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 import Form from './components/form/Form';
+import { SearchIcon } from 'lucide-react';
 
 export default function LiveTrainsPage() {
   const [from, setFrom] = useState<string>('');
@@ -31,7 +31,7 @@ export default function LiveTrainsPage() {
           <Search label="To (Optional)" value={to} setValue={setTo} />
         </section>
         <Button submit width="w-full">
-          <FaMagnifyingGlass /> Search Departures
+          <SearchIcon /> Search Departures
         </Button>
       </Form>
     </main>

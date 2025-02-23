@@ -5,7 +5,7 @@ import Notice from '@/app/components/notice/Notice';
 import { CallingPoint } from '@/app/interfaces';
 import getService from '@/app/utils/getService';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { FaArrowLeft } from 'react-icons/fa6';
+import { ArrowLeftIcon } from 'lucide-react';
 
 export default async function TrainPage(props: {
   params: Promise<{ id: string }>;
@@ -27,7 +27,7 @@ export default async function TrainPage(props: {
           tag={`Last updated at ${callingPoints.time}`}
         >
           <Button width="w-full md:w-56" back>
-            <FaArrowLeft /> Back to departures
+            <ArrowLeftIcon /> Back to departures
           </Button>
         </HeadingWidget>
       </section>

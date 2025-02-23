@@ -1,6 +1,6 @@
 import Button from '@/app/components/button/Button';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
-import { FaArrowLeft } from 'react-icons/fa6';
+import { ArrowLeftIcon } from 'lucide-react';
 
 export default function Loading() {
   return (
@@ -12,7 +12,7 @@ export default function Loading() {
         {/* Terminating station, last updated and back button */}
         <HeadingWidget text="Loading service..." tag="Not yet updated">
           <Button width="w-full md:w-56" back>
-            <FaArrowLeft /> Back to departures
+            <ArrowLeftIcon /> Back to departures
           </Button>
         </HeadingWidget>
       </section>

@@ -1,12 +1,10 @@
 import { Service } from '@/app/interfaces';
 import formatDuration from '@/app/utils/formatDuration';
-import { GiRabbit, GiTortoise } from 'react-icons/gi';
 import toTitleCase from '@/app/utils/toTitleCase';
 import formatEstimated from '@/app/utils/formatEstimated';
 import Link from 'next/link';
 import Tag from '../tag/Tag';
-import { FaClock, FaLocationDot } from 'react-icons/fa6';
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { CircleAlertIcon, ClockIcon, MapPinIcon, RabbitIcon, TurtleIcon } from 'lucide-react';
 
 export default function TrainInfo({
   service,
@@ -48,7 +46,7 @@ export default function TrainInfo({
           </div>
           {service.estimatedDepartureTime && (
             <Tag status={service.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
-              {service.estimatedDepartureTime === 'Cancelled' && <AiOutlineExclamationCircle />}
+              {service.estimatedDepartureTime === 'Cancelled' && <CircleAlertIcon size={16} />}
               {formatEstimated(service.estimatedDepartureTime)}
             </Tag>
           )}
@@ -65,7 +63,7 @@ export default function TrainInfo({
           <Tag status={cancelled ? 'fail' : 'neutral'}>{toCrs}</Tag>
           {service.estimatedArrivalTime && (
             <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
-              {service.estimatedArrivalTime === 'Cancelled' && <AiOutlineExclamationCircle />}
+              {service.estimatedArrivalTime === 'Cancelled' && <CircleAlertIcon size={16} />}
               {formatEstimated(service.estimatedArrivalTime)}
             </Tag>
           )}
@@ -75,20 +73,20 @@ export default function TrainInfo({
       {/* Duration */}
       <section className="grid h-12 w-full grid-cols-3 grid-rows-1 py-2 pl-3 pr-2">
         <p className="flex items-center justify-start gap-1">
-          <FaLocationDot className="text-stone-600" /> {service.numberOfStops} Stop
+          <MapPinIcon className="text-stone-600" /> {service.numberOfStops} Stop
           {service.numberOfStops > 1 && 's'}
         </p>
         <p className="flex items-center justify-center gap-1">
-          <FaClock className="text-stone-600" /> {formatDuration(service.duration)}
+          <ClockIcon className="text-stone-600" /> {formatDuration(service.duration)}
         </p>
         <span className="flex items-center justify-end">
           {fast ? (
             <Tag status="success">
-              <GiRabbit /> Fast
+              <RabbitIcon size={16} /> Fast
             </Tag>
           ) : (
             <Tag status="fail">
-              <GiTortoise /> Slow
+              <TurtleIcon size={16} /> Slow
             </Tag>
           )}
         </span>

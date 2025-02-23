@@ -1,7 +1,7 @@
 import Button from '@/app/components/button/Button';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Skeletons from '@/app/components/skeletons/Skeletons';
-import { FaArrowRightArrowLeft, FaBookmark } from 'react-icons/fa6';
+import { ArrowRightLeftIcon, BookmarkIcon } from 'lucide-react';
 
 export default function Loading() {
   return (
@@ -13,10 +13,10 @@ export default function Loading() {
         {/* Station, last updated and buttons */}
         <HeadingWidget text="Loading departures..." tag="Not yet updated">
           <Button width="w-[40vw] md:w-40" secondary>
-            <FaArrowRightArrowLeft /> Switch
+            <ArrowRightLeftIcon /> Switch
           </Button>
           <Button width="w-[40vw] md:w-40">
-            <FaBookmark /> Save
+            <BookmarkIcon /> Save
           </Button>
         </HeadingWidget>
       </section>

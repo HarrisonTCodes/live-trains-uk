@@ -1,5 +1,5 @@
-import { FaClock } from 'react-icons/fa6';
 import Tag from '../tag/Tag';
+import { ClockIcon } from 'lucide-react';
 
 export default function HeadingWidget({
   children,
@@ -17,7 +17,7 @@ export default function HeadingWidget({
         <h2 className={`text-center text-stone-600 md:text-left ${tag && 'md:pl-1'}`}>{text}</h2>
         {tag && (
           <Tag>
-            <FaClock className="text-stone-600" /> {tag}
+            <ClockIcon className="text-stone-600" size={16} /> {tag}
           </Tag>
         )}
       </div>

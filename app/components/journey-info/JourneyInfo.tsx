@@ -1,9 +1,9 @@
 import { Journey } from '@/app/interfaces';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
-import { FaLocationDot, FaMagnifyingGlass, FaTrash } from 'react-icons/fa6';
 import Button from '../button/Button';
 import Tag from '../tag/Tag';
+import { MapPinIcon, SearchIcon, Trash2Icon } from 'lucide-react';
 
 export default function JourneyInfo({
   journey,
@@ -18,17 +18,17 @@ export default function JourneyInfo({
       <div className="flex flex-col items-start gap-1">
         <h2 className="pb-2 text-xl font-medium text-blue-900">{journey.name}</h2>
         <div className="flex items-center gap-2 text-stone-600">
-          <FaLocationDot /> {toTitleCase(journey.firstStation)} <Tag>{journey.firstCrs}</Tag>
+          <MapPinIcon /> {toTitleCase(journey.firstStation)} <Tag>{journey.firstCrs}</Tag>
         </div>
         <div className="flex items-center gap-2 text-stone-600">
-          <FaLocationDot /> {toTitleCase(journey.secondStation)} <Tag>{journey.secondCrs}</Tag>
+          <MapPinIcon /> {toTitleCase(journey.secondStation)} <Tag>{journey.secondCrs}</Tag>
         </div>
       </div>
 
       {/* Search departures and delete journey buttons */}
       <div className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
         <Button width="w-full" onClick={() => setDeleteJourneyId(journey.id)} secondary>
-          <FaTrash /> Delete Journey
+          <Trash2Icon /> Delete Journey
         </Button>
         <Link
           prefetch={false}
@@ -36,7 +36,7 @@ export default function JourneyInfo({
           className="w-full"
         >
           <Button width="w-full">
-            <FaMagnifyingGlass /> Search Departures
+            <SearchIcon /> Search Departures
           </Button>
         </Link>
       </div>

@@ -1,5 +1,4 @@
 import Button from '../../../components/button/Button';
-import { FaArrowRightArrowLeft, FaBookmark } from 'react-icons/fa6';
 import TrainInfo from '../../../components/train-info/TrainInfo';
 import toTitleCase from '../../../utils/toTitleCase';
 import getServices from '../../../utils/getServices';
@@ -7,6 +6,7 @@ import Link from 'next/link';
 import { Service } from '@/app/interfaces';
 import Notice from '@/app/components/notice/Notice';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
+import { ArrowRightLeftIcon, BookmarkIcon } from 'lucide-react';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -34,12 +34,12 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
         >
           <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
             <Button width="w-[40vw] md:w-40" secondary disabled={parsedTo === 'any'}>
-              <FaArrowRightArrowLeft /> Switch
+              <ArrowRightLeftIcon /> Switch
             </Button>
           </Link>
           <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
             <Button width="w-[40vw] md:w-40">
-              <FaBookmark /> Save
+              <BookmarkIcon /> Save
             </Button>
           </Link>
         </HeadingWidget>

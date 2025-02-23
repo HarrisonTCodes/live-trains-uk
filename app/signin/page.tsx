@@ -1,14 +1,11 @@
 import { signIn, providerMap } from '@/auth';
 import Button from '../components/button/Button';
-import { FaGoogle } from 'react-icons/fa6';
+import { LogInIcon } from 'lucide-react';
 
 export default async function SignInPage(props: {
   searchParams: Promise<{ callbackUrl: string | undefined }>;
 }) {
   const searchParams = await props.searchParams;
-  const icons = {
-    Google: <FaGoogle />,
-  };
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
@@ -17,7 +14,7 @@ export default async function SignInPage(props: {
         <section className="flex flex-col items-center gap-2">
           <h1 className="text-center text-2xl font-bold text-blue-900">Sign In</h1>
           <h2 className="text-center text-stone-600">
-            Sign in using an authentication provider below to save journeys
+            Sign in with a Google account to save your journeys
           </h2>
         </section>
         {Object.values(providerMap).map((provider) => (
@@ -32,7 +29,7 @@ export default async function SignInPage(props: {
             className="w-full"
           >
             <Button width="w-full" submit>
-              {icons[provider.name as keyof typeof icons]} Sign In with {provider.name}
+              <LogInIcon /> Sign In with {provider.name}
             </Button>
           </form>
         ))}

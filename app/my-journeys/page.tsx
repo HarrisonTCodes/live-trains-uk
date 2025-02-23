@@ -6,9 +6,9 @@ import Button from '../components/button/Button';
 import Link from 'next/link';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
-import { FaArrowRightToBracket, FaPlus, FaTrash } from 'react-icons/fa6';
 import Skeletons from '../components/skeletons/Skeletons';
 import HeadingWidget from '../components/heading-widget/HeadingWidget';
+import { LogOutIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
@@ -54,7 +54,7 @@ export default function JourneysPage() {
           confirmAction={() => deleteJourney(deleteJourneyId)}
           cancelAction={() => setDeleteJourneyId(undefined)}
           confirmLabel="Delete"
-          confirmIcon={<FaTrash />}
+          confirmIcon={<Trash2Icon />}
         >
           <p className="text-center">
             Are you sure you want to delete{' '}
@@ -77,12 +77,12 @@ export default function JourneysPage() {
           <HeadingWidget text="Save your regular routes for quick access to live departures">
             <Link href={'/signout'} className="w-full whitespace-nowrap md:w-40">
               <Button width="w-full" secondary>
-                <FaArrowRightToBracket /> Sign Out
+                <LogOutIcon /> Sign Out
               </Button>
             </Link>
             <Link href={'/my-journeys/new'} className="w-full md:w-40">
               <Button width="w-full whitespace-nowrap">
-                <FaPlus /> Add Journey
+                <PlusIcon /> Add Journey
               </Button>
             </Link>
           </HeadingWidget>
