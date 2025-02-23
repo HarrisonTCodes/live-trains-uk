@@ -3,15 +3,8 @@ import formatDuration from '@/app/utils/formatDuration';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
 import Tag from '../tag/Tag';
-import {
-  CircleAlertIcon,
-  CircleCheckIcon,
-  ClockAlertIcon,
-  ClockIcon,
-  MapPinIcon,
-  RabbitIcon,
-  TurtleIcon,
-} from 'lucide-react';
+import { ClockIcon, MapPinIcon, RabbitIcon, TurtleIcon } from 'lucide-react';
+import EstimatedIcon from '../icon/EstimatedIcon';
 
 export default function TrainInfo({
   service,
@@ -53,10 +46,7 @@ export default function TrainInfo({
           </div>
           {service.estimatedDepartureTime && (
             <Tag status={service.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
-              {service.estimatedDepartureTime === 'Cancelled' && <CircleAlertIcon size={16} />}
-              {service.estimatedDepartureTime === 'On time' && <CircleCheckIcon size={16} />}
-              {(/\d/.test(service.estimatedDepartureTime) ||
-                service.estimatedDepartureTime === 'Delayed') && <ClockAlertIcon size={16} />}
+              <EstimatedIcon estimated={service.estimatedDepartureTime} />
               {service.estimatedDepartureTime}
             </Tag>
           )}
@@ -73,10 +63,7 @@ export default function TrainInfo({
           <Tag status={cancelled ? 'fail' : 'neutral'}>{toCrs}</Tag>
           {service.estimatedArrivalTime && (
             <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
-              {service.estimatedArrivalTime === 'Cancelled' && <CircleAlertIcon size={16} />}
-              {service.estimatedArrivalTime === 'On time' && <CircleCheckIcon size={16} />}
-              {(/\d/.test(service.estimatedArrivalTime) ||
-                service.estimatedArrivalTime === 'Delayed') && <ClockAlertIcon size={16} />}
+              <EstimatedIcon estimated={service.estimatedArrivalTime} />
               {service.estimatedArrivalTime}
             </Tag>
           )}

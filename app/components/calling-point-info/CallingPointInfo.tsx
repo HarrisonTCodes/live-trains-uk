@@ -1,7 +1,8 @@
 import { CallingPoint } from '@/app/interfaces';
 import CallingPointGraphic from './CallingPointGraphic';
 import Tag from '../tag/Tag';
-import { CircleAlertIcon, CircleCheckIcon, ClockAlertIcon } from 'lucide-react';
+import { CircleCheckIcon } from 'lucide-react';
+import EstimatedIcon from '../icon/EstimatedIcon';
 
 export default function CallingPointInfo({
   callingPoint,
@@ -48,10 +49,7 @@ export default function CallingPointInfo({
             </Tag>
           ) : (
             <Tag status={callingPoint.estimatedDepartureTime === 'On time' ? 'success' : 'fail'}>
-              {callingPoint.estimatedDepartureTime === 'Cancelled' && <CircleAlertIcon size={16} />}
-              {callingPoint.estimatedDepartureTime === 'On time' && <CircleCheckIcon size={16} />}
-              {(/\d/.test(callingPoint.estimatedDepartureTime!) ||
-                callingPoint.estimatedDepartureTime === 'Delayed') && <ClockAlertIcon size={16} />}
+              <EstimatedIcon estimated={callingPoint.estimatedDepartureTime} />
               {callingPoint.estimatedDepartureTime}
             </Tag>
           )}
