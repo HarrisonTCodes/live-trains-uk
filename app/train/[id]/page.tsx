@@ -7,9 +7,13 @@ import getService from '@/app/utils/getService';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { FaArrowLeft } from 'react-icons/fa6';
 
-export default async function TrainPage(props: { params: Promise<{ id: string }> }) {
+export default async function TrainPage(props: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ to: string }>;
+}) {
   const params = await props.params;
-  const callingPoints = await getService(params.id);
+  const searchParams = await props.searchParams;
+  const callingPoints = await getService(params.id, searchParams.to);
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
