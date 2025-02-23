@@ -1,7 +1,7 @@
 import { CallingPointResponse } from '@/app/interfaces';
 import getTime from './getTime';
 
-export default async function getService(serviceId: string) {
+export default async function getService(serviceId: string, toStation?: string) {
   // Set API key in headers
   const headers = new Headers();
   headers.set('x-apikey', process.env.SERVICE_DETAILS_API_KEY!);
@@ -55,6 +55,7 @@ export default async function getService(serviceId: string) {
         station: callingPoint.locationName,
         departureTime: callingPoint.st,
         estimatedDepartureTime: callingPoint.et,
+        focus: callingPoint.locationName.toLowerCase() === toStation?.toLowerCase(),
       };
     },
   );
