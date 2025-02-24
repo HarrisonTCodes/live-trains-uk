@@ -1,13 +1,8 @@
-import Notice from '../components/notice/Notice';
-import toTitleCase from '../utils/toTitleCase';
+import { Suspense } from 'react';
+import AlertsSection from '../components/alert/AlertsSection';
+import Skeletons from '../components/skeletons/Skeletons';
 
 export default async function AlertsPage() {
-  const alerts = await fetch('https://www.nationalrail.co.uk/nreapi/incidents/alerts/', {
-    cache: 'no-cache',
-  })
-    .then((response) => response.json())
-    .catch((err) => console.error(err));
-
   return (
     <main className="flex flex-col items-center gap-4 py-8">
       {/* Heading */}
@@ -15,31 +10,9 @@ export default async function AlertsPage() {
 
       {/* Alerts */}
       <div className="flex flex-col items-center gap-6">
-        {alerts ? (
-          alerts.length > 0 ? (
-            alerts.map((alert: { name: string; summary: string }, index: number) => (
-              <Notice
-                key={`alert-${index}`}
-                notice={toTitleCase(alert.name.replaceAll('-', ' '))}
-                description={alert.summary}
-                status="alert"
-              />
-            ))
-          ) : (
-            <Notice
-              notice="No alerts"
-              description="No alerts or disruptions at the moment."
-              status="success"
-            />
-          )
-        ) : (
-          // If there was an error
-          <Notice
-            notice="Error"
-            description="There was an error trying to retrieve alerts and disruptions."
-            status="fail"
-          />
-        )}
+        <Suspense fallback={<Skeletons height="h-24" />}>
+          <AlertsSection />
+        </Suspense>
       </div>
     </main>
   );
