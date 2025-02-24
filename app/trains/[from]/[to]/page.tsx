@@ -23,7 +23,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
 
         {/* Station, last updated and buttons */}
         <HeadingWidget
-          text={`${toTitleCase(parsedFrom)} to ${toTitleCase(parsedTo)}`}
+          text={`${toTitleCase(parsedFrom)} to ${parsedTo === 'any' ? 'Any Station' : toTitleCase(parsedTo)}`}
           tag={`Last updated at ${now}`}
         >
           <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>

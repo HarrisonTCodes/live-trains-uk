@@ -20,7 +20,7 @@ export default async function TrainPage(props: {
         {/* Heading */}
         <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Service Details</h1>
 
-        {/* Terminating station, last updated and back button */}
+        {/* Last updated and back button */}
         <HeadingWidget text="Calling points and times" tag={`Last updated at ${now}`}>
           <Button width="w-full md:w-56" back>
             <ArrowLeftIcon /> Back to departures
@@ -28,6 +28,7 @@ export default async function TrainPage(props: {
         </HeadingWidget>
       </section>
 
+      {/* Cancellation reasons and calling points */}
       <Suspense fallback={<Skeletons count={1} height="h-[100dvh]" />}>
         <CallingPointsSection id={params.id} to={searchParams.to} />
       </Suspense>
