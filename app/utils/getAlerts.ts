@@ -23,7 +23,8 @@ export default async function getAlerts(station: string) {
   return response[0].disruptions.map((disruption: DisruptionResponse) => ({
     message: disruption.xhtmlMessage
       .split(' More details can be found in')[0]
-      .split(' Latest information can be found in')[0],
+      .split(' Latest information can be found in')[0]
+      .replace(/<[^>]*>/g, ''),
     severity: disruption.severity,
   }));
 }
