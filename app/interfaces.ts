@@ -14,6 +14,19 @@ export interface CallingPointResponse {
   cancelReason?: string;
 }
 
+export interface AlertResponse {
+  generatedAt: string;
+  crs: string;
+  disruptions: DisruptionResponse[];
+}
+
+export interface DisruptionResponse {
+  category: string;
+  severity: string;
+  xhtmlMessage: string;
+  description: string;
+}
+
 export interface Service {
   departureTime: string;
   estimatedDepartureTime: string;
@@ -33,6 +46,10 @@ export interface CallingPoint {
   estimatedDepartureTime?: string;
   platform?: string;
   focus?: boolean;
+}
+
+export interface Alert {
+  message: string;
 }
 
 export interface Journey {
