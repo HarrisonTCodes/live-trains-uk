@@ -1,5 +1,4 @@
 import { CallingPointResponse } from '@/app/interfaces';
-import getTime from './getTime';
 
 export default async function getService(serviceId: string, toStation?: string) {
   // Set API key in headers
@@ -7,7 +6,6 @@ export default async function getService(serviceId: string, toStation?: string) 
   headers.set('x-apikey', process.env.SERVICE_DETAILS_API_KEY!);
 
   // Get service details
-  const time = getTime();
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-service-details/LDBWS/api/20220120/GetServiceDetails/${serviceId}`,
     { headers, cache: 'no-store' },
@@ -81,6 +79,5 @@ export default async function getService(serviceId: string, toStation?: string) 
   return {
     callingPoints,
     cancelReasons,
-    time,
   };
 }
