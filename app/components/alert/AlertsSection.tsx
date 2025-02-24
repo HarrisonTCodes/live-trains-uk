@@ -8,7 +8,12 @@ export default async function AlertsSection({ station }: { station: string }) {
 
   if (alerts && alerts.length > 0) {
     return alerts.map((alert: Alert, index: number) => (
-      <Notice key={index} notice="Alert" description={alert.message} status="alert" />
+      <Notice
+        key={index}
+        notice={`${alert.severity} Alert`}
+        description={alert.message}
+        status="alert"
+      />
     ));
   } else {
     return (

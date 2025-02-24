@@ -24,5 +24,6 @@ export default async function getAlerts(station: string) {
     message: disruption.xhtmlMessage
       .split(' More details can be found in')[0]
       .split(' Latest information can be found in')[0],
+    severity: disruption.severity,
   }));
 }

@@ -50,6 +50,7 @@ export interface CallingPoint {
 
 export interface Alert {
   message: string;
+  severity: string;
 }
 
 export interface Journey {
