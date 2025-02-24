@@ -3,11 +3,11 @@ import Button from '@/app/components/button/Button';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Notice from '@/app/components/notice/Notice';
 import Skeletons from '@/app/components/skeletons/Skeletons';
-import { Alert } from '@/app/interfaces';
 import getAlerts from '@/app/utils/getAlerts';
 import getTime from '@/app/utils/getTime';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { ArrowLeftIcon } from 'lucide-react';
+import { SearchIcon } from 'lucide-react';
+import Link from 'next/link';
 import { Suspense } from 'react';
 
 export default async function StationAlertsPage(props: { params: Promise<{ station: string }> }) {
@@ -29,9 +29,11 @@ export default async function StationAlertsPage(props: { params: Promise<{ stati
           text={`Alerts and disruptions for ${toTitleCase(parsedStation)}`}
           tag={`Last updated at ${now}`}
         >
-          <Button width="w-full md:w-56" back>
-            <ArrowLeftIcon /> Back to alerts
-          </Button>
+          <Link prefetch={false} href={`/trains/${parsedStation}/any`} className="w-full">
+            <Button width="w-full md:w-56">
+              <SearchIcon /> Search departures
+            </Button>
+          </Link>
         </HeadingWidget>
       </section>
 
