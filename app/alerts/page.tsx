@@ -1,19 +1,25 @@
-import { Suspense } from 'react';
-import AlertsSection from '../components/alert/AlertsSection';
-import Skeletons from '../components/skeletons/Skeletons';
+'use client';
+import { useState } from 'react';
+import Form from '../components/form/Form';
+import Search from '../components/search/Search';
+import Button from '../components/button/Button';
+import { SearchIcon } from 'lucide-react';
 
-export default async function AlertsPage() {
+export default function AlertsPage() {
+  const [station, setStation] = useState('');
+
   return (
     <main className="flex flex-col items-center gap-4 py-8">
-      {/* Heading */}
-      <h1 className="text-center text-2xl font-bold text-blue-900">Alerts and Disruptions</h1>
-
-      {/* Alerts */}
-      <div className="flex flex-col items-center gap-6">
-        <Suspense fallback={<Skeletons height="h-24" />}>
-          <AlertsSection />
-        </Suspense>
-      </div>
+      <Form
+        heading="Station Alerts"
+        subHeading="Get alerts and disruptions affecting a specific station"
+      >
+        <Search label="Station" value={station} setValue={setStation} />
+        <Button width="w-full">
+          <SearchIcon />
+          Search alerts
+        </Button>
+      </Form>
     </main>
   );
 }
