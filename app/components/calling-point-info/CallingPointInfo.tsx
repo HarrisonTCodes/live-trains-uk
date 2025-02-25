@@ -1,7 +1,7 @@
 import { CallingPoint } from '@/app/interfaces';
 import CallingPointGraphic from './CallingPointGraphic';
 import Tag from '../tag/Tag';
-import { CircleArrowRight, CircleCheckIcon } from 'lucide-react';
+import { CircleArrowRight } from 'lucide-react';
 import EstimatedIcon from '../icon/EstimatedIcon';
 
 export default function CallingPointInfo({
