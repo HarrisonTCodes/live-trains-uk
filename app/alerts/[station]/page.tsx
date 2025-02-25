@@ -13,7 +13,6 @@ import { Suspense } from 'react';
 export default async function StationAlertsPage(props: { params: Promise<{ station: string }> }) {
   const params = await props.params;
   const parsedStation = decodeURIComponent(params.station).replaceAll('+', ' ').toLowerCase();
-  const alerts = await getAlerts(parsedStation);
   const now = getTime();
 
   return (
@@ -39,7 +38,7 @@ export default async function StationAlertsPage(props: { params: Promise<{ stati
 
       {/* Alerts */}
       <section className="flex flex-col items-center gap-6">
-        <Suspense fallback={<Skeletons height="h-24" />}>
+        <Suspense fallback={<Skeletons count={1} height="h-24" />}>
           <AlertsSection station={parsedStation} />
         </Suspense>
       </section>
