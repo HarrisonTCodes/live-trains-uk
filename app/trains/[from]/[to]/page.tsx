@@ -2,7 +2,7 @@ import Button from '../../../components/button/Button';
 import toTitleCase from '../../../utils/toTitleCase';
 import Link from 'next/link';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
-import { ArrowRightLeftIcon, BookmarkIcon } from 'lucide-react';
+import { BookmarkIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import Skeletons from '@/app/components/skeletons/Skeletons';
 import TrainInfoSection from '@/app/components/train-info/TrainInfoSection';
@@ -29,14 +29,13 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
           text={`${toTitleCase(parsedFrom)} to ${parsedTo === 'any' ? 'Any Station' : toTitleCase(parsedTo)}`}
           tag={`Last updated at ${now}`}
         >
-          <Link prefetch={false} href={`/trains/${params.to}/${params.from}`}>
-            <Button width="w-[40vw] md:w-40" secondary disabled={parsedTo === 'any'}>
-              <ArrowRightLeftIcon /> Switch
-            </Button>
-          </Link>
-          <Link prefetch={false} href={`/my-journeys/new?from=${params.from}&to=${params.to}`}>
-            <Button width="w-[40vw] md:w-40">
-              <BookmarkIcon /> Save
+          <Link
+            prefetch={false}
+            href={`/my-journeys/new?from=${params.from}&to=${params.to}`}
+            className="w-full"
+          >
+            <Button width="w-full md:w-56">
+              <BookmarkIcon /> Save Journey
             </Button>
           </Link>
         </HeadingWidget>

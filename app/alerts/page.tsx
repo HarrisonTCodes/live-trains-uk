@@ -28,7 +28,7 @@ export default function AlertsPage() {
         <Search label="Station" value={station} setValue={setStation} />
         <Button width="w-full" submit>
           <SearchIcon />
-          Search alerts
+          Search Alerts
         </Button>
       </Form>
     </main>
