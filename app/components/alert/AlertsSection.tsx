@@ -12,7 +12,7 @@ export default async function AlertsSection({ station }: { station: string }) {
         key={index}
         notice={`${alert.severity !== 'Normal' ? alert.severity : ''} Alert`}
         description={alert.message}
-        status="alert"
+        status={alert.severity === 'Minor' || alert.severity === 'Normal' ? 'warning' : 'alert'}
       />
     ));
   } else {
