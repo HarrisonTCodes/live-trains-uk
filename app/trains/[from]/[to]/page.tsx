@@ -7,6 +7,7 @@ import { Suspense } from 'react';
 import Skeletons from '@/app/components/skeletons/Skeletons';
 import TrainInfoSection from '@/app/components/train-info/TrainInfoSection';
 import getTime from '@/app/utils/getTime';
+import BackButton from '@/app/components/button/BackButton';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -17,7 +18,9 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <section className="flex flex-col items-center gap-1">
+      <section className="relative flex flex-col items-center gap-1">
+        <BackButton />
+
         {/* Heading */}
         <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Live Departures</h1>
 

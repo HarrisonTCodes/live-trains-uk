@@ -1,3 +1,4 @@
+import BackButton from '@/app/components/button/BackButton';
 import Button from '@/app/components/button/Button';
 import CallingPointsSection from '@/app/components/calling-point-info/CallingPointsSection';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
@@ -16,7 +17,9 @@ export default async function TrainPage(props: {
 
   return (
     <main className="flex flex-col items-center gap-6 py-8">
-      <section className="flex flex-col items-center gap-1">
+      <section className="relative flex flex-col items-center gap-1">
+        <BackButton />
+
         {/* Heading */}
         <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Service Details</h1>
 
