@@ -10,7 +10,7 @@ export default async function AlertsSection({ station }: { station: string }) {
     return alerts.map((alert: Alert, index: number) => (
       <Notice
         key={index}
-        notice={`${alert.severity} Alert`}
+        notice={`${alert.severity !== 'Normal' ? alert.severity : ''} Alert`}
         description={alert.message}
         status="alert"
       />
