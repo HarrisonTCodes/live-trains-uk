@@ -21,8 +21,13 @@ export interface AlertResponse {
 }
 
 export interface DisruptionResponse {
-  category: string;
-  severity: string;
+  category:
+    | 'Train service'
+    | 'Connecting services'
+    | 'System related'
+    | 'Prior (trains)'
+    | 'Prior (other)';
+  severity: 'Minor' | 'Normal' | 'Major' | 'Severe';
   xhtmlMessage: string;
   description: string;
 }
@@ -50,7 +55,7 @@ export interface CallingPoint {
 
 export interface Alert {
   message: string;
-  severity: string;
+  severity: 'Minor' | 'Normal' | 'Major' | 'Severe';
 }
 
 export interface Journey {
