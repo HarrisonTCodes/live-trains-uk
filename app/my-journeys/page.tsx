@@ -67,7 +67,7 @@ export default function JourneysPage() {
       )}
       {/* Page content */}
       <main
-        className={`flex flex-col items-center gap-6 py-8 ${deleteJourneyId !== undefined && 'pointer-events-none blur-sm'}`}
+        className={`flex flex-grow flex-col items-center gap-6 py-8 ${deleteJourneyId !== undefined && 'pointer-events-none blur-sm'}`}
       >
         <section className="flex flex-col items-center gap-1">
           {/* Heading */}

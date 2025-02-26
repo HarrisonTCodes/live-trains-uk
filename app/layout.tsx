@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from './components/navbar/Navbar';
 import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
+import Footer from './components/footer/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,9 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${inter.className} bg-[#f6f8fa]`}>
+      <body className={`antialiased ${inter.className} flex min-h-screen flex-col bg-[#f6f8fa]`}>
         <Navbar />
         <Suspense>{children}</Suspense>
+        <Footer />
       </body>
     </html>
   );

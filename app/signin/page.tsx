@@ -8,7 +8,7 @@ export default async function SignInPage(props: {
   const searchParams = await props.searchParams;
 
   return (
-    <main className="flex flex-col items-center gap-6 py-8">
+    <main className="flex flex-grow flex-col items-center gap-6 py-8">
       {/* Sign In form */}
       <div className="flex w-[90vw] max-w-[500px] flex-col items-center gap-6 rounded-lg border border-gray-300 bg-white p-4 shadow-lg">
         <section className="flex flex-col items-center gap-2">

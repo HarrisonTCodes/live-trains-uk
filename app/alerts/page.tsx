@@ -19,7 +19,7 @@ export default function AlertsPage() {
   };
 
   return (
-    <main className="flex flex-col items-center gap-4 py-8">
+    <main className="flex flex-grow flex-col items-center gap-4 py-8">
       <Form
         onSubmit={getAlerts}
         heading="Station Alerts"

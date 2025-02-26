@@ -17,7 +17,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
   const now = getTime();
 
   return (
-    <main className="flex flex-col items-center gap-6 py-8">
+    <main className="flex flex-grow flex-col items-center gap-6 py-8">
       <section className="relative flex flex-col items-center gap-1">
         <BackButton />
 

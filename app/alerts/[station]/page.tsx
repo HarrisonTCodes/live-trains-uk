@@ -15,7 +15,7 @@ export default async function StationAlertsPage(props: { params: Promise<{ stati
   const now = getTime();
 
   return (
-    <main className="flex flex-col items-center gap-6 py-8">
+    <main className="flex flex-grow flex-col items-center gap-6 py-8">
       <section className="relative flex w-[90vw] max-w-[700px] flex-col items-center gap-1">
         <BackButton />
 
