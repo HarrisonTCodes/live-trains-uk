@@ -4,7 +4,7 @@ import Notice from '@/app/components/notice/Notice';
 
 export default function Error() {
   return (
-    <main className="flex flex-col items-center gap-6 py-8">
+    <main className="flex flex-grow flex-col items-center gap-6 py-8">
       <section className="relative w-[90vw] max-w-[700px]">
         <BackButton />
         <h1 className="text-center text-2xl font-bold text-blue-900">Alerts and Disruptions</h1>
