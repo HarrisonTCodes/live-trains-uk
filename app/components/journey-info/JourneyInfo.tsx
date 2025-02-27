@@ -3,7 +3,14 @@ import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
 import Button from '../button/Button';
 import Tag from '../tag/Tag';
-import { EllipsisVerticalIcon, MapPinIcon, SearchIcon, Trash2Icon } from 'lucide-react';
+import {
+  CircleAlertIcon,
+  EllipsisVerticalIcon,
+  MapPinIcon,
+  SearchIcon,
+  Trash2Icon,
+  XIcon,
+} from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function JourneyInfo({
@@ -34,7 +41,11 @@ export default function JourneyInfo({
         <section className="flex w-full justify-between">
           <h2 className="pb-2 text-xl font-medium text-blue-900">{journey.name}</h2>
           <button onClick={() => setKebabMenuOpen(!kebabMenuOpen)}>
-            <EllipsisVerticalIcon className="text-stone-600" />
+            {kebabMenuOpen ? (
+              <XIcon className="text-stone-600" />
+            ) : (
+              <EllipsisVerticalIcon className="text-stone-600" />
+            )}
           </button>
         </section>
         <div className="flex items-center gap-2 text-stone-600">
@@ -68,13 +79,13 @@ export default function JourneyInfo({
           ref={kebabMenuRef}
         >
           <button className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200">
-            Alerts for {journey.firstCrs}
+            <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.firstCrs}
           </button>
           <button className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200">
-            Alerts for {journey.secondCrs}
+            <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.secondCrs}
           </button>
           <button className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200">
-            Delete Journey
+            <Trash2Icon className="text-blue-900" /> Delete Journey
           </button>
         </div>
       )}
