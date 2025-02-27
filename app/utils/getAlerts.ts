@@ -1,4 +1,5 @@
 import { AlertResponse, DisruptionResponse } from '../interfaces';
+import unescape from 'lodash.unescape';
 import stations from './stations';
 
 export default async function getAlerts(station: string) {
@@ -20,11 +21,15 @@ export default async function getAlerts(station: string) {
     { headers, cache: 'no-store' },
   ).then((response) => response.json())) as AlertResponse[];
 
+  console.log(response[0].disruptions[0].xhtmlMessage);
+
   return response[0].disruptions.map((disruption: DisruptionResponse) => ({
-    message: disruption.xhtmlMessage
-      .split(' More details can be found in')[0]
-      .split(' Latest information can be found in')[0]
-      .replace(/<[^>]*>/g, ''),
+    message: unescape(
+      disruption.xhtmlMessage
+        .split(' More details can be found in')[0]
+        .split(' Latest information can be found in')[0]
+        .replace(/<[^>]*>/g, ''),
+    ),
     severity: disruption.severity,
   }));
 }
