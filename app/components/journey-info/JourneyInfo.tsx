@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Button from '../button/Button';
 import Tag from '../tag/Tag';
 import {
+  ArrowRightIcon,
   CircleAlertIcon,
   EllipsisVerticalIcon,
   MapPinIcon,
@@ -58,16 +59,28 @@ export default function JourneyInfo({
 
       {/* Search departures and delete journey buttons */}
       <div className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
-        <Button width="w-full" onClick={() => setDeleteJourneyId(journey.id)} secondary>
-          <Trash2Icon /> Delete Journey
-        </Button>
+        <Link
+          prefetch={false}
+          href={`/trains/${journey.secondStation}/${journey.firstStation}`}
+          className="w-full"
+        >
+          <Button width="w-full" secondary>
+            <SearchIcon />
+            <span className="flex items-center gap-0.5">
+              {journey.secondCrs} <ArrowRightIcon size={16} /> {journey.firstCrs}
+            </span>
+          </Button>
+        </Link>
         <Link
           prefetch={false}
           href={`/trains/${journey.firstStation}/${journey.secondStation}`}
           className="w-full"
         >
           <Button width="w-full">
-            <SearchIcon /> Search Departures
+            <SearchIcon />
+            <span className="flex items-center gap-0.5">
+              {journey.firstCrs} <ArrowRightIcon size={16} /> {journey.secondCrs}
+            </span>
           </Button>
         </Link>
       </div>
@@ -78,13 +91,25 @@ export default function JourneyInfo({
           className="absolute right-9 flex w-48 cursor-pointer flex-col divide-y divide-stone-300 rounded-lg border border-stone-300 bg-white shadow-xl"
           ref={kebabMenuRef}
         >
-          <button className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200">
+          <Link
+            href={`/alerts/${journey.firstStation}`}
+            className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+          >
             <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.firstCrs}
-          </button>
-          <button className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200">
+          </Link>
+          <Link
+            href={`/alerts/${journey.secondStation}`}
+            className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+          >
             <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.secondCrs}
-          </button>
-          <button className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200">
+          </Link>
+          <button
+            className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+            onClick={() => {
+              setDeleteJourneyId(journey.id);
+              setKebabMenuOpen(false);
+            }}
+          >
             <Trash2Icon className="text-blue-900" /> Delete Journey
           </button>
         </div>
