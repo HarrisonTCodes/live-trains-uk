@@ -21,8 +21,6 @@ export default async function getAlerts(station: string) {
     { headers, cache: 'no-store' },
   ).then((response) => response.json())) as AlertResponse[];
 
-  console.log(response[0].disruptions[0].xhtmlMessage);
-
   return response[0].disruptions.map((disruption: DisruptionResponse) => ({
     message: unescape(
       disruption.xhtmlMessage
