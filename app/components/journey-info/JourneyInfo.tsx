@@ -64,7 +64,7 @@ export default function JourneyInfo({
           href={`/trains/${journey.secondStation}/${journey.firstStation}`}
           className="w-full"
         >
-          <Button width="w-full" secondary>
+          <Button className="w-full" secondary>
             <SearchIcon />
             <span className="flex items-center gap-0.5">
               {journey.secondCrs} <ArrowRightIcon size={16} /> {journey.firstCrs}
@@ -76,7 +76,7 @@ export default function JourneyInfo({
           href={`/trains/${journey.firstStation}/${journey.secondStation}`}
           className="w-full"
         >
-          <Button width="w-full">
+          <Button className="w-full">
             <SearchIcon />
             <span className="flex items-center gap-0.5">
               {journey.firstCrs} <ArrowRightIcon size={16} /> {journey.secondCrs}

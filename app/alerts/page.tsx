@@ -26,7 +26,7 @@ export default function AlertsPage() {
         subHeading="Get alerts and disruptions affecting a specific station"
       >
         <Search label="Station" value={station} setValue={setStation} />
-        <Button width="w-full" submit>
+        <Button className="w-full" submit>
           <SearchIcon />
           Search Alerts
         </Button>

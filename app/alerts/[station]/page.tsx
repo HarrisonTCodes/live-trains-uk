@@ -30,7 +30,7 @@ export default async function StationAlertsPage(props: { params: Promise<{ stati
           tag={`Last updated at ${now}`}
         >
           <Link prefetch={false} href={`/trains/${parsedStation}/any`} className="w-full">
-            <Button width="w-full md:w-56">
+            <Button className="w-full md:w-56">
               <SearchIcon /> Search departures
             </Button>
           </Link>

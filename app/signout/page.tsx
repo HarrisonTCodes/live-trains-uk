@@ -22,7 +22,7 @@ export default async function SignOutPage() {
           }}
           className="w-full"
         >
-          <Button width="w-full" submit>
+          <Button className="w-full" submit>
             <LogOutIcon /> Sign Out
           </Button>
         </form>

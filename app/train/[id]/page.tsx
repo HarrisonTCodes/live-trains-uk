@@ -25,7 +25,7 @@ export default async function TrainPage(props: {
 
         {/* Last updated and back button */}
         <HeadingWidget text="Calling points and times" tag={`Last updated at ${now}`}>
-          <Button width="w-full md:w-56" back>
+          <Button className="w-full md:w-56" back>
             <ArrowLeftIcon /> Back to departures
           </Button>
         </HeadingWidget>

@@ -30,7 +30,7 @@ export default function LiveTrainsPage() {
           <Search label="From" value={from} setValue={setFrom} />
           <Search label="To (Optional)" value={to} setValue={setTo} />
         </section>
-        <Button submit width="w-full">
+        <Button submit className="w-full">
           <SearchIcon /> Search Departures
         </Button>
       </Form>

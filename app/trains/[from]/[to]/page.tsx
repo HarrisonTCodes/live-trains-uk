@@ -34,7 +34,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
             href={`/my-journeys/new?from=${params.from}&to=${params.to}`}
             className="w-full"
           >
-            <Button width="w-full md:w-56">
+            <Button className="w-full md:w-56">
               <BookmarkIcon /> Save Journey
             </Button>
           </Link>

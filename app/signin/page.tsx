@@ -28,7 +28,7 @@ export default async function SignInPage(props: {
             }}
             className="w-full"
           >
-            <Button width="w-full" submit>
+            <Button className="w-full" submit>
               <LogInIcon /> Sign In with {provider.name}
             </Button>
           </form>
