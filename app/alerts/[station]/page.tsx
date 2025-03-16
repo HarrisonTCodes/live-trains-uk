@@ -39,7 +39,7 @@ export default async function StationAlertsPage(props: { params: Promise<{ stati
 
       {/* Alerts */}
       <section className="flex flex-col items-center gap-6">
-        <Suspense fallback={<Skeletons count={1} height="h-24" />}>
+        <Suspense fallback={<Skeletons count={1} className="h-24" />}>
           <AlertsSection station={parsedStation} />
         </Suspense>
       </section>

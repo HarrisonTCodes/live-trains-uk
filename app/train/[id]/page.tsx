@@ -32,7 +32,7 @@ export default async function TrainPage(props: {
       </section>
 
       {/* Cancellation reasons and calling points */}
-      <Suspense fallback={<Skeletons count={1} height="h-[100dvh]" />}>
+      <Suspense fallback={<Skeletons count={1} className="h-[100dvh]" />}>
         <CallingPointsSection id={params.id} to={searchParams.to} />
       </Suspense>
     </main>

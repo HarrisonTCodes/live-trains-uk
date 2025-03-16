@@ -43,7 +43,7 @@ export default async function TrainsPage(props: { params: Promise<{ from: string
 
       {/* Trains */}
       <section className="flex w-full flex-col items-center gap-4">
-        <Suspense fallback={<Skeletons height="h-56" />}>
+        <Suspense fallback={<Skeletons className="h-56" />}>
           <TrainInfoSection from={parsedFrom} to={parsedTo !== 'any' ? parsedTo : undefined} />
         </Suspense>
       </section>
