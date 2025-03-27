@@ -4,6 +4,7 @@ import toTitleCase from '@/app/utils/toTitleCase';
 import { ChangeEvent, useCallback, useState } from 'react';
 import debounce from 'lodash.debounce';
 import Tag from '../tag/Tag';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Search({
   label,
@@ -95,41 +96,50 @@ export default function Search({
         onBlur={() => setFocused(false)}
         spellCheck={false}
       />
+
       {/* Matching options dropdown */}
-      {(loading || options.length > 0) && focused && (
-        <ul className="absolute z-10 max-h-40 w-full translate-y-14 cursor-pointer divide-y divide-gray-300 overflow-y-scroll rounded-lg border border-gray-300 bg-white md:max-h-96">
-          {loading && options.length === 0 && (
-            <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
-          )}
-          {options.map((option) => (
-            <li
-              key={option.crs}
-              onMouseDown={() => {
-                setValue(toTitleCase(option.name));
+      <AnimatePresence>
+        {(loading || options.length > 0) && focused && (
+          <motion.ul
+            className="absolute z-10 max-h-40 w-full translate-y-14 cursor-pointer divide-y divide-gray-300 overflow-y-scroll rounded-lg border border-gray-300 bg-white md:max-h-96"
+            initial={{ opacity: 0, y: '14' }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15, ease: 'easeInOut' }}
+          >
+            {loading && options.length === 0 && (
+              <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
+            )}
+            {options.map((option) => (
+              <li
+                key={option.crs}
+                onMouseDown={() => {
+                  setValue(toTitleCase(option.name));
 
-                // Update recent stations
-                const newRecentOptions = getRecentOptions();
-                const index = newRecentOptions.findIndex(
-                  (recentStation: Station) => recentStation.name === option.name,
-                );
+                  // Update recent stations
+                  const newRecentOptions = getRecentOptions();
+                  const index = newRecentOptions.findIndex(
+                    (recentStation: Station) => recentStation.name === option.name,
+                  );
 
-                if (index > -1) {
-                  newRecentOptions.splice(index, 1);
-                } else if (newRecentOptions.length >= 3) {
-                  newRecentOptions.pop();
-                }
+                  if (index > -1) {
+                    newRecentOptions.splice(index, 1);
+                  } else if (newRecentOptions.length >= 3) {
+                    newRecentOptions.pop();
+                  }
 
-                newRecentOptions.unshift(option);
-                setRecentOptions(newRecentOptions);
-              }}
-              className="flex items-center justify-between p-2 transition hover:bg-stone-100"
-            >
-              {toTitleCase(option.name)}
-              <Tag>{option.crs}</Tag>
-            </li>
-          ))}
-        </ul>
-      )}
+                  newRecentOptions.unshift(option);
+                  setRecentOptions(newRecentOptions);
+                }}
+                className="flex items-center justify-between p-2 transition hover:bg-stone-100"
+              >
+                {toTitleCase(option.name)}
+                <Tag>{option.crs}</Tag>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
