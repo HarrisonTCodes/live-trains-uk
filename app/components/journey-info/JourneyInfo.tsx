@@ -13,6 +13,7 @@ import {
   XIcon,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function JourneyInfo({
   journey,
@@ -86,34 +87,40 @@ export default function JourneyInfo({
       </div>
 
       {/* Kebab menu */}
-      {kebabMenuOpen && (
-        <div
-          className="absolute right-9 flex w-48 cursor-pointer flex-col divide-y divide-stone-300 rounded-lg border border-stone-300 bg-white shadow-xl"
-          ref={kebabMenuRef}
-        >
-          <Link
-            href={`/alerts/${journey.firstStation}`}
-            className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+      <AnimatePresence>
+        {kebabMenuOpen && (
+          <motion.div
+            className="absolute right-9 flex w-48 cursor-pointer flex-col divide-y divide-stone-300 rounded-lg border border-stone-300 bg-white shadow-xl"
+            ref={kebabMenuRef}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
-            <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.firstCrs}
-          </Link>
-          <Link
-            href={`/alerts/${journey.secondStation}`}
-            className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
-          >
-            <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.secondCrs}
-          </Link>
-          <button
-            className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
-            onClick={() => {
-              setDeleteJourneyId(journey.id);
-              setKebabMenuOpen(false);
-            }}
-          >
-            <Trash2Icon className="text-blue-900" /> Delete Journey
-          </button>
-        </div>
-      )}
+            <Link
+              href={`/alerts/${journey.firstStation}`}
+              className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+            >
+              <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.firstCrs}
+            </Link>
+            <Link
+              href={`/alerts/${journey.secondStation}`}
+              className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+            >
+              <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.secondCrs}
+            </Link>
+            <button
+              className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+              onClick={() => {
+                setDeleteJourneyId(journey.id);
+                setKebabMenuOpen(false);
+              }}
+            >
+              <Trash2Icon className="text-blue-900" /> Delete Journey
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

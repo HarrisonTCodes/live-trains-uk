@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import NavbarButton from './NavbarButton';
 import { useRouter } from 'next/navigation';
 import { BookmarkIcon, CircleAlertIcon, MenuIcon, TrainFrontIcon, XIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const buttonData = [
   {
@@ -67,22 +68,28 @@ export default function Navbar() {
       </section>
 
       {/* Hamburger Menu */}
-      {hamburgerMenuOpen && (
-        <div
-          className="absolute right-2 top-16 z-20 flex w-48 cursor-pointer flex-col divide-y divide-stone-300 rounded-lg border border-stone-300 bg-white shadow-xl md:hidden"
-          ref={hamburgerMenuRef}
-        >
-          {buttonData.map((data) => (
-            <button
-              onClick={() => menuButtonPressed(data.href)}
-              className="flex items-center gap-2 px-2 py-2 text-left text-lg active:bg-stone-200"
-              key={`${data.label} menu option`}
-            >
-              <span className="text-blue-900">{data.icon}</span> {data.label}
-            </button>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {hamburgerMenuOpen && (
+          <motion.div
+            className="absolute right-2 top-16 z-20 flex w-48 cursor-pointer flex-col divide-y divide-stone-300 rounded-lg border border-stone-300 bg-white shadow-xl md:hidden"
+            ref={hamburgerMenuRef}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            {buttonData.map((data) => (
+              <button
+                onClick={() => menuButtonPressed(data.href)}
+                className="flex items-center gap-2 px-2 py-2 text-left text-lg active:bg-stone-200"
+                key={`${data.label} menu option`}
+              >
+                <span className="text-blue-900">{data.icon}</span> {data.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
