@@ -4,6 +4,7 @@ import Navbar from './components/navbar/Navbar';
 import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 import Footer from './components/footer/Footer';
+import ScrollToTopButton from './components/button/ScrollToTopButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={`antialiased ${inter.className} flex min-h-screen flex-col bg-[#f6f8fa]`}>
         <Navbar />
         <Suspense>{children}</Suspense>
+        <ScrollToTopButton />
         <Footer />
       </body>
     </html>
