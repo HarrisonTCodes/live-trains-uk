@@ -106,7 +106,7 @@ export default function JourneysPage() {
           ) : (
             journeys.map((journey: Journey) => (
               <JourneyInfo
-                key={`journey ${journey.name}`}
+                key={`journey ${journey.id}`}
                 journey={journey}
                 setDeleteJourneyId={setDeleteJourneyId}
               />
