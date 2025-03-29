@@ -51,6 +51,7 @@ export default function JourneysPage() {
       {deleteJourneyId !== undefined && (
         <Modal
           title="Delete Journey?"
+          destructive
           confirmAction={() => deleteJourney(deleteJourneyId)}
           cancelAction={() => setDeleteJourneyId(undefined)}
           confirmLabel="Delete"

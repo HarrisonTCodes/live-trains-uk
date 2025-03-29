@@ -110,13 +110,13 @@ export default function JourneyInfo({
               <CircleAlertIcon className="text-blue-900" /> Alerts for {journey.secondCrs}
             </Link>
             <button
-              className="flex items-center gap-2 px-2 py-2 text-left active:bg-stone-200"
+              className="flex items-center gap-2 px-2 py-2 text-left text-red-800 active:bg-stone-200"
               onClick={() => {
                 setDeleteJourneyId(journey.id);
                 setKebabMenuOpen(false);
               }}
             >
-              <Trash2Icon className="text-blue-900" /> Delete Journey
+              <Trash2Icon className="text-red-700" /> Delete Journey
             </button>
           </motion.div>
         )}

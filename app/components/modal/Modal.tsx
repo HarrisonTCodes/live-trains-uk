@@ -4,6 +4,7 @@ import { CheckIcon, XIcon } from 'lucide-react';
 export default function Modal({
   children,
   title,
+  destructive,
   confirmAction,
   cancelAction,
   confirmLabel,
@@ -11,6 +12,7 @@ export default function Modal({
 }: {
   children?: React.ReactNode;
   title: string;
+  destructive?: boolean;
   confirmAction?: () => void;
   cancelAction?: () => void;
   confirmLabel?: string;
@@ -24,7 +26,7 @@ export default function Modal({
         <Button onClick={cancelAction} className="w-full" secondary>
           <XIcon /> Cancel
         </Button>
-        <Button onClick={confirmAction} className="w-full">
+        <Button onClick={confirmAction} destructive={destructive} className="w-full">
           {confirmIcon ?? <CheckIcon />} {confirmLabel ?? 'OK'}
         </Button>
       </section>
