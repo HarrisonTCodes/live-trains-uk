@@ -59,7 +59,8 @@ export default function AccountPage() {
         >
           <p className="text-center">
             Are you sure you want to delete your account under{' '}
-            <span className="font-bold">{user?.email}</span>? This action cannot be reversed.
+            <span className="font-bold">{user?.email}</span> and all associated journeys? This
+            action cannot be reversed.
           </p>
         </Modal>
       )}
@@ -117,7 +118,7 @@ export default function AccountPage() {
                 <p>{user!.dateCreated}</p>
               </section>
 
-              {/* Journey COunt */}
+              {/* Journey Count */}
               <section className="flex flex-wrap items-center gap-2">
                 <BookmarkIcon className="text-blue-900" />
                 <p className="text-stone-600">Number of Saved Journeys:</p>
