@@ -2,7 +2,14 @@
 import { useEffect, useRef, useState } from 'react';
 import NavbarButton from './NavbarButton';
 import { useRouter } from 'next/navigation';
-import { BookmarkIcon, CircleAlertIcon, MenuIcon, TrainFrontIcon, XIcon } from 'lucide-react';
+import {
+  BookmarkIcon,
+  CircleAlertIcon,
+  MenuIcon,
+  TrainFrontIcon,
+  UserRoundIcon,
+  XIcon,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const buttonData = [
@@ -20,6 +27,11 @@ const buttonData = [
     label: 'Alerts',
     href: '/alerts',
     icon: <CircleAlertIcon />,
+  },
+  {
+    label: 'Account',
+    href: '/account',
+    icon: <UserRoundIcon />,
   },
 ];
 
