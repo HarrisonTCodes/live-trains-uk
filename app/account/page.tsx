@@ -2,7 +2,14 @@
 import Link from 'next/link';
 import Button from '../components/button/Button';
 import HeadingWidget from '../components/heading-widget/HeadingWidget';
-import { LogOutIcon, Trash2Icon } from 'lucide-react';
+import {
+  BookmarkIcon,
+  CalendarIcon,
+  LogOutIcon,
+  MailIcon,
+  Trash2Icon,
+  UserRoundIcon,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { User } from '../interfaces';
 import Skeletons from '../components/skeletons/Skeletons';
@@ -46,7 +53,7 @@ export default function AccountPage() {
 
       {/* Account info */}
       {loading ? (
-        <Skeletons className="h-72 sm:h-56" count={1} />
+        <Skeletons className="h-80 sm:h-64" count={1} />
       ) : error ? (
         <Notice
           notice="Error"
@@ -59,20 +66,34 @@ export default function AccountPage() {
           <h2 className="text-xl font-medium text-blue-900">Account Details</h2>
 
           {/* Account details section */}
-          <section className="flex flex-col gap-1">
-            <p className="text-stone-600">
-              <span className="font-medium text-black">Email Address:</span> {user?.email}
-            </p>
-            <p className="text-stone-600">
-              <span className="font-medium text-black">Name:</span> {user?.name}
-            </p>
-            <p className="text-stone-600">
-              <span className="font-medium text-black">Date Created:</span> {user?.dateCreated}
-            </p>
-            <p className="text-stone-600">
-              <span className="font-medium text-black">Number of Saved Journeys:</span>{' '}
-              {user?.journeyCount}
-            </p>
+          <section className="flex flex-col gap-3">
+            {/* Email */}
+            <section className="flex flex-wrap items-center gap-2">
+              <MailIcon className="text-blue-900" />
+              <p className="text-stone-600">Email Address:</p>
+              <p>{user!.email}</p>
+            </section>
+
+            {/* Name */}
+            <section className="flex flex-wrap items-center gap-2">
+              <UserRoundIcon className="text-blue-900" />
+              <p className="text-stone-600">Name:</p>
+              <p>{user!.name}</p>
+            </section>
+
+            {/* Date created */}
+            <section className="flex flex-wrap items-center gap-2">
+              <CalendarIcon className="text-blue-900" />
+              <p className="text-stone-600">Date Created:</p>
+              <p>{user!.dateCreated}</p>
+            </section>
+
+            {/* Journey COunt */}
+            <section className="flex flex-wrap items-center gap-2">
+              <BookmarkIcon className="text-blue-900" />
+              <p className="text-stone-600">Number of Saved Journeys:</p>
+              <p>{user!.journeyCount}</p>
+            </section>
           </section>
 
           {/* Buttons */}
