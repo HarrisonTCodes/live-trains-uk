@@ -55,6 +55,9 @@ export default function AddJourneyPage() {
 
   return (
     <main className="flex flex-grow flex-col items-center gap-6 py-8">
+      {error && (
+        <Notice notice="Error" description={`${error}.`} status="fail" className="!max-w-[500px]" />
+      )}
       <Form
         onSubmit={createJourney}
         heading="Create a New Journey"
@@ -80,7 +83,6 @@ export default function AddJourneyPage() {
           </Button>
         </section>
       </Form>
-      {error && <Notice notice="Error" description={`${error}.`} status="fail" />}
     </main>
   );
 }
