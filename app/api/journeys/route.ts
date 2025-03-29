@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
   // If the user is not logged in (or not found)
   if (!user) {
-    return new Response('User not found', {
+    return new Response('User not found, please try signing out', {
       status: 400,
     });
   }
