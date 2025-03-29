@@ -1,21 +1,31 @@
+'use client';
 import Link from 'next/link';
 import Button from '../components/button/Button';
 import HeadingWidget from '../components/heading-widget/HeadingWidget';
 import { LogOutIcon, Trash2Icon } from 'lucide-react';
-import { auth } from '@/auth';
-import prisma from '../utils/prisma';
+import { useEffect, useState } from 'react';
+import { User } from '../interfaces';
 
-export default async function AccountPage() {
-  const session = await auth();
-  const { accountCreatedAt, journeyCount } = await prisma.user
-    .findUnique({
-      where: { email: session!.user!.email! },
-      select: { createdAt: true, _count: { select: { journeys: true } } },
-    })
-    .then((response) => ({
-      accountCreatedAt: response!.createdAt,
-      journeyCount: response!._count.journeys,
-    }));
+export default function AccountPage() {
+  const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(false);
+    fetch('/api/account')
+      .then((response) => response.json())
+      .then((response) => {
+        setUser(response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setError(true);
+      });
+  }, []);
 
   return (
     <main className="flex flex-grow flex-col items-center gap-6 py-8">
@@ -40,17 +50,17 @@ export default async function AccountPage() {
         {/* Account details section */}
         <section className="flex flex-col gap-1">
           <p className="text-stone-600">
-            <span className="font-medium text-black">Email Address:</span> {session?.user?.email}
+            <span className="font-medium text-black">Email Address:</span> {user?.email}
           </p>
           <p className="text-stone-600">
-            <span className="font-medium text-black">Name:</span> {session?.user?.name}
+            <span className="font-medium text-black">Name:</span> {user?.name}
           </p>
           <p className="text-stone-600">
-            <span className="font-medium text-black">Date Created:</span>{' '}
-            {accountCreatedAt.toDateString()}
+            <span className="font-medium text-black">Date Created:</span> {user?.dateCreated}
           </p>
           <p className="text-stone-600">
-            <span className="font-medium text-black">Number of Saved Journeys:</span> {journeyCount}
+            <span className="font-medium text-black">Number of Saved Journeys:</span>{' '}
+            {user?.journeyCount}
           </p>
         </section>
 

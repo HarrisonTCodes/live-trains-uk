@@ -71,3 +71,10 @@ export interface Station {
   name: string;
   crs: string;
 }
+
+export interface User {
+  email: string;
+  name: string;
+  dateCreated: string;
+  journeyCount: number;
+}
