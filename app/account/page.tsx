@@ -15,12 +15,14 @@ import { User } from '../interfaces';
 import Skeletons from '../components/skeletons/Skeletons';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
+import { useRouter } from 'next/navigation';
 
 export default function AccountPage() {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -38,6 +40,11 @@ export default function AccountPage() {
       });
   }, []);
 
+  const deleteAccount = () => {
+    fetch('/api/account', { method: 'DELETE' });
+    router.push('/api/auth/signout');
+  };
+
   return (
     <>
       {/* Modal */}
@@ -45,7 +52,7 @@ export default function AccountPage() {
         <Modal
           title="Delete Account?"
           destructive
-          confirmAction={() => {}}
+          confirmAction={deleteAccount}
           cancelAction={() => setModalOpen(false)}
           confirmLabel="Delete"
           confirmIcon={<Trash2Icon />}
@@ -79,7 +86,7 @@ export default function AccountPage() {
         ) : error ? (
           <Notice
             notice="Error"
-            description="There was an error getting account information, please try again."
+            description="There was an error getting account information, please sign out and try again."
             status="fail"
           />
         ) : (
