@@ -32,10 +32,13 @@ export default async function AccountPage() {
         </HeadingWidget>
       </section>
 
-      {/* Account Info */}
+      {/* Account info */}
       <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
-        <h2 className="text-xl font-bold text-blue-900">Account Details</h2>
-        <section>
+        {/* Account section heading */}
+        <h2 className="text-xl font-medium text-blue-900">Account Details</h2>
+
+        {/* Account details section */}
+        <section className="flex flex-col gap-1">
           <p className="text-stone-600">
             <span className="font-medium text-black">Email Address:</span> {session?.user?.email}
           </p>
@@ -50,9 +53,18 @@ export default async function AccountPage() {
             <span className="font-medium text-black">Number of Saved Journeys:</span> {journeyCount}
           </p>
         </section>
-        <Button variant="destructive" className="w-full">
-          <Trash2Icon /> Delete Account
-        </Button>
+
+        {/* Buttons */}
+        <section className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
+          <Link href={'/signout'} className="w-full">
+            <Button className="w-full" variant="secondary">
+              <LogOutIcon /> Sign Out
+            </Button>
+          </Link>
+          <Button variant="destructive" className="w-full">
+            <Trash2Icon /> Delete Account
+          </Button>
+        </section>
       </div>
     </main>
   );
