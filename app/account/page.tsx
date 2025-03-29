@@ -5,6 +5,7 @@ import HeadingWidget from '../components/heading-widget/HeadingWidget';
 import { LogOutIcon, Trash2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { User } from '../interfaces';
+import Skeletons from '../components/skeletons/Skeletons';
 
 export default function AccountPage() {
   const [user, setUser] = useState<User>();
@@ -43,39 +44,43 @@ export default function AccountPage() {
       </section>
 
       {/* Account info */}
-      <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
-        {/* Account section heading */}
-        <h2 className="text-xl font-medium text-blue-900">Account Details</h2>
+      {loading ? (
+        <Skeletons className="h-72 sm:h-56" count={1} />
+      ) : (
+        <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
+          {/* Account section heading */}
+          <h2 className="text-xl font-medium text-blue-900">Account Details</h2>
 
-        {/* Account details section */}
-        <section className="flex flex-col gap-1">
-          <p className="text-stone-600">
-            <span className="font-medium text-black">Email Address:</span> {user?.email}
-          </p>
-          <p className="text-stone-600">
-            <span className="font-medium text-black">Name:</span> {user?.name}
-          </p>
-          <p className="text-stone-600">
-            <span className="font-medium text-black">Date Created:</span> {user?.dateCreated}
-          </p>
-          <p className="text-stone-600">
-            <span className="font-medium text-black">Number of Saved Journeys:</span>{' '}
-            {user?.journeyCount}
-          </p>
-        </section>
+          {/* Account details section */}
+          <section className="flex flex-col gap-1">
+            <p className="text-stone-600">
+              <span className="font-medium text-black">Email Address:</span> {user?.email}
+            </p>
+            <p className="text-stone-600">
+              <span className="font-medium text-black">Name:</span> {user?.name}
+            </p>
+            <p className="text-stone-600">
+              <span className="font-medium text-black">Date Created:</span> {user?.dateCreated}
+            </p>
+            <p className="text-stone-600">
+              <span className="font-medium text-black">Number of Saved Journeys:</span>{' '}
+              {user?.journeyCount}
+            </p>
+          </section>
 
-        {/* Buttons */}
-        <section className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
-          <Link href={'/signout'} className="w-full">
-            <Button className="w-full" variant="secondary">
-              <LogOutIcon /> Sign Out
+          {/* Buttons */}
+          <section className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
+            <Link href={'/signout'} className="w-full">
+              <Button className="w-full" variant="secondary">
+                <LogOutIcon /> Sign Out
+              </Button>
+            </Link>
+            <Button variant="destructive" className="w-full">
+              <Trash2Icon /> Delete Account
             </Button>
-          </Link>
-          <Button variant="destructive" className="w-full">
-            <Trash2Icon /> Delete Account
-          </Button>
-        </section>
-      </div>
+          </section>
+        </div>
+      )}
     </main>
   );
 }
