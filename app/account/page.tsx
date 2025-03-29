@@ -6,6 +6,7 @@ import { LogOutIcon, Trash2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { User } from '../interfaces';
 import Skeletons from '../components/skeletons/Skeletons';
+import Notice from '../components/notice/Notice';
 
 export default function AccountPage() {
   const [user, setUser] = useState<User>();
@@ -46,6 +47,12 @@ export default function AccountPage() {
       {/* Account info */}
       {loading ? (
         <Skeletons className="h-72 sm:h-56" count={1} />
+      ) : error ? (
+        <Notice
+          notice="Error"
+          description="There was an error getting account information, please try again."
+          status="fail"
+        />
       ) : (
         <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
           {/* Account section heading */}
