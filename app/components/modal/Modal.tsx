@@ -23,10 +23,14 @@ export default function Modal({
       <h2 className="text-xl font-bold text-blue-900">{title}</h2>
       {children}
       <section className="flex w-full justify-evenly gap-2 px-2">
-        <Button onClick={cancelAction} className="w-full" secondary>
+        <Button onClick={cancelAction} className="w-full" variant="secondary">
           <XIcon /> Cancel
         </Button>
-        <Button onClick={confirmAction} destructive={destructive} className="w-full">
+        <Button
+          onClick={confirmAction}
+          variant={destructive ? 'destructive' : 'primary'}
+          className="w-full"
+        >
           {confirmIcon ?? <CheckIcon />} {confirmLabel ?? 'OK'}
         </Button>
       </section>

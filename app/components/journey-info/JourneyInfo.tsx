@@ -65,7 +65,7 @@ export default function JourneyInfo({
           href={`/trains/${journey.secondStation}/${journey.firstStation}`}
           className="w-full"
         >
-          <Button className="w-full" secondary>
+          <Button className="w-full" variant="secondary">
             <SearchIcon />
             <span className="flex items-center gap-0.5">
               {journey.secondCrs} <ArrowRightIcon size={16} /> {journey.firstCrs}

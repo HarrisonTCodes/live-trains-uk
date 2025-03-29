@@ -72,7 +72,7 @@ export default function AddJourneyPage() {
           <Search label="Second station" value={secondStation} setValue={setSecondStation} />
         </section>
         <section className="flex w-full justify-evenly gap-2">
-          <Button back secondary className="w-1/2">
+          <Button back variant="secondary" className="w-1/2">
             <XIcon /> Cancel
           </Button>
           <Button submit className="w-1/2">
