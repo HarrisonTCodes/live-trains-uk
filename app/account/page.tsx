@@ -32,13 +32,23 @@ export default async function AccountPage() {
         </HeadingWidget>
       </section>
 
+      {/* Account Info */}
       <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
-        <h2>Account Details</h2>
+        <h2 className="text-xl font-bold text-blue-900">Account Details</h2>
         <section>
-          <p>Email Address: {session?.user?.email}</p>
-          <p>Name: {session?.user?.name}</p>
-          <p>Date Created: {accountCreatedAt.toDateString()}</p>
-          <p>Number of Saved Journeys: {journeyCount}</p>
+          <p className="text-stone-600">
+            <span className="font-medium text-black">Email Address:</span> {session?.user?.email}
+          </p>
+          <p className="text-stone-600">
+            <span className="font-medium text-black">Name:</span> {session?.user?.name}
+          </p>
+          <p className="text-stone-600">
+            <span className="font-medium text-black">Date Created:</span>{' '}
+            {accountCreatedAt.toDateString()}
+          </p>
+          <p className="text-stone-600">
+            <span className="font-medium text-black">Number of Saved Journeys:</span> {journeyCount}
+          </p>
         </section>
         <Button variant="destructive" className="w-full">
           <Trash2Icon /> Delete Account
