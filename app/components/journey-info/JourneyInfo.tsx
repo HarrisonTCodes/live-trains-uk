@@ -58,7 +58,7 @@ export default function JourneyInfo({
         </div>
       </div>
 
-      {/* Search departures and delete journey buttons */}
+      {/* Search departures buttons */}
       <div className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
         <Link
           prefetch={false}
