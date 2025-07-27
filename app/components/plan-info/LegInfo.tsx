@@ -1,12 +1,11 @@
 import { Leg } from '@/app/interfaces';
+import formatDate from '@/app/utils/formatDate';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { TrainFrontIcon, TrainFrontTunnelIcon } from 'lucide-react';
 
 export default function LegInfo({ leg }: { leg: Leg }) {
-  const departureDate = new Date(leg.departure.time);
-  const departureTimeString = `${departureDate.getDate().toString()} ${departureDate.toLocaleString('en-GB', { month: 'long' })}, ${departureDate.getHours().toString().padStart(2, '0')}:${departureDate.getMinutes().toString().padStart(2, '0')}`;
-  const arrivalDate = new Date(leg.arrival.time);
-  const arrivalTimeString = `${arrivalDate.getDate().toString()} ${arrivalDate.toLocaleString('en-GB', { month: 'long' })}, ${arrivalDate.getHours().toString().padStart(2, '0')}:${arrivalDate.getMinutes().toString().padStart(2, '0')}`;
+  const departureTimeString = formatDate(leg.departure.time);
+  const arrivalTimeString = formatDate(leg.arrival.time);
 
   return (
     <section className="p-2">
