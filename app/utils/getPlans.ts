@@ -52,12 +52,12 @@ export default async function getPlans(from: string, to?: string) {
     return plan.legs.map((leg) => ({
       departure: {
         station: leg.board.name,
-        crs: leg.board.crs,
+        crs: leg.board.crsCode,
         time: leg.timetable.scheduled.departure,
       },
       arrival: {
         station: leg.alight.name,
-        crs: leg.alight.crs,
+        crs: leg.alight.crsCode,
         time: leg.timetable.scheduled.arrival,
       },
     }));
