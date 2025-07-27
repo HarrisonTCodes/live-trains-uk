@@ -78,3 +78,36 @@ export interface User {
   dateCreated: string;
   journeyCount: number;
 }
+
+export interface PlanResponse {
+  legs: LegResponse[];
+}
+
+export interface LegResponse {
+  board: LegPointResponse;
+  alight: LegPointResponse;
+  mode: 'TRAIN' | 'UNDERGROUND';
+  timetable: {
+    scheduled: {
+      departure: string;
+      arrival: string;
+    };
+  };
+}
+
+export interface LegPointResponse {
+  crsCode: string;
+  name: string;
+}
+
+export interface Leg {
+  arrival: LegPoint;
+  departure: LegPoint;
+  mode: 'train' | 'underground';
+}
+
+export interface LegPoint {
+  crs: string;
+  station: string;
+  time: string;
+}

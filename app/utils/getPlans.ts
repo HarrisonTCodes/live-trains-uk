@@ -1,3 +1,4 @@
+import { LegResponse, PlanResponse } from '../interfaces';
 import stations from './stations';
 
 export default async function getPlans(from: string, to?: string) {
@@ -48,8 +49,8 @@ export default async function getPlans(from: string, to?: string) {
     }),
   }).then((response) => response.json());
 
-  const plans = response.outwardJourneys.map((plan) => {
-    return plan.legs.map((leg) => ({
+  const plans = response.outwardJourneys.map((plan: PlanResponse) => {
+    return plan.legs.map((leg: LegResponse) => ({
       departure: {
         station: leg.board.name,
         crs: leg.board.crsCode,
