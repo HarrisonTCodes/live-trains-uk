@@ -60,6 +60,7 @@ export default async function getPlans(from: string, to?: string) {
         crs: leg.alight.crsCode,
         time: leg.timetable.scheduled.arrival,
       },
+      mode: leg.mode.toLowerCase(),
     }));
   });
 
