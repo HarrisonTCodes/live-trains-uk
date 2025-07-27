@@ -13,6 +13,7 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
 
   const parsedFrom = decodeURIComponent(params.from).replaceAll('+', ' ').toLowerCase();
   const parsedTo = decodeURIComponent(params.to).replaceAll('+', ' ').toLowerCase();
+  const now = getTime();
 
   return (
     <main className="flex flex-grow flex-col items-center gap-6 py-8">
@@ -25,7 +26,7 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
         {/* Stations, time and button */}
         <HeadingWidget
           text={`${toTitleCase(parsedFrom)} to ${parsedTo === 'any' ? 'Any Station' : toTitleCase(parsedTo)}`}
-          tag={`Journey plans`}
+          tag={`Last updated at ${now}`}
         >
           <Link
             prefetch={false}
