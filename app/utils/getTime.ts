@@ -1,8 +1,7 @@
+import { format, toZonedTime } from "date-fns-tz";
+
 export default function getTime() {
   const date = new Date();
-  return `${formatNumber(date.getHours())}:${formatNumber(date.getMinutes())}`;
-}
-
-function formatNumber(number: number) {
-  return number.toString().padStart(2, '0');
+  const zonedDate = toZonedTime(date, "Europe/London")
+  return format(zonedDate, "HH:mm")
 }
