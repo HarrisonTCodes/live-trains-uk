@@ -34,3 +34,8 @@ test('handles special untitled words', () => {
   expect(toTitleCase('chapel-en-le-frith')).toBe('Chapel-en-le-Frith');
   expect(toTitleCase('ashchurch for tewkesbury')).toBe('Ashchurch for Tewkesbury');
 });
+
+test('handles station names beginning with "the"', () => {
+  expect(toTitleCase('the hawthorns')).toBe('The Hawthorns');
+  expect(toTitleCase('the lakes')).toBe('The Lakes');
+});

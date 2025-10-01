@@ -18,8 +18,8 @@ const doNotTitleCase = [
 ];
 
 export default function toTitleCase(str: string) {
-  return str.replace(/\b\w+/g, (text) =>
-    doNotTitleCase.includes(text)
+  return str.replace(/\b\w+/g, (text, i) =>
+    doNotTitleCase.includes(text) && i > 0
       ? text
       : text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
   );
