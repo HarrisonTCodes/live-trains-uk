@@ -1700,6 +1700,7 @@ const stations = {
   'newport (essex)': 'NWE',
   'newport (south wales)': 'NWP',
   newquay: 'NQY',
+  newsham: 'NWH',
   newstead: 'NSD',
   newton: 'NTN',
   'newton abbot': 'NTA',
