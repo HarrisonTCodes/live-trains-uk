@@ -189,6 +189,7 @@ const stations = {
   bearsden: 'BRN',
   bearsted: 'BSD',
   beasdale: 'BSL',
+  'beaulieu park': 'BPA',
   'beaulieu road': 'BEU',
   beauly: 'BEL',
   bebington: 'BEB',
