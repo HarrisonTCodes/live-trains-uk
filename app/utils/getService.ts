@@ -6,8 +6,9 @@ export default async function getService(serviceId: string, toStation?: string) 
   headers.set('x-apikey', process.env.SERVICE_DETAILS_API_KEY!);
 
   // Get service details
+  const paddedSeviceId = serviceId.padEnd(15, '_');
   const response = await fetch(
-    `https://api1.raildata.org.uk/1010-service-details/LDBWS/api/20220120/GetServiceDetails/${serviceId}`,
+    `https://api1.raildata.org.uk/1010-service-details/LDBWS/api/20220120/GetServiceDetails/${paddedSeviceId}`,
     { headers, cache: 'no-store' },
   )
     .then((response) => response.json())
