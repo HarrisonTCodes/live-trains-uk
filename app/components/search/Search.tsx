@@ -30,7 +30,7 @@ export default function Search({
     });
 
     // Setup listener with worker
-    worker.onmessage = (event: MessageEvent) => {
+    worker.onmessage = (event: MessageEvent<Station[]>) => {
       setOptions(event.data);
     };
 
