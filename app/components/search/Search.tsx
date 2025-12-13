@@ -1,10 +1,11 @@
 'use client';
 import { Station } from '@/app/interfaces';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
 import Tag from '../tag/Tag';
 import { motion, AnimatePresence } from 'framer-motion';
+import { stations } from '@/app/utils/stations';
 
 export default function Search({
   label,
@@ -16,8 +17,28 @@ export default function Search({
   setValue: (value: string) => void;
 }) {
   const [options, setOptions] = useState<Station[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const [focused, setFocused] = useState<boolean>(false);
+  const workerRef = useRef<Worker | null>(null);
+
+  useEffect(() => {
+    const worker = new Worker(new URL('./SearchWorker.ts', import.meta.url), { type: 'module' });
+
+    // Send stations to worker to initialise fuse
+    worker.postMessage({
+      type: 'init',
+      payload: { stations },
+    });
+
+    // Setup listener with worker
+    worker.onmessage = (event: MessageEvent) => {
+      setOptions(event.data);
+    };
+
+    // Set ref for later access
+    workerRef.current = worker;
+
+    return () => worker.terminate();
+  }, []);
 
   const getRecentOptions = () => {
     try {
@@ -46,20 +67,14 @@ export default function Search({
   };
 
   const getStations = useCallback(
-    debounce((input: string) => {
-      if (input.length < 2) return;
-      setLoading(true);
-      fetch(`/api/stations?prompt=${input}`)
-        .then((response) => response.json())
-        .then((stations) => {
-          setLoading(false);
-          setOptions(stations);
-        })
-        .catch((error) => {
-          setLoading(false);
-          console.error('Error fetching stations:', error);
-        });
-    }, 250),
+    debounce(
+      (input: string) =>
+        workerRef.current?.postMessage({
+          type: 'search',
+          payload: { input },
+        }),
+      50,
+    ),
     [],
   );
 
@@ -74,7 +89,7 @@ export default function Search({
       return;
     }
 
-    // Fetch matching stations
+    // Get matching stations
     getStations(event.target.value);
   };
 
@@ -99,7 +114,7 @@ export default function Search({
 
       {/* Matching options dropdown */}
       <AnimatePresence>
-        {(loading || options.length > 0) && focused && (
+        {options.length > 0 && focused && (
           <motion.ul
             className="absolute z-10 max-h-40 w-full translate-y-14 cursor-pointer divide-y divide-gray-300 overflow-y-scroll rounded-lg border border-gray-300 bg-white md:max-h-96"
             initial={{ opacity: 0, y: '14' }}
@@ -107,9 +122,6 @@ export default function Search({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15, ease: 'easeInOut' }}
           >
-            {loading && options.length === 0 && (
-              <li className="p-2 text-center text-lg text-gray-500">Loading stations...</li>
-            )}
             {options.map((option) => (
               <li
                 key={option.crs}

@@ -1,6 +1,6 @@
 import prisma from '@/app/utils/prisma';
 import { NextRequest } from 'next/server';
-import stations from '../../utils/stations';
+import { stations } from '../../utils/stations';
 import { auth } from '@/auth';
 
 export async function GET() {

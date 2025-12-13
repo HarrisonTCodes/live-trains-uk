@@ -1,6 +1,6 @@
 import { AlertResponse, DisruptionResponse } from '../interfaces';
 import unescape from 'lodash.unescape';
-import stations from './stations';
+import { stations } from './stations';
 
 export default async function getAlerts(station: string) {
   // Get station CRS

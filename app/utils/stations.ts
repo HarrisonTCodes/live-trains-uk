@@ -1,4 +1,4 @@
-const stations = {
+export const stations = {
   'abbey wood': 'ABW',
   aber: 'ABE',
   abercynon: 'ACY',
@@ -2626,5 +2626,3 @@ const stations = {
   'ystrad mynach': 'YSM',
   'ystrad rhondda': 'YSR',
 };
-
-export default stations;

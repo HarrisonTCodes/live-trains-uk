@@ -1,6 +1,6 @@
 import { CallingPointResponse, ServiceResponse } from '../interfaces';
 import getDuration from './getDuration';
-import stations from './stations';
+import { stations } from './stations';
 
 export default async function getServices(from: string, to?: string) {
   // Get query parameters
