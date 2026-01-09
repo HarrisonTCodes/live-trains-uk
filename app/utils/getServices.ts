@@ -8,8 +8,11 @@ export default async function getServices(from: string, to?: string) {
   const toCrs = stations[to as keyof typeof stations];
 
   // If invalid or missing stations provided
-  if (!fromCrs || (to && !toCrs)) {
-    throw Error(`Invalid station(s) provided: '${from}' and '${to}'`);
+  if (!fromCrs) {
+    throw Error(`Invalid 'from' station provided: '${from}'`);
+  }
+  if (to && !toCrs) {
+    throw Error(`Invalid 'to' station provided: '${to}'`);
   }
 
   // Set API key in headers
