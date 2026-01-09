@@ -23,7 +23,30 @@ export default async function getServices(from: string, to?: string) {
   const response = await fetch(
     `https://api1.raildata.org.uk/1010-live-departure-board-dep1_2/LDBWS/api/20220120/GetDepBoardWithDetails/${fromCrs}?numRows=10${toCrs && `&filterCrs=${toCrs}`}`,
     { headers, cache: 'no-store' },
-  ).then((response) => response.json());
+  )
+    .then((response) => response.json())
+    .catch((err) => {
+      console.error({
+        event: 'error_getting_services',
+        fromCrs,
+        toCrs,
+        error: err,
+      });
+
+      throw err;
+    });
+
+  // If the response has a fault attribute, something has necessarily gone fatally wrong
+  if (response.fault) {
+    console.error({
+      event: 'fault_getting_services',
+      fromCrs,
+      toCrs,
+      fault: response.fault,
+    });
+
+    throw Error('Failed to access departure board API');
+  }
 
   // If no services
   if (!response.trainServices) {
