@@ -12,11 +12,30 @@ export default async function getService(serviceId: string, toStation?: string) 
     { headers, cache: 'no-store' },
   )
     .then((response) => response.json())
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error({
+        event: 'error_getting_service_details',
+        serviceId: paddedSeviceId,
+        error: err,
+      });
 
-  // If the response has a message attribute, something has necessarily gone wrong
+      throw err;
+    });
+
+  // If the response has a Message attribute, something has necessarily gone wrong
   if (response.Message) {
     throw Error('Service not found');
+  }
+
+  // If the response has a fault attribute, something has necessarily gone fatally wrong
+  if (response.fault) {
+    console.error({
+      event: 'fault_getting_service_details',
+      serviceId: paddedSeviceId,
+      fault: response.fault,
+    });
+
+    throw Error('Failed to access service details API');
   }
 
   // Initialise array to store reasons calling points are cancelled
