@@ -3,6 +3,7 @@ import TrainInfo from './TrainInfo';
 import Notice from '../notice/Notice';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { Service } from '@/app/interfaces';
+import getNextFastest from '@/app/utils/getNextFastest';
 
 export default async function TrainInfoSection({ from, to }: { from: string; to?: string }) {
   const services = await getServices(from, to);
@@ -11,9 +12,10 @@ export default async function TrainInfoSection({ from, to }: { from: string; to?
       (accumulator: number, service: Service) => accumulator + service.duration,
       0,
     ) / services.services.length;
+  const nextFastestIndex = to && getNextFastest(services.services);
 
   if (services.services.length > 0) {
-    return services.services.map((service: Service) => (
+    return services.services.map((service: Service, i: number) => (
       <TrainInfo
         key={service.serviceId}
         service={service}
@@ -22,6 +24,7 @@ export default async function TrainInfoSection({ from, to }: { from: string; to?
         toStation={service.arrivalStation}
         toCrs={service.arrivalCrs}
         averageDuration={averageDuration}
+        nextFastest={i === nextFastestIndex}
       />
     ));
   } else {

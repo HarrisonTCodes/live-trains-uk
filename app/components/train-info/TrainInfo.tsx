@@ -13,6 +13,7 @@ export default function TrainInfo({
   toStation,
   toCrs,
   averageDuration,
+  nextFastest,
 }: {
   service: Service;
   fromStation: string;
@@ -20,6 +21,7 @@ export default function TrainInfo({
   toStation: string;
   toCrs: string;
   averageDuration: number;
+  nextFastest?: boolean;
 }) {
   const fast = service.duration <= averageDuration;
   const cancelled =
@@ -60,7 +62,14 @@ export default function TrainInfo({
           <h2 className="px-1 text-lg font-medium">{service.arrivalTime}</h2>
         </div>
         <div className="flex w-full justify-between">
-          <Tag status={cancelled ? 'fail' : 'neutral'}>{toCrs}</Tag>
+          <div className="flex gap-2">
+            <Tag status={cancelled ? 'fail' : 'neutral'}>{toCrs}</Tag>
+            {nextFastest && (
+              <Tag status="success">
+                <RabbitIcon size={16} /> Next fastest
+              </Tag>
+            )}
+          </div>
           {service.estimatedArrivalTime && (
             <Tag status={service.estimatedArrivalTime === 'On time' ? 'success' : 'fail'}>
               <EstimatedIcon estimated={service.estimatedArrivalTime} />
