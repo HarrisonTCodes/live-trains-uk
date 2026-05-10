@@ -30,8 +30,6 @@ export default function JourneysPage() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    setError(false);
     fetch('/api/journeys')
       .then((response) => response.json())
       .then((response) => {

@@ -1,8 +1,7 @@
 'use client';
 import { Station } from '@/app/interfaces';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import debounce from 'lodash.debounce';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Tag from '../tag/Tag';
 import { motion, AnimatePresence } from 'framer-motion';
 import { stations } from '@/app/utils/stations';
@@ -66,17 +65,19 @@ export default function Search({
     localStorage.setItem('recentStations', JSON.stringify(newRecentOptions));
   };
 
-  const getStations = useCallback(
-    debounce(
-      (input: string) =>
-        workerRef.current?.postMessage({
-          type: 'search',
-          payload: { input },
-        }),
-      50,
-    ),
-    [],
-  );
+  useEffect(() => {
+    if (!value) return;
+
+    // Debounce search to avoid excessive worker calls
+    const handler = setTimeout(() => {
+      workerRef.current?.postMessage({
+        type: 'search',
+        payload: { input: value },
+      });
+    }, 50);
+
+    return () => clearTimeout(handler);
+  }, [value]);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     // Update state
@@ -88,9 +89,6 @@ export default function Search({
       setOptions(getRecentOptions());
       return;
     }
-
-    // Get matching stations
-    getStations(event.target.value);
   };
 
   return (

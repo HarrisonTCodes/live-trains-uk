@@ -25,8 +25,6 @@ export default function AccountPage() {
   const router = useRouter();
 
   useEffect(() => {
-    setLoading(true);
-    setError(false);
     fetch('/api/account')
       .then((response) => response.json())
       .then((response) => {
