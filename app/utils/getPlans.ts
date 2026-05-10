@@ -1,5 +1,7 @@
 import { LegResponse, PlanResponse } from '../interfaces';
+import getUndergroundInfo from './getUndergroundInfo';
 import { stations } from './stations';
+import fs from 'fs';
 
 export default async function getPlans(from: string, to?: string) {
   // Get query parameters
@@ -62,6 +64,7 @@ export default async function getPlans(from: string, to?: string) {
         time: leg.timetable.scheduled.arrival,
       },
       mode: leg.mode.toLowerCase(),
+      undergroundInfo: leg.mode === 'UNDERGROUND' ? getUndergroundInfo(leg) : undefined,
     }));
   });
 

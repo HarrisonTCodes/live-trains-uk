@@ -1,0 +1,20 @@
+import { LegResponse } from '../interfaces';
+
+export default function getUndergroundInfo(leg: LegResponse) {
+  if (leg.mode !== 'UNDERGROUND') return undefined;
+
+  const messages = leg.undergroundTravelInformation?.messages;
+  if (!messages?.length) return undefined;
+
+  const message = messages[0];
+
+  const lineMatch = message.match(/the\s+([\w\s]+?)\s+Line\b/i);
+  const directionMatch = message.match(/\b(Northbound|Southbound|Eastbound|Westbound)\b/i);
+
+  if (!lineMatch) return undefined;
+
+  return {
+    line: lineMatch[1],
+    direction: directionMatch?.[1],
+  };
+}

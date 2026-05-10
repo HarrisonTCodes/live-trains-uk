@@ -17,7 +17,10 @@ export default function LegInfo({ leg }: { leg: Leg }) {
           </>
         ) : (
           <>
-            <TrainFrontTunnelIcon /> Tube
+            <TrainFrontTunnelIcon /> Tube{' '}
+            {leg.undergroundInfo
+              ? `(${leg.undergroundInfo.line} Line, ${leg.undergroundInfo.direction})`
+              : ''}
           </>
         )}
       </h2>

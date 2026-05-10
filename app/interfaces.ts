@@ -93,6 +93,9 @@ export interface LegResponse {
       arrival: string;
     };
   };
+  undergroundTravelInformation?: {
+    messages: string[];
+  };
 }
 
 export interface LegPointResponse {
@@ -104,10 +107,16 @@ export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
   mode: 'train' | 'underground';
+  undergroundInfo?: UndergroundInfo;
 }
 
 export interface LegPoint {
   crs: string;
   station: string;
   time: string;
+}
+
+export interface UndergroundInfo {
+  line: string; // TODO: Enum?
+  direction?: 'Northbound' | 'Southbound' | 'Eastbound' | 'Westbound';
 }
