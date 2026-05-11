@@ -39,7 +39,7 @@ function PlanStationInfo({
   return (
     <section className="flex items-center gap-2">
       {/* Graphic */}
-      <CircleStepGraphic isFirstStep={isFirstStation} isLastStep={isLastStation} />
+      <CircleStepGraphic isFirstStep={isFirstStation} isLastStep={isLastStation} length={150} />
 
       {/* Details */}
       <section className="flex h-24 w-full flex-col gap-2 pr-2 pt-9">
