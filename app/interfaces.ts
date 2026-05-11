@@ -106,7 +106,7 @@ export interface LegPointResponse {
 export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
-  mode: 'train' | 'underground';
+  mode: 'train' | 'underground' | 'walk';
   undergroundInfo?: UndergroundInfo;
 }
 

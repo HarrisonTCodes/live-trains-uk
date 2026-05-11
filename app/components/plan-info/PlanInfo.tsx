@@ -2,7 +2,6 @@ import { Leg } from '@/app/interfaces';
 import LegInfo from './LegInfo';
 
 export default function PlanInfo({ plan }: { plan: Leg[] }) {
-  console.log(plan);
   return (
     <div className="relative flex w-[90vw] max-w-[700px] flex-col rounded-lg border border-gray-300 bg-white px-2 pb-4">
       {plan.map((leg: Leg, index: number) => (
