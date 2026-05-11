@@ -1,8 +1,8 @@
 import { CallingPoint } from '@/app/interfaces';
-import CallingPointGraphic from './CallingPointGraphic';
 import Tag from '../tag/Tag';
 import { CircleArrowRight } from 'lucide-react';
 import EstimatedIcon from '../icon/EstimatedIcon';
+import CircleStepGraphic from '../graphics/CircleStepGraphic';
 
 export default function CallingPointInfo({
   callingPoint,
@@ -18,10 +18,10 @@ export default function CallingPointInfo({
   return (
     <section className="flex items-center gap-2">
       {/* Graphic */}
-      <CallingPointGraphic
-        isFirstPoint={isFirstPoint}
-        isLastPoint={isLastPoint}
-        departed={departed}
+      <CircleStepGraphic
+        isFirstStep={isFirstPoint}
+        isLastStep={isLastPoint}
+        circleColor={departed ? '#d6d3d1' : undefined}
       />
 
       {/* Details */}
