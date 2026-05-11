@@ -54,12 +54,12 @@ export default async function getPlans(from: string, to?: string) {
   const plans = response.outwardJourneys.map((plan: PlanResponse) => {
     return plan.legs.map((leg: LegResponse) => ({
       departure: {
-        station: leg.board.name,
+        station: leg.board.name.toLowerCase(),
         crs: leg.board.crsCode,
         time: leg.timetable.scheduled.departure,
       },
       arrival: {
-        station: leg.alight.name,
+        station: leg.alight.name.toLowerCase(),
         crs: leg.alight.crsCode,
         time: leg.timetable.scheduled.arrival,
       },

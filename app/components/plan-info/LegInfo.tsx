@@ -2,7 +2,56 @@ import { Leg } from '@/app/interfaces';
 import formatDate from '@/app/utils/formatDate';
 import CircleStepGraphic from '../graphics/CircleStepGraphic';
 import Tag from '../tag/Tag';
-import { FootprintsIcon, TrainFrontIcon, TrainFrontTunnelIcon } from 'lucide-react';
+import {
+  ArrowRightLeftIcon,
+  CircleArrowDownIcon,
+  CircleArrowLeftIcon,
+  CircleArrowRightIcon,
+  CircleArrowUpIcon,
+  FootprintsIcon,
+  TrainFrontIcon,
+  TrainFrontTunnelIcon,
+  TrainTrackIcon,
+} from 'lucide-react';
+import toTitleCase from '@/app/utils/toTitleCase';
+
+const directionDetails = {
+  northbound: {
+    label: 'Northbound',
+    icon: <CircleArrowUpIcon size={16} />,
+  },
+  southbound: {
+    label: 'Southbound',
+    icon: <CircleArrowDownIcon size={16} />,
+  },
+  eastbound: {
+    label: 'Eastbound',
+    icon: <CircleArrowRightIcon size={16} />,
+  },
+  westbound: {
+    label: 'Westbound',
+    icon: <CircleArrowLeftIcon size={16} />,
+  },
+};
+
+const modeDetails = {
+  train: {
+    label: 'Train',
+    icon: <TrainFrontIcon size={16} />,
+  },
+  underground: {
+    label: 'Tube',
+    icon: <TrainFrontTunnelIcon size={16} />,
+  },
+  walk: {
+    label: 'Walk',
+    icon: <FootprintsIcon size={16} />,
+  },
+  transfer: {
+    label: 'Transfer',
+    icon: <ArrowRightLeftIcon size={16} />,
+  },
+};
 
 export default function LegInfo({
   leg,
@@ -45,7 +94,9 @@ function PlanStationInfo({
       <section className="flex h-24 w-full flex-col gap-2 pr-2 pt-9">
         {/* Station */}
         <div className="flex w-full justify-between gap-4">
-          <p className={`pl-1 ${(isFirstStation || isLastStation) && 'font-bold'}`}>{station}</p>
+          <p className={`pl-1 ${(isFirstStation || isLastStation) && 'font-bold'}`}>
+            {toTitleCase(station)}
+          </p>
           <p
             className={`whitespace-nowrap pr-1 ${(isFirstStation || isLastStation) && 'font-bold'}`}
           >
@@ -57,25 +108,19 @@ function PlanStationInfo({
         <div className="flex gap-2">
           <section className="flex flex-wrap gap-2">
             <Tag>
-              {leg.mode === 'train' ? (
-                <>
-                  <TrainFrontIcon size={16} /> Train
-                </>
-              ) : leg.mode === 'underground' ? (
-                <>
-                  <TrainFrontTunnelIcon size={16} /> Tube
-                </>
-              ) : (
-                <>
-                  <FootprintsIcon size={16} /> Walk
-                </>
-              )}
+              {modeDetails[leg.mode].icon}
+              {modeDetails[leg.mode].label}
             </Tag>
             {leg.mode === 'underground' && leg.undergroundInfo?.line && (
-              <Tag>{leg.undergroundInfo.line} Line</Tag>
+              <Tag>
+                <TrainTrackIcon size={16} /> {`${toTitleCase(leg.undergroundInfo.line)} Line`}
+              </Tag>
             )}
             {leg.mode === 'underground' && leg.undergroundInfo?.direction && (
-              <Tag>{leg.undergroundInfo.direction}</Tag>
+              <Tag>
+                {directionDetails[leg.undergroundInfo.direction].icon}
+                {directionDetails[leg.undergroundInfo.direction].label}
+              </Tag>
             )}
           </section>
         </div>

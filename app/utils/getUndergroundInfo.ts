@@ -14,7 +14,7 @@ export default function getUndergroundInfo(leg: LegResponse) {
   if (!lineMatch) return undefined;
 
   return {
-    line: lineMatch[1],
-    direction: directionMatch?.[1],
+    line: lineMatch[1].toLowerCase(),
+    direction: directionMatch?.[1]?.toLowerCase(),
   };
 }

@@ -106,7 +106,7 @@ export interface LegPointResponse {
 export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
-  mode: 'train' | 'underground' | 'walk';
+  mode: 'train' | 'underground' | 'walk' | 'transfer';
   undergroundInfo?: UndergroundInfo;
 }
 
@@ -118,5 +118,5 @@ export interface LegPoint {
 
 export interface UndergroundInfo {
   line: string; // TODO: Enum?
-  direction?: 'Northbound' | 'Southbound' | 'Eastbound' | 'Westbound';
+  direction?: 'northbound' | 'southbound' | 'eastbound' | 'westbound';
 }
