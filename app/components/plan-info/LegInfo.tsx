@@ -4,6 +4,7 @@ import CircleStepGraphic from '../graphics/CircleStepGraphic';
 import Tag from '../tag/Tag';
 import {
   ArrowRightLeftIcon,
+  BusIcon,
   CircleArrowDownIcon,
   CircleArrowLeftIcon,
   CircleArrowRightIcon,
@@ -14,25 +15,6 @@ import {
   TrainTrackIcon,
 } from 'lucide-react';
 import toTitleCase from '@/app/utils/toTitleCase';
-
-const directionDetails = {
-  northbound: {
-    label: 'Northbound',
-    icon: <CircleArrowUpIcon size={16} />,
-  },
-  southbound: {
-    label: 'Southbound',
-    icon: <CircleArrowDownIcon size={16} />,
-  },
-  eastbound: {
-    label: 'Eastbound',
-    icon: <CircleArrowRightIcon size={16} />,
-  },
-  westbound: {
-    label: 'Westbound',
-    icon: <CircleArrowLeftIcon size={16} />,
-  },
-};
 
 const modeDetails = {
   train: {
@@ -50,6 +32,29 @@ const modeDetails = {
   transfer: {
     label: 'Transfer',
     icon: <ArrowRightLeftIcon size={16} />,
+  },
+  replacement_bus: {
+    label: 'Bus',
+    icon: <BusIcon size={16} />,
+  },
+};
+
+const directionDetails = {
+  northbound: {
+    label: 'Northbound',
+    icon: <CircleArrowUpIcon size={16} />,
+  },
+  southbound: {
+    label: 'Southbound',
+    icon: <CircleArrowDownIcon size={16} />,
+  },
+  eastbound: {
+    label: 'Eastbound',
+    icon: <CircleArrowRightIcon size={16} />,
+  },
+  westbound: {
+    label: 'Westbound',
+    icon: <CircleArrowLeftIcon size={16} />,
   },
 };
 
@@ -81,9 +86,6 @@ function PlanStationInfo({
 }) {
   const time = isLastStation ? formatDate(leg.arrival.time) : formatDate(leg.departure.time);
   const station = isLastStation ? leg.arrival.station : leg.departure.station;
-  if (leg.mode === 'underground') {
-    console.log(leg.undergroundInfo);
-  }
 
   return (
     <section className="flex items-center gap-2">
@@ -107,20 +109,29 @@ function PlanStationInfo({
         {/* Detail tags */}
         <div className="flex gap-2">
           <section className="flex flex-wrap gap-2">
-            <Tag>
-              {modeDetails[leg.mode].icon}
-              {modeDetails[leg.mode].label}
-            </Tag>
-            {leg.mode === 'underground' && leg.undergroundInfo?.line && (
-              <Tag>
-                <TrainTrackIcon size={16} /> {`${toTitleCase(leg.undergroundInfo.line)} Line`}
-              </Tag>
-            )}
-            {leg.mode === 'underground' && leg.undergroundInfo?.direction && (
-              <Tag>
-                {directionDetails[leg.undergroundInfo.direction].icon}
-                {directionDetails[leg.undergroundInfo.direction].label}
-              </Tag>
+            {!isLastStation && (
+              <>
+                <Tag>
+                  {modeDetails[leg.mode].icon}
+                  {modeDetails[leg.mode].label}
+                </Tag>
+                {leg.mode === 'underground' && (
+                  <>
+                    {leg.undergroundInfo?.line && (
+                      <Tag>
+                        <TrainTrackIcon size={16} />{' '}
+                        {`${toTitleCase(leg.undergroundInfo.line)} Line`}
+                      </Tag>
+                    )}
+                    {leg.undergroundInfo?.direction && (
+                      <Tag>
+                        {directionDetails[leg.undergroundInfo.direction].icon}
+                        {directionDetails[leg.undergroundInfo.direction].label}
+                      </Tag>
+                    )}
+                  </>
+                )}
+              </>
             )}
           </section>
         </div>
