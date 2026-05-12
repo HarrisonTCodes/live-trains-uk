@@ -81,6 +81,7 @@ export interface User {
 
 export interface PlanResponse {
   legs: LegResponse[];
+  duration: string;
 }
 
 export interface LegResponse {
@@ -119,4 +120,9 @@ export interface LegPoint {
 export interface UndergroundInfo {
   line: string; // TODO: Enum?
   direction?: 'northbound' | 'southbound' | 'eastbound' | 'westbound';
+}
+
+export interface Plan {
+  legs: Leg[];
+  duration: string;
 }

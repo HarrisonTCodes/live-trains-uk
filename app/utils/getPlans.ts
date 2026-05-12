@@ -52,20 +52,23 @@ export default async function getPlans(from: string, to?: string) {
   }).then((response) => response.json());
 
   const plans = response.outwardJourneys.map((plan: PlanResponse) => {
-    return plan.legs.map((leg: LegResponse) => ({
-      departure: {
-        station: leg.board.name.toLowerCase(),
-        crs: leg.board.crsCode,
-        time: leg.timetable.scheduled.departure,
-      },
-      arrival: {
-        station: leg.alight.name.toLowerCase(),
-        crs: leg.alight.crsCode,
-        time: leg.timetable.scheduled.arrival,
-      },
-      mode: leg.mode.toLowerCase(),
-      undergroundInfo: leg.mode === 'UNDERGROUND' ? getUndergroundInfo(leg) : undefined,
-    }));
+    return {
+      duration: plan.duration,
+      legs: plan.legs.map((leg: LegResponse) => ({
+        departure: {
+          station: leg.board.name.toLowerCase(),
+          crs: leg.board.crsCode,
+          time: leg.timetable.scheduled.departure,
+        },
+        arrival: {
+          station: leg.alight.name.toLowerCase(),
+          crs: leg.alight.crsCode,
+          time: leg.timetable.scheduled.arrival,
+        },
+        mode: leg.mode.toLowerCase(),
+        undergroundInfo: leg.mode === 'UNDERGROUND' ? getUndergroundInfo(leg) : undefined,
+      })),
+    };
   });
 
   return plans;
