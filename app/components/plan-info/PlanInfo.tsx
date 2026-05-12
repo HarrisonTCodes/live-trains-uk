@@ -1,6 +1,7 @@
 import { Leg, Plan } from '@/app/interfaces';
 import LegInfo from './LegInfo';
-import { ClockIcon, MapPinIcon } from 'lucide-react';
+import { ClockIcon, MapPinIcon, MapPinCheckIcon } from 'lucide-react';
+import { format } from 'date-fns';
 
 export default function PlanInfo({ plan }: { plan: Plan }) {
   return (
@@ -18,7 +19,7 @@ export default function PlanInfo({ plan }: { plan: Plan }) {
       </section>
 
       {/* Plan summary */}
-      <section className="grid h-12 w-full grid-cols-3 grid-rows-1 pb-2 pl-3 pr-2 pt-6">
+      <section className="grid h-12 w-full grid-cols-3 grid-rows-1 px-1 pb-2 pt-6">
         <p className="flex items-center justify-start gap-1">
           <MapPinIcon className="text-stone-600" /> {plan.legs.length} Leg
           {plan.legs.length > 1 && 's'}
@@ -26,7 +27,10 @@ export default function PlanInfo({ plan }: { plan: Plan }) {
         <p className="flex items-center justify-center gap-1">
           <ClockIcon className="text-stone-600" /> {plan.duration}
         </p>
-        <span className="flex items-center justify-end">placeholder</span>
+        <p className="flex items-center justify-end gap-1">
+          <MapPinCheckIcon className="text-stone-600" />{' '}
+          {format(plan.legs[plan.legs.length - 1].arrival.time, 'HH:mm')}
+        </p>
       </section>
     </div>
   );
