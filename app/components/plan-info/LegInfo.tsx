@@ -1,5 +1,4 @@
 import { Leg } from '@/app/interfaces';
-import formatDate from '@/app/utils/formatDate';
 import CircleStepGraphic from '../graphics/CircleStepGraphic';
 import Tag from '../tag/Tag';
 import {
@@ -15,6 +14,7 @@ import {
   TrainTrackIcon,
 } from 'lucide-react';
 import toTitleCase from '@/app/utils/toTitleCase';
+import { format } from 'date-fns';
 
 const modeDetails = {
   train: {
@@ -84,7 +84,9 @@ function PlanStationInfo({
   isFirstStation?: boolean;
   isLastStation?: boolean;
 }) {
-  const time = isLastStation ? formatDate(leg.arrival.time) : formatDate(leg.departure.time);
+  const time = isLastStation
+    ? format(leg.arrival.time, 'd MMM, HH:mm')
+    : format(leg.departure.time, 'd MMM, HH:mm');
   const station = isLastStation ? leg.arrival.station : leg.departure.station;
 
   return (
