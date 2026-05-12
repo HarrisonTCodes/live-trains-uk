@@ -1,12 +1,15 @@
 import BackButton from '@/app/components/button/BackButton';
 import Button from '@/app/components/button/Button';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
+import Notice from '@/app/components/notice/Notice';
 import PlanInfoSection from '@/app/components/plan-info/PlanInfoSection';
+import Skeletons from '@/app/components/skeletons/Skeletons';
 import getPlans from '@/app/utils/getPlans';
 import getTime from '@/app/utils/getTime';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { BookmarkIcon } from 'lucide-react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export default async function PlanPage(props: { params: Promise<{ from: string; to: string }> }) {
   const params = await props.params;
@@ -40,7 +43,16 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
         </HeadingWidget>
       </section>
 
-      <PlanInfoSection from={parsedFrom} to={parsedTo} />
+      {/* Experimental feature notice */}
+      <Notice
+        notice="Experimental Feature"
+        description="Planning is still in development, and may not work as expected, or undergo regular change. You can report any issues or feedback on GitHub (see website footer)."
+        status="info"
+      />
+
+      <Suspense fallback={<Skeletons className="h-96" />}>
+        <PlanInfoSection from={parsedFrom} to={parsedTo} />
+      </Suspense>
     </main>
   );
 }

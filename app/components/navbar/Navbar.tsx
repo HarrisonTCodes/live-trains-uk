@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import {
   BookmarkIcon,
   CircleAlertIcon,
+  MapIcon,
   MenuIcon,
   TrainFrontIcon,
   UserRoundIcon,
@@ -17,6 +18,11 @@ const buttonData = [
     label: 'Live Trains',
     href: '/',
     icon: <TrainFrontIcon />,
+  },
+  {
+    label: 'Plans',
+    href: '/plans',
+    icon: <MapIcon />,
   },
   {
     label: 'My Journeys',

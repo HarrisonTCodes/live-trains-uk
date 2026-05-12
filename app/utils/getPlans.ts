@@ -1,7 +1,6 @@
 import { LegResponse, PlanResponse } from '../interfaces';
 import getUndergroundInfo from './getUndergroundInfo';
 import { stations } from './stations';
-import fs from 'fs';
 
 export default async function getPlans(from: string, to?: string) {
   // Get query parameters
