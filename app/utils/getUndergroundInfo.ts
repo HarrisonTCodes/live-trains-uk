@@ -10,8 +10,9 @@ export default function getUndergroundInfo(leg: LegResponse) {
 
   const lineMatch = message.match(/the\s+([\w\s]+?)\s+Line\b/i);
   const directionMatch = message.match(/\b(Northbound|Southbound|Eastbound|Westbound)\b/i);
+  const directMatch = message.match(/\bwhich\sis\sa\sdirect\sservice\b/i);
 
-  if (!lineMatch) return undefined;
+  if (!lineMatch || !directionMatch || !directMatch) return undefined;
 
   return {
     line: lineMatch[1].toLowerCase(),
