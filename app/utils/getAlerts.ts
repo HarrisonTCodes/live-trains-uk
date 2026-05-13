@@ -16,10 +16,10 @@ export default async function getAlerts(station: string) {
   headers.set('x-apikey', process.env.DISRUPTIONS_API_KEY!);
 
   // Get alerts
-  const response = await fetch(
-    `https://api1.raildata.org.uk/1010-disruption-list1_0/LDBSVWS/api/20220120/GetDisruptionList/${stationCrs}`,
-    { headers, cache: 'no-store' },
-  )
+  const response = await fetch(`${process.env.DISRUPTIONS_BASE_URL}/${stationCrs}`, {
+    headers,
+    cache: 'no-store',
+  })
     .then((response) => response.json())
     .catch((err) => {
       console.error({

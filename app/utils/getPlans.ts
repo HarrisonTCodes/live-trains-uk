@@ -14,7 +14,7 @@ export default async function getPlans(from: string, to?: string) {
 
   const now = new Date().toISOString();
 
-  const response = await fetch('https://jpservices.nationalrail.co.uk/journey-planner', {
+  const response = await fetch(process.env.PLANS_BASE_URL!, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

@@ -21,7 +21,7 @@ export default async function getServices(from: string, to?: string) {
 
   // Get service details
   const response = await fetch(
-    `https://api1.raildata.org.uk/1010-live-departure-board-dep1_2/LDBWS/api/20220120/GetDepBoardWithDetails/${fromCrs}?numRows=10${toCrs && `&filterCrs=${toCrs}`}`,
+    `${process.env.LIVE_DEPARTURE_BOARD_BASE_URL}/${fromCrs}?numRows=10${toCrs && `&filterCrs=${toCrs}`}`,
     { headers, cache: 'no-store' },
   )
     .then((response) => response.json())
