@@ -1,6 +1,5 @@
-import { formatDate } from 'date-fns';
 import axios from 'axios';
-import { Leg, LegResponse, Plan, PlanResponse } from '../interfaces';
+import { Leg, Plan, PlansResponse } from '../interfaces';
 import convertTransportMode from './convertTransportMode';
 import inferUndergroundInfo from './inferUndergroundInfo';
 import { stations } from './stations';
@@ -18,7 +17,7 @@ export default async function getPlans(from: string, to?: string) {
 
   const now = new Date().toISOString();
 
-  const response = await axios
+  const response = (await axios
     .post(process.env.PLANS_BASE_URL!, {
       origin: {
         crs: fromCrs,
@@ -47,7 +46,7 @@ export default async function getPlans(from: string, to?: string) {
       useAlternativeServices: false,
       increasedInterchange: 'ZERO',
     })
-    .then((response) => response.data);
+    .then((response) => response.data)) as PlansResponse;
 
   const plans: Plan[] = [];
   const icsCache: Record<string, string> = {};
@@ -61,15 +60,13 @@ export default async function getPlans(from: string, to?: string) {
         legs.push({
           departure: {
             station: leg.board.name.toLowerCase(),
-            crs: leg.board.crsCode,
             time: leg.timetable.scheduled.departure,
           },
           arrival: {
             station: leg.alight.name.toLowerCase(),
-            crs: leg.alight.crsCode,
             time: leg.timetable.scheduled.arrival,
           },
-          mode: leg.mode.toLowerCase(),
+          mode: convertTransportMode(leg.mode.toLowerCase()),
         });
         continue;
       }
@@ -80,12 +77,10 @@ export default async function getPlans(from: string, to?: string) {
         legs.push({
           departure: {
             station: leg.board.name.toLowerCase(),
-            crs: leg.board.crsCode,
             time: leg.timetable.scheduled.departure,
           },
           arrival: {
             station: leg.alight.name.toLowerCase(),
-            crs: leg.alight.crsCode,
             time: leg.timetable.scheduled.arrival,
           },
           mode: convertTransportMode(leg.mode.toLowerCase()),

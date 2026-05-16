@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { formatDate } from 'date-fns';
 import convertTransportMode from './convertTransportMode';
+import { StopPointsResponse, TubePlansResponse } from '../interfaces';
 
 export default async function getTubePlan(
   from: string,
@@ -16,18 +17,18 @@ export default async function getTubePlan(
         return icsCache[name];
       }
 
-      const search = await axios
+      const search = (await axios
         .get(process.env.STOP_POINT_SEARCH_BASE_URL!, {
           params: {
             query: name,
             app_key: process.env.STOP_POINT_SEARCH_API_KEY,
           },
         })
-        .then((response) => response.data);
+        .then((response) => response.data)) as StopPointsResponse;
 
       // Get result that has every word in name, if none, fallback to first result
       const nameWords = name.toLowerCase().split(' ');
-      let ics = search.matches.find((match: any) => {
+      let ics = search.matches.find((match) => {
         const matchWords = new Set(match.name.toLowerCase().split(' '));
         return nameWords.every((word: string) => matchWords.has(word));
       })?.icsId;
@@ -42,7 +43,7 @@ export default async function getTubePlan(
   );
 
   // Get tube journey between two stations
-  const tubePlanResponse = await axios
+  const tubePlansResponse = (await axios
     .get(`${process.env.TUBE_PLANS_BASE_URL}/${departureIcs}/to/${arrivalIcs}`, {
       params: {
         date: formatDate(at, 'yyyyMMdd'),
@@ -50,20 +51,18 @@ export default async function getTubePlan(
         app_key: process.env.TUBE_PLANS_API_KEY,
       },
     })
-    .then((response) => response.data);
-  const earliestJourney = tubePlanResponse.journeys[0];
+    .then((response) => response.data)) as TubePlansResponse;
+  const earliestJourney = tubePlansResponse.journeys[0];
 
   return earliestJourney.legs.map((leg: any) => {
     const mode = convertTransportMode(leg.mode.id.toLowerCase());
     return {
       departure: {
         station: leg.departurePoint.commonName.toLowerCase(),
-        crs: leg.departurePoint.icsCode, // TODO: FIX!!!
         time: leg.departureTime,
       },
       arrival: {
         station: leg.arrivalPoint.commonName.toLowerCase(),
-        crs: leg.arrivalPoint.icsCode, // TODO: FIX!!!
         time: leg.arrivalTime,
       },
       mode,

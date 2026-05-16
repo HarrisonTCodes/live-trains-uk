@@ -79,6 +79,10 @@ export interface User {
   journeyCount: number;
 }
 
+export interface PlansResponse {
+  outwardJourneys: PlanResponse[];
+}
+
 export interface PlanResponse {
   legs: LegResponse[];
   duration: string;
@@ -114,7 +118,6 @@ export interface Leg {
 }
 
 export interface LegPoint {
-  crs: string;
   station: string;
   time: string;
 }
@@ -127,4 +130,42 @@ export interface UndergroundInfo {
 export interface Plan {
   legs: Leg[];
   duration: string;
+}
+
+export interface StopPointsResponse {
+  total: number;
+  matches: StopPointResponse[];
+}
+
+export interface StopPointResponse {
+  icsId: string;
+  modes: string[];
+  name: string;
+}
+
+export interface TubePlansResponse {
+  journeys: TubePlanResponse[];
+}
+
+export interface TubePlanResponse {
+  legs: TubeLegResponse[];
+}
+
+export interface TubeLegResponse {
+  departurePoint: TubeLegPointResponse;
+  arrivalPoint: TubeLegPointResponse;
+  departureTime: string;
+  arrivalTime: string;
+  mode: {
+    id: string;
+  };
+  routeOptions: {
+    lineIdentifier: {
+      id: string; // TODO: Enum?
+    };
+  };
+}
+
+export interface TubeLegPointResponse {
+  commonName: string;
 }
