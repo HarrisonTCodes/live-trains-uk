@@ -104,10 +104,12 @@ export interface LegPointResponse {
   name: string;
 }
 
+export type TransportMode = 'train' | 'underground' | 'walk' | 'transfer' | 'bus' | 'dlr';
+
 export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
-  mode: 'train' | 'underground' | 'walk' | 'transfer' | 'replacement_bus';
+  mode?: TransportMode;
   undergroundInfo?: UndergroundInfo;
 }
 
