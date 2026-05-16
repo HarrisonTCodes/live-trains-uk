@@ -1,5 +1,7 @@
-import { LegResponse, PlanResponse } from '../interfaces';
-import getUndergroundInfo from './getUndergroundInfo';
+import { formatDate } from 'date-fns';
+import { Leg, LegResponse, Plan, PlanResponse } from '../interfaces';
+import convertTransportMode from './convertTransportMode';
+import inferUndergroundInfo from './inferUndergroundInfo';
 import { stations } from './stations';
 
 export default async function getPlans(from: string, to?: string) {
@@ -50,25 +52,114 @@ export default async function getPlans(from: string, to?: string) {
     }),
   }).then((response) => response.json());
 
-  const plans = response.outwardJourneys.map((plan: PlanResponse) => {
-    return {
+  const plans: Plan[] = [];
+  const icsCache: Record<string, string> = {};
+
+  for (const plan of response.outwardJourneys) {
+    const legs: Leg[] = [];
+
+    for (const leg of plan.legs) {
+      // If a non-underground leg
+      if (leg.mode !== 'UNDERGROUND') {
+        legs.push({
+          departure: {
+            station: leg.board.name.toLowerCase(),
+            crs: leg.board.crsCode,
+            time: leg.timetable.scheduled.departure,
+          },
+          arrival: {
+            station: leg.alight.name.toLowerCase(),
+            crs: leg.alight.crsCode,
+            time: leg.timetable.scheduled.arrival,
+          },
+          mode: leg.mode.toLowerCase(),
+        });
+        continue;
+      }
+
+      // If leg is trivial, direct underground service (details can be inferred from message string)
+      const inferredUndergroundInfo = inferUndergroundInfo(leg);
+      if (inferredUndergroundInfo) {
+        legs.push({
+          departure: {
+            station: leg.board.name.toLowerCase(),
+            crs: leg.board.crsCode,
+            time: leg.timetable.scheduled.departure,
+          },
+          arrival: {
+            station: leg.alight.name.toLowerCase(),
+            crs: leg.alight.crsCode,
+            time: leg.timetable.scheduled.arrival,
+          },
+          mode: convertTransportMode(leg.mode.toLowerCase()),
+          undergroundInfo: inferredUndergroundInfo,
+        });
+        continue;
+      }
+
+      // Get station ICS IDs using (cleaned) names for TfL tube API
+      const cleanedNames = [
+        leg.board.name.replace(/\s*\(.*?\)/g, ''),
+        leg.alight.name.replace(/\s*\(.*?\)/g, ''),
+      ];
+      const [departureIcs, arrivalIcs] = await Promise.all(
+        cleanedNames.map(async (name) => {
+          if (name in icsCache) {
+            return icsCache[name];
+          }
+
+          const search = await fetch(`https://api.tfl.gov.uk/StopPoint/Search?query=${name}`).then(
+            (response) => response.json(),
+          );
+
+          // Get result that has every word in name, if none, fallback to first result
+          const nameWords = name.toLowerCase().split();
+          let ics = search.matches.find((match: any) => {
+            const matchWords = new Set(match.name.toLowerCase().split());
+            return nameWords.every((word: string) => matchWords.has(word));
+          })?.icsId;
+          if (!ics) {
+            ics = search.matches[0].icsId;
+          }
+
+          // Update cache and return ID
+          icsCache[name] = ics;
+          return ics;
+        }),
+      );
+
+      // Get tube journey between two stations
+      const tubePlanResponse = await fetch(
+        `https://api.tfl.gov.uk/Journey/JourneyResults/${departureIcs}/to/${arrivalIcs}?date=${formatDate(leg.timetable.scheduled.departure, 'yyyyMMdd')}&time=${formatDate(leg.timetable.scheduled.departure, 'HHmm')}`,
+      ).then((response) => response.json());
+      const earliestJourney = tubePlanResponse.journeys[0];
+
+      for (const subLeg of earliestJourney.legs) {
+        const mode = convertTransportMode(subLeg.mode.id.toLowerCase());
+        legs.push({
+          departure: {
+            station: subLeg.departurePoint.commonName.toLowerCase(),
+            crs: subLeg.departurePoint.icsCode, // TODO: FIX!!!
+            time: subLeg.departureTime,
+          },
+          arrival: {
+            station: subLeg.arrivalPoint.commonName.toLowerCase(),
+            crs: subLeg.arrivalPoint.icsCode, // TODO: FIX!!!
+            time: subLeg.arrivalTime,
+          },
+          mode,
+          undergroundInfo: {
+            line: mode === 'underground' ? subLeg.routeOptions[0].lineIdentifier.id : undefined,
+          },
+        });
+      }
+    }
+
+    plans.push({
       duration: plan.duration,
-      legs: plan.legs.map((leg: LegResponse) => ({
-        departure: {
-          station: leg.board.name.toLowerCase(),
-          crs: leg.board.crsCode,
-          time: leg.timetable.scheduled.departure,
-        },
-        arrival: {
-          station: leg.alight.name.toLowerCase(),
-          crs: leg.alight.crsCode,
-          time: leg.timetable.scheduled.arrival,
-        },
-        mode: leg.mode.toLowerCase(),
-        undergroundInfo: leg.mode === 'UNDERGROUND' ? getUndergroundInfo(leg) : undefined,
-      })),
-    };
-  });
+      legs,
+    });
+  }
 
   return plans;
 }

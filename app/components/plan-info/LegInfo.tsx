@@ -33,9 +33,13 @@ const modeDetails = {
     label: 'Transfer',
     icon: <ArrowRightLeftIcon size={16} />,
   },
-  replacement_bus: {
+  bus: {
     label: 'Bus',
     icon: <BusIcon size={16} />,
+  },
+  dlr: {
+    label: 'DLR',
+    icon: <TrainFrontIcon size={16} />,
   },
 };
 
@@ -113,10 +117,12 @@ function PlanStationInfo({
           <section className="flex flex-wrap gap-2">
             {!isLastStation && (
               <>
-                <Tag>
-                  {modeDetails[leg.mode].icon}
-                  {modeDetails[leg.mode].label}
-                </Tag>
+                {leg.mode && (
+                  <Tag>
+                    {modeDetails[leg.mode].icon}
+                    {modeDetails[leg.mode].label}
+                  </Tag>
+                )}
                 {leg.mode === 'underground' && (
                   <>
                     {leg.undergroundInfo?.line && (

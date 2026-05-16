@@ -1,6 +1,6 @@
-import { LegResponse } from '../interfaces';
+import { LegResponse, UndergroundInfo } from '../interfaces';
 
-export default function getUndergroundInfo(leg: LegResponse) {
+export default function inferUndergroundInfo(leg: LegResponse): UndergroundInfo | undefined {
   if (leg.mode !== 'UNDERGROUND') return undefined;
 
   const messages = leg.undergroundTravelInformation?.messages;
@@ -16,6 +16,6 @@ export default function getUndergroundInfo(leg: LegResponse) {
 
   return {
     line: lineMatch[1].toLowerCase(),
-    direction: directionMatch?.[1]?.toLowerCase(),
+    direction: directionMatch?.[1]?.toLowerCase() as UndergroundInfo['direction'],
   };
 }
