@@ -108,9 +108,9 @@ export default async function getPlans(from: string, to?: string) {
             return icsCache[name];
           }
 
-          const search = await fetch(`https://api.tfl.gov.uk/StopPoint/Search?query=${name}`).then(
-            (response) => response.json(),
-          );
+          const search = await fetch(
+            `${process.env.STOP_POINT_SEARCH_BASE_URL}?query=${name}&app_key=${process.env.STOP_POINT_SEARCH_API_KEY}`,
+          ).then((response) => response.json());
 
           // Get result that has every word in name, if none, fallback to first result
           const nameWords = name.toLowerCase().split();
@@ -130,7 +130,7 @@ export default async function getPlans(from: string, to?: string) {
 
       // Get tube journey between two stations
       const tubePlanResponse = await fetch(
-        `https://api.tfl.gov.uk/Journey/JourneyResults/${departureIcs}/to/${arrivalIcs}?date=${formatDate(leg.timetable.scheduled.departure, 'yyyyMMdd')}&time=${formatDate(leg.timetable.scheduled.departure, 'HHmm')}`,
+        `${process.env.TUBE_PLANS_BASE_URL}/${departureIcs}/to/${arrivalIcs}?date=${formatDate(leg.timetable.scheduled.departure, 'yyyyMMdd')}&time=${formatDate(leg.timetable.scheduled.departure, 'HHmm')}&app_key=${process.env.TUBE_PLANS_API_KEY}`,
       ).then((response) => response.json());
       const earliestJourney = tubePlanResponse.journeys[0];
 
