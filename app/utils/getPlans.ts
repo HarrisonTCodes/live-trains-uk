@@ -4,6 +4,7 @@ import { Leg, LegResponse, Plan, PlanResponse } from '../interfaces';
 import convertTransportMode from './convertTransportMode';
 import inferUndergroundInfo from './inferUndergroundInfo';
 import { stations } from './stations';
+import getTubePlan from './getTubePlan';
 
 export default async function getPlans(from: string, to?: string) {
   // Get query parameters
@@ -93,73 +94,14 @@ export default async function getPlans(from: string, to?: string) {
         continue;
       }
 
-      // Get station ICS IDs using (cleaned) names for TfL tube API
-      const cleanedNames = [
-        leg.board.name.replace(/\s*\(.*?\)/g, ''),
-        leg.alight.name.replace(/\s*\(.*?\)/g, ''),
-      ];
-      const [departureIcs, arrivalIcs] = await Promise.all(
-        cleanedNames.map(async (name) => {
-          if (name in icsCache) {
-            return icsCache[name];
-          }
-
-          const search = await axios
-            .get(process.env.STOP_POINT_SEARCH_BASE_URL!, {
-              params: {
-                query: name,
-                app_key: process.env.STOP_POINT_SEARCH_API_KEY,
-              },
-            })
-            .then((response) => response.data);
-
-          // Get result that has every word in name, if none, fallback to first result
-          const nameWords = name.toLowerCase().split();
-          let ics = search.matches.find((match: any) => {
-            const matchWords = new Set(match.name.toLowerCase().split());
-            return nameWords.every((word: string) => matchWords.has(word));
-          })?.icsId;
-          if (!ics) {
-            ics = search.matches[0].icsId;
-          }
-
-          // Update cache and return ID
-          icsCache[name] = ics;
-          return ics;
-        }),
+      // If leg is a complex tube journey, expand into multiple legs
+      const subLegs = await getTubePlan(
+        leg.board.name,
+        leg.alight.name,
+        leg.timetable.scheduled.departure,
+        icsCache,
       );
-
-      // Get tube journey between two stations
-      const tubePlanResponse = await axios
-        .get(`${process.env.TUBE_PLANS_BASE_URL}/${departureIcs}/to/${arrivalIcs}`, {
-          params: {
-            date: formatDate(leg.timetable.scheduled.departure, 'yyyyMMdd'),
-            time: formatDate(leg.timetable.scheduled.departure, 'HHmm'),
-            app_key: process.env.TUBE_PLANS_API_KEY,
-          },
-        })
-        .then((response) => response.data);
-      const earliestJourney = tubePlanResponse.journeys[0];
-
-      for (const subLeg of earliestJourney.legs) {
-        const mode = convertTransportMode(subLeg.mode.id.toLowerCase());
-        legs.push({
-          departure: {
-            station: subLeg.departurePoint.commonName.toLowerCase(),
-            crs: subLeg.departurePoint.icsCode, // TODO: FIX!!!
-            time: subLeg.departureTime,
-          },
-          arrival: {
-            station: subLeg.arrivalPoint.commonName.toLowerCase(),
-            crs: subLeg.arrivalPoint.icsCode, // TODO: FIX!!!
-            time: subLeg.arrivalTime,
-          },
-          mode,
-          undergroundInfo: {
-            line: mode === 'underground' ? subLeg.routeOptions[0].lineIdentifier.id : undefined,
-          },
-        });
-      }
+      legs.push(...subLegs);
     }
 
     plans.push({
