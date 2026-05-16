@@ -7,6 +7,7 @@ import toTitleCase from '@/app/utils/toTitleCase';
 import { PlusIcon, XIcon } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
+import axios from 'axios';
 
 export default function AddJourneyPage() {
   const router = useRouter();
@@ -35,22 +36,20 @@ export default function AddJourneyPage() {
       return;
     }
 
-    fetch('/api/journeys', {
-      method: 'POST',
-      body: JSON.stringify({
+    axios
+      .post('/api/journeys', {
         name,
         firstStation,
         secondStation,
-      }),
-    }).then(async (response) => {
-      if (response.ok) {
+      })
+      .then(() => {
         setError(undefined);
         router.push('/my-journeys');
-      } else {
-        const message = await response.text();
+      })
+      .catch((error) => {
+        const message = error.response?.data || '';
         setError(`Error processing journey: ${message.length > 0 ? message : 'Please try again'}`);
-      }
-    });
+      });
   };
 
   return (

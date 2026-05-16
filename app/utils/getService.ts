@@ -1,17 +1,16 @@
+import axios from 'axios';
 import { CallingPointResponse } from '@/app/interfaces';
 
 export default async function getService(serviceId: string, toStation?: string) {
-  // Set API key in headers
-  const headers = new Headers();
-  headers.set('x-apikey', process.env.SERVICE_DETAILS_API_KEY!);
-
   // Get service details
   const paddedSeviceId = serviceId.padEnd(15, '_');
-  const response = await fetch(`${process.env.SERVICE_DETAILS_BASE_URL}/${paddedSeviceId}`, {
-    headers,
-    cache: 'no-store',
-  })
-    .then((response) => response.json())
+  const response = await axios
+    .get(`${process.env.SERVICE_DETAILS_BASE_URL}/${paddedSeviceId}`, {
+      headers: {
+        'x-apikey': process.env.SERVICE_DETAILS_API_KEY!,
+      },
+    })
+    .then((response) => response.data)
     .catch((err) => {
       console.error({
         event: 'error_getting_service_details',

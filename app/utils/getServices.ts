@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { CallingPointResponse, ServiceResponse } from '../interfaces';
 import getDuration from './getDuration';
 import { stations } from './stations';
@@ -15,16 +16,18 @@ export default async function getServices(from: string, to?: string) {
     throw Error(`Invalid 'to' station provided: '${to}'`);
   }
 
-  // Set API key in headers
-  const headers = new Headers();
-  headers.set('x-apikey', process.env.LIVE_DEPARTURE_BOARD_API_KEY!);
-
   // Get service details
-  const response = await fetch(
-    `${process.env.LIVE_DEPARTURE_BOARD_BASE_URL}/${fromCrs}?numRows=10${toCrs && `&filterCrs=${toCrs}`}`,
-    { headers, cache: 'no-store' },
-  )
-    .then((response) => response.json())
+  const response = await axios
+    .get(`${process.env.LIVE_DEPARTURE_BOARD_BASE_URL}/${fromCrs}`, {
+      headers: {
+        'x-apikey': process.env.LIVE_DEPARTURE_BOARD_API_KEY!,
+      },
+      params: {
+        numRows: 10,
+        filterCrs: toCrs,
+      },
+    })
+    .then((response) => response.data)
     .catch((err) => {
       console.error({
         event: 'error_getting_services',

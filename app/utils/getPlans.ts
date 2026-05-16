@@ -1,4 +1,5 @@
 import { formatDate } from 'date-fns';
+import axios from 'axios';
 import { Leg, LegResponse, Plan, PlanResponse } from '../interfaces';
 import convertTransportMode from './convertTransportMode';
 import inferUndergroundInfo from './inferUndergroundInfo';
@@ -16,13 +17,8 @@ export default async function getPlans(from: string, to?: string) {
 
   const now = new Date().toISOString();
 
-  const response = await fetch(process.env.PLANS_BASE_URL!, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const response = await axios
+    .post(process.env.PLANS_BASE_URL!, {
       origin: {
         crs: fromCrs,
         group: false,
@@ -49,8 +45,8 @@ export default async function getPlans(from: string, to?: string) {
       overtakenTrains: true,
       useAlternativeServices: false,
       increasedInterchange: 'ZERO',
-    }),
-  }).then((response) => response.json());
+    })
+    .then((response) => response.data);
 
   const plans: Plan[] = [];
   const icsCache: Record<string, string> = {};
@@ -108,9 +104,14 @@ export default async function getPlans(from: string, to?: string) {
             return icsCache[name];
           }
 
-          const search = await fetch(
-            `${process.env.STOP_POINT_SEARCH_BASE_URL}?query=${name}&app_key=${process.env.STOP_POINT_SEARCH_API_KEY}`,
-          ).then((response) => response.json());
+          const search = await axios
+            .get(process.env.STOP_POINT_SEARCH_BASE_URL!, {
+              params: {
+                query: name,
+                app_key: process.env.STOP_POINT_SEARCH_API_KEY,
+              },
+            })
+            .then((response) => response.data);
 
           // Get result that has every word in name, if none, fallback to first result
           const nameWords = name.toLowerCase().split();
@@ -129,9 +130,15 @@ export default async function getPlans(from: string, to?: string) {
       );
 
       // Get tube journey between two stations
-      const tubePlanResponse = await fetch(
-        `${process.env.TUBE_PLANS_BASE_URL}/${departureIcs}/to/${arrivalIcs}?date=${formatDate(leg.timetable.scheduled.departure, 'yyyyMMdd')}&time=${formatDate(leg.timetable.scheduled.departure, 'HHmm')}&app_key=${process.env.TUBE_PLANS_API_KEY}`,
-      ).then((response) => response.json());
+      const tubePlanResponse = await axios
+        .get(`${process.env.TUBE_PLANS_BASE_URL}/${departureIcs}/to/${arrivalIcs}`, {
+          params: {
+            date: formatDate(leg.timetable.scheduled.departure, 'yyyyMMdd'),
+            time: formatDate(leg.timetable.scheduled.departure, 'HHmm'),
+            app_key: process.env.TUBE_PLANS_API_KEY,
+          },
+        })
+        .then((response) => response.data);
       const earliestJourney = tubePlanResponse.journeys[0];
 
       for (const subLeg of earliestJourney.legs) {

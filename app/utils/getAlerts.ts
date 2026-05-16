@@ -1,5 +1,6 @@
 import { DisruptionResponse } from '../interfaces';
 import unescape from 'lodash.unescape';
+import axios from 'axios';
 import { stations } from './stations';
 
 export default async function getAlerts(station: string) {
@@ -11,16 +12,14 @@ export default async function getAlerts(station: string) {
     throw Error(`Invalid station provided: '${station}'`);
   }
 
-  // Set API key in headers
-  const headers = new Headers();
-  headers.set('x-apikey', process.env.DISRUPTIONS_API_KEY!);
-
   // Get alerts
-  const response = await fetch(`${process.env.DISRUPTIONS_BASE_URL}/${stationCrs}`, {
-    headers,
-    cache: 'no-store',
-  })
-    .then((response) => response.json())
+  const response = await axios
+    .get(`${process.env.DISRUPTIONS_BASE_URL}/${stationCrs}`, {
+      headers: {
+        'x-apikey': process.env.DISRUPTIONS_API_KEY!,
+      },
+    })
+    .then((response) => response.data)
     .catch((err) => {
       console.error({
         event: 'error_getting_alerts',

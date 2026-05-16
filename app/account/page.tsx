@@ -16,6 +16,7 @@ import Skeletons from '../components/skeletons/Skeletons';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function AccountPage() {
   const [user, setUser] = useState<User>();
@@ -25,10 +26,10 @@ export default function AccountPage() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('/api/account')
-      .then((response) => response.json())
+    axios
+      .get('/api/account')
       .then((response) => {
-        setUser(response);
+        setUser(response.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -39,7 +40,7 @@ export default function AccountPage() {
   }, []);
 
   const deleteAccount = () => {
-    fetch('/api/account', { method: 'DELETE' });
+    axios.delete('/api/account');
     router.push('/api/auth/signout');
   };
 

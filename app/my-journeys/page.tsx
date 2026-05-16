@@ -9,6 +9,7 @@ import Modal from '../components/modal/Modal';
 import Skeletons from '../components/skeletons/Skeletons';
 import HeadingWidget from '../components/heading-widget/HeadingWidget';
 import { LogOutIcon, PlusIcon, Trash2Icon } from 'lucide-react';
+import axios from 'axios';
 
 export default function JourneysPage() {
   const [journeys, setJourneys] = useState<Journey[]>([]);
@@ -21,19 +22,17 @@ export default function JourneysPage() {
     setDeleteJourneyId(undefined);
 
     // Actually delete journey
-    fetch(`/api/journeys/${id}`, {
-      method: 'DELETE',
-    });
+    axios.delete(`/api/journeys/${id}`);
 
     // Remove journey from current list (so no need to refetch data)
     setJourneys(journeys.filter((journey: Journey) => journey.id !== id));
   };
 
   useEffect(() => {
-    fetch('/api/journeys')
-      .then((response) => response.json())
+    axios
+      .get('/api/journeys')
       .then((response) => {
-        setJourneys(response);
+        setJourneys(response.data);
         setLoading(false);
       })
       .catch((err) => {
