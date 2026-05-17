@@ -7,13 +7,15 @@ const statusStyles = {
 export default function Tag({
   children,
   status = 'neutral',
+  overrideStyle,
 }: {
   children: React.ReactNode;
   status?: 'success' | 'fail' | 'neutral';
+  overrideStyle?: string;
 }) {
   return (
     <div
-      className={`flex h-8 w-fit items-center gap-1 whitespace-nowrap rounded-full border px-2 py-1 text-sm font-medium ${statusStyles[status]}`}
+      className={`flex h-8 w-fit items-center gap-1 whitespace-nowrap rounded-full border px-2 py-1 text-sm font-medium ${overrideStyle ?? statusStyles[status]}`}
     >
       {children}
     </div>

@@ -102,7 +102,8 @@ export type UndergroundLine =
   | 'northern'
   | 'piccadilly'
   | 'victoria'
-  | 'waterloo-city';
+  | 'waterloo-city'
+  | 'elizabeth';
 
 export interface Plan {
   legs: Leg[];
