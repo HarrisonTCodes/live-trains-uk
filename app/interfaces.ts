@@ -32,6 +32,14 @@ export interface DisruptionResponse {
   description: string;
 }
 
+export interface CallingPoint {
+  station: string;
+  departureTime: string;
+  estimatedDepartureTime?: string;
+  platform?: string;
+  focus?: boolean;
+}
+
 export interface Service {
   departureTime: string;
   estimatedDepartureTime: string;
@@ -45,12 +53,15 @@ export interface Service {
   serviceId: string;
 }
 
-export interface CallingPoint {
-  station: string;
-  departureTime: string;
-  estimatedDepartureTime?: string;
-  platform?: string;
-  focus?: boolean;
+export interface Services {
+  fromCrs: string;
+  toCrs?: string;
+  services: Service[];
+}
+
+export interface ServiceDetails {
+  callingPoints: CallingPoint[];
+  cancelReasons: string[];
 }
 
 export interface Alert {

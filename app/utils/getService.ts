@@ -1,7 +1,10 @@
 import axios from 'axios';
-import { CallingPointResponse } from '@/app/interfaces';
+import { CallingPointResponse, ServiceDetails } from '@/app/interfaces';
 
-export default async function getService(serviceId: string, toStation?: string) {
+export default async function getService(
+  serviceId: string,
+  toStation?: string,
+): Promise<ServiceDetails> {
   // Get service details
   const paddedSeviceId = serviceId.padEnd(15, '_');
   const response = await axios

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { CallingPointResponse, ServiceResponse } from '../interfaces';
+import { CallingPointResponse, ServiceResponse, Services } from '../interfaces';
 import getDuration from './getDuration';
 import { stations } from './stations';
 
-export default async function getServices(from: string, to?: string) {
+export default async function getServices(from: string, to?: string): Promise<Services> {
   // Get query parameters
   const fromCrs = stations[from as keyof typeof stations];
   const toCrs = stations[to as keyof typeof stations];

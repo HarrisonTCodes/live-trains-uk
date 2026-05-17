@@ -1,4 +1,4 @@
-export default function getDuration(departureTime: string, arrivalTime: string) {
+export default function getDuration(departureTime: string, arrivalTime: string): number {
   // Parse numbers from time strings
   const [departureHours, departureMinutes] = departureTime
     .split(':')

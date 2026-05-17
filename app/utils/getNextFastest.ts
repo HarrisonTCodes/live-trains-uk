@@ -4,7 +4,7 @@ function serialiseTime(time: string, day: number) {
   return parseInt(time.split(':').join('')) + day * 2400;
 }
 
-export default function getNextFastest(services: Service[]) {
+export default function getNextFastest(services: Service[]): number {
   let day = 0;
   const serialisedArrivals: number[] = [];
 

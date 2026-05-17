@@ -17,7 +17,7 @@ const doNotTitleCase = [
   'for',
 ];
 
-export default function toTitleCase(str: string) {
+export default function toTitleCase(str: string): string {
   return str.replace(/\b[\w']+/g, (text, i) =>
     doNotTitleCase.includes(text) && i > 0
       ? text
