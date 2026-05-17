@@ -3,7 +3,9 @@ import CircleStepGraphic from '../graphics/CircleStepGraphic';
 import Tag from '../tag/Tag';
 import {
   ArrowRightLeftIcon,
+  BikeIcon,
   BusIcon,
+  CableCarIcon,
   CircleArrowDownIcon,
   CircleArrowLeftIcon,
   CircleArrowRightIcon,
@@ -12,6 +14,8 @@ import {
   TrainFrontIcon,
   TrainFrontTunnelIcon,
   TrainTrackIcon,
+  TramFrontIcon,
+  WavesIcon,
 } from 'lucide-react';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { format } from 'date-fns';
@@ -40,6 +44,22 @@ const modeDetails = {
   dlr: {
     label: 'DLR',
     icon: <TrainFrontIcon size={16} />,
+  },
+  tram: {
+    label: 'Tram',
+    icon: <TramFrontIcon size={16} />,
+  },
+  cableCar: {
+    label: 'Cable Car',
+    icon: <CableCarIcon size={16} />,
+  },
+  cycle: {
+    label: 'Cycle',
+    icon: <BikeIcon size={16} />,
+  },
+  river: {
+    label: 'River',
+    icon: <WavesIcon size={16} />,
   },
 };
 

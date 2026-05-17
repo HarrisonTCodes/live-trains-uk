@@ -1,15 +1,19 @@
 import { TransportMode } from '../interfaces';
 
 const modes: Record<TransportMode, Set<string>> = {
-  underground: new Set(['tube']),
-  bus: new Set(['replacement_bus']),
+  underground: new Set(['tube', 'elizabeth-line']),
+  bus: new Set(['replacement_bus', 'public-bus', 'coach']),
   train: new Set(['national-rail', 'overground']),
   walk: new Set(['walking']),
   transfer: new Set(),
   dlr: new Set(),
+  tram: new Set(),
+  cableCar: new Set('cable-car'),
+  cycle: new Set(),
+  river: new Set(),
 };
 
-export default function convertTransportMode(rawMode: string): TransportMode | undefined {
+export default function convertTransportMode(rawMode: string): TransportMode {
   // If raw mode appears directly as transport mode variant
   if (rawMode in modes) {
     return rawMode as TransportMode;
@@ -21,4 +25,6 @@ export default function convertTransportMode(rawMode: string): TransportMode | u
       return mode as TransportMode;
     }
   }
+
+  throw new Error(`Unhandled transport mode: ${rawMode}`);
 }

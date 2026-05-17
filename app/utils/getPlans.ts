@@ -2,9 +2,9 @@ import axios from 'axios';
 import convertTransportMode from './convertTransportMode';
 import { stations } from './stations';
 import getIcsId from './getIcsId';
-import { PlansResponse } from '../interfaces';
+import { Plan, PlansResponse } from '../interfaces';
 
-export default async function getPlans(from: string, to: string) {
+export default async function getPlans(from: string, to: string): Promise<Plan[]> {
   // Get query parameters
   const fromCrs = stations[from as keyof typeof stations];
   const toCrs = stations[to as keyof typeof stations];
@@ -30,6 +30,7 @@ export default async function getPlans(from: string, to: string) {
     duration: plan.duration,
     legs: plan.legs.map((leg) => {
       const mode = convertTransportMode(leg.mode.id.toLowerCase());
+
       return {
         departure: {
           station: leg.departurePoint.commonName.toLowerCase(),
@@ -40,9 +41,12 @@ export default async function getPlans(from: string, to: string) {
           time: leg.arrivalTime,
         },
         mode,
-        undergroundInfo: {
-          line: mode === 'underground' ? leg.routeOptions[0].lineIdentifier.id : undefined,
-        },
+        undergroundInfo:
+          mode === 'underground'
+            ? {
+                line: leg.routeOptions[0].lineIdentifier.id,
+              }
+            : undefined,
       };
     }),
   }));

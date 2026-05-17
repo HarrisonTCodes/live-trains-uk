@@ -79,7 +79,17 @@ export interface User {
   journeyCount: number;
 }
 
-export type TransportMode = 'train' | 'underground' | 'walk' | 'transfer' | 'bus' | 'dlr';
+export type TransportMode =
+  | 'train'
+  | 'underground'
+  | 'walk'
+  | 'transfer'
+  | 'bus'
+  | 'dlr'
+  | 'tram'
+  | 'cableCar'
+  | 'cycle'
+  | 'river';
 
 export interface Plan {
   legs: Leg[];
@@ -89,7 +99,7 @@ export interface Plan {
 export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
-  mode?: TransportMode;
+  mode: TransportMode;
   undergroundInfo?: UndergroundInfo;
 }
 
