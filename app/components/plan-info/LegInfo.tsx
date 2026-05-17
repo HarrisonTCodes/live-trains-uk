@@ -120,7 +120,8 @@ function PlanStationInfo({
                 </Tag>
                 {leg.line && (
                   <Tag>
-                    <TrainTrackIcon size={16} /> {`${toTitleCase(leg.line)} Line`}
+                    <TrainTrackIcon size={16} />{' '}
+                    {`${toTitleCase(leg.line.replaceAll('-', ' & '))} Line`}
                   </Tag>
                 )}
               </>
