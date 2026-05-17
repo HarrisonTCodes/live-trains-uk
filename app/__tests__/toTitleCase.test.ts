@@ -39,3 +39,8 @@ test('handles station names beginning with "the"', () => {
   expect(toTitleCase('the hawthorns')).toBe('The Hawthorns');
   expect(toTitleCase('the lakes')).toBe('The Lakes');
 });
+
+test('handles apostrophes', () => {
+  expect(toTitleCase("king's cross")).toBe("King's Cross");
+  expect(toTitleCase("sherpherd's bush")).toBe("Sherpherd's Bush");
+});
