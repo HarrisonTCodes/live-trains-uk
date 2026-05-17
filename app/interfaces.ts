@@ -91,6 +91,19 @@ export type TransportMode =
   | 'cycle'
   | 'river';
 
+export type UndergroundLine =
+  | 'bakerloo'
+  | 'central'
+  | 'circle'
+  | 'district'
+  | 'hammersmith-city'
+  | 'jubilee'
+  | 'metropolitan'
+  | 'northern'
+  | 'piccadilly'
+  | 'victoria'
+  | 'waterloo-city';
+
 export interface Plan {
   legs: Leg[];
   duration: number;
@@ -100,17 +113,12 @@ export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
   mode: TransportMode;
-  undergroundInfo?: UndergroundInfo;
+  line?: UndergroundLine;
 }
 
 export interface LegPoint {
   station: string;
   time: string;
-}
-
-export interface UndergroundInfo {
-  line: string; // TODO: Enum?
-  direction?: 'northbound' | 'southbound' | 'eastbound' | 'westbound';
 }
 
 export interface StopPointsResponse {
@@ -143,7 +151,7 @@ export interface LegResponse {
   };
   routeOptions: {
     lineIdentifier: {
-      id: string; // TODO: Enum?
+      id: UndergroundLine;
     };
   }[];
 }

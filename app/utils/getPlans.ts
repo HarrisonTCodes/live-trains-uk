@@ -41,12 +41,7 @@ export default async function getPlans(from: string, to: string): Promise<Plan[]
           time: leg.arrivalTime,
         },
         mode,
-        undergroundInfo:
-          mode === 'underground'
-            ? {
-                line: leg.routeOptions[0].lineIdentifier.id,
-              }
-            : undefined,
+        line: mode === 'underground' ? leg.routeOptions[0].lineIdentifier.id : undefined,
       };
     }),
   }));

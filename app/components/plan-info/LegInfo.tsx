@@ -6,10 +6,6 @@ import {
   BikeIcon,
   BusIcon,
   CableCarIcon,
-  CircleArrowDownIcon,
-  CircleArrowLeftIcon,
-  CircleArrowRightIcon,
-  CircleArrowUpIcon,
   FootprintsIcon,
   TrainFrontIcon,
   TrainFrontTunnelIcon,
@@ -60,25 +56,6 @@ const modeDetails = {
   river: {
     label: 'River',
     icon: <WavesIcon size={16} />,
-  },
-};
-
-const directionDetails = {
-  northbound: {
-    label: 'Northbound',
-    icon: <CircleArrowUpIcon size={16} />,
-  },
-  southbound: {
-    label: 'Southbound',
-    icon: <CircleArrowDownIcon size={16} />,
-  },
-  eastbound: {
-    label: 'Eastbound',
-    icon: <CircleArrowRightIcon size={16} />,
-  },
-  westbound: {
-    label: 'Westbound',
-    icon: <CircleArrowLeftIcon size={16} />,
   },
 };
 
@@ -137,27 +114,14 @@ function PlanStationInfo({
           <section className="flex flex-wrap gap-2">
             {!isLastStation && (
               <>
-                {leg.mode && (
+                <Tag>
+                  {modeDetails[leg.mode].icon}
+                  {modeDetails[leg.mode].label}
+                </Tag>
+                {leg.line && (
                   <Tag>
-                    {modeDetails[leg.mode].icon}
-                    {modeDetails[leg.mode].label}
+                    <TrainTrackIcon size={16} /> {`${toTitleCase(leg.line)} Line`}
                   </Tag>
-                )}
-                {leg.mode === 'underground' && (
-                  <>
-                    {leg.undergroundInfo?.line && (
-                      <Tag>
-                        <TrainTrackIcon size={16} />{' '}
-                        {`${toTitleCase(leg.undergroundInfo.line)} Line`}
-                      </Tag>
-                    )}
-                    {leg.undergroundInfo?.direction && (
-                      <Tag>
-                        {directionDetails[leg.undergroundInfo.direction].icon}
-                        {directionDetails[leg.undergroundInfo.direction].label}
-                      </Tag>
-                    )}
-                  </>
                 )}
               </>
             )}
