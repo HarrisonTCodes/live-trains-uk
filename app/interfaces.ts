@@ -79,36 +79,12 @@ export interface User {
   journeyCount: number;
 }
 
-export interface PlansResponse {
-  outwardJourneys: PlanResponse[];
-}
-
-export interface PlanResponse {
-  legs: LegResponse[];
-  duration: string;
-}
-
-export interface LegResponse {
-  board: LegPointResponse;
-  alight: LegPointResponse;
-  mode: 'TRAIN' | 'UNDERGROUND';
-  timetable: {
-    scheduled: {
-      departure: string;
-      arrival: string;
-    };
-  };
-  undergroundTravelInformation?: {
-    messages: string[];
-  };
-}
-
-export interface LegPointResponse {
-  crsCode: string;
-  name: string;
-}
-
 export type TransportMode = 'train' | 'underground' | 'walk' | 'transfer' | 'bus' | 'dlr';
+
+export interface Plan {
+  legs: Leg[];
+  duration: number;
+}
 
 export interface Leg {
   arrival: LegPoint;
@@ -127,11 +103,6 @@ export interface UndergroundInfo {
   direction?: 'northbound' | 'southbound' | 'eastbound' | 'westbound';
 }
 
-export interface Plan {
-  legs: Leg[];
-  duration: string;
-}
-
 export interface StopPointsResponse {
   total: number;
   matches: StopPointResponse[];
@@ -143,17 +114,18 @@ export interface StopPointResponse {
   name: string;
 }
 
-export interface TubePlansResponse {
-  journeys: TubePlanResponse[];
+export interface PlansResponse {
+  journeys: PlanResponse[];
 }
 
-export interface TubePlanResponse {
-  legs: TubeLegResponse[];
+export interface PlanResponse {
+  duration: number;
+  legs: LegResponse[];
 }
 
-export interface TubeLegResponse {
-  departurePoint: TubeLegPointResponse;
-  arrivalPoint: TubeLegPointResponse;
+export interface LegResponse {
+  departurePoint: LegPointResponse;
+  arrivalPoint: LegPointResponse;
   departureTime: string;
   arrivalTime: string;
   mode: {
@@ -163,9 +135,9 @@ export interface TubeLegResponse {
     lineIdentifier: {
       id: string; // TODO: Enum?
     };
-  };
+  }[];
 }
 
-export interface TubeLegPointResponse {
+export interface LegPointResponse {
   commonName: string;
 }

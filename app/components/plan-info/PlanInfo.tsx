@@ -2,6 +2,7 @@ import { Leg, Plan } from '@/app/interfaces';
 import LegInfo from './LegInfo';
 import { ClockIcon, MapPinIcon, MapPinCheckIcon } from 'lucide-react';
 import { format } from 'date-fns';
+import formatDuration from '@/app/utils/formatDuration';
 
 export default function PlanInfo({ plan }: { plan: Plan }) {
   return (
@@ -10,7 +11,7 @@ export default function PlanInfo({ plan }: { plan: Plan }) {
       <section>
         {plan.legs.map((leg: Leg, index: number) => (
           <LegInfo
-            key={`${leg.departure.crs} ${leg.departure.time} to ${leg.arrival.crs} ${leg.arrival.time}`}
+            key={`${leg.departure.station} ${leg.departure.time} to ${leg.arrival.station} ${leg.arrival.time}`}
             leg={leg}
             isFirstLeg={index === 0}
             isLastLeg={index === plan.legs.length - 1}
@@ -25,7 +26,7 @@ export default function PlanInfo({ plan }: { plan: Plan }) {
           {plan.legs.length > 1 && 's'}
         </p>
         <p className="flex items-center justify-center gap-1">
-          <ClockIcon className="text-stone-600" /> {plan.duration}
+          <ClockIcon className="text-stone-600" /> {formatDuration(plan.duration)}
         </p>
         <p className="flex items-center justify-end gap-1">
           <MapPinCheckIcon className="text-stone-600" />{' '}

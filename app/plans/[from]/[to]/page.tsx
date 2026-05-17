@@ -4,7 +4,6 @@ import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Notice from '@/app/components/notice/Notice';
 import PlanInfoSection from '@/app/components/plan-info/PlanInfoSection';
 import Skeletons from '@/app/components/skeletons/Skeletons';
-import getPlans from '@/app/utils/getPlans';
 import getTime from '@/app/utils/getTime';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { SearchIcon } from 'lucide-react';
