@@ -4,6 +4,7 @@ import Tag from '../tag/Tag';
 import {
   ArrowRightLeftIcon,
   BikeIcon,
+  BusFrontIcon,
   BusIcon,
   CableCarIcon,
   FootprintsIcon,
@@ -137,6 +138,11 @@ function PlanStationInfo({
                   <Tag overrideStyle={lineStyles[leg.line]}>
                     <TrainTrackIcon size={16} />{' '}
                     {`${toTitleCase(leg.line.replaceAll('-', ' & '))} Line`}
+                  </Tag>
+                )}
+                {leg.number && (
+                  <Tag>
+                    <BusFrontIcon size={16} /> {leg.number}
                   </Tag>
                 )}
               </>

@@ -42,6 +42,7 @@ export default async function getPlans(from: string, to: string): Promise<Plan[]
         },
         mode,
         line: mode === 'underground' ? leg.routeOptions[0].lineIdentifier.id : undefined,
+        number: mode === 'bus' ? leg.routeOptions[0].name : undefined,
       };
     }),
   }));

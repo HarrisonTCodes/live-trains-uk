@@ -126,6 +126,7 @@ export interface Leg {
   departure: LegPoint;
   mode: TransportMode;
   line?: UndergroundLine;
+  number?: string;
 }
 
 export interface LegPoint {
@@ -162,6 +163,7 @@ export interface LegResponse {
     id: string;
   };
   routeOptions: {
+    name: string;
     lineIdentifier: {
       id: UndergroundLine;
     };
