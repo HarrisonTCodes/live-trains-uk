@@ -91,16 +91,14 @@ export default function JourneysPage() {
           {loading ? (
             <Skeletons className="h-56 sm:h-48" />
           ) : error ? (
-            <Notice
-              notice="Error"
-              description="There was an error getting journeys, please try again."
-              status="fail"
-            />
+            <Notice notice="Error" status="fail">
+              There was an error getting journeys, please try again.
+            </Notice>
           ) : journeys.length === 0 ? (
-            <Notice
-              notice="No journeys"
-              description="You don't have any saved journeys yet. Click 'Add Journey' to create one."
-            />
+            <Notice notice="No journeys">
+              You don&apos;t have any saved journeys yet. Click &apos;Add Journey&apos; to create
+              one.
+            </Notice>
           ) : (
             journeys.map((journey: Journey) => (
               <JourneyInfo

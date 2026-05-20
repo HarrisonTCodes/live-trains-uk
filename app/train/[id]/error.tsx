@@ -9,11 +9,9 @@ export default function Error() {
         <BackButton />
         <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">Service Details</h1>
       </section>
-      <Notice
-        notice="Error"
-        description="There was an error trying to retrieve the service. This service may no longer exist"
-        status="fail"
-      />
+      <Notice notice="Error" status="fail">
+        There was an error trying to retrieve the service. This service may no longer exist
+      </Notice>
     </main>
   );
 }

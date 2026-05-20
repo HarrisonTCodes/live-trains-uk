@@ -29,14 +29,11 @@ export default async function TrainInfoSection({ from, to }: { from: string; to?
     ));
   } else {
     return (
-      <Notice
-        notice="No services"
-        description={
-          to
-            ? `There are currently no direct services running between ${toTitleCase(from)} and ${toTitleCase(to)}.`
-            : `There are currently no departures running from ${toTitleCase(from)}`
-        }
-      />
+      <Notice notice="No services">
+        {to
+          ? `There are currently no direct services running between ${toTitleCase(from)} and ${toTitleCase(to)}.`
+          : `There are currently no departures running from ${toTitleCase(from)}`}
+      </Notice>
     );
   }
 }

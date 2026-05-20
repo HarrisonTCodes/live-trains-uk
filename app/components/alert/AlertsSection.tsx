@@ -11,17 +11,16 @@ export default async function AlertsSection({ station }: { station: string }) {
       <Notice
         key={index}
         notice={`${alert.severity !== 'Normal' ? alert.severity : ''} Alert`}
-        description={alert.message}
         status={alert.severity === 'Minor' || alert.severity === 'Normal' ? 'warning' : 'alert'}
-      />
+      >
+        {alert.message}
+      </Notice>
     ));
   } else {
     return (
-      <Notice
-        notice="No alerts"
-        description={`There are currently no alerts or disruptions affecting ${toTitleCase(station)}.`}
-        status="success"
-      />
+      <Notice notice="No alerts" status="success">
+        There are currently no alerts or disruptions affecting {toTitleCase(station)}.
+      </Notice>
     );
   }
 }

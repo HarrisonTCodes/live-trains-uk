@@ -10,12 +10,9 @@ export default async function CallingPointsSection({ id, to }: { id: string; to?
     <section className="flex flex-col items-center gap-6">
       {/* Cancel reasons */}
       {callingPoints.cancelReasons.map((cancelReason: string) => (
-        <Notice
-          key={cancelReason}
-          notice="Some stops cancelled"
-          description={`${cancelReason}. See affected calling points below.`}
-          status="alert"
-        />
+        <Notice key={cancelReason} notice="Some stops cancelled" status="alert">
+          {cancelReason}. See affected calling points below.
+        </Notice>
       ))}
 
       {/* Calling points */}

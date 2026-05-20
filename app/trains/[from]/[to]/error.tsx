@@ -9,11 +9,10 @@ export default function Error() {
         <BackButton />
         <h1 className="text-center text-2xl font-bold text-blue-900">Live Departures</h1>
       </section>
-      <Notice
-        notice="Error"
-        description="There was an error retrieving services between these stations. Please make sure you choose valid stations from the dropdown menu."
-        status="fail"
-      />
+      <Notice notice="Error" status="fail">
+        There was an error retrieving services between these stations. Please make sure you choose
+        valid stations from the dropdown menu.
+      </Notice>
     </main>
   );
 }

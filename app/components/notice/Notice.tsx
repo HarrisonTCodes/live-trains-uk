@@ -25,12 +25,12 @@ const statusDetails = {
 
 export default function Notice({
   notice,
-  description,
+  children,
   className,
   status = 'info',
 }: {
   notice: string;
-  description: string;
+  children: React.ReactNode;
   className?: string;
   status?: 'info' | 'success' | 'fail' | 'alert' | 'warning';
 }) {
@@ -42,7 +42,7 @@ export default function Notice({
         {statusDetails[status].icon}
         {notice}
       </h2>
-      <p>{description}</p>
+      <p>{children}</p>
     </div>
   );
 }

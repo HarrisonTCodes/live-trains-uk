@@ -84,11 +84,9 @@ export default function AccountPage() {
         {loading ? (
           <Skeletons className="h-80 sm:h-64" count={1} />
         ) : error ? (
-          <Notice
-            notice="Error"
-            description="There was an error getting account information, please sign out and try again."
-            status="fail"
-          />
+          <Notice notice="Error" status="fail">
+            There was an error getting account information, please sign out and try again.
+          </Notice>
         ) : (
           <div className="flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
             {/* Account section heading */}

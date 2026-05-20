@@ -39,11 +39,10 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
       </section>
 
       {/* Experimental feature notice */}
-      <Notice
-        notice="Experimental Feature"
-        description="Planning is still in development, and may not work as expected, or undergo regular change. You can report any issues or feedback on GitHub (see website footer)."
-        status="info"
-      />
+      <Notice notice="Experimental Feature" status="info">
+        Planning is still in development, and may not work as expected, or undergo regular change.
+        You can report any issues or feedback on GitHub (see website footer).
+      </Notice>
 
       {/* Plans */}
       <Suspense fallback={<Skeletons className="h-96" />}>
