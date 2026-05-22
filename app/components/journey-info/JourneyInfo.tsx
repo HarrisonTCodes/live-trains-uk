@@ -7,8 +7,10 @@ import {
   ArrowRightIcon,
   CircleAlertIcon,
   EllipsisVerticalIcon,
+  MapIcon,
   MapPinIcon,
   SearchIcon,
+  TrainFrontIcon,
   Trash2Icon,
   XIcon,
 } from 'lucide-react';
@@ -40,8 +42,19 @@ export default function JourneyInfo({
     <div className="relative flex w-[90vw] max-w-[700px] flex-col gap-4 rounded-lg border border-stone-300 bg-white p-2">
       {/* Name and stations */}
       <div className="flex flex-col items-start gap-1">
-        <section className="flex w-full justify-between">
-          <h2 className="pb-2 text-xl font-medium text-blue-900">{journey.name}</h2>
+        <section className="flex w-full items-start justify-between">
+          <div className="flex flex-wrap items-center gap-2 pb-2">
+            <h2 className="text-xl font-medium text-blue-900">{journey.name}</h2>
+            {journey.type === 'PLANS' ? (
+              <Tag>
+                <MapIcon size={16} /> Plans
+              </Tag>
+            ) : (
+              <Tag>
+                <TrainFrontIcon size={16} /> Departures
+              </Tag>
+            )}
+          </div>
           <button onClick={() => setKebabMenuOpen(!kebabMenuOpen)}>
             {kebabMenuOpen ? (
               <XIcon className="text-stone-600" />
@@ -62,7 +75,7 @@ export default function JourneyInfo({
       <div className="flex w-full flex-col items-center justify-center gap-2 px-2 sm:flex-row">
         <Link
           prefetch={false}
-          href={`/trains/${journey.secondStation}/${journey.firstStation}`}
+          href={`/${journey.type === 'PLANS' ? 'plans' : 'trains'}/${journey.secondStation}/${journey.firstStation}`}
           className="w-full"
         >
           <Button className="w-full" variant="secondary">
@@ -74,7 +87,7 @@ export default function JourneyInfo({
         </Link>
         <Link
           prefetch={false}
-          href={`/trains/${journey.firstStation}/${journey.secondStation}`}
+          href={`/${journey.type === 'PLANS' ? 'plans' : 'trains'}/${journey.firstStation}/${journey.secondStation}`}
           className="w-full"
         >
           <Button className="w-full">
