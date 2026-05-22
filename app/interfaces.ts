@@ -69,6 +69,8 @@ export interface Alert {
   severity: 'Minor' | 'Normal' | 'Major' | 'Severe';
 }
 
+export type JourneyType = 'DEPARTURES' | 'PLANS';
+
 export interface Journey {
   firstStation: string;
   firstCrs: string;
@@ -76,6 +78,7 @@ export interface Journey {
   secondCrs: string;
   name: string;
   id: number;
+  type: JourneyType;
 }
 
 export interface Station {

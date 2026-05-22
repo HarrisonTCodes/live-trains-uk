@@ -17,12 +17,18 @@ model User {
   journeys  Journey[]
 }
 
+enum JourneyType {
+  DEPARTURES
+  PLANS
+}
+
 model Journey {
-  id            Int      @id @default(autoincrement())
-  createdAt     DateTime @default(now())
+  id            Int         @id @default(autoincrement())
+  createdAt     DateTime    @default(now())
   firstStation  String
   secondStation String
   name          String
-  author        User     @relation(fields: [authorId], references: [id])
+  type          JourneyType @default(DEPARTURES)
+  author        User        @relation(fields: [authorId], references: [id])
   authorId      Int
 }
