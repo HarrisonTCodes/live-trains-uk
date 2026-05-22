@@ -72,7 +72,7 @@ export default function JourneysPage() {
           <h1 className="pb-2 text-center text-2xl font-bold text-blue-900">My Journeys</h1>
 
           {/* Caption and buttons */}
-          <HeadingWidget text="Save your regular routes for quick access to live departures">
+          <HeadingWidget text="Save your regular routes for quick access to departures and plans">
             <Link href={'/signout'} className="w-full whitespace-nowrap md:w-40">
               <Button className="w-full" variant="secondary">
                 <LogOutIcon /> Sign Out

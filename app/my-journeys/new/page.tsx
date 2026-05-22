@@ -3,11 +3,13 @@ import Button from '@/app/components/button/Button';
 import Form from '@/app/components/form/Form';
 import Notice from '@/app/components/notice/Notice';
 import Search from '@/app/components/search/Search';
+import JourneyTypeSelector from '@/app/components/journey-type-selector/JourneyTypeSelector';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { PlusIcon, XIcon } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
+import { JourneyType } from '@/app/interfaces';
 
 export default function AddJourneyPage() {
   const router = useRouter();
@@ -22,6 +24,10 @@ export default function AddJourneyPage() {
       !searchParams.get('to') || searchParams.get('to') === 'any' ? '' : searchParams.get('to')!,
     ),
   );
+  const [type, setType] = useState<JourneyType>(() => {
+    const searchParamType = searchParams.get('type')?.toUpperCase();
+    return searchParamType === 'PLANS' ? 'PLANS' : 'DEPARTURES';
+  });
 
   const createJourney = () => {
     // Make sure all inputs are filled
@@ -41,6 +47,7 @@ export default function AddJourneyPage() {
         name,
         firstStation,
         secondStation,
+        type,
       })
       .then(() => {
         setError(undefined);
@@ -62,9 +69,11 @@ export default function AddJourneyPage() {
       <Form
         onSubmit={createJourney}
         heading="Create a New Journey"
-        subHeading="Save your regular routes for quick access to live departures"
+        subHeading="Save your regular routes for quick access to departures or plans"
       >
         <section className="flex w-full flex-col gap-4">
+          <JourneyTypeSelector value={type} onChange={setType} />
+
           <input
             type="search"
             className="w-full rounded-lg border border-gray-400 bg-white p-2 text-lg focus:border-blue-800 focus:outline-none"
@@ -72,6 +81,7 @@ export default function AddJourneyPage() {
             value={name}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
           />
+
           <Search label="First station" value={firstStation} setValue={setFirstStation} />
           <Search label="Second station" value={secondStation} setValue={setSecondStation} />
         </section>
