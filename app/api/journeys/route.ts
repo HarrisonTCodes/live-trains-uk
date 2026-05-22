@@ -29,6 +29,7 @@ export async function GET() {
       secondCrs: stations[journey.secondStation as keyof typeof stations],
       name: journey.name,
       id: journey.id,
+      type: journey.type,
     })),
   );
 }
@@ -86,6 +87,7 @@ export async function POST(request: NextRequest) {
       name: data.name,
       firstStation: data.firstStation.toLowerCase(),
       secondStation: data.secondStation.toLowerCase(),
+      type: data.type === 'PLANS' ? 'PLANS' : 'DEPARTURES',
       authorId: user.id,
     },
   });
