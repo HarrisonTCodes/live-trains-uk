@@ -6,7 +6,7 @@ import PlanInfoSection from '@/app/components/plan-info/PlanInfoSection';
 import Skeletons from '@/app/components/skeletons/Skeletons';
 import getTime from '@/app/utils/getTime';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { SearchIcon } from 'lucide-react';
+import { BookmarkIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
@@ -30,9 +30,13 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
           text={`${toTitleCase(parsedFrom)} to ${parsedTo === 'any' ? 'Any Station' : toTitleCase(parsedTo)}`}
           tag={`Last updated at ${now}`}
         >
-          <Link prefetch={false} href="/" className="w-full">
+          <Link
+            prefetch={false}
+            href={`/my-journeys/new?from=${params.from}&to=${params.to}&type=plans`}
+            className="w-full"
+          >
             <Button className="w-full md:w-56">
-              <SearchIcon /> Search Departures
+              <BookmarkIcon /> Save Journey
             </Button>
           </Link>
         </HeadingWidget>
