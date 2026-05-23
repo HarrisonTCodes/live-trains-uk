@@ -24,7 +24,13 @@ export default async function getPlans(from: string, to: string): Promise<Plan[]
         app_key: process.env.PLANS_API_KEY,
       },
     })
-    .then((response) => response.data)) as PlansResponse;
+    .then((response) => response.data)
+    .catch((err) => {
+      // API returns 404 if no plans found, catch and yield mock result with empty journeys
+      if (axios.isAxiosError(err) && err.response?.status === 404) {
+        return { journeys: [] };
+      }
+    })) as PlansResponse;
 
   return response.journeys.map((plan) => ({
     duration: plan.duration,
