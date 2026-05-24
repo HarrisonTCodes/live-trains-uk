@@ -40,3 +40,7 @@ next-env.d.ts
 # prisma
 /app/utils/prisma/client/
 
+# terraform
+**/*.tfvars
+**/.terraform
+**/*.tfstate*
