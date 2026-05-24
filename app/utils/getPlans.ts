@@ -10,7 +10,7 @@ export default async function getPlans(from: string, to: string): Promise<Plan[]
   const toCrs = stations[to as keyof typeof stations];
 
   // If invalid or missing stations provided
-  if (!fromCrs || (to && !toCrs)) {
+  if (!fromCrs || !toCrs) {
     throw Error(`Invalid station(s) provided: '${from}' and '${to}'`);
   }
 
