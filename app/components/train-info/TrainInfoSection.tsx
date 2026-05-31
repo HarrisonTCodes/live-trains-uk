@@ -4,6 +4,7 @@ import Notice from '../notice/Notice';
 import toTitleCase from '@/app/utils/toTitleCase';
 import { Service } from '@/app/interfaces';
 import getNextFastest from '@/app/utils/getNextFastest';
+import Link from 'next/link';
 
 export default async function TrainInfoSection({ from, to }: { from: string; to?: string }) {
   const services = await getServices(from, to);
@@ -30,9 +31,21 @@ export default async function TrainInfoSection({ from, to }: { from: string; to?
   } else {
     return (
       <Notice notice="No services">
-        {to
-          ? `There are currently no direct services running between ${toTitleCase(from)} and ${toTitleCase(to)}.`
-          : `There are currently no departures running from ${toTitleCase(from)}`}
+        {to ? (
+          <>
+            There are currently no direct services running between {toTitleCase(from)} and{' '}
+            {toTitleCase(to)}. You can try{' '}
+            <Link
+              className="text-blue-900 underline"
+              href={`/plans/${toTitleCase(from)}/${toTitleCase(to)}`}
+            >
+              planning a journey
+            </Link>{' '}
+            instead.
+          </>
+        ) : (
+          `There are currently no departures running from ${toTitleCase(from)}`
+        )}
       </Notice>
     );
   }
