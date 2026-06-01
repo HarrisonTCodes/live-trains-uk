@@ -15,6 +15,6 @@ resource "vercel_project_environment_variable" "env_vars" {
   project_id = vercel_project.live_trains_uk.id
   key        = each.key
   value      = each.value
-  sensitive  = can(regex("DATABASE_URL|API_KEY|SECRET|POSTGRES", each.key))
+  sensitive  = can(regex(join("|", local.env_var_sensitive_identifiers), each.key))
   target     = ["preview", "production"]
 }

@@ -7,4 +7,6 @@ locals {
     trimspace(split("=", line)[0]) => trimspace(join("=", slice(split("=", line), 1, length(split("=", line)))))
     if !startswith(trimspace(line), "#") && length(split("=", line)) >= 2 && trimspace(line) != ""
   }
+
+  env_var_sensitive_identifiers = ["DATABASE_URL", "API_KEY", "SECRET", "POSTGRES"]
 }
