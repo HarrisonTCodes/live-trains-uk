@@ -45,7 +45,14 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
       {/* Experimental feature notice */}
       <Notice notice="Experimental Feature" status="info">
         Planning is still in development, and may not work as expected, or undergo regular change.
-        You can report any issues or feedback on GitHub (see website footer).
+        You can report any issues or feedback on{' '}
+        <Link
+          className="text-blue-900 underline"
+          href="https://github.com/HarrisonTCodes/live-trains-uk"
+        >
+          GitHub
+        </Link>
+        .
       </Notice>
 
       {/* Plans */}
