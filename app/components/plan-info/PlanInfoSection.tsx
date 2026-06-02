@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default async function PlanInfoSection({ from, to }: { from: string; to: string }) {
   const plans = await getPlans(from, to);
-  const isDirect = plans.some((plan) => plan.legs.length === 1);
+  const isDirect = plans.some((plan) => plan.legs.length === 1 && plan.legs[0].mode === 'train');
 
   if (plans.length > 0) {
     return (
