@@ -12,3 +12,10 @@ resource "neon_role" "default" {
   branch_id  = neon_branch.main.id
   name       = "default"
 }
+
+resource "neon_database" "live_trains_uk_db" {
+  project_id = neon_project.live_trains_uk_db.id
+  branch_id  = neon_branch.main.id
+  name       = "verceldb"
+  owner_name = neon_role.default.name
+}
