@@ -130,10 +130,12 @@ function PlanStationInfo({
           <section className="flex flex-wrap gap-2">
             {!isLastStation && (
               <>
-                <Tag>
-                  {modeDetails[leg.mode].icon}
-                  {modeDetails[leg.mode].label}
-                </Tag>
+                {leg.mode && (
+                  <Tag>
+                    {modeDetails[leg.mode].icon}
+                    {modeDetails[leg.mode].label}
+                  </Tag>
+                )}
                 {leg.line && (
                   <Tag overrideStyle={lineStyles[leg.line]}>
                     <TrainTrackIcon size={16} />{' '}

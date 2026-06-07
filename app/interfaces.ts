@@ -127,7 +127,7 @@ export interface Plan {
 export interface Leg {
   arrival: LegPoint;
   departure: LegPoint;
-  mode: TransportMode;
+  mode?: TransportMode;
   line?: UndergroundLine;
   number?: string;
 }

@@ -13,7 +13,7 @@ const modes: Record<TransportMode, Set<string>> = {
   river: new Set(),
 };
 
-export default function convertTransportMode(rawMode: string): TransportMode {
+export default function convertTransportMode(rawMode: string): TransportMode | undefined {
   // If raw mode appears directly as transport mode variant
   if (rawMode in modes) {
     return rawMode as TransportMode;
@@ -25,6 +25,4 @@ export default function convertTransportMode(rawMode: string): TransportMode {
       return mode as TransportMode;
     }
   }
-
-  throw new Error(`Unhandled transport mode: ${rawMode}`);
 }
