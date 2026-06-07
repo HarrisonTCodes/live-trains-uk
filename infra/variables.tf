@@ -12,3 +12,8 @@ variable "neon_api_key" {
   description = "Neon API key for database access"
   type        = string
 }
+
+variable "github_repo" {
+  description = "GitHub repository (username/repo)"
+  type        = string
+}

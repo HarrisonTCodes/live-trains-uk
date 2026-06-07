@@ -4,7 +4,7 @@ resource "vercel_project" "live_trains_uk" {
 
   git_repository = {
     type = "github"
-    repo = "${local.github_account}/${local.project_name}"
+    repo = var.github_repo
     org  = var.vercel_team
   }
 }
