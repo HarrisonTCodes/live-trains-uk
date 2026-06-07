@@ -1,6 +1,6 @@
 locals {
   env_file_content = fileexists("../.env.prod") ? file("../.env.prod") : ""
-
+  env_var_sensitive_identifiers = ["DATABASE_URL", "API_KEY", "SECRET", "POSTGRES"]
   # Parse environment variables into a map
   env_vars = {
     for line in compact(split("\n", local.env_file_content)) :
@@ -8,5 +8,6 @@ locals {
     if !startswith(trimspace(line), "#") && length(split("=", line)) >= 2 && trimspace(line) != ""
   }
 
-  env_var_sensitive_identifiers = ["DATABASE_URL", "API_KEY", "SECRET", "POSTGRES"]
+  project_name = "live-trains-uk"
+  github_account = "HarrisonTCodes"
 }

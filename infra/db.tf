@@ -1,5 +1,5 @@
 resource "neon_project" "live_trains_uk_db" {
-  name = "live-trains-uk-db"
+  name = "${local.project_name}-db"
 }
 
 resource "neon_branch" "main" {

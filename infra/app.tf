@@ -1,10 +1,10 @@
 resource "vercel_project" "live_trains_uk" {
-  name      = "live-trains-uk"
+  name      = local.project_name
   framework = "nextjs"
 
   git_repository = {
     type = "github"
-    repo = "HarrisonTCodes/live-trains-uk"
+    repo = "${local.github_account}/${local.project_name}"
     org  = var.vercel_team
   }
 }
