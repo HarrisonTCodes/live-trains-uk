@@ -19,3 +19,9 @@ resource "neon_database" "live_trains_uk_db" {
   name       = "verceldb"
   owner_name = neon_role.default.name
 }
+
+resource "neon_endpoint" "live_trains_uk_db" {
+  project_id = neon_project.live_trains_uk_db.id
+  branch_id  = neon_branch.main.id
+  type       = "read_write"
+}
