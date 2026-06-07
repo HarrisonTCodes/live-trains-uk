@@ -8,9 +8,9 @@ const modes: Record<TransportMode, Set<string>> = {
   transfer: new Set(),
   dlr: new Set(),
   tram: new Set(),
-  cableCar: new Set('cable-car'),
-  cycle: new Set(),
-  river: new Set(),
+  cableCar: new Set(['cable-car']),
+  cycle: new Set(['cycle-hire']),
+  river: new Set(['river-bus', 'river-tour']),
 };
 
 export default function convertTransportMode(rawMode: string): TransportMode | undefined {
