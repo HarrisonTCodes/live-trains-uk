@@ -2,7 +2,7 @@ import { TransportMode } from '../interfaces';
 
 const modes: Record<TransportMode, Set<string>> = {
   underground: new Set(['tube', 'elizabeth-line']),
-  bus: new Set(['replacement_bus', 'public-bus', 'coach']),
+  bus: new Set(['replacement-bus', 'public-bus', 'coach']),
   train: new Set(['national-rail', 'overground']),
   walk: new Set(['walking']),
   transfer: new Set(),
