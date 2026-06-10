@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Journey } from '../interfaces';
+import { Journey } from '../types/app';
 import JourneyInfo from '../components/journey-info/JourneyInfo';
 import Button from '../components/button/Button';
 import Link from 'next/link';

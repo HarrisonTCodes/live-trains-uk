@@ -1,4 +1,4 @@
-import { TransportMode } from '../interfaces';
+import { TransportMode } from '../types/enums';
 
 const modes: Record<TransportMode, Set<string>> = {
   underground: new Set(['tube', 'elizabeth-line']),

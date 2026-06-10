@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { StopPointsResponse } from '../interfaces';
+import { StopPointsResponse } from '../types/api';
 
 export default async function getIcsId(station: string): Promise<string> {
   const response = (await axios

@@ -1,4 +1,5 @@
-import { Leg, TransportMode, UndergroundLine } from '@/app/interfaces';
+import { Leg } from '@/app/types/app';
+import { TransportMode, UndergroundLine } from '@/app/types/enums';
 import CircleStepGraphic from '../graphics/CircleStepGraphic';
 import Tag from '../tag/Tag';
 import {

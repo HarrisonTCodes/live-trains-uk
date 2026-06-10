@@ -11,7 +11,7 @@ import {
   UserRoundIcon,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { User } from '../interfaces';
+import { User } from '../types/app';
 import Skeletons from '../components/skeletons/Skeletons';
 import Notice from '../components/notice/Notice';
 import Modal from '../components/modal/Modal';

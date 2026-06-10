@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { CallingPointResponse, ServiceDetails } from '@/app/interfaces';
+import { CallingPointResponse } from '@/app/types/api';
+import { ServiceDetails } from '@/app/types/app';
 
 export default async function getService(
   serviceId: string,

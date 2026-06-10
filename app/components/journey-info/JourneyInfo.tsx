@@ -1,4 +1,4 @@
-import { Journey } from '@/app/interfaces';
+import { Journey } from '@/app/types/app';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
 import Button from '../button/Button';

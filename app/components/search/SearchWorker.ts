@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import { Station } from '@/app/interfaces';
+import { Station } from '@/app/types/app';
 
 let fuse: Fuse<Station> | null = null;
 

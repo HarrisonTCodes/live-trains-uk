@@ -1,6 +1,6 @@
 import getPlans from '@/app/utils/getPlans';
 import PlanInfo from './PlanInfo';
-import { Plan } from '@/app/interfaces';
+import { Plan } from '@/app/types/app';
 import Notice from '../notice/Notice';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
