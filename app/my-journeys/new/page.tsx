@@ -9,7 +9,7 @@ import { PlusIcon, XIcon } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
-import { JourneyType } from '@/app/types/enums';
+import type { JourneyType } from '@/app/types/enums';
 
 export default function AddJourneyPage() {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import { JourneyType } from '@/app/types/enums';
+import type { JourneyType } from '@/app/types/enums';
 import { MapIcon, TrainFrontIcon } from 'lucide-react';
 
 export default function JourneyTypeSelector({

@@ -2,7 +2,7 @@ import getServices from '@/app/utils/getServices';
 import TrainInfo from './TrainInfo';
 import Notice from '../notice/Notice';
 import toTitleCase from '@/app/utils/toTitleCase';
-import { Service } from '@/app/types/app';
+import type { Service } from '@/app/types/app';
 import getNextFastest from '@/app/utils/getNextFastest';
 import Link from 'next/link';
 

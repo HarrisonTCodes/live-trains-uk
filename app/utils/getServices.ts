@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Services } from '../types/app';
-import { CallingPointResponse, ServiceResponse } from '../types/api';
+import type { Services } from '../types/app';
+import type { CallingPointResponse, ServiceResponse } from '../types/api';
 import getDuration from './getDuration';
 import { stations } from './stations';
 

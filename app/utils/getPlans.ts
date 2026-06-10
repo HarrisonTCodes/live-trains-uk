@@ -2,8 +2,8 @@ import axios from 'axios';
 import convertTransportMode from './convertTransportMode';
 import { stations } from './stations';
 import getIcsId from './getIcsId';
-import { Plan } from '../types/app';
-import { PlansResponse } from '../types/api';
+import type { Plan } from '../types/app';
+import type { PlansResponse } from '../types/api';
 
 export default async function getPlans(from: string, to: string): Promise<Plan[]> {
   // Get query parameters

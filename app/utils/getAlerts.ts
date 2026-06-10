@@ -1,5 +1,5 @@
-import { Alert } from '../types/app';
-import { DisruptionResponse } from '../types/api';
+import type { Alert } from '../types/app';
+import type { DisruptionResponse } from '../types/api';
 import unescape from 'lodash.unescape';
 import axios from 'axios';
 import { stations } from './stations';

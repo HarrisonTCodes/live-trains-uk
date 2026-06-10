@@ -1,4 +1,4 @@
-import { Service } from '../types/app';
+import type { Service } from '../types/app';
 import getNextFastest from '../utils/getNextFastest';
 
 test('same day all on time', () => {

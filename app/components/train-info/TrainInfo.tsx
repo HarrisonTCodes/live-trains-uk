@@ -1,4 +1,4 @@
-import { Service } from '@/app/types/app';
+import type { Service } from '@/app/types/app';
 import formatDuration from '@/app/utils/formatDuration';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';

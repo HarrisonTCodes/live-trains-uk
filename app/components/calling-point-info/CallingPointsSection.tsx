@@ -1,7 +1,7 @@
 import getService from '@/app/utils/getService';
 import Notice from '../notice/Notice';
 import CallingPointInfo from './CallingPointInfo';
-import { CallingPoint } from '@/app/types/app';
+import type { CallingPoint } from '@/app/types/app';
 
 export default async function CallingPointsSection({ id, to }: { id: string; to?: string }) {
   const callingPoints = await getService(id, to);

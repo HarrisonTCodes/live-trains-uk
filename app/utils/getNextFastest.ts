@@ -1,4 +1,4 @@
-import { Service } from '../types/app';
+import type { Service } from '../types/app';
 
 function serialiseTime(time: string, day: number) {
   return parseInt(time.split(':').join('')) + day * 2400;

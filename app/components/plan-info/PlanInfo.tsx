@@ -1,4 +1,4 @@
-import { Leg, Plan } from '@/app/types/app';
+import type { Leg, Plan } from '@/app/types/app';
 import LegInfo from './LegInfo';
 import { ClockIcon, MapPinIcon, MapPinCheckIcon } from 'lucide-react';
 import { format } from 'date-fns';

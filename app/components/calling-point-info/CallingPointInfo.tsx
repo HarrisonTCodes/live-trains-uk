@@ -1,4 +1,4 @@
-import { CallingPoint } from '@/app/types/app';
+import type { CallingPoint } from '@/app/types/app';
 import Tag from '../tag/Tag';
 import { CircleArrowRight } from 'lucide-react';
 import EstimatedIcon from '../icon/EstimatedIcon';
