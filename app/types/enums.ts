@@ -15,15 +15,15 @@ export type TransportMode =
   | 'RIVER';
 
 export type UndergroundLine =
-  | 'bakerloo'
-  | 'central'
-  | 'circle'
-  | 'district'
-  | 'hammersmith-city'
-  | 'jubilee'
-  | 'metropolitan'
-  | 'northern'
-  | 'piccadilly'
-  | 'victoria'
-  | 'waterloo-city'
-  | 'elizabeth';
+  | 'BAKERLOO'
+  | 'CENTRAL'
+  | 'CIRCLE'
+  | 'DISTRICT'
+  | 'HAMMERSMITH-CITY'
+  | 'JUBILEE'
+  | 'METROPOLITAN'
+  | 'NORTHERN'
+  | 'PICCADILLY'
+  | 'VICTORIA'
+  | 'WATERLOO-CITY'
+  | 'ELIZABETH';

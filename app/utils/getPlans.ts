@@ -4,6 +4,7 @@ import { stations } from './stations';
 import getIcsId from './getIcsId';
 import type { Plan } from '../types/app';
 import type { PlansResponse } from '../types/api';
+import { UndergroundLine } from '../types/enums';
 
 export default async function getPlans(from: string, to: string): Promise<Plan[]> {
   // Get query parameters
@@ -48,7 +49,10 @@ export default async function getPlans(from: string, to: string): Promise<Plan[]
           time: leg.arrivalTime,
         },
         mode,
-        line: mode === 'UNDERGROUND' ? leg.routeOptions[0].lineIdentifier.id : undefined,
+        line:
+          mode === 'UNDERGROUND'
+            ? (leg.routeOptions[0].lineIdentifier.id.toUpperCase() as UndergroundLine)
+            : undefined,
         number: mode === 'BUS' ? leg.routeOptions[0].name : undefined,
       };
     }),

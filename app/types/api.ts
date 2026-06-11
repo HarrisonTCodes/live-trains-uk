@@ -59,7 +59,7 @@ export interface LegResponse {
   routeOptions: {
     name: string;
     lineIdentifier: {
-      id: UndergroundLine;
+      id: Lowercase<UndergroundLine>;
     };
   }[];
 }
