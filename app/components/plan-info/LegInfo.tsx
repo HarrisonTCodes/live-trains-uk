@@ -19,43 +19,43 @@ import toTitleCase from '@/app/utils/toTitleCase';
 import { format } from 'date-fns';
 
 const modeDetails = {
-  train: {
+  TRAIN: {
     label: 'Train',
     icon: <TrainFrontIcon size={16} />,
   },
-  underground: {
+  UNDERGROUND: {
     label: 'Tube',
     icon: <TrainFrontTunnelIcon size={16} />,
   },
-  walk: {
+  WALK: {
     label: 'Walk',
     icon: <FootprintsIcon size={16} />,
   },
-  transfer: {
+  TRANSFER: {
     label: 'Transfer',
     icon: <ArrowRightLeftIcon size={16} />,
   },
-  bus: {
+  BUS: {
     label: 'Bus',
     icon: <BusIcon size={16} />,
   },
-  dlr: {
+  DLR: {
     label: 'DLR',
     icon: <TrainFrontIcon size={16} />,
   },
-  tram: {
+  TRAM: {
     label: 'Tram',
     icon: <TramFrontIcon size={16} />,
   },
-  cableCar: {
+  CABLE_CAR: {
     label: 'Cable Car',
     icon: <CableCarIcon size={16} />,
   },
-  cycle: {
+  CYCLE: {
     label: 'Cycle',
     icon: <BikeIcon size={16} />,
   },
-  river: {
+  RIVER: {
     label: 'River',
     icon: <WavesIcon size={16} />,
   },

@@ -1,16 +1,16 @@
 import type { TransportMode } from '../types/enums';
 
 const modes: Record<TransportMode, Set<string>> = {
-  underground: new Set(['tube', 'elizabeth-line']),
-  bus: new Set(['replacement-bus', 'public-bus', 'coach']),
-  train: new Set(['national-rail', 'overground']),
-  walk: new Set(['walking']),
-  transfer: new Set(),
-  dlr: new Set(),
-  tram: new Set(),
-  cableCar: new Set(['cable-car']),
-  cycle: new Set(['cycle-hire']),
-  river: new Set(['river-bus', 'river-tour']),
+  UNDERGROUND: new Set(['tube', 'elizabeth-line']),
+  BUS: new Set(['replacement-bus', 'public-bus', 'coach']),
+  TRAIN: new Set(['national-rail', 'overground']),
+  WALK: new Set(['walking']),
+  TRANSFER: new Set(),
+  DLR: new Set(),
+  TRAM: new Set(),
+  CABLE_CAR: new Set(['cable-car']),
+  CYCLE: new Set(['cycle-hire']),
+  RIVER: new Set(['river-bus', 'river-tour']),
 };
 
 export default function convertTransportMode(rawMode: string): TransportMode | undefined {

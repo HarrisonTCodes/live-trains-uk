@@ -3,16 +3,16 @@ export type JourneyType = 'DEPARTURES' | 'PLANS';
 export type DisruptionSeverity = 'MINOR' | 'NORMAL' | 'MAJOR' | 'SEVERE';
 
 export type TransportMode =
-  | 'train'
-  | 'underground'
-  | 'walk'
-  | 'transfer'
-  | 'bus'
-  | 'dlr'
-  | 'tram'
-  | 'cableCar'
-  | 'cycle'
-  | 'river';
+  | 'TRAIN'
+  | 'UNDERGROUND'
+  | 'WALK'
+  | 'TRANSFER'
+  | 'BUS'
+  | 'DLR'
+  | 'TRAM'
+  | 'CABLE_CAR'
+  | 'CYCLE'
+  | 'RIVER';
 
 export type UndergroundLine =
   | 'bakerloo'
