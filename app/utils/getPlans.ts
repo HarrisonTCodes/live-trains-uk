@@ -51,7 +51,9 @@ export default async function getPlans(from: string, to: string): Promise<Plan[]
         mode,
         line:
           mode === 'UNDERGROUND'
-            ? (leg.routeOptions[0].lineIdentifier.id.toUpperCase() as UndergroundLine)
+            ? (leg.routeOptions[0].lineIdentifier.id
+                .toUpperCase()
+                .replaceAll('-', '_') as UndergroundLine)
             : undefined,
         number: mode === 'BUS' ? leg.routeOptions[0].name : undefined,
       };

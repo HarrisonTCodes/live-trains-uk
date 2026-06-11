@@ -19,11 +19,11 @@ export type UndergroundLine =
   | 'CENTRAL'
   | 'CIRCLE'
   | 'DISTRICT'
-  | 'HAMMERSMITH-CITY'
+  | 'HAMMERSMITH_CITY'
   | 'JUBILEE'
   | 'METROPOLITAN'
   | 'NORTHERN'
   | 'PICCADILLY'
   | 'VICTORIA'
-  | 'WATERLOO-CITY'
+  | 'WATERLOO_CITY'
   | 'ELIZABETH';

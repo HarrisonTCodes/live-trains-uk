@@ -66,13 +66,13 @@ const lineStyles: Record<UndergroundLine, string> = {
   CENTRAL: 'border-[#e02525] bg-[#e02525]/30 text-red-950',
   CIRCLE: 'border-[#fece08] bg-[#fece08]/30 text-yellow-950',
   DISTRICT: 'border-[#04783f] bg-[#04783f]/30 text-green-950',
-  'HAMMERSMITH-CITY': 'border-[#ee9bac] bg-[#ee9bac]/30 text-pink-950',
+  HAMMERSMITH_CITY: 'border-[#ee9bac] bg-[#ee9bac]/30 text-pink-950',
   JUBILEE: 'border-[#7b848b] bg-[#7b848b]/30 text-gray-950',
   METROPOLITAN: 'border-[#861a54] bg-[#861a54]/30 text-purple-950',
   NORTHERN: 'border-[#231f20] bg-[#231f20]/30 text-gray-950',
   PICCADILLY: 'border-[#1b3f94] bg-[#1b3f94]/30 text-blue-950',
   VICTORIA: 'border-[#0c9fdc] bg-[#0c9fdc]/30 text-cyan-950',
-  'WATERLOO-CITY': 'border-[#6dc7b0] bg-[#6dc7b0]/30 text-teal-950',
+  WATERLOO_CITY: 'border-[#6dc7b0] bg-[#6dc7b0]/30 text-teal-950',
   ELIZABETH: 'border-[#8719e0] bg-[#8719e0]/30 text-purple-950',
 };
 
