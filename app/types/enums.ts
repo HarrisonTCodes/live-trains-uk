@@ -1,6 +1,6 @@
 export type JourneyType = 'DEPARTURES' | 'PLANS';
 
-export type DisruptionSeverity = 'Minor' | 'Normal' | 'Major' | 'Severe';
+export type DisruptionSeverity = 'MINOR' | 'NORMAL' | 'MAJOR' | 'SEVERE';
 
 export type TransportMode =
   | 'train'

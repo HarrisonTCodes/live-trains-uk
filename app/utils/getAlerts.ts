@@ -49,6 +49,6 @@ export default async function getAlerts(station: string): Promise<Alert[]> {
         .split(' Latest information can be found in')[0]
         .replace(/<[^>]*>/g, ''),
     ),
-    severity: disruption.severity,
+    severity: disruption.severity.toUpperCase(),
   }));
 }

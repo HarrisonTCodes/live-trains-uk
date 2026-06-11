@@ -23,7 +23,7 @@ export interface AlertResponse {
 }
 
 export interface DisruptionResponse {
-  severity: DisruptionSeverity;
+  severity: Capitalize<Lowercase<DisruptionSeverity>>;
   xhtmlMessage: string;
   description: string;
 }
