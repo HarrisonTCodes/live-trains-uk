@@ -1,3 +1,3 @@
-type SnakeToKebabcase<T extends string> = T extends `${infer Left}_${infer Right}`
+export type SnakeToKebabcase<T extends string> = T extends `${infer Left}_${infer Right}`
   ? `${Left}-${SnakeToKebabcase<Right>}`
   : T;

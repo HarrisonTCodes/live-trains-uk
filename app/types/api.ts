@@ -1,4 +1,5 @@
 import type { DisruptionSeverity, UndergroundLine } from './enums';
+import type { SnakeToKebabcase } from './utils';
 
 export interface ServiceResponse {
   std: string;
@@ -59,7 +60,7 @@ export interface LegResponse {
   routeOptions: {
     name: string;
     lineIdentifier: {
-      id: SnakeToKebabcase<Lowercase<UndergroundLine>>;
+      id: Lowercase<SnakeToKebabcase<UndergroundLine>>;
     };
   }[];
 }
