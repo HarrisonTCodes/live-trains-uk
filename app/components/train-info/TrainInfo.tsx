@@ -4,7 +4,7 @@ import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
 import Tag from '../tag/Tag';
 import { ClockIcon, MapPinIcon, RabbitIcon, TurtleIcon } from 'lucide-react';
-import EstimatedIcon from '../icon/EstimatedIcon';
+import EstimatedIcon from '../graphics/EstimatedIcon';
 
 export default function TrainInfo({
   service,
