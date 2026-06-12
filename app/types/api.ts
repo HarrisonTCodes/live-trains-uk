@@ -57,12 +57,14 @@ export interface LegResponse {
   mode: {
     id: string;
   };
-  routeOptions: {
-    name: string;
-    lineIdentifier: {
-      id: Lowercase<SnakeToKebabcase<UndergroundLine>>;
-    };
-  }[];
+  routeOptions: LegRouteOptionResponse[];
+}
+
+export interface LegRouteOptionResponse {
+  name: string;
+  lineIdentifier: {
+    id: Lowercase<SnakeToKebabcase<UndergroundLine>>;
+  };
 }
 
 export interface LegPointResponse {
