@@ -16,7 +16,11 @@ export async function GET() {
       email: session!.user!.email!,
     },
     include: {
-      journeys: true,
+      journeys: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+      },
     },
   });
   const journeys = userWithJourneys?.journeys ?? [];
