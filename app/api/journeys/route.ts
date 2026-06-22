@@ -74,6 +74,13 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  // If the provided type is not valid
+  if (data.type !== 'PLANS' && data.type !== 'DEPARTURES') {
+    return new Response('Invalid type provided (must be "PLANS" or "DEPARTURES")', {
+      status: 400,
+    });
+  }
+
   const firstCrs = stations[data.firstStation.toLowerCase() as keyof typeof stations];
   const secondCrs = stations[data.secondStation.toLowerCase() as keyof typeof stations];
   // If the provided stations are invalid
@@ -91,7 +98,7 @@ export async function POST(request: NextRequest) {
       name: data.name,
       firstStation: data.firstStation.toLowerCase(),
       secondStation: data.secondStation.toLowerCase(),
-      type: data.type === 'PLANS' ? 'PLANS' : 'DEPARTURES',
+      type: data.type,
       authorId: user.id,
     },
   });
