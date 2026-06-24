@@ -10,18 +10,6 @@ export default function Error() {
         <BackButton />
         <h1 className="text-center text-2xl font-bold text-blue-900">Journey Plans</h1>
       </section>
-      {/* Experimental feature notice */}
-      <Notice notice="Experimental Feature" status="info">
-        Planning is still in development, and may not work as expected, or undergo regular change.
-        You can report any issues or feedback on{' '}
-        <Link
-          className="text-blue-900 underline"
-          href="https://github.com/HarrisonTCodes/live-trains-uk"
-        >
-          GitHub
-        </Link>
-        .
-      </Notice>
       <Notice notice="Error" status="fail">
         There was an error retrieving plans between these stations. Please make sure you choose
         valid stations from the dropdown menu.
