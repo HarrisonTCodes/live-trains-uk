@@ -42,19 +42,6 @@ export default async function PlanPage(props: { params: Promise<{ from: string; 
         </HeadingWidget>
       </section>
 
-      {/* Experimental feature notice */}
-      <Notice notice="Experimental Feature" status="info">
-        Planning is still in development, and may not work as expected, or undergo regular change.
-        You can report any issues or feedback on{' '}
-        <Link
-          className="text-blue-900 underline"
-          href="https://github.com/HarrisonTCodes/live-trains-uk"
-        >
-          GitHub
-        </Link>
-        .
-      </Notice>
-
       {/* Plans */}
       <Suspense fallback={<Skeletons className="h-96" />}>
         <PlanInfoSection from={parsedFrom} to={parsedTo} />
