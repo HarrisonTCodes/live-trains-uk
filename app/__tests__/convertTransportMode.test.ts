@@ -1,30 +1,30 @@
 import convertTransportMode from '../utils/convertTransportMode';
 
 test('underground', () => {
-  expect(convertTransportMode('underground')).toBe('underground');
-  expect(convertTransportMode('tube')).toBe('underground');
+  expect(convertTransportMode('underground')).toBe('UNDERGROUND');
+  expect(convertTransportMode('tube')).toBe('UNDERGROUND');
 });
 
 test('bus', () => {
-  expect(convertTransportMode('bus')).toBe('bus');
-  expect(convertTransportMode('replacement_bus')).toBe('bus');
+  expect(convertTransportMode('bus')).toBe('BUS');
+  expect(convertTransportMode('replacement-bus')).toBe('BUS');
 });
 
 test('train', () => {
-  expect(convertTransportMode('train')).toBe('train');
-  expect(convertTransportMode('national-rail')).toBe('train');
-  expect(convertTransportMode('overground')).toBe('train');
+  expect(convertTransportMode('train')).toBe('TRAIN');
+  expect(convertTransportMode('national-rail')).toBe('TRAIN');
+  expect(convertTransportMode('overground')).toBe('TRAIN');
 });
 
 test('walk', () => {
-  expect(convertTransportMode('walk')).toBe('walk');
-  expect(convertTransportMode('walking')).toBe('walk');
+  expect(convertTransportMode('walk')).toBe('WALK');
+  expect(convertTransportMode('walking')).toBe('WALK');
 });
 
 test('transfer', () => {
-  expect(convertTransportMode('transfer')).toBe('transfer');
+  expect(convertTransportMode('transfer')).toBe('TRANSFER');
 });
 
 test('dlr', () => {
-  expect(convertTransportMode('dlr')).toBe('dlr');
+  expect(convertTransportMode('dlr')).toBe('DLR');
 });
