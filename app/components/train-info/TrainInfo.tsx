@@ -91,7 +91,7 @@ export default function TrainInfo({
         <span className="flex items-center justify-end">
           {!destinationStats.hasDurationVariance ? (
             <Tag status="neutral">
-              <GaugeIcon size={16} /> Unassessed
+              <GaugeIcon size={16} /> N/A
             </Tag>
           ) : fast ? (
             <Tag status="success">
