@@ -2,12 +2,14 @@ import axios from 'axios';
 import type { CallingPointResponse } from '@/app/types/api';
 import type { ServiceDetails } from '@/app/types/app';
 
+const SERVICE_ID_LENGTH = 16;
+
 export default async function getService(
   serviceId: string,
   toStation?: string,
 ): Promise<ServiceDetails> {
   // Get service details
-  const paddedSeviceId = serviceId.padEnd(15, '_');
+  const paddedSeviceId = serviceId.padEnd(SERVICE_ID_LENGTH, '_');
   const response = await axios
     .get(`${process.env.SERVICE_DETAILS_BASE_URL}/${paddedSeviceId}`, {
       headers: {
