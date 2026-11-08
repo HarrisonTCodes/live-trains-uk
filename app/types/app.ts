@@ -27,6 +27,11 @@ export interface Services {
   services: Service[];
 }
 
+export interface DestinationStats {
+  averageDuration: number;
+  hasDurationVariance: boolean;
+}
+
 export interface ServiceDetails {
   callingPoints: CallingPoint[];
   cancelReasons: string[];

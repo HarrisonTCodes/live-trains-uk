@@ -1,4 +1,4 @@
-import type { Service } from '@/app/types/app';
+import type { DestinationStats, Service } from '@/app/types/app';
 import formatDuration from '@/app/utils/formatDuration';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
@@ -12,8 +12,7 @@ export default function TrainInfo({
   fromCrs,
   toStation,
   toCrs,
-  averageDuration,
-  hasDurationVariance,
+  destinationStats,
   nextFastest,
 }: {
   service: Service;
@@ -21,11 +20,10 @@ export default function TrainInfo({
   fromCrs: string;
   toStation: string;
   toCrs: string;
-  averageDuration: number;
-  hasDurationVariance: boolean;
+  destinationStats: DestinationStats;
   nextFastest?: boolean;
 }) {
-  const fast = service.duration <= averageDuration;
+  const fast = service.duration <= destinationStats.averageDuration;
   const cancelled =
     service.estimatedArrivalTime == 'Cancelled' || service.estimatedDepartureTime == 'Cancelled';
 
@@ -91,7 +89,7 @@ export default function TrainInfo({
           <ClockIcon className="text-stone-600" /> {formatDuration(service.duration)}
         </p>
         <span className="flex items-center justify-end">
-          {!hasDurationVariance ? (
+          {!destinationStats.hasDurationVariance ? (
             <Tag status="neutral">
               <GaugeIcon size={16} /> Unassessed
             </Tag>
