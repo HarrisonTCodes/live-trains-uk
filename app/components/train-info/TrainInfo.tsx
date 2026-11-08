@@ -3,7 +3,7 @@ import formatDuration from '@/app/utils/formatDuration';
 import toTitleCase from '@/app/utils/toTitleCase';
 import Link from 'next/link';
 import Tag from '../tag/Tag';
-import { ClockIcon, MapPinIcon, RabbitIcon, TurtleIcon } from 'lucide-react';
+import { ClockIcon, GaugeIcon, MapPinIcon, RabbitIcon, TurtleIcon } from 'lucide-react';
 import EstimatedIcon from '../graphics/EstimatedIcon';
 
 export default function TrainInfo({
@@ -13,6 +13,7 @@ export default function TrainInfo({
   toStation,
   toCrs,
   averageDuration,
+  hasDurationVariance,
   nextFastest,
 }: {
   service: Service;
@@ -21,6 +22,7 @@ export default function TrainInfo({
   toStation: string;
   toCrs: string;
   averageDuration: number;
+  hasDurationVariance: boolean;
   nextFastest?: boolean;
 }) {
   const fast = service.duration <= averageDuration;
@@ -89,7 +91,11 @@ export default function TrainInfo({
           <ClockIcon className="text-stone-600" /> {formatDuration(service.duration)}
         </p>
         <span className="flex items-center justify-end">
-          {fast ? (
+          {!hasDurationVariance ? (
+            <Tag status="neutral">
+              <GaugeIcon size={16} /> Unassessed
+            </Tag>
+          ) : fast ? (
             <Tag status="success">
               <RabbitIcon size={16} /> Fast
             </Tag>
