@@ -1,9 +1,9 @@
-import getServices from '@/app/utils/getServices';
+import { getServices } from '@/app/utils/services';
 import TrainInfo from './TrainInfo';
 import Notice from '../notice/Notice';
-import toTitleCase from '@/app/utils/toTitleCase';
-import getDestinationStats from '@/app/utils/getDestinationStats';
-import getNextFastest from '@/app/utils/getNextFastest';
+import { toTitleCase } from '@/app/utils/stations';
+import { getDestinationStats } from '@/app/utils/services';
+import { getNextFastest } from '@/app/utils/services';
 import Link from 'next/link';
 import type { Service } from '@/app/types/app';
 

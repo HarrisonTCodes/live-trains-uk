@@ -1,7 +1,7 @@
-import getAlerts from '@/app/utils/getAlerts';
+import { getAlerts } from '@/app/utils/alerts';
 import Notice from '../notice/Notice';
 import type { Alert } from '@/app/types/app';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { toTitleCase } from '@/app/utils/stations';
 
 export default async function AlertsSection({ station }: { station: string }) {
   const alerts = await getAlerts(station);

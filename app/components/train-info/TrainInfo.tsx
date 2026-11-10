@@ -1,6 +1,6 @@
 import type { DestinationStats, Service } from '@/app/types/app';
-import formatDuration from '@/app/utils/formatDuration';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { formatDuration } from '@/app/utils/time';
+import { toTitleCase } from '@/app/utils/stations';
 import Link from 'next/link';
 import Tag from '../tag/Tag';
 import { ClockIcon, GaugeIcon, MapPinIcon, RabbitIcon, TurtleIcon } from 'lucide-react';

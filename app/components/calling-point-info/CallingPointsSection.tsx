@@ -1,4 +1,4 @@
-import getService from '@/app/utils/getService';
+import { getService } from '@/app/utils/services';
 import Notice from '../notice/Notice';
 import CallingPointInfo from './CallingPointInfo';
 import type { CallingPoint } from '@/app/types/app';

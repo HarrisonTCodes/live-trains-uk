@@ -1,8 +1,8 @@
-import getPlans from '@/app/utils/getPlans';
+import { getPlans } from '@/app/utils/plans';
 import PlanInfo from './PlanInfo';
 import type { Plan } from '@/app/types/app';
 import Notice from '../notice/Notice';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { toTitleCase } from '@/app/utils/stations';
 import Link from 'next/link';
 
 export default async function PlanInfoSection({ from, to }: { from: string; to: string }) {

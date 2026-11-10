@@ -4,7 +4,7 @@ import Form from '@/app/components/form/Form';
 import Notice from '@/app/components/notice/Notice';
 import Search from '@/app/components/search/Search';
 import JourneyTypeSelector from '@/app/components/journey-type-selector/JourneyTypeSelector';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { toTitleCase } from '@/app/utils/stations';
 import { PlusIcon, XIcon } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';

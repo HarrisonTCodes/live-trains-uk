@@ -1,12 +1,12 @@
 import Button from '../../../components/button/Button';
-import toTitleCase from '../../../utils/toTitleCase';
+import { toTitleCase } from '../../../utils/stations';
 import Link from 'next/link';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import { BookmarkIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import Skeletons from '@/app/components/skeletons/Skeletons';
 import TrainInfoSection from '@/app/components/train-info/TrainInfoSection';
-import getTime from '@/app/utils/getTime';
+import { getTime } from '@/app/utils/time';
 import BackButton from '@/app/components/button/BackButton';
 
 export default async function TrainsPage(props: { params: Promise<{ from: string; to: string }> }) {

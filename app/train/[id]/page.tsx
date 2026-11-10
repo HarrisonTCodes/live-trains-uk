@@ -3,7 +3,7 @@ import Button from '@/app/components/button/Button';
 import CallingPointsSection from '@/app/components/calling-point-info/CallingPointsSection';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Skeletons from '@/app/components/skeletons/Skeletons';
-import getTime from '@/app/utils/getTime';
+import { getTime } from '@/app/utils/time';
 import { ArrowLeftIcon } from 'lucide-react';
 import { Suspense } from 'react';
 

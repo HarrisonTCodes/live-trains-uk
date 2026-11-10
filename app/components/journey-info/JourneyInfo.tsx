@@ -1,5 +1,5 @@
 import type { Journey } from '@/app/types/app';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { toTitleCase } from '@/app/utils/stations';
 import Link from 'next/link';
 import Button from '../button/Button';
 import Tag from '../tag/Tag';

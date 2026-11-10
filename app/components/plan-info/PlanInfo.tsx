@@ -2,7 +2,7 @@ import type { Leg, Plan } from '@/app/types/app';
 import LegInfo from './LegInfo';
 import { ClockIcon, MapPinIcon, MapPinCheckIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import formatDuration from '@/app/utils/formatDuration';
+import { formatDuration } from '@/app/utils/time';
 
 export default function PlanInfo({ plan }: { plan: Plan }) {
   return (

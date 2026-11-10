@@ -15,7 +15,7 @@ import {
   TramFrontIcon,
   WavesIcon,
 } from 'lucide-react';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { toTitleCase } from '@/app/utils/stations';
 import { format } from 'date-fns';
 
 const modeDetails = {

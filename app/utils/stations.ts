@@ -1,3 +1,6 @@
+import axios from 'axios';
+import type { StopPointsResponse } from '../types/api';
+
 export const stations = {
   'abbey wood': 'ABW',
   aber: 'ABE',
@@ -2636,3 +2639,55 @@ export const stations = {
   'ystrad mynach': 'YSM',
   'ystrad rhondda': 'YSR',
 };
+
+export async function getIcsId(station: string): Promise<string> {
+  const response = (await axios
+    .get(process.env.STOP_POINT_SEARCH_BASE_URL!, {
+      params: {
+        query: station,
+        app_key: process.env.STOP_POINT_SEARCH_API_KEY,
+      },
+    })
+    .then((response) => response.data)) as StopPointsResponse;
+
+  // Get result that has every word in name
+  const nameWords = station.toLowerCase().split(' ');
+  let ics = response.matches.find((match) => {
+    const matchWords = new Set(match.name.toLowerCase().split(' '));
+    return nameWords.every((word: string) => matchWords.has(word));
+  })?.icsId;
+
+  // If no word-match found, fallback to first result
+  if (!ics) {
+    ics = response.matches[0].icsId;
+  }
+
+  return ics;
+}
+
+// Special words that appear untitled (first letter lowercase) in station names
+const doNotTitleCase = [
+  'en',
+  'le',
+  'on',
+  'under',
+  'in',
+  'upon',
+  'y',
+  'by',
+  'super',
+  'over',
+  'the',
+  'bach',
+  'at',
+  'gron',
+  'for',
+];
+
+export function toTitleCase(str: string): string {
+  return str.replace(/\b[\w']+/g, (text, i) =>
+    doNotTitleCase.includes(text) && i > 0
+      ? text
+      : text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+  );
+}

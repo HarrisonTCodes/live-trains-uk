@@ -1,4 +1,12 @@
-export default function getDuration(departureTime: string, arrivalTime: string): number {
+import { format, toZonedTime } from 'date-fns-tz';
+
+export function getTime(): string {
+  const date = new Date();
+  const zonedDate = toZonedTime(date, 'Europe/London');
+  return format(zonedDate, 'HH:mm');
+}
+
+export function getDuration(departureTime: string, arrivalTime: string): number {
   // Parse numbers from time strings
   const [departureHours, departureMinutes] = departureTime
     .split(':')
@@ -21,4 +29,10 @@ export default function getDuration(departureTime: string, arrivalTime: string):
 
   const difference = (arrivalDate.getTime() - departureDate.getTime()) / (1000 * 60); // Convert milliseconds to minutes
   return difference;
+}
+
+export function formatDuration(duration: number): string {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+  return `${hours > 0 ? hours + 'h' : ''}${hours > 0 && minutes > 0 ? ' ' : ''}${minutes > 0 ? minutes + 'm' : ''}`;
 }

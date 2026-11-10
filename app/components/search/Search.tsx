@@ -1,6 +1,6 @@
 'use client';
 import type { Station } from '@/app/types/app';
-import toTitleCase from '@/app/utils/toTitleCase';
+import { toTitleCase } from '@/app/utils/stations';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Tag from '../tag/Tag';
 import { motion, AnimatePresence } from 'framer-motion';

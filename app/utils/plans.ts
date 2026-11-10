@@ -1,12 +1,37 @@
 import axios from 'axios';
-import convertTransportMode from './convertTransportMode';
-import { stations } from './stations';
-import getIcsId from './getIcsId';
 import type { Plan } from '../types/app';
 import type { PlansResponse } from '../types/api';
-import { UndergroundLine } from '../types/enums';
+import type { TransportMode, UndergroundLine } from '../types/enums';
+import { stations, getIcsId } from './stations';
 
-export default async function getPlans(from: string, to: string): Promise<Plan[]> {
+const modes: Record<TransportMode, Set<string>> = {
+  UNDERGROUND: new Set(['tube', 'elizabeth-line']),
+  BUS: new Set(['replacement-bus', 'public-bus', 'coach']),
+  TRAIN: new Set(['national-rail', 'overground']),
+  WALK: new Set(['walking']),
+  TRANSFER: new Set(),
+  DLR: new Set(),
+  TRAM: new Set(),
+  CABLE_CAR: new Set(['cable-car']),
+  CYCLE: new Set(['cycle-hire']),
+  RIVER: new Set(['river-bus', 'river-tour']),
+};
+
+export function convertTransportMode(rawMode: string): TransportMode | undefined {
+  // If raw mode appears directly as transport mode variant
+  if (rawMode.toUpperCase() in modes) {
+    return rawMode.toUpperCase() as TransportMode;
+  }
+
+  // If raw mode is a known synonym of a transport mode variant from other APIs
+  for (const [mode, otherNames] of Object.entries(modes)) {
+    if (otherNames.has(rawMode)) {
+      return mode as TransportMode;
+    }
+  }
+}
+
+export async function getPlans(from: string, to: string): Promise<Plan[]> {
   // Get query parameters
   const fromCrs = stations[from as keyof typeof stations];
   const toCrs = stations[to as keyof typeof stations];

@@ -4,7 +4,7 @@ import unescape from 'lodash.unescape';
 import axios from 'axios';
 import { stations } from './stations';
 
-export default async function getAlerts(station: string): Promise<Alert[]> {
+export async function getAlerts(station: string): Promise<Alert[]> {
   // Get station CRS
   const stationCrs = stations[station as keyof typeof stations];
 

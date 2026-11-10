@@ -1,4 +1,4 @@
-import convertTransportMode from '../utils/convertTransportMode';
+import { convertTransportMode } from '../utils/plans';
 
 test('underground', () => {
   expect(convertTransportMode('underground')).toBe('UNDERGROUND');

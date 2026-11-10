@@ -1,4 +1,4 @@
-import toTitleCase from '../utils/toTitleCase';
+import { toTitleCase } from '../utils/stations';
 
 test('handles one word', () => {
   expect(toTitleCase('hello')).toBe('Hello');
