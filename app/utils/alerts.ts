@@ -4,6 +4,31 @@ import unescape from 'lodash.unescape';
 import axios from 'axios';
 import { stations } from './stations';
 
+function toAlertText(xhtml: string): string {
+  const text = unescape(
+    xhtml
+      // Keep words separated when the API wraps them in block or break tags.
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/<\/(?:p|div|li|h[1-6]|tr)\s*>/gi, ' ')
+      .replace(/<[^>]*>/g, ' '),
+  )
+    // lodash.unescape doesn't cover nbsp or numeric character references.
+    .replace(/&nbsp;|&#0*160;|&#x0*a0;/gi, ' ')
+    .replace(/&#(\d+);/g, (_, decimal: string) => {
+      const codePoint = Number(decimal);
+      return codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : '\ufffd';
+    })
+    .replace(/&#x([\da-f]+);/gi, (_, hexadecimal: string) => {
+      const codePoint = Number.parseInt(hexadecimal, 16);
+      return codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : '\ufffd';
+    });
+
+  return text
+    .split(/\s+(?:More details|Latest information) can be found in\b/i)[0]
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export async function getAlerts(station: string): Promise<Alert[]> {
   // Get station CRS
   const stationCrs = stations[station as keyof typeof stations];
@@ -43,12 +68,7 @@ export async function getAlerts(station: string): Promise<Alert[]> {
   }
 
   return response[0].disruptions.map((disruption: DisruptionResponse) => ({
-    message: unescape(
-      disruption.xhtmlMessage
-        .split(' More details can be found in')[0]
-        .split(' Latest information can be found in')[0]
-        .replace(/<[^>]*>/g, ''),
-    ),
+    message: toAlertText(disruption.xhtmlMessage),
     severity: disruption.severity.toUpperCase(),
   }));
 }
