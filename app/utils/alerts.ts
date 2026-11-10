@@ -4,7 +4,7 @@ import unescape from 'lodash.unescape';
 import axios from 'axios';
 import { stations } from './stations';
 
-function toAlertText(xhtml: string): string {
+export function toAlertText(xhtml: string): string {
   const text = unescape(
     xhtml
       // Keep words separated when the API wraps them in block or break tags.
