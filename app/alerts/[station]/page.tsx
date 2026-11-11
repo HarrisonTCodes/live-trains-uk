@@ -31,7 +31,7 @@ export default async function StationAlertsPage(props: { params: Promise<{ stati
         >
           <Link prefetch={false} href={`/trains/${parsedStation}/any`} className="w-full">
             <Button className="w-full md:w-56">
-              <SearchIcon /> Search departures
+              <SearchIcon /> Search Departures
             </Button>
           </Link>
         </HeadingWidget>
