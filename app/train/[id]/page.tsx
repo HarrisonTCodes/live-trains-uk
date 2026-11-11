@@ -26,10 +26,10 @@ export default async function TrainPage(props: {
 
         {/* Last updated and back button */}
         <HeadingWidget text="Calling points and times" tag={`Last updated at ${now}`}>
-          <ShareServiceButton />
           <Button className="w-full md:w-56" back variant="secondary">
             <ArrowLeftIcon /> Back
           </Button>
+          <ShareServiceButton />
         </HeadingWidget>
       </section>
 
