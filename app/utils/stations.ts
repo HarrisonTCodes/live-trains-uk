@@ -356,6 +356,7 @@ export const stations = {
   brighton: 'BTN',
   brimsdown: 'BMD',
   brinnington: 'BNT',
+  'bristol brabazon': 'BBZ',
   'bristol parkway': 'BPW',
   'bristol temple meads': 'BRI',
   brithdir: 'BHD',
