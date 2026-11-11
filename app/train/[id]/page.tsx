@@ -1,5 +1,6 @@
 import BackButton from '@/app/components/button/BackButton';
 import Button from '@/app/components/button/Button';
+import ShareServiceButton from '@/app/components/button/ShareServiceButton';
 import CallingPointsSection from '@/app/components/calling-point-info/CallingPointsSection';
 import HeadingWidget from '@/app/components/heading-widget/HeadingWidget';
 import Skeletons from '@/app/components/skeletons/Skeletons';
@@ -25,8 +26,9 @@ export default async function TrainPage(props: {
 
         {/* Last updated and back button */}
         <HeadingWidget text="Calling points and times" tag={`Last updated at ${now}`}>
-          <Button className="w-full md:w-56" back>
-            <ArrowLeftIcon /> Back to departures
+          <ShareServiceButton />
+          <Button className="w-full md:w-56" back variant="secondary">
+            <ArrowLeftIcon /> Back
           </Button>
         </HeadingWidget>
       </section>
