@@ -1,7 +1,6 @@
 'use client';
 import BackButton from '@/app/components/button/BackButton';
 import Notice from '@/app/components/notice/Notice';
-import Link from 'next/link';
 
 export default function Error() {
   return (
