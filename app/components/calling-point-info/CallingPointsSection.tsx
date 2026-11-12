@@ -1,7 +1,6 @@
 import { getService } from '@/app/utils/services';
 import Notice from '../notice/Notice';
-import CallingPointInfo from './CallingPointInfo';
-import type { CallingPoint } from '@/app/types/app';
+import CallingPointsList from './CallingPointsList';
 
 export default async function CallingPointsSection({ id, to }: { id: string; to?: string }) {
   const callingPoints = await getService(id, to);
@@ -17,15 +16,7 @@ export default async function CallingPointsSection({ id, to }: { id: string; to?
 
       {/* Calling points */}
       <section className="relative flex w-[90vw] max-w-[700px] flex-col rounded-lg border border-gray-300 bg-white px-2 pb-4">
-        {callingPoints.callingPoints.map((callingPoint: CallingPoint, index: number) => (
-          <CallingPointInfo
-            key={`calling point ${index}`}
-            callingPoint={callingPoint}
-            isFirstPoint={index === 0}
-            isLastPoint={index === callingPoints.callingPoints.length - 1}
-            departed={!callingPoint.estimatedDepartureTime}
-          />
-        ))}
+        <CallingPointsList callingPoints={callingPoints.callingPoints} />
       </section>
     </section>
   );
