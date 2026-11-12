@@ -16,7 +16,7 @@ export default function CallingPointInfo({
   departed?: boolean;
 }) {
   return (
-    <section className="flex items-center gap-2">
+    <section className={`flex items-center gap-2 ${isFirstPoint ? '-mt-4' : ''}`}>
       {/* Graphic */}
       <CircleStepGraphic
         isFirstStep={isFirstPoint}
